@@ -1,3 +1,7 @@
+package com.snake.Model;
+
+import java.util.Timer;
+
 public class GameModel {
     Tile[][] board;
     Vector direction;

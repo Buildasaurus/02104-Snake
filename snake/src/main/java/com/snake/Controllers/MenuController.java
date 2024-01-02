@@ -1,5 +1,7 @@
-package com.snake;
+package com.snake.Controllers;
 
+import com.snake.Views.MenuView;
+import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
 public class MenuController implements IController {
@@ -9,8 +11,9 @@ public class MenuController implements IController {
         this.view = view;
     }
 
-    public int getView() {
-        return 1;
+    public Parent getView() {
+        //TODO implement
+        return null;
     }
 
     public void update(KeyEvent key) {

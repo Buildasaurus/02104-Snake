@@ -1,4 +1,4 @@
-package com.snake;
+package com.snake.Model;
 
 import java.io.IOException;
 import javafx.fxml.FXML;

@@ -1,8 +1,14 @@
-package com.snake;
+package com.snake.Controllers;
 
 import java.io.IOException;
-import javax.swing.Icon;
+import java.util.Timer;
+import com.snake.App;
+import com.snake.Model.GameModel;
+import com.snake.Model.Vector;
+import com.snake.Views.GameView;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.input.KeyEvent;
 
 public class GameController implements IController
 {

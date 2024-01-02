@@ -1,4 +1,4 @@
-package com.snake;
+package com.snake.Model;
 
 public class Vector {
     int x;
