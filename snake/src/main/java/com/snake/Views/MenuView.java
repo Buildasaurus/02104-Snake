@@ -1,7 +1,6 @@
 package com.snake.Views;
 
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 
 public class MenuView extends StackPane{
