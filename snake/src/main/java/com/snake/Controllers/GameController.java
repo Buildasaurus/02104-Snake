@@ -18,6 +18,8 @@ public class GameController implements IController
     GameModel model;
     Timer gameTimer;
 
+    int speed;
+
     public Parent getView()
     {
         return view;
@@ -28,17 +30,24 @@ public class GameController implements IController
         this.view = new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
         this.gameTimer = new Timer();
+        this.speed = 2;
 
+        view.setOnKeyPressed(this::handleKeyPressed);
+
+        gameTimer.schedule(timeLoop(), 1000/speed);
+    }
+
+    private TimerTask timeLoop() {
+        // this automatically handles changes in speed by finishing the current one and applying after that, how sexy
         TimerTask task = new TimerTask() {
             public void run() {
                 model.nextState();
+                gameTimer.schedule(timeLoop(), 1000/speed);
             }
         };
-        gameTimer.schedule(task, 500);
 
-        view.setOnKeyPressed(this::handleKeyPressed);
+        return task;
     }
-
 
     void handleKeyPressed(KeyEvent key) {
         switch (key.getCode()) {
