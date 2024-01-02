@@ -1,17 +1,12 @@
-package com.example;
+package com.snake;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class PrimaryController implements IController{
+public class PrimaryController {
 
     @FXML
     private void switchToSecondary() throws IOException {
         App.setRoot("secondary");
-    }
-
-    public int getView()
-    {
-        return 2;
     }
 }

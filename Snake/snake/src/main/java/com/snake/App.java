@@ -1,4 +1,4 @@
-package com.example;
+package com.snake;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,18 +9,16 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * JavaFX App hej
+ * JavaFX App
  */
 public class App extends Application {
 
     private static Scene scene;
-    IController controller;
+
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("primary"), 640, 480);
         stage.setScene(scene);
-        controller = new PrimaryController();
-        controller.getView();
         stage.show();
     }
 
