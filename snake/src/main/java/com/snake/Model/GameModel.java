@@ -14,7 +14,7 @@ public class GameModel {
 
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        snakePosition = new Vector(row/2, column/2); //snake start position
+        snakePosition = new Vector(rowCount/2, columnCount/2); //snake start position
         direction = new Vector(rowCount, columnCount); //initializing direction
 
         boolean startSquare = false;
@@ -38,7 +38,7 @@ public class GameModel {
         Vector nextPosition = snakePosition.add(direction);
 
         if (isValidMove(nextPosition)) {
-            return nextPosition();
+            return nextPosition;
         }
 
         if (isValidMove(nextPosition)) 
