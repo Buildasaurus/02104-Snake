@@ -1,8 +1,6 @@
 package com.snake.Model;
 
 import java.util.Timer;
-import java.utlil.Arraylist;
-
 
 public class GameModel {
     Tile[][] board;

@@ -38,7 +38,7 @@ public class GameController implements IController
     }
 
     private TimerTask timeLoop() {
-        // this automatically handles changes in speed by finishing the current one and applying after that, how sexy
+        // this automatically handles changes in speed by finishing the current loop and applying after that, how fucking sexy is that
         TimerTask task = new TimerTask() {
             public void run() {
                 model.nextState();
