@@ -68,13 +68,11 @@ public class GameView extends GridPane
                 if (board[row][column] != null)
                 {
                     ImageView imageView = new ImageView(board[row][column].getImage());
-                    imageView.setFitWidth(columnSize);
+                    imageView.setFitWidth(height / rowCount);
                     imageView.setPreserveRatio(true);
-                    this.add(imageView, x, 7 - column);
+                    this.add(imageView, column, rowCount - row);
                 }
             }
         }
     }
-    }
-
 }
