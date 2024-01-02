@@ -2,6 +2,7 @@ package com.snake.Model;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Tile
@@ -19,9 +20,9 @@ public class Tile
         tileType = TileType.Empty;
     }
 
-    public Color getImage()
+    public Image getImage()
     {
-        return Color.BLACK;
+        return null;
     }
 
     public boolean equals()
