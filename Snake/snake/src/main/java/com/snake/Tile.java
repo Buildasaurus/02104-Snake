@@ -1,14 +1,18 @@
-package com.example;
+package com.snake;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.paint.Color;
 
 public class Tile {
     
-    public void getImage(){
-
+    public Color getImage(){
+        
+        return Color.BLACK;
     }
-    public void getImage(){
+    public boolean equals(){
+        
+        return false;
 
     }
     
