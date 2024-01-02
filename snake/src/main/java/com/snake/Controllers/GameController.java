@@ -1,6 +1,8 @@
 package com.snake.Controllers;
 
 import java.util.Timer;
+import java.util.TimerTask;
+
 import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Vector;
@@ -26,6 +28,13 @@ public class GameController implements IController
         this.view = new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
         this.gameTimer = new Timer();
+
+        TimerTask task = new TimerTask() {
+            public void run() {
+                model.nextState();
+            }
+        };
+        gameTimer.schedule(task, 500);
 
         view.setOnKeyPressed(this::handleKeyPressed);
     }
