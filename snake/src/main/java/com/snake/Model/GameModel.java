@@ -35,7 +35,7 @@ public class GameModel {
         return position.x >= 0 && position.x < rowCount &&
                position.y >= 0 && position.y < columnCount;
     }
-    Vector nextState()
+    public Vector nextState()
     {
         Vector nextPosition = snakePosition.add(direction);
 
