@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import com.snake.Controllers.IController;
+import com.snake.Controllers.MenuController;
 
 /**
  * JavaFX App
@@ -14,10 +16,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
+    IController controller;
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        controller = new MenuController();
+        scene = new Scene(controller.getView(), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

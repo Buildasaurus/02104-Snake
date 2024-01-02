@@ -7,13 +7,13 @@ import javafx.scene.input.KeyEvent;
 public class MenuController implements IController {
     MenuView view;
 
-    public MenuController(MenuView view) {
-        this.view = view;
+    public MenuController() {
+        this.view = new MenuView();
     }
 
     public Parent getView() {
+        return view;
         //TODO implement
-        return null;
     }
 
     public void update(KeyEvent key) {
