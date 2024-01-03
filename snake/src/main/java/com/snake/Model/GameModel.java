@@ -1,5 +1,7 @@
 package com.snake.Model;
 
+import java.util.Random;
+
 public class GameModel
 {
     private Tile[][] board;
@@ -9,6 +11,7 @@ public class GameModel
     private int speed;
     Vector head;
     Vector tail;
+    Vector apple;
 
 
     public GameModel(int rowCount, int columnCount)
@@ -24,6 +27,9 @@ public class GameModel
         board[head.y][head.x-1] = new Tile(TileType.Snakebody, direction, direction);
         board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
+        Random randint = new Random();
+        apple.x = randint.nextInt(columnCount);
+        apple.y = randint.nextInt(rowCount);
     }
 
     /**
@@ -61,11 +67,6 @@ public class GameModel
                                 board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[tail.y][tail.x] = null;
             }
-            else
-            { // loses if you hit an apple?
-                gameOver();
-            }
-
         }
         else
         {
