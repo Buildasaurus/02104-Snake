@@ -59,6 +59,7 @@ public class Tile
     private String getDirectionName(Vector firstDirection, Vector secondDirection)
     {
         int crossProduct = firstDirection.crossProduct(secondDirection);
+        System.out.println("crossproduct between " + firstDirection + " and " + secondDirection + " is " + crossProduct);
         switch (crossProduct)
         {
 
@@ -77,11 +78,12 @@ public class Tile
                     System.out.println("vectors are weird, or something is wrong.");
                     return "error";
                 }
-            case -1:
-                Vector temp = firstDirection;
-                firstDirection = secondDirection;
-                secondDirection = temp;
             case 1:
+                System.out.println("left turn");
+                Vector temp = firstDirection.multiply(-1);
+                firstDirection = secondDirection.multiply(-1);
+                secondDirection = temp;
+            case -1:
                 // They are parallel, so now we can figure out in which direction
                 if (firstDirection.x == 1 && firstDirection.y == 0)
                     return "turn_down";
