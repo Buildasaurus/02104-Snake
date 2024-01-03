@@ -5,6 +5,7 @@ import java.util.Random;
 public class GameModel
 {
     private Tile[][] board;
+    private Vector lastDirection;
     private Vector direction;
     private int rowCount;
     private int columnCount;
@@ -28,7 +29,8 @@ public class GameModel
         board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
         Random randint = new Random();
-        apple = new Vector(randint.nextInt(columnCount), randint.nextInt(rowCount));
+        apple = new Vector(randint.nextInt(columnCount),randint.nextInt(rowCount));
+        lastDirection = new Vector(0, 0);
     }
 
     /**
@@ -67,19 +69,19 @@ public class GameModel
                 board[tail.y][tail.x] = null;
                 tail = nextTailPosition;
                 head = nextHeadPosition;
+                
+                lastDirection = direction;
             }
         }
         else
         {
             gameover = true;
         }
-
     }
 
     public void setDirection(Vector direction)
     {
-        if (direction.x == -this.direction.x || direction.y == -this.direction.y)
-        {
+        if (direction.x == -this.lastDirection.x || direction.y == -this.lastDirection.y) {
             return;
         }
         this.direction = direction;
