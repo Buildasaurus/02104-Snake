@@ -39,6 +39,7 @@ public class GameController implements IController
         TimerTask task = new TimerTask() {
             public void run() {
                 model.nextState();
+                view.update(model.getBoard());
                 gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
             }
         };
