@@ -28,8 +28,7 @@ public class GameModel
         board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
         Random randint = new Random();
-        apple.x = randint.nextInt(columnCount);
-        apple.y = randint.nextInt(rowCount);
+        apple = new Vector(randint.nextInt(columnCount),randint.nextInt(rowCount));
     }
 
     /**
@@ -62,9 +61,9 @@ public class GameModel
                         new Tile(TileType.Snakehead, direction, direction);
 
                 // opdatere hale
-                board[nextTailPosition.y][nextTailPosition.x] =
-                        new Tile(TileType.Snaketail, board[nextTailPosition.y][nextTailPosition.x].enterDirection,
-                                board[nextTailPosition.y][nextTailPosition.x].targetDirection);
+                board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail,
+                        board[nextTailPosition.y][nextTailPosition.x].enterDirection,
+                        board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[tail.y][tail.x] = null;
             }
         }
@@ -78,7 +77,8 @@ public class GameModel
 
     public void setDirection(Vector direction)
     {
-        if (direction.x == -this.direction.x || direction.y == -this.direction.y) {
+        if (direction.x == -this.direction.x || direction.y == -this.direction.y)
+        {
             return;
         }
         this.direction = direction;
