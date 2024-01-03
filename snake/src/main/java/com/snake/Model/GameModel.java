@@ -9,9 +9,10 @@ public class GameModel
     private int rowCount;
     private int columnCount;
     private int speed;
-    Vector head;
-    Vector tail;
-    Vector apple;
+    private Vector head;
+    private Vector tail;
+    private Vector apple;
+    private boolean gameover = false;
 
 
     public GameModel(int rowCount, int columnCount)
@@ -19,16 +20,15 @@ public class GameModel
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         head = new Vector(rowCount / 2, columnCount / 2); // snake start position
-        tail = new Vector(rowCount / 2 - 2, columnCount / 2);
+        tail = new Vector(rowCount / 2 - 1, columnCount / 2);
         direction = new Vector(1, 0); // initializing direction as right
         board = new Tile[rowCount][columnCount];
 
         board[head.y][head.x] = new Tile(TileType.Snakehead, direction, direction);
-        board[head.y][head.x-1] = new Tile(TileType.Snakebody, direction, direction);
         board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
         Random randint = new Random();
-        apple = new Vector(randint.nextInt(columnCount),randint.nextInt(rowCount));
+        apple = new Vector(randint.nextInt(columnCount), randint.nextInt(rowCount));
     }
 
     /**
@@ -65,14 +65,15 @@ public class GameModel
                         board[nextTailPosition.y][nextTailPosition.x].enterDirection,
                         board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[tail.y][tail.x] = null;
+                tail = nextTailPosition;
+                head = nextHeadPosition;
             }
         }
         else
         {
-            gameOver();
+            gameover = true;
         }
-        tail = nextTailPosition;
-        head = nextHeadPosition;
+
     }
 
     public void setDirection(Vector direction)
@@ -84,9 +85,9 @@ public class GameModel
         this.direction = direction;
     }
 
-    public void gameOver()
+    public boolean gameOver()
     {
-        System.out.println("gameover");
+        return gameover;
         // game over
     }
 

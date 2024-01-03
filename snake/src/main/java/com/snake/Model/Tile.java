@@ -1,9 +1,6 @@
 package com.snake.Model;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
-import com.snake.App;
 import javafx.scene.image.Image;
 
 public class Tile
