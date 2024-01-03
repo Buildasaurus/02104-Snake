@@ -42,6 +42,7 @@ public class Highscore
                     result = Integer.parseInt(data);
                     System.out.println(data);
                 }
+                System.out.println("htljal");
                 myReader.close();
             }
         }
@@ -69,9 +70,9 @@ public class Highscore
             try
             {
                 FileWriter myWriter = new FileWriter(fileName);
-                myWriter.write(highscore);
+                myWriter.write("" + highscore);
                 myWriter.close();
-                System.out.println("Successfully wrote to the file.");
+                System.out.println("Successfully wrote " + highscore + " to the file.");
             }
             catch (IOException e)
             {

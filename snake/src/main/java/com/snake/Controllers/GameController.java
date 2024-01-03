@@ -3,6 +3,7 @@ package com.snake.Controllers;
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameModel;
+import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
 import javafx.animation.AnimationTimer;
@@ -15,9 +16,7 @@ public class GameController implements IController
     private GameView view;
     private GameModel model;
     private AnimationTimer gameTimer;
-
     private long lastUpdate = 0;
-    private boolean gameOver;
 
     public Parent getView()
     {
@@ -49,10 +48,13 @@ public class GameController implements IController
     private void timeLoop()
     {
         model.nextState();
-        if (model.gameOver()) {
+        if (model.gameOver())
+        {
             gameTimer.stop();
-            gameOver = true;
-        } else {
+            Highscore.setHighscore(model.getSnakeLength());
+        }
+        else
+        {
             view.update(model.getBoard());
         }
     }

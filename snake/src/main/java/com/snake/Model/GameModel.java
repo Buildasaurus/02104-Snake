@@ -26,11 +26,11 @@ public class GameModel
         direction = new Vector(1, 0); // initializing direction as right
         board = new Tile[rowCount][columnCount];
 
-        board[head.y][head.x] = new Tile(TileType.Snakehead, direction, direction);
-        board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
+        board[head.y][head.x] = new SnakeTile(TileType.Snakehead, direction, direction);
+        board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction);
         speed = 2;
         Random randint = new Random();
-        apple = new Vector(randint.nextInt(columnCount),randint.nextInt(rowCount));
+        apple = new Vector(randint.nextInt(columnCount), randint.nextInt(rowCount));
         lastDirection = new Vector(0, 0);
     }
 
@@ -49,28 +49,29 @@ public class GameModel
     public void nextState()
     {
         Vector nextHeadPosition = head.add(direction);
-        Vector tailDirection = board[tail.y][tail.x].targetDirection;
+        Vector tailDirection = ((SnakeTile) board[tail.y][tail.x]).targetDirection;
         Vector nextTailPosition = tail.add(tailDirection);
 
-        Vector previousDirection = board[head.y][head.x].targetDirection;
+        Vector previousDirection = ((SnakeTile) board[head.y][head.x]).targetDirection;
         if (isInRange(nextHeadPosition))
         {
             // Implement rest of next state logic, as we won't get out of bounds here.
             if (board[nextHeadPosition.y][nextHeadPosition.x] == null)
             {
-                board[head.y][head.x] = new Tile(TileType.Snakebody, previousDirection, direction);
+                board[head.y][head.x] =
+                        new SnakeTile(TileType.Snakebody, previousDirection, direction);
                 // opdatere hoved
                 board[nextHeadPosition.y][nextHeadPosition.x] =
-                        new Tile(TileType.Snakehead, direction, direction);
+                        new SnakeTile(TileType.Snakehead, direction, direction);
 
                 // opdatere hale
-                board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail,
-                        board[nextTailPosition.y][nextTailPosition.x].enterDirection,
-                        board[nextTailPosition.y][nextTailPosition.x].targetDirection);
+                board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
+                        ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
+                        ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection);
                 board[tail.y][tail.x] = null;
                 tail = nextTailPosition;
                 head = nextHeadPosition;
-                
+
                 lastDirection = direction;
             }
         }
@@ -82,7 +83,8 @@ public class GameModel
 
     public void setDirection(Vector direction)
     {
-        if (direction.x == -this.lastDirection.x || direction.y == -this.lastDirection.y) {
+        if (direction.x == -this.lastDirection.x || direction.y == -this.lastDirection.y)
+        {
             return;
         }
         this.direction = direction;
@@ -102,6 +104,11 @@ public class GameModel
     public int getSpeed()
     {
         return speed;
+    }
+
+    public int getSnakeLength()
+    {
+        return snakeLength;
     }
 
 }

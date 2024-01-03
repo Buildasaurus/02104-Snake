@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import com.snake.Controllers.IController;
 import com.snake.Controllers.MenuController;
+import com.snake.Model.Highscore;
 
 /**
  * JavaFX App
@@ -21,6 +22,7 @@ public class App extends Application {
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
         stage.show();
+        System.out.println(Highscore.getHighscore());
     }
 
     public static void setRoot(IController newController) {
