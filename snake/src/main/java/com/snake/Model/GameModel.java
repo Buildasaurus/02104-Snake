@@ -22,7 +22,7 @@ public class GameModel
         board = new Tile[rowCount][columnCount];
 
         board[snakePosition.y][snakePosition.x] = new Tile(TileType.Snakehead, direction, direction);
-        board[snakePosition.y][snakePosition.x] = new Tile(TileType.Snaketail, direction, direction);
+        board[snakePosition.y][snakePosition.x+1] = new Tile(TileType.Snaketail, direction, direction);
     }
 
     void updateDirection(Vector direction)
