@@ -12,6 +12,7 @@ public class GameModel
     Vector head;
     Vector tail;
     Vector appleposition;
+    boolean gameover = false;
 
 
     public GameModel(int rowCount, int columnCount)
@@ -80,7 +81,7 @@ public class GameModel
         }
         else
         {
-            gameover = true;
+            gameOver();
         }
 
     }
