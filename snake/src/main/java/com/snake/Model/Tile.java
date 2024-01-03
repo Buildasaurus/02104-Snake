@@ -26,10 +26,15 @@ public class Tile
         {
             try
             {
-                String imageName = tileType.toString().toLowerCase() + "_"
-                        + getDirectionName(enterDirection, targetDirection);
+                String directionName = getDirectionName(enterDirection, targetDirection);
+                if (tileType == TileType.Snaketail && directionName.contains("_"))
+                {
+                    directionName = getDirectionName(targetDirection);
+                }
+                String imageName = tileType.toString().toLowerCase() + "_" + directionName;
                 URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
                 sprite = new Image(url.toString());
+
             }
             catch (Exception e)
             {
@@ -59,7 +64,8 @@ public class Tile
     private String getDirectionName(Vector firstDirection, Vector secondDirection)
     {
         int crossProduct = firstDirection.crossProduct(secondDirection);
-        System.out.println("crossproduct between " + firstDirection + " and " + secondDirection + " is " + crossProduct);
+        System.out.println("crossproduct between " + firstDirection + " and " + secondDirection
+                + " is " + crossProduct);
         switch (crossProduct)
         {
 
@@ -107,4 +113,23 @@ public class Tile
                 return "";
         }
     }
+
+    private String getDirectionName(Vector direction)
+    {
+        if (direction.x == 1 && direction.y == 0)
+            return "right";
+        else if (direction.x == -1 && direction.y == 0)
+            return "left";
+        else if (direction.x == 0 && direction.y == 1)
+            return "up";
+        else if (direction.x == 0 && direction.y == -1)
+            return "down";
+        else
+        {
+            System.out.println("vectors are weird, or something is wrong.");
+            return "error";
+        }
+
+    }
+
 }
