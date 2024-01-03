@@ -14,11 +14,9 @@ import javafx.scene.input.KeyEvent;
 
 public class GameController implements IController
 {
-    GameView view;
-    GameModel model;
-    Timer gameTimer;
-
-    int speed;
+    private GameView view;
+    private GameModel model;
+    private Timer gameTimer;
 
     public Parent getView()
     {
@@ -30,11 +28,10 @@ public class GameController implements IController
         this.view = new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
         this.gameTimer = new Timer();
-        this.speed = 2;
 
         view.setOnKeyPressed(this::handleKeyPressed);
 
-        gameTimer.schedule(timeLoop(), 1000/speed);
+        gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
     }
 
     private TimerTask timeLoop() {
@@ -42,7 +39,7 @@ public class GameController implements IController
         TimerTask task = new TimerTask() {
             public void run() {
                 model.nextState();
-                gameTimer.schedule(timeLoop(), 1000/speed);
+                gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
             }
         };
 
