@@ -74,7 +74,6 @@ public class GameModel
                 board[tail.y][tail.x] = null;
                 tail = nextTailPosition;
                 head = nextHeadPosition;
-
                 lastDirection = direction;
             }
         }

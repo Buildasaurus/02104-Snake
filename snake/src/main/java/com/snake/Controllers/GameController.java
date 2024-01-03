@@ -47,7 +47,6 @@ public class GameController implements IController
 
     private void timeLoop()
     {
-        System.out.println("nextstate");
         model.nextState();
         if (model.gameOver())
         {
