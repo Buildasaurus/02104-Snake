@@ -1,7 +1,5 @@
 package com.snake.Model;
 
-import java.util.Timer;
-
 public class GameModel
 {
     private Tile[][] board;
@@ -9,6 +7,7 @@ public class GameModel
     private Vector snakePosition; // keep track of position
     private int rowCount;
     private int columnCount;
+    private int speed;
 
     public GameModel(int rowCount, int columnCount)
     {
@@ -17,6 +16,7 @@ public class GameModel
         this.columnCount = columnCount;
         snakePosition = new Vector(rowCount / 2, columnCount / 2); // snake start position
         direction = new Vector(1, 0); // initializing direction as right
+        speed = 2;
 
         boolean startSquare = false;
     }
@@ -57,5 +57,10 @@ public class GameModel
     public Tile[][] getBoard()
     {
         return board;
+    }
+
+    public int getSpeed() 
+    {
+        return speed;
     }
 }

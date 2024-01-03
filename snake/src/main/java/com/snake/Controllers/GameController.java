@@ -3,22 +3,20 @@ package com.snake.Controllers;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
 
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
 public class GameController implements IController
 {
-    GameView view;
-    GameModel model;
-    Timer gameTimer;
-
-    int speed;
+    private GameView view;
+    private GameModel model;
+    private Timer gameTimer;
 
     public Parent getView()
     {
@@ -30,11 +28,10 @@ public class GameController implements IController
         this.view = new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
         this.gameTimer = new Timer();
-        this.speed = 2;
 
         view.setOnKeyPressed(this::handleKeyPressed);
 
-        gameTimer.schedule(timeLoop(), 1000/speed);
+        gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
     }
 
     private TimerTask timeLoop() {
@@ -42,7 +39,8 @@ public class GameController implements IController
         TimerTask task = new TimerTask() {
             public void run() {
                 model.nextState();
-                gameTimer.schedule(timeLoop(), 1000/speed);
+                view.update(model.getBoard());
+                gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
             }
         };
 
@@ -72,7 +70,9 @@ public class GameController implements IController
                 break;
 
             case ESCAPE:
-                Platform.exit();
+                MenuController newController = new MenuController();
+                App.setRoot(newController);
+                break;
 
             default:
                 System.out.println("non functional key " + key.getCode() + " pressed");
