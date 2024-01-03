@@ -78,7 +78,7 @@ public class GameModel
     }
 
     public void gameOver(){
-        //game over
+        
     }
     
     public Tile[][] getBoard()
@@ -90,4 +90,5 @@ public class GameModel
     {
         return speed;
     }
+    
 }
