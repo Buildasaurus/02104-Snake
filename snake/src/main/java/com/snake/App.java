@@ -22,7 +22,7 @@ public class App extends Application {
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
         stage.show();
-        System.out.println(Highscore.getHighscore());
+        System.out.println("Highscore at start of game is: " + Highscore.getHighscore());
     }
 
     public static void setRoot(IController newController) {
