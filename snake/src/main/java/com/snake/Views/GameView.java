@@ -55,6 +55,8 @@ public class GameView extends GridPane
     {
         if (board != null)
         {
+            this.getChildren().clear(); // Clear the current view
+
             for (int row = 0; row < rowCount; row++)
             {
                 for (int column = 0; column < columnCount; column++)

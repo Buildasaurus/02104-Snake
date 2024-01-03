@@ -100,11 +100,14 @@ public class Tile
                 else
                 {
                     System.out.println("vectors are weird, or something is wrong.");
+                    System.out.println(firstDirection.toString() + " " + secondDirection);
                     return "error";
                 }
 
             default:
                 System.out.println("vectors are weird, or something is wrong.");
+                System.out.println(firstDirection.toString() + " " + secondDirection);
+
                 return "";
         }
     }
