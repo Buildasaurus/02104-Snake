@@ -1,6 +1,5 @@
 package com.snake.Controllers;
 
-import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
@@ -28,6 +27,7 @@ public class GameController implements IController
     {
         model.nextState();
         if (model.gameOver()) {
+            Highscore.setHighscore(model.getSnakeLength());
             return true;
         } else {
             view.update(model.getBoard());
