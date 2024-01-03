@@ -1,13 +1,10 @@
 package com.snake.Controllers;
 
-import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
-import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
@@ -15,52 +12,35 @@ public class GameController implements IController
 {
     private GameView view;
     private GameModel model;
-    private AnimationTimer gameTimer;
-    private long lastUpdate = 0;
 
     public Parent getView()
     {
         return view;
     }
 
-    public GameController(int rowCount, int columnCount)
+    public GameController()
     {
-        this.view =
-                new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
-        this.model = new GameModel(rowCount, columnCount);
-        view.setOnKeyPressed(this::handleKeyPressed);
-        Platform.runLater(() -> view.requestFocus());
-        gameTimer = new AnimationTimer()
-        {
-            @Override
-            public void handle(long now)
-            {
-                if (now - lastUpdate >= 1_000_000_000 / model.getSpeed())
-                {
-                    timeLoop();
-                    lastUpdate = now;
-                }
-            }
-        };
-        gameTimer.start();
+        this.view = new GameView(500, 500);
+        this.model = new GameModel();
     }
 
-    private void timeLoop()
+    public boolean executeNextStep()
     {
         System.out.println("nextstate");
         model.nextState();
-        if (model.gameOver())
-        {
-            gameTimer.stop();
-            Highscore.setHighscore(model.getSnakeLength());
-        }
-        else
-        {
+        if (model.gameOver()) {
+            return true;
+        } else {
             view.update(model.getBoard());
+            return false;
         }
     }
 
-    private void handleKeyPressed(KeyEvent key)
+    public int getSpeed() {
+        return model.getSpeed();
+    }
+
+    public void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
         {
@@ -84,14 +64,7 @@ public class GameController implements IController
                 model.setDirection(new Vector(1, 0));
                 break;
 
-            case ESCAPE:
-                gameTimer.stop();
-                MenuController newController = new MenuController();
-                App.setRoot(newController);
-                break;
-
             default:
-                System.out.println("non functional key " + key.getCode() + " pressed");
                 break;
         }
     }

@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import java.util.Random;
 
+import com.snake.Settings;
+
 public class GameModel
 {
     public Tile[][] board;
@@ -17,10 +19,10 @@ public class GameModel
     private boolean gameover = false;
 
 
-    public GameModel(int rowCount, int columnCount)
+    public GameModel()
     {
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
+        this.rowCount = Settings.rowCount;
+        this.columnCount = Settings.columnCount;
         head = new Vector(rowCount / 2, columnCount / 2); // snake start position
         tail = new Vector(rowCount / 2 - 1, columnCount / 2);
         direction = new Vector(1, 0); // initializing direction as right

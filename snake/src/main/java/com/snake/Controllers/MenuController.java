@@ -1,7 +1,6 @@
 package com.snake.Controllers;
 
 import com.snake.App;
-import com.snake.Settings;
 import com.snake.Views.MenuView;
 
 import javafx.application.Platform;
@@ -23,7 +22,7 @@ public class MenuController implements IController {
     }
 
     public void handlePlayButtonPressed(ActionEvent action) {
-        GameController newController = new GameController(Settings.rowCount, Settings.columnCount);
+        GUIController newController = new GUIController();
         App.setRoot(newController);
     }
 

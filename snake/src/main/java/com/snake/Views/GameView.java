@@ -1,5 +1,6 @@
 package com.snake.Views;
 
+import com.snake.Settings;
 import com.snake.Model.Tile;
 import javafx.scene.image.ImageView;
 
@@ -22,12 +23,12 @@ public class GameView extends GridPane
      * @param height The height of the board in pixels
      * @param width The width of the board in pixels
      */
-    public GameView(int rowCount, int columnCount, int height, int width)
+    public GameView(int height, int width)
     {
         this.height = height;
         this.width = width;
-        this.rowCount = rowCount;
-        this.columnCount = columnCount;
+        this.rowCount = Settings.rowCount;
+        this.columnCount = Settings.columnCount;
         initialize();
     }
 
