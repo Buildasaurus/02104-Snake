@@ -30,6 +30,7 @@ public class GameModel
         Random randint = new Random();
         apple.x = randint.nextInt(columnCount);
         apple.y = randint.nextInt(rowCount);
+        new Tile(TileType.Apple, apple, apple);
     }
 
     /**
@@ -67,6 +68,9 @@ public class GameModel
                                 board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[tail.y][tail.x] = null;
             }
+        }
+        else if (board[apple.x][apple.y]){
+
         }
         else
         {
