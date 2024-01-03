@@ -11,19 +11,18 @@ public class GameModel
     Vector tail;
 
 
-    public GameModel(int rowCount, int columnCount) {
-
+    public GameModel(int rowCount, int columnCount)
+    {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        head = new Vector(rowCount/2, columnCount/2); //snake start position
-        tail = new Vector(rowCount/2, columnCount/2 + 1);
-        direction = new Vector(1, 0); //initializing direction as right
-                board = new Tile[rowCount][columnCount];
+        head = new Vector(rowCount / 2, columnCount / 2); // snake start position
+        tail = new Vector(rowCount / 2 - 1, columnCount / 2);
+        direction = new Vector(1, 0); // initializing direction as right
+        board = new Tile[rowCount][columnCount];
 
         board[head.y][head.x] = new Tile(TileType.Snakehead, direction, direction);
-        board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);    
+        board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
-
     }
 
     void updateDirection(Vector direction)
@@ -45,31 +44,39 @@ public class GameModel
 
     public void nextState()
     {
-        Vector nextPosition = head.add(direction);
+        Vector nextHeadPosition = head.add(direction);
+        Vector tailDirection = board[tail.y][tail.x].targetDirection;
+        Vector nextTailPosition = tail.add(tailDirection);
 
-        if (isInRange(nextPosition))
+        Vector previousDirection = board[head.y][head.x].targetDirection;
+        if (isInRange(nextHeadPosition))
         {
+            // Implement rest of next state logic, as we won't get out of bounds here.
+            if (board[nextHeadPosition.y][nextHeadPosition.x] == null)
+            {
+                board[head.y][head.x] = new Tile(TileType.Snakebody, previousDirection, direction);
+                // opdatere hoved
+                board[nextHeadPosition.y][nextHeadPosition.x] =
+                        new Tile(TileType.Snakehead, direction, direction);
 
-            //Implement rest of next state logic, as we won't get out of bounds here.
-            if (board[nextPosition.x][nextPosition.y] == null){
-                board[head.x][head.y] = null;
-                //opdatere hoved
-                head = head.add(direction);
-                board[head.x][head.y] = new Tile(TileType.Snakehead, head, nextPosition);
-
-                board[tail.x][tail.y] = null;
-                //opdatere hale
-                tail = tail.add(direction);
-                board[tail.x][tail.y] = new Tile(TileType.Snaketail,head, nextPosition);
+                // opdatere hale
+                board[nextTailPosition.y][nextTailPosition.x] =
+                        new Tile(TileType.Snaketail, board[tail.y][tail.x].enterDirection,
+                                board[tail.y][tail.x].targetDirection);
+                board[tail.y][tail.x] = null;
             }
-            else {
+            else
+            { // loses if you hit an apple?
                 gameOver();
             }
 
         }
-        else {
+        else
+        {
             gameOver();
-        }   
+        }
+        tail = nextTailPosition;
+        head = nextHeadPosition;
     }
 
     public void setDirection(Vector direction)
@@ -77,10 +84,12 @@ public class GameModel
         this.direction = direction;
     }
 
-    public void gameOver(){
-        
+    public void gameOver()
+    {
+        System.out.println("gameover");
+        // game over
     }
-    
+
     public Tile[][] getBoard()
     {
         return board;
