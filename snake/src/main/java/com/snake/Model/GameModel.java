@@ -5,21 +5,19 @@ import java.util.Timer;
 public class GameModel {
     Tile[][] board;
     Vector direction;
-    Timer time;
-    Vector snakePosition; // keep track of position
+    Timer time; 
     int rowCount;
     int columnCount;
-
+    Vector head;
+    Vector tail;
 
     public GameModel(int rowCount, int columnCount) {
 
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        Vector head = new Vector(rowCount/2, columnCount/2); //snake start position
-        Vector tail = new Vector(rowCount/2, columnCount/2 + 1);
+        head = new Vector(rowCount/2, columnCount/2); //snake start position
+        tail = new Vector(rowCount/2, columnCount/2 + 1);
         direction = new Vector(1, 0); //initializing direction as right
-
-        boolean startSquare = false;
     }
 
     void updateDirection(Vector direction)
@@ -37,7 +35,7 @@ public class GameModel {
                position.y >= 0 && position.y < columnCount;
     }
 
-    public void nextState(Vector head, Vector tail)
+    public void nextState()
     {
         Vector nextPosition = head.add(direction);
 
@@ -49,14 +47,12 @@ public class GameModel {
                 board[head.x][head.y] = null;
                 //opdatere hoved
                 head = head.add(direction);
-                board[head.x][head.y] = new Tile();
-                //board[head.x][head.y].tileType = TileType.Snakehead;
+                board[head.x][head.y] = new Tile(TileType.Snakehead);
 
                 board[tail.x][tail.y] = null;
                 //opdatere hale
                 tail = tail.add(direction);
-                board[tail.x][tail.y] = new Tile();
-                //board[tail.x][tail.y].tileType = TileType.Snaketail;
+                board[tail.x][tail.y] = new Tile(TileType.Snaketail);
             }
             else {
                 gameOver();
