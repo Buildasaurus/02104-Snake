@@ -11,6 +11,7 @@ public class GameModel
     private int speed;
     private Vector head;
     private Vector tail;
+    private int snakeLength = 2;
     private Vector apple;
     private boolean gameover = false;
 
