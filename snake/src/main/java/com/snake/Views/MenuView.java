@@ -8,16 +8,19 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class MenuView extends StackPane {
+public class MenuView extends StackPane
+{
     MenuController controller;
 
-    public MenuView(MenuController controller) {
+    public MenuView(MenuController controller)
+    {
         this.controller = controller;
 
         initialize();
     }
 
-    private void initialize() {
+    private void initialize()
+    {
         Button playButton = new Button("Play");
         Button exitButton = new Button("Quit");
 

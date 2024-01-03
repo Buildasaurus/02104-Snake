@@ -9,14 +9,15 @@ public class Fruit extends Tile
 {
     private static final Image Image = null;
     Vector fruitposition;
-    
+
     public Fruit()
-    { 
+    {
         super(TileType.Apple);
         randFruit();
     }
 
-    public Vector getfruitPosition(){    
+    public Vector getfruitPosition()
+    {
         return fruitposition;
     }
 
@@ -26,8 +27,10 @@ public class Fruit extends Tile
         fruitposition.x = randint.nextInt(Settings.columnCount);
         fruitposition.y = randint.nextInt(Settings.rowCount);
     }
-    public Image getImage(){
-        
+
+    public Image getImage()
+    {
+
         return Image;
     }
 

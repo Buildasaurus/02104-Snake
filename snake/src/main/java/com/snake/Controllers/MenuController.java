@@ -10,7 +10,6 @@ import javafx.scene.input.KeyEvent;
 
 public class MenuController implements IController {
     private MenuView view;
-
     public MenuController() {
         this.view = new MenuView(this);
 

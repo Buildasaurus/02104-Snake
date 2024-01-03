@@ -100,4 +100,17 @@ public class Vector
     {
         return this.x * other.y - this.y * other.x;
     }
+    private int correctModulo(int a, int b)
+    {
+        int mod = a%b;
+        if (mod < 0)
+        {
+            return mod+b;
+        }
+        return mod;
+    }
+    public Vector modulo(int x, int y)
+    {
+        return new Vector(correctModulo(this.x, x), correctModulo(this.y%y, y));
+    }
 }

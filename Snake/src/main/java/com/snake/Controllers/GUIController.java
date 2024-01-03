@@ -86,7 +86,7 @@ public class GUIController implements IController {
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
                 break;
-                
+
             default:
                 break;
         }

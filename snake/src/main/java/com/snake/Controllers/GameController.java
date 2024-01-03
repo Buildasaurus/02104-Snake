@@ -27,15 +27,19 @@ public class GameController implements IController
     public boolean executeNextStep()
     {
         model.nextState();
-        if (model.gameOver()) {
+        if (model.gameOver())
+        {
             return true;
-        } else {
+        }
+        else
+        {
             view.update(model.getBoard());
             return false;
         }
     }
 
-    public int getSpeed() {
+    public double getSpeed()
+    {
         return model.getSpeed();
     }
 
