@@ -82,7 +82,6 @@ public class SnakeTile extends Tile
                     return "error";
                 }
             case 1:
-                System.out.println("left turn");
                 Vector temp = firstDirection.multiply(-1);
                 firstDirection = secondDirection.multiply(-1);
                 secondDirection = temp;
