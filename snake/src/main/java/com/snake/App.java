@@ -14,18 +14,19 @@ import com.snake.Controllers.MenuController;
 public class App extends Application {
 
     private static Scene scene;
-    IController controller;
+    private static IController controller;
 
     @Override
     public void start(Stage stage) throws IOException {
         controller = new MenuController();
-        scene = new Scene(controller.getView(), 640, 480);
+        scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
         stage.show();
     }
 
-    public static void setRoot(String fxml) throws IOException {
-        System.out.println(fxml);
+    public static void setRoot(IController newController) {
+        controller = newController;
+        scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
     }
 
 
