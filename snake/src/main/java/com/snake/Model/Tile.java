@@ -28,9 +28,7 @@ public class Tile
             {
                 String imageName = tileType.toString().toLowerCase() + "_"
                         + getDirectionName(enterDirection, targetDirection);
-                System.out.println(imageName);
                 URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
-                System.out.println(url);
                 sprite = new Image(url.toString());
             }
             catch (Exception e)
@@ -60,10 +58,6 @@ public class Tile
      */
     private String getDirectionName(Vector firstDirection, Vector secondDirection)
     {
-        if (firstDirection.x == -secondDirection.x || firstDirection.y == -firstDirection.y)
-        {
-            System.out.println("opposite directions");
-        }
         int crossProduct = firstDirection.crossProduct(secondDirection);
         switch (crossProduct)
         {
