@@ -1,9 +1,6 @@
 package com.snake.Model;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
-import com.snake.App;
 import javafx.scene.image.Image;
 
 public class Tile
@@ -26,10 +23,15 @@ public class Tile
         {
             try
             {
-                String imageName = tileType.toString().toLowerCase() + "_"
-                        + getDirectionName(enterDirection, targetDirection);
+                String directionName = getDirectionName(enterDirection, targetDirection);
+                if (tileType == TileType.Snaketail && directionName.contains("_"))
+                {
+                    directionName = getDirectionName(targetDirection);
+                }
+                String imageName = tileType.toString().toLowerCase() + "_" + directionName;
                 URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
                 sprite = new Image(url.toString());
+
             }
             catch (Exception e)
             {
@@ -59,6 +61,8 @@ public class Tile
     private String getDirectionName(Vector firstDirection, Vector secondDirection)
     {
         int crossProduct = firstDirection.crossProduct(secondDirection);
+        System.out.println("crossproduct between " + firstDirection + " and " + secondDirection
+                + " is " + crossProduct);
         switch (crossProduct)
         {
 
@@ -77,11 +81,12 @@ public class Tile
                     System.out.println("vectors are weird, or something is wrong.");
                     return "error";
                 }
-            case -1:
-                Vector temp = firstDirection;
-                firstDirection = secondDirection;
-                secondDirection = temp;
             case 1:
+                System.out.println("left turn");
+                Vector temp = firstDirection.multiply(-1);
+                firstDirection = secondDirection.multiply(-1);
+                secondDirection = temp;
+            case -1:
                 // They are parallel, so now we can figure out in which direction
                 if (firstDirection.x == 1 && firstDirection.y == 0)
                     return "turn_down";
@@ -105,5 +110,23 @@ public class Tile
                 return "";
         }
     }
-    
+
+    private String getDirectionName(Vector direction)
+    {
+        if (direction.x == 1 && direction.y == 0)
+            return "right";
+        else if (direction.x == -1 && direction.y == 0)
+            return "left";
+        else if (direction.x == 0 && direction.y == 1)
+            return "up";
+        else if (direction.x == 0 && direction.y == -1)
+            return "down";
+        else
+        {
+            System.out.println("vectors are weird, or something is wrong.");
+            return "error";
+        }
+
+    }
+
 }

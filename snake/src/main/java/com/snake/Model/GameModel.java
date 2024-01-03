@@ -19,12 +19,11 @@ public class GameModel
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         head = new Vector(rowCount / 2, columnCount / 2); // snake start position
-        tail = new Vector(rowCount / 2 - 2, columnCount / 2);
+        tail = new Vector(rowCount / 2 - 1, columnCount / 2);
         direction = new Vector(1, 0); // initializing direction as right
         board = new Tile[rowCount][columnCount];
 
         board[head.y][head.x] = new Tile(TileType.Snakehead, direction, direction);
-        board[head.y][head.x-1] = new Tile(TileType.Snakebody, direction, direction);
         board[tail.y][tail.x] = new Tile(TileType.Snaketail, direction, direction);
         speed = 2;
         appleposition = newAppleposition();
@@ -59,7 +58,18 @@ public class GameModel
             if (board[nextHeadPosition.y][nextHeadPosition.x] == null) {
                 // opdatere hale
                 board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail, board[nextTailPosition.y][nextTailPosition.x].enterDirection, board[nextTailPosition.y][nextTailPosition.x].targetDirection);
+                board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail,
+                        board[nextTailPosition.y][nextTailPosition.x].enterDirection,
+                        board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[tail.y][tail.x] = null;
+                tail = nextTailPosition;
+                head = nextHeadPosition;
+            }
+            if (board[nextHeadPosition.y][nextHeadPosition.x] != null && board[nextHeadPosition.y][nextHeadPosition.x].tileType != TileType.Apple) {
+                gameOver();
+            }
+            if (board[nextHeadPosition.y][nextHeadPosition.x].tileType == TileType.Apple){
+                appleposition = newAppleposition();
             }
             if (board[nextHeadPosition.y][nextHeadPosition.x] != null && board[nextHeadPosition.y][nextHeadPosition.x].tileType != TileType.Apple) {
                 gameOver();
@@ -70,23 +80,23 @@ public class GameModel
         }
         else
         {
-            gameOver();
+            gameover = true;
         }
-        tail = nextTailPosition;
-        head = nextHeadPosition;
+
     }
 
     public void setDirection(Vector direction)
     {
-        if (direction.x == -this.direction.x || direction.y == -this.direction.y) {
+        if (direction.x == -this.direction.x || direction.y == -this.direction.y)
+        {
             return;
         }
         this.direction = direction;
     }
 
-    public void gameOver()
+    public boolean gameOver()
     {
-        System.out.println("gameover");
+        return gameover;
         // game over
     }
 
