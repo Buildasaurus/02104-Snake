@@ -15,7 +15,7 @@ public class GameModel {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         snakePosition = new Vector(rowCount/2, columnCount/2); //snake start position
-        direction = new Vector(rowCount, columnCount); //initializing direction
+        direction = new Vector(1, 0); //initializing direction as right
 
         boolean startSquare = false;
     }
@@ -28,29 +28,22 @@ public class GameModel {
      * @param position
      * @return
      */
-    private boolean isValidMove(Vector position) 
+    private boolean isInRange(Vector position)
     {
         return position.x >= 0 && position.x < rowCount &&
                position.y >= 0 && position.y < columnCount;
     }
-    public Vector nextState()
+    public void nextState()
     {
         Vector nextPosition = snakePosition.add(direction);
 
-        if (isValidMove(nextPosition)) {
-            return nextPosition;
-        }
-
-        if (isValidMove(nextPosition)) 
+        if (isInRange(nextPosition))
         {
             snakePosition = nextPosition;
-        }
-        else 
-        {
-            return null;
+            //Implement rest of next state logic, as we won't get out of bounds here.
         }
     }
-    
+
     public void setDirection(Vector direction)
     {
         this.direction = direction;
