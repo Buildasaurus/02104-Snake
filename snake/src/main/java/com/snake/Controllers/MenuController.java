@@ -32,7 +32,6 @@ public class MenuController implements IController {
     }
 
     private void handleKeyPressed(KeyEvent key) {
-        System.out.println("hej2");
         switch (key.getCode()) {
             case ESCAPE:
                 Platform.exit();

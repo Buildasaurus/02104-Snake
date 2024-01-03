@@ -16,12 +16,12 @@ public class GameController implements IController
     private GameModel model;
     private AnimationTimer gameTimer;
 
+    private long lastUpdate = 0;
+
     public Parent getView()
     {
         return view;
     }
-
-    private long lastUpdate = 0;
 
     public GameController(int rowCount, int columnCount)
     {
