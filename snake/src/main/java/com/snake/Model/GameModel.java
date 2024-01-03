@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameModel
 {
-    private Tile[][] board;
+    public Tile[][] board;
     private Vector lastDirection;
     private Vector direction;
     private int rowCount;
@@ -64,6 +64,11 @@ public class GameModel
                 board[nextHeadPosition.y][nextHeadPosition.x] =
                         new SnakeTile(TileType.Snakehead, direction, direction);
 
+
+            if (board[nextHeadPosition.y][nextHeadPosition.x] == null) {
+                // opdatere hoved
+                board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
+                board[nextHeadPosition.y][nextHeadPosition.x] = new SnakeTile(TileType.Snakehead, direction, direction);
                 // opdatere hale
                 board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
                         ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
@@ -77,8 +82,9 @@ public class GameModel
         }
         else
         {
-            gameover = true;
+            gameOver();
         }
+    }
     }
 
     public void setDirection(Vector direction)
