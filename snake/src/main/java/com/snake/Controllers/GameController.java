@@ -28,7 +28,6 @@ public class GameController implements IController
         this.view =
                 new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
-        System.out.println("setting thing");
         view.setOnKeyPressed(this::handleKeyPressed);
         Platform.runLater(() -> view.requestFocus());
         gameTimer = new AnimationTimer()
@@ -54,7 +53,6 @@ public class GameController implements IController
 
     private void handleKeyPressed(KeyEvent key)
     {
-        System.out.println("hej");
         switch (key.getCode())
         {
             case UP:
@@ -78,6 +76,7 @@ public class GameController implements IController
                 break;
 
             case ESCAPE:
+                gameTimer.stop();
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
                 break;
