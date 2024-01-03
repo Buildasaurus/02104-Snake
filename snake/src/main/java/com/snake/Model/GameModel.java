@@ -69,9 +69,6 @@ public class GameModel
                 board[tail.y][tail.x] = null;
             }
         }
-        else if (board[apple.x][apple.y]){
-
-        }
         else
         {
             gameOver();
