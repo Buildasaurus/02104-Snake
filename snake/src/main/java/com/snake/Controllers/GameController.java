@@ -3,12 +3,12 @@ package com.snake.Controllers;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
 
-import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
@@ -70,7 +70,9 @@ public class GameController implements IController
                 break;
 
             case ESCAPE:
-                Platform.exit();
+                MenuController newController = new MenuController();
+                App.setRoot(newController);
+                break;
 
             default:
                 System.out.println("non functional key " + key.getCode() + " pressed");

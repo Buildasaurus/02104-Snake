@@ -29,8 +29,6 @@ public class App extends Application {
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
     }
 
-
-
     public static void main(String[] args) {
         launch();
     }
