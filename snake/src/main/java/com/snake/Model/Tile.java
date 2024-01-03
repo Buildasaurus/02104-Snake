@@ -1,6 +1,7 @@
 package com.snake.Model;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import com.snake.App;
 import javafx.scene.image.Image;
@@ -27,10 +28,8 @@ public class Tile
             try
             {
                 String imageName = tileType.toString().toLowerCase();
-                URL url = App.class.getResource("/resources/" + imageName + ".png");
-
-                FileInputStream fis = new FileInputStream(imageName + ".png");
-                sprite = new Image(fis);
+                URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
+                sprite = new Image(url.toString());
             }
             catch (Exception e)
             {
@@ -39,6 +38,7 @@ public class Tile
         }
         return sprite;
     }
+
 
 
     public boolean equals()

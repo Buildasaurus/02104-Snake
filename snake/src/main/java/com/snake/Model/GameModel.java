@@ -19,6 +19,10 @@ public class GameModel
         speed = 2;
 
         boolean startSquare = false;
+        board = new Tile[rowCount][columnCount];
+
+        board[snakePosition.y][snakePosition.x] = new Tile();
+        board[snakePosition.y][snakePosition.x].tileType = TileType.Snakehead;
     }
 
     void updateDirection(Vector direction)
@@ -59,7 +63,7 @@ public class GameModel
         return board;
     }
 
-    public int getSpeed() 
+    public int getSpeed()
     {
         return speed;
     }

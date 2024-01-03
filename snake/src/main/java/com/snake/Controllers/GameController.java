@@ -8,47 +8,57 @@ import com.snake.Settings;
 import com.snake.Model.GameModel;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
-
+import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 public class GameController implements IController
 {
     private GameView view;
     private GameModel model;
-    private Timer gameTimer;
+    private AnimationTimer gameTimer;
 
     public Parent getView()
     {
         return view;
     }
 
+    private long lastUpdate = 0;
+
     public GameController(int rowCount, int columnCount)
     {
-        this.view = new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
+        this.view =
+                new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
-        this.gameTimer = new Timer();
 
         view.setOnKeyPressed(this::handleKeyPressed);
 
-        gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
-    }
-
-    private TimerTask timeLoop() {
-        // this automatically handles changes in speed by finishing the current loop and applying after that, how fucking sexy is that
-        TimerTask task = new TimerTask() {
-            public void run() {
-                model.nextState();
-                view.update(model.getBoard());
-                gameTimer.schedule(timeLoop(), 1000/model.getSpeed());
+        gameTimer = new AnimationTimer()
+        {
+            @Override
+            public void handle(long now)
+            {
+                if (now - lastUpdate >= 1_000_000_000)
+                {
+                    timeLoop();
+                    lastUpdate = now;
+                }
             }
         };
-
-        return task;
+        gameTimer.start();
     }
 
-    void handleKeyPressed(KeyEvent key) {
-        switch (key.getCode()) {
+    private void timeLoop()
+    {
+        model.nextState();
+        view.update(model.getBoard());
+    }
+
+    void handleKeyPressed(KeyEvent key)
+    {
+        switch (key.getCode())
+        {
             case UP:
             case W:
                 model.setDirection(new Vector(0, 1));

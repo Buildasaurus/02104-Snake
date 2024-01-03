@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import com.snake.Controllers.GameController;
 import com.snake.Controllers.IController;
 import com.snake.Controllers.MenuController;
 
@@ -18,7 +19,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        controller = new MenuController();
+        controller = new GameController(20, 20);
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
         stage.show();
