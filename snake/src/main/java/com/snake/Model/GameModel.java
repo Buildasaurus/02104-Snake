@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class GameModel
 {
-    private Tile[][] board;
+    public Tile[][] board;
     private Vector direction;
     private int rowCount;
     private int columnCount;
@@ -52,11 +52,12 @@ public class GameModel
         Vector previousDirection = board[head.y][head.x].targetDirection;
         if (isInRange(nextHeadPosition))
         {
-            // opdatere hoved
-            board[head.y][head.x] = new Tile(TileType.Snakebody, previousDirection, direction);
-            board[nextHeadPosition.y][nextHeadPosition.x] = new Tile(TileType.Snakehead, direction, direction);
+
 
             if (board[nextHeadPosition.y][nextHeadPosition.x] == null) {
+                // opdatere hoved
+                board[head.y][head.x] = new Tile(TileType.Snakebody, previousDirection, direction);
+                board[nextHeadPosition.y][nextHeadPosition.x] = new Tile(TileType.Snakehead, direction, direction);
                 // opdatere hale
                 board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail, board[nextTailPosition.y][nextTailPosition.x].enterDirection, board[nextTailPosition.y][nextTailPosition.x].targetDirection);
                 board[nextTailPosition.y][nextTailPosition.x] = new Tile(TileType.Snaketail,
@@ -65,13 +66,7 @@ public class GameModel
                 board[tail.y][tail.x] = null;
                 tail = nextTailPosition;
                 head = nextHeadPosition;
-            }
-            if (board[nextHeadPosition.y][nextHeadPosition.x] != null && board[nextHeadPosition.y][nextHeadPosition.x].tileType != TileType.Apple) {
-                gameOver();
-            }
-            if (board[nextHeadPosition.y][nextHeadPosition.x].tileType == TileType.Apple){
-                appleposition = newAppleposition();
-            }
+            }   
             if (board[nextHeadPosition.y][nextHeadPosition.x] != null && board[nextHeadPosition.y][nextHeadPosition.x].tileType != TileType.Apple) {
                 gameOver();
             }
@@ -109,15 +104,6 @@ public class GameModel
     public int getSpeed()
     {
         return speed;
-    }
-    public Vector newAppleposition()
-    {  
-        Vector newappleposition = new Vector();
-        Random randint = new Random();
-        newappleposition.x = randint.nextInt(columnCount);
-        newappleposition.y = randint.nextInt(rowCount);
-        new Tile(TileType.Apple, appleposition, appleposition);
-        return newappleposition;
     }
 
 }
