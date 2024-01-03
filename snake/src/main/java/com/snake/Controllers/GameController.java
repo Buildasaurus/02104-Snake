@@ -17,6 +17,7 @@ public class GameController implements IController
     private AnimationTimer gameTimer;
 
     private long lastUpdate = 0;
+    private boolean gameOver;
 
     public Parent getView()
     {
@@ -48,7 +49,12 @@ public class GameController implements IController
     private void timeLoop()
     {
         model.nextState();
-        view.update(model.getBoard());
+        if (model.gameOver()) {
+            gameTimer.stop();
+            gameOver = true;
+        } else {
+            view.update(model.getBoard());
+        }
     }
 
     private void handleKeyPressed(KeyEvent key)
