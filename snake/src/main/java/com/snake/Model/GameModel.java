@@ -26,11 +26,6 @@ public class GameModel
         speed = 2;
     }
 
-    void updateDirection(Vector direction)
-    {
-        this.direction = direction;
-    }
-
     /**
      * if inside board limit
      *
@@ -82,6 +77,9 @@ public class GameModel
 
     public void setDirection(Vector direction)
     {
+        if (direction.x == -this.direction.x || direction.y == -this.direction.y) {
+            return;
+        }
         this.direction = direction;
     }
 
