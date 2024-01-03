@@ -32,6 +32,6 @@ public class GUIView extends StackPane {
     }
 
     public void updateFrameRate(double frameRate) {
-        frameRateCounter.setText(String.format("fps: %.3f", frameRate));
+        frameRateCounter.setText(String.format("fps: %.1f", frameRate));
     }
 }

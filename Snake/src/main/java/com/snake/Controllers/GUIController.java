@@ -35,6 +35,7 @@ public class GUIController implements IController {
             @Override
             public void handle(long now)
             {
+                // DON'T TRUST THE FRAMERATE!!!
                 long oldFrameTime = frameTimes[frameTimeIndex];
                 frameTimes[frameTimeIndex] = now;
                 frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length;
