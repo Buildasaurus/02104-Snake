@@ -1,8 +1,5 @@
 package com.snake.Controllers;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameModel;
@@ -11,7 +8,6 @@ import com.snake.Views.GameView;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
 
 public class GameController implements IController
 {
@@ -39,7 +35,7 @@ public class GameController implements IController
             @Override
             public void handle(long now)
             {
-                if (now - lastUpdate >= 1_000_000_000)
+                if (now - lastUpdate >= 1_000_000_000/model.getSpeed())
                 {
                     timeLoop();
                     lastUpdate = now;
