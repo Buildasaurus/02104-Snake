@@ -6,6 +6,7 @@ import com.snake.Model.GameModel;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
@@ -27,15 +28,14 @@ public class GameController implements IController
         this.view =
                 new GameView(rowCount, columnCount, Settings.windowHeight, Settings.windowWidth);
         this.model = new GameModel(rowCount, columnCount);
-
         view.setOnKeyPressed(this::handleKeyPressed);
-
+        Platform.runLater(() -> view.requestFocus());
         gameTimer = new AnimationTimer()
         {
             @Override
             public void handle(long now)
             {
-                if (now - lastUpdate >= 1_000_000_000/model.getSpeed())
+                if (now - lastUpdate >= 1_000_000_000 / model.getSpeed())
                 {
                     timeLoop();
                     lastUpdate = now;
@@ -51,7 +51,7 @@ public class GameController implements IController
         view.update(model.getBoard());
     }
 
-    void handleKeyPressed(KeyEvent key)
+    private void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
         {
@@ -76,6 +76,7 @@ public class GameController implements IController
                 break;
 
             case ESCAPE:
+                gameTimer.stop();
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
                 break;
