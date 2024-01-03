@@ -12,7 +12,7 @@ public class Fruit extends Tile
     
     public Fruit()
     { 
-        super(TileType.Apple,new Vector(),new Vector());
+        super(TileType.Apple);
         randFruit();
     }
 

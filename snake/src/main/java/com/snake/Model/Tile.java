@@ -15,8 +15,6 @@ public abstract class Tile
 
     public abstract Image getImage();
 
-
-
     public boolean equals()
     {
         return false;

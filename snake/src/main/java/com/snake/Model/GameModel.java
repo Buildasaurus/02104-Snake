@@ -67,8 +67,8 @@ public class GameModel
 
             if (board[nextHeadPosition.y][nextHeadPosition.x] == null) {
                 // opdatere hoved
-                board[head.y][head.x] = new Tile(TileType.Snakebody, previousDirection, direction);
-                board[nextHeadPosition.y][nextHeadPosition.x] = new Tile(TileType.Snakehead, direction, direction);
+                board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
+                board[nextHeadPosition.y][nextHeadPosition.x] = new SnakeTile(TileType.Snakehead, direction, direction);
                 // opdatere hale
                 board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
                         ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
@@ -84,6 +84,7 @@ public class GameModel
         {
             gameOver();
         }
+    }
     }
 
     public void setDirection(Vector direction)
