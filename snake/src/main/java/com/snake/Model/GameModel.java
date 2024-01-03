@@ -64,8 +64,6 @@ public class GameModel
                 board[nextHeadPosition.y][nextHeadPosition.x] =
                         new SnakeTile(TileType.Snakehead, direction, direction);
 
-
-            if (board[nextHeadPosition.y][nextHeadPosition.x] == null) {
                 // opdatere hoved
                 board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
                 board[nextHeadPosition.y][nextHeadPosition.x] = new SnakeTile(TileType.Snakehead, direction, direction);
@@ -84,7 +82,6 @@ public class GameModel
         {
             gameOver();
         }
-    }
     }
 
     public void setDirection(Vector direction)
