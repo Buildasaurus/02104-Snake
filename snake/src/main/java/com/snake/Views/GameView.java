@@ -53,20 +53,29 @@ public class GameView extends GridPane
 
     public void update(Tile[][] board)
     {
-        for (int row = 0; row < rowCount; row++)
+        if (board != null)
         {
-            for (int column = 0; column < columnCount; column++)
+            for (int row = 0; row < rowCount; row++)
             {
-                // Text text = new Text(x + " " + y);
-                // this.add(text, x, 7 - y);
-                if (board[row][column] != null)
+                for (int column = 0; column < columnCount; column++)
                 {
-                    ImageView imageView = new ImageView(board[row][column].getImage());
-                    imageView.setFitWidth(height / rowCount);
-                    imageView.setPreserveRatio(true);
-                    this.add(imageView, column, rowCount - row);
+                    // Text text = new Text(x + " " + y);
+                    // this.add(text, x, 7 - y);
+                    if (board[row][column] != null)
+                    {
+                        ImageView imageView = new ImageView(board[row][column].getImage());
+                        imageView.setFitWidth(height / rowCount);
+                        imageView.setPreserveRatio(true);
+                        this.add(imageView, column, rowCount - row);
+                    }
                 }
             }
         }
+        else
+        {
+            System.out.println("board isnull");
+
+        }
+
     }
 }
