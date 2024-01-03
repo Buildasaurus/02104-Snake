@@ -90,4 +90,9 @@ public class Vector
     {
         return Math.max(Math.abs(other.x - x), Math.abs(other.y - y));
     }
+
+    public int crossProduct(Vector other)
+    {
+        return this.x * other.y - this.y * other.x;
+    }
 }

@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import com.snake.Controllers.GameController;
 import com.snake.Controllers.IController;
-import com.snake.Controllers.MenuController;
 
 /**
  * JavaFX App

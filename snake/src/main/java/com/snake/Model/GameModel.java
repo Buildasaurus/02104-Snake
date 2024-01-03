@@ -21,8 +21,8 @@ public class GameModel
         boolean startSquare = false;
         board = new Tile[rowCount][columnCount];
 
-        board[snakePosition.y][snakePosition.x] = new Tile();
-        board[snakePosition.y][snakePosition.x].tileType = TileType.Snakehead;
+        board[snakePosition.y][snakePosition.x] = new Tile(TileType.Snakehead, direction, direction);
+        board[snakePosition.y][snakePosition.x] = new Tile(TileType.Snaketail, direction, direction);
     }
 
     void updateDirection(Vector direction)
