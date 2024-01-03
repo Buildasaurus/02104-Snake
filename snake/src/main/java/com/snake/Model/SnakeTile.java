@@ -30,7 +30,9 @@ public class SnakeTile extends Tile
                     directionName = getDirectionName(targetDirection);
                 }
                 String imageName = tileType.toString().toLowerCase() + "_" + directionName;
+                System.out.println(imageName);
                 URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
+                System.out.println(url);
                 sprite = new Image(url.toString());
 
             }
