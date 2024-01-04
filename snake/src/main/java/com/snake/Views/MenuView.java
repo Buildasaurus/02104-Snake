@@ -1,9 +1,17 @@
 package com.snake.Views;
 
+import java.net.URL;
+
 import com.snake.Controllers.MenuController;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -21,6 +29,9 @@ public class MenuView extends StackPane
 
     private void initialize()
     {
+        URL url = getClass().getResource("/com/snake/Graphics/main.png");
+        BackgroundImage BI = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        this.setBackground(new Background(BI));
         Button playButton = new Button("Play");
         Button exitButton = new Button("Quit");
 
