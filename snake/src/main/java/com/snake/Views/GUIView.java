@@ -16,9 +16,9 @@ public class GUIView extends StackPane {
     private GameOverView gameOverView;
 
     private Label frameRateCounter;
-    private Label currentScore;
+    private Label[] currentScores;
 
-    public GUIView(Parent gameView) {
+    public GUIView(Parent gameView, int playerCount) {
         this.gameView = gameView;
 
         BorderPane gameGroup = new BorderPane();
@@ -26,9 +26,18 @@ public class GUIView extends StackPane {
         gameGroup.setPadding(new Insets(5, 5, 5, 5));
 
         HBox topBox = new HBox(50.0);
+
         frameRateCounter = new Label("fps: 0.0");
-        currentScore = new Label("Current Score: 0");
-        topBox.getChildren().addAll(frameRateCounter, currentScore);
+        topBox.getChildren().add(frameRateCounter);
+
+        currentScores = new Label[playerCount];
+        for (int i = 0; i < playerCount; i++) {
+            Label currentScore = new Label();
+            currentScore.setText("Player " + i + "'s score: 0");
+            currentScores[i] = currentScore;
+            topBox.getChildren().add(currentScore);
+        }
+        
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
@@ -46,8 +55,8 @@ public class GUIView extends StackPane {
         frameRateCounter.setText(String.format("fps: %.1f", frameRate));
     }
 
-    public void updateCurrentScore(int score) {
-        currentScore.setText("Current score: " + score);
+    public void updateCurrentScore(int score, int player) {
+        currentScores[player].setText("Player " + player + "'s score: " + score);
     }
 
     public void setPauseView(GUIController controller) {
