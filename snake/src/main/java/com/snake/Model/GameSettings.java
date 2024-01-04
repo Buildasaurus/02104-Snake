@@ -33,7 +33,7 @@ public class GameSettings
     }
 
     /**
-     * sets the player count if the given player count is valid, and can be handled.
+     * Sets the  {@link #playerCount player count} if the given player count is valid, and can be handled.
      *
      * @return Returns if the update was succesful
      */
