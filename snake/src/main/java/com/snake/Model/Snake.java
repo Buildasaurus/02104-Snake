@@ -37,9 +37,9 @@ public class Snake
         nextHeadPosition = nextHeadPosition.modulo(Settings.columnCount, Settings.columnCount);
         nextTailPosition = nextTailPosition.modulo(Settings.columnCount, Settings.columnCount);
 
-        Vector previousDirection = ((SnakeTile) board[head.y][head.x]).targetDirection;
-
-        if (board[nextHeadPosition.y][nextHeadPosition.x] == null)
+        Vector previousDirection = lastDirection;
+        Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
+        if (tileAtHead == null)
         {
             // update head
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
@@ -54,6 +54,19 @@ public class Snake
 
             // save data for next time
             tail = nextTailPosition;
+            head = nextHeadPosition;
+            lastDirection = direction;
+        }
+        else if (tileAtHead instanceof Fruit)
+        {
+            // update head
+            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
+            board[nextHeadPosition.y][nextHeadPosition.x] =
+                    new SnakeTile(TileType.Snakehead, direction, direction);
+
+            // Tail shouldn't be updated.
+
+            // Save data
             head = nextHeadPosition;
             lastDirection = direction;
         }

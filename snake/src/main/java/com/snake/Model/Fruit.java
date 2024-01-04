@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 
 public abstract class Fruit extends Tile
 {
-    private Vector fruitposition;
+    protected Vector fruitposition;
 
     public Fruit(TileType type)
     {
