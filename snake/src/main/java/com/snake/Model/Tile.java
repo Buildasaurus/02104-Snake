@@ -1,6 +1,5 @@
 package com.snake.Model;
 
-import java.net.URL;
 import javafx.scene.image.Image;
 
 public abstract class Tile

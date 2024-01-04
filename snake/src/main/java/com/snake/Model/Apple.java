@@ -2,7 +2,7 @@ package com.snake.Model;
 
 public class Apple extends Fruit
 {
-    public Vector applePosition;
+    private Vector applePosition;
 
     public Apple(Vector applePosition)
     {
@@ -10,9 +10,9 @@ public class Apple extends Fruit
         this.applePosition = applePosition;
     }
 
-    public void getapplePosition()
+    public Vector getapplePosition()
     {
-
+        return applePosition;
     }
 
 }
