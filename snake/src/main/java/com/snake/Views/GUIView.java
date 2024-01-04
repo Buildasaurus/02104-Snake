@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class GUIView extends StackPane {
@@ -15,6 +16,7 @@ public class GUIView extends StackPane {
     private Parent gameOverView;
 
     private Label frameRateCounter;
+    private Label currentScore;
 
     public GUIView(Parent gameView) {
         this.gameView = gameView;
@@ -23,8 +25,11 @@ public class GUIView extends StackPane {
         gameGroup.setCenter(this.gameView);
         gameGroup.setPadding(new Insets(5, 5, 5, 5));
 
+        HBox topBox = new HBox(50.0);
         frameRateCounter = new Label("fps: 0.0");
-        gameGroup.setTop(frameRateCounter);
+        currentScore = new Label("Current Score: 0");
+        topBox.getChildren().addAll(frameRateCounter, currentScore);
+        gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
     }
@@ -37,6 +42,10 @@ public class GUIView extends StackPane {
 
     public void updateFrameRate(double frameRate) {
         frameRateCounter.setText(String.format("fps: %.1f", frameRate));
+    }
+
+    public void updateCurrentScore(int score) {
+        currentScore.setText("Current score: " + score);
     }
 
     public void setPauseView(GUIController controller) {

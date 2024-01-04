@@ -52,6 +52,7 @@ public class GUIController implements IController {
                 if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed() && !isGameOver && !isPaused)
                 {
                     isGameOver = gameController.executeNextStep();
+                    view.updateCurrentScore(gameController.getCurrentScore());
                     lastUpdate = now;
                 }
             }
