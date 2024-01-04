@@ -10,6 +10,7 @@ public class Snake
     private Vector direction;
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
+    private Fruit fruit;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection)
@@ -37,9 +38,9 @@ public class Snake
         nextHeadPosition = nextHeadPosition.modulo(Settings.columnCount, Settings.columnCount);
         nextTailPosition = nextTailPosition.modulo(Settings.columnCount, Settings.columnCount);
 
-        Vector previousDirection = lastDirection;
-        Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
-        if (tileAtHead == null)
+        Vector previousDirection = ((SnakeTile) board[head.y][head.x]).targetDirection;
+
+        if (board[nextHeadPosition.y][nextHeadPosition.x] == null)
         {
             // update head
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
@@ -63,6 +64,9 @@ public class Snake
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
+            fruit = tileAtHead;
+            
+            
 
             // Tail shouldn't be updated.
 
@@ -101,5 +105,10 @@ public class Snake
     public int getSnakeLength()
     {
         return snakeLength;
+    }
+
+    public Fruit Fruiteaten()
+    {
+        return fruit;
     }
 }
