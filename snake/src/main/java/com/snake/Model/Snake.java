@@ -21,7 +21,7 @@ public class Snake
 
         board[head.y][head.x] = new SnakeTile(TileType.Snakehead, direction, direction);
         board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction);
-        lastDirection = new Vector(0, 0);
+        lastDirection = startDirection;
     }
 
 
@@ -97,6 +97,11 @@ public class Snake
     {
         return position.x >= 0 && position.x < Settings.rowCount && position.y >= 0
                 && position.y < Settings.columnCount;
+    }
+
+    public Vector getNextHeadPosition()
+    {
+        return head.add(direction);
     }
 
     public boolean isAlive()

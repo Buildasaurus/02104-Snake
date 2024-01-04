@@ -26,7 +26,8 @@ public class GameController implements IController
     public boolean executeNextStep()
     {
         model.nextState();
-        if (model.gameOver()) {
+        if (model.gameOver())
+        {
             Highscore.setHighscore(model.getSnakeLength());
             return true;
         }
@@ -51,23 +52,32 @@ public class GameController implements IController
         switch (key.getCode())
         {
             case UP:
+                model.setDirection(new Vector(0, 1), 1);
+                break;
             case W:
-                model.setDirection(new Vector(0, 1));
+                model.setDirection(new Vector(0, 1), 2);
                 break;
 
             case DOWN:
+                model.setDirection(new Vector(0, -1), 1);
+                break;
             case S:
-                model.setDirection(new Vector(0, -1));
+                model.setDirection(new Vector(0, -1), 2);
                 break;
 
             case LEFT:
+                model.setDirection(new Vector(-1, 0), 1);
+
+                break;
             case A:
-                model.setDirection(new Vector(-1, 0));
+                model.setDirection(new Vector(-1, 0), 2);
                 break;
 
             case RIGHT:
+                model.setDirection(new Vector(1, 0), 1);
+                break;
             case D:
-                model.setDirection(new Vector(1, 0));
+                model.setDirection(new Vector(1, 0), 2);
                 break;
 
             default:
