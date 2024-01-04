@@ -10,7 +10,8 @@ public class GameModel
     private int columnCount;
     private double speed;
     private double acceleration = 0.1;
-    private Snake snake;
+    private Snake player1;
+    private Snake player2;
     private Apple apple;
 
 
@@ -18,15 +19,11 @@ public class GameModel
     {
         this.rowCount = Settings.rowCount;
         this.columnCount = Settings.columnCount;
-
+        Vector midpoint = new Vector(rowCount / 2, columnCount / 2);
         board = new Tile[rowCount][columnCount];
-        snake = new Snake(board, new Vector(rowCount / 2, columnCount / 2),
-                new Vector(rowCount / 2 - 1, columnCount / 2), new Vector(1, 0));
+        player1 = new Snake(board, midpoint, midpoint.add(-1, 0), new Vector(1, 0));
+        player2 = new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
 
-        apple = new Apple();
-        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
-        apple = new Apple();
-        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
         apple = new Apple();
         board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
 
@@ -38,18 +35,26 @@ public class GameModel
     public void nextState()
     {
         speed += acceleration;
-        snake.updatePosition(board);
+        player1.updatePosition(board);
+        player2.updatePosition(board);
     }
 
-    public void setDirection(Vector direction)
+    public void setDirection(Vector direction, int player)
     {
         // TODO You can later add an int player in the input
-        snake.setDirection(direction);
+        if (player == 1)
+        {
+            player1.setDirection(direction);
+        }
+        else if (player == 2)
+        {
+            player2.setDirection(direction);
+        }
     }
 
     public boolean gameOver()
     {
-        return !snake.isAlive();
+        return !player1.isAlive();
         // game over
     }
 
@@ -65,6 +70,6 @@ public class GameModel
 
     public int getSnakeLength()
     {
-        return snake.getSnakeLength();
+        return player1.getSnakeLength();
     }
 }
