@@ -55,6 +55,7 @@ public class Snake
             tail = nextTailPosition;
             head = nextHeadPosition;
             lastDirection = direction;
+            fruit = null;
         }
         else if (tileAtHead instanceof Fruit)
         {
@@ -62,9 +63,7 @@ public class Snake
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
-            fruit = tileAtHead;
-            
-            
+            fruit = (Fruit)tileAtHead;
 
             snakeLength += 1;
             // Tail shouldn't be updated.
