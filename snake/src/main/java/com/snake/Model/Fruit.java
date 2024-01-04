@@ -13,15 +13,15 @@ public abstract class Fruit extends Tile
     public Fruit(TileType type)
     {
         super(type);
-        randFruit();
+        setRandomPosition();
     }
 
-    public Vector getfruitPosition()
+    public Vector getPosition()
     {
         return fruitposition;
     }
 
-    public void randFruit()
+    public void setRandomPosition()
     {
         Random randint = new Random();
         fruitposition = new Vector(randint.nextInt(Settings.columnCount), randint.nextInt(Settings.rowCount));
