@@ -21,7 +21,8 @@ public class GameModel
         board = new Tile[rowCount][columnCount];
         players = new Snake[2];
         players[0] = new Snake(board, midpoint, midpoint.add(-1, 0), new Vector(1, 0));
-        players[1] = new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
+        players[1] =
+                new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
 
         Apple apple = new Apple();
         board[apple.getPosition().y][apple.getPosition().x] = apple;
@@ -29,6 +30,7 @@ public class GameModel
         speed = 2;
     }
 
+    //TODO - seems to be buggy, when snake eats apple, both stop moving for a frame?
     public void nextState()
     {
         speed += acceleration;
@@ -37,12 +39,20 @@ public class GameModel
         {
             player.updatePosition(board);
             fruit = player.Fruiteaten();
-            if(fruit != null)
+            if (fruit != null)
                 break;
         }
         if (fruit != null)
         {
-            board[fruit.getPosition().y][fruit.getPosition().x] = new Apple();
+            // TODO - fix this, so that when someone wins the game, it isn't an infinite looop, and
+            // when they are close, it doesn't take forever
+            Apple apple = new Apple();
+            while (board[apple.getPosition().y][apple.getPosition().x] != null)
+            {
+                apple = new Apple();
+                break;
+            }
+            board[apple.getPosition().y][apple.getPosition().x] = apple;
         }
     }
 
@@ -103,5 +113,5 @@ public class GameModel
     {
         return players.length;
     }
-    
+
 }
