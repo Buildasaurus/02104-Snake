@@ -28,7 +28,8 @@ public class GameController implements IController
         model.nextState();
         if (model.gameOver())
         {
-            Highscore.setHighscore(model.getSnakeLength());
+            Highscore.setHighscore(model.getSnakeLength(0));
+            Highscore.setHighscore(model.getSnakeLength(1));
             return true;
         }
         else
@@ -43,8 +44,8 @@ public class GameController implements IController
         return model.getSpeed();
     }
 
-    public int getCurrentScore() {
-        return model.getSnakeLength();
+    public int getCurrentScore(int player) {
+        return model.getSnakeLength(player);
     }
 
     public void handleKeyPressed(KeyEvent key)
@@ -52,32 +53,32 @@ public class GameController implements IController
         switch (key.getCode())
         {
             case UP:
-                model.setDirection(new Vector(0, 1), 1);
+                model.setDirection(new Vector(0, 1), 0);
                 break;
             case W:
-                model.setDirection(new Vector(0, 1), 2);
+                model.setDirection(new Vector(0, 1), 1);
                 break;
 
             case DOWN:
-                model.setDirection(new Vector(0, -1), 1);
+                model.setDirection(new Vector(0, -1), 0);
                 break;
             case S:
-                model.setDirection(new Vector(0, -1), 2);
+                model.setDirection(new Vector(0, -1), 1);
                 break;
 
             case LEFT:
-                model.setDirection(new Vector(-1, 0), 1);
+                model.setDirection(new Vector(-1, 0), 0);
 
                 break;
             case A:
-                model.setDirection(new Vector(-1, 0), 2);
+                model.setDirection(new Vector(-1, 0), 1);
                 break;
 
             case RIGHT:
-                model.setDirection(new Vector(1, 0), 1);
+                model.setDirection(new Vector(1, 0), 0);
                 break;
             case D:
-                model.setDirection(new Vector(1, 0), 2);
+                model.setDirection(new Vector(1, 0), 1);
                 break;
 
             default:

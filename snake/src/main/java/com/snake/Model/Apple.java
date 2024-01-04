@@ -8,9 +8,4 @@ public class Apple extends Fruit
         super(TileType.Apple);
     }
 
-    public Vector getapplePosition()
-    {
-        return fruitposition;
-    }
-
 }

@@ -55,7 +55,7 @@ public class GUIController implements IController {
                     if (isGameOver) {
                         setGameOverView();
                     }
-                    view.updateCurrentScore(gameController.getCurrentScore());
+                    view.updateCurrentScore(gameController.getCurrentScore(0));
                     lastUpdate = now;
                 }
             }

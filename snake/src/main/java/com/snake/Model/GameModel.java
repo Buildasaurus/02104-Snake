@@ -10,10 +10,7 @@ public class GameModel
     private int columnCount;
     private double speed;
     private double acceleration = 0.1;
-    private Snake player1;
-    private Snake player2;
-    private Apple apple;
-    private Fruit fruit;
+    private Snake[] players;
 
 
     public GameModel()
@@ -22,11 +19,12 @@ public class GameModel
         this.columnCount = Settings.columnCount;
         Vector midpoint = new Vector(rowCount / 2, columnCount / 2);
         board = new Tile[rowCount][columnCount];
-        player1 = new Snake(board, midpoint, midpoint.add(-1, 0), new Vector(1, 0));
-        player2 = new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
+        players = new Snake[2];
+        players[0] = new Snake(board, midpoint, midpoint.add(-1, 0), new Vector(1, 0));
+        players[1] = new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
 
-        apple = new Apple();
-        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
+        Apple apple = new Apple();
+        board[apple.getPosition().y][apple.getPosition().x] = apple;
 
         speed = 2;
     }
@@ -34,33 +32,46 @@ public class GameModel
     public void nextState()
     {
         speed += acceleration;
-        player1.updatePosition(board);
-        player2.updatePosition(board);
-        fruit = player1.Fruiteaten() == null ? player2.Fruiteaten() : player1.Fruiteaten();
+        Fruit fruit = null;
+        for (Snake player : players)
+        {
+            player.updatePosition(board);
+            fruit = player.Fruiteaten();
+            if(fruit != null)
+                break;
+        }
         if (fruit != null)
         {
-            apple = new Apple();
-            board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
-
+            board[fruit.getPosition().y][fruit.getPosition().x] = new Apple();
         }
     }
 
     public void setDirection(Vector direction, int player)
     {
         // TODO You can later add an int player in the input
-        if (player == 1)
+        if (player == 0)
         {
-            player1.setDirection(direction);
+            players[0].setDirection(direction);
         }
-        else if (player == 2)
+        else if (player == 1)
         {
-            player2.setDirection(direction);
+            players[1].setDirection(direction);
         }
     }
 
     public boolean gameOver()
     {
-        return !player1.isAlive();
+        boolean playerIsDead = false;
+        for (Snake player : players)
+        {
+            if (!player.isAlive())
+            {
+                playerIsDead = true;
+                break;
+            }
+        }
+
+        return playerIsDead;
         // game over
     }
 
@@ -74,9 +85,23 @@ public class GameModel
         return speed;
     }
 
-    public int getSnakeLength()
+    public int getSnakeLength(int player)
     {
-        return player1.getSnakeLength();
+        // TODO You can later add an int player in the input
+        if (player == 0)
+        {
+            return players[0].getSnakeLength();
+        }
+        else if (player == 1)
+        {
+            return players[1].getSnakeLength();
+        }
+        return -1;
+    }
+
+    public int getPlayerCount()
+    {
+        return players.length;
     }
     
 }
