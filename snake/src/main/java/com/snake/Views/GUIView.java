@@ -1,5 +1,7 @@
 package com.snake.Views;
 
+import com.snake.Controllers.GUIController;
+
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -9,7 +11,7 @@ import javafx.scene.layout.StackPane;
 
 public class GUIView extends StackPane {
     private Parent gameView;
-    private Parent pauseView;
+    private PauseView pauseView;
     private Parent gameOverView;
 
     private Label frameRateCounter;
@@ -28,10 +30,22 @@ public class GUIView extends StackPane {
     }
 
     public void shiftFocus(KeyEvent key) {
-
+        if (pauseView != null) {
+            pauseView.shiftFocus(key);
+        }
     }
 
     public void updateFrameRate(double frameRate) {
         frameRateCounter.setText(String.format("fps: %.1f", frameRate));
+    }
+
+    public void setPauseView(GUIController controller) {
+        pauseView = new PauseView(controller);
+        getChildren().add(this.pauseView);
+    }
+
+    public void removePauseView() {
+        getChildren().remove(pauseView);
+        pauseView = null;
     }
 }
