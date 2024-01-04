@@ -9,7 +9,7 @@ public class GameModel
     private int rowCount;
     private int columnCount;
     private double speed;
-    private double acceleration = 0.1;
+    private double acceleration = 0.01;
     private Snake[] players;
 
 
@@ -50,7 +50,6 @@ public class GameModel
             while (board[apple.getPosition().y][apple.getPosition().x] != null)
             {
                 apple = new Apple();
-                break;
             }
             board[apple.getPosition().y][apple.getPosition().x] = apple;
         }
