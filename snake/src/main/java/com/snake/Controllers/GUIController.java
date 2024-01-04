@@ -178,9 +178,16 @@ public class GUIController implements IController
         view.setGameOverView(this);
     }
 
+    /**
+     * Stops the animation timer to kill thread activity and goes to the new game menu.
+     * 
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleNewGameButtonPressed(ActionEvent action)
     {
-        System.out.println("pressed new game");
+        gameTimer.stop();
+        NewGameController newController = new NewGameController();
+        App.setRoot(newController);
     }
 
     public void handleLoadGameButtonPressed(ActionEvent action)
