@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 
 public abstract class Tile
 {
-    private TileType tileType;
+    protected TileType tileType;
     protected Image sprite;
 
     public Tile(TileType type)
