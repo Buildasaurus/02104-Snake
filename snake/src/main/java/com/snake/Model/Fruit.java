@@ -29,7 +29,6 @@ public abstract class Fruit extends Tile
 
     public Image getImage()
     {
-
         return Image;
     }
 
