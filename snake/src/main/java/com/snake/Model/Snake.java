@@ -63,7 +63,7 @@ public class Snake
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
-
+            snakeLength += 1;
             // Tail shouldn't be updated.
 
             // Save data
