@@ -25,10 +25,12 @@ public class GUIController implements IController
     private boolean isGameOver = false;
     private boolean isPaused = false;
 
-    public GUIController()
-    {
+    private int playerCount;
+
+    public GUIController() {
         this.gameController = new GameController();
-        this.view = new GUIView(gameController.getView());
+        this.playerCount = gameController.getPlayerCount();
+        this.view = new GUIView(gameController.getView(), this.playerCount);
 
         view.setOnKeyPressed(this::handleKeyPressed);
         Platform.runLater(() -> view.requestFocus());
@@ -61,7 +63,9 @@ public class GUIController implements IController
                     {
                         setGameOverView();
                     }
-                    view.updateCurrentScore(gameController.getCurrentScore(0));
+                    for (int i = 0; i < playerCount; i++) {
+                        view.updateCurrentScore(gameController.getCurrentScore(i), i);
+                    }
                     lastUpdate = now;
                 }
             }
@@ -105,6 +109,7 @@ public class GUIController implements IController
                 view.setPauseView(this);
                 break;
 
+            // debugging keybind
             case BACK_SPACE:
                 if (!isGameOver && !isPaused)
                 {
