@@ -5,6 +5,7 @@ import com.snake.Views.GUIView;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
@@ -20,8 +21,8 @@ public class GUIController implements IController {
     private int frameTimeIndex = 0;
     private boolean arrayFilled = false;
 
-    private boolean isGameOver;
-    private boolean isPaused;
+    private boolean isGameOver = false;
+    private boolean isPaused = false;
 
     public GUIController() {
         this.gameController = new GameController();
@@ -68,13 +69,10 @@ public class GUIController implements IController {
             case S:
             case A:
             case D:
-                gameController.handleKeyPressed(key);
-                break;
-
-            case UP:
-            case DOWN:
             case LEFT:
             case RIGHT:
+            case UP:
+            case DOWN:
                 if (!isGameOver && !isPaused) {
                     gameController.handleKeyPressed(key);
                 } else {
@@ -83,13 +81,31 @@ public class GUIController implements IController {
                 break;
 
             case ESCAPE:
-                //gameTimer.stop();
-                MenuController newController = new MenuController();
-                App.setRoot(newController);
+                if (isPaused) {
+                    handleBackButtonPressed(null);
+                }
+                isPaused = true;
+                view.setPauseView(this);
                 break;
 
             default:
                 break;
         }
+    }
+
+    public void handleResumeButtonPressed(ActionEvent action) {
+        isPaused = false;
+        view.removePauseView();
+        Platform.runLater(() -> view.requestFocus());
+    }
+
+    public void handleSaveButtonPressed(ActionEvent action) {
+        System.out.println("pressed save");
+    }
+
+    public void handleBackButtonPressed(ActionEvent action) {
+        gameTimer.stop();
+        MenuController newController = new MenuController();
+        App.setRoot(newController);
     }
 }
