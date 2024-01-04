@@ -30,8 +30,15 @@ public class GUIController implements IController
 
     private int playerCount;
 
-    public GUIController()
-    {
+    /**
+     * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game logic via {@link GameController}.
+     * Main controller of the main view {@link com.snake.Views.GUIView GUIView}.
+     * Handles {@link #handleKeyPressed(KeyEvent) keypresses} of the view.
+     * Handles button actions of the {@link com.snake.Views.GUIView GUIView} subviews:
+     * {@link com.snake.Views.PauseView PauseView} and {@link com.snake.Views.GameOverView GameOverView},
+     * as well as switching to those views.
+     */
+    public GUIController() {
         this.gameController = new GameController();
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         this.view = new GUIView(gameController.getView(), this.playerCount);
@@ -78,11 +85,22 @@ public class GUIController implements IController
         gameTimer.start();
     }
 
+    /**
+     * @return {@link com.snake.Views.GUIView GUIView} handled by the controller.
+     */
     public Parent getView()
     {
         return view;
     }
 
+    /**
+     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}.
+     * WASD and arrow keys used to navigate in game or in menus.
+     * Escape pauses game or returns to main menu if paused or in game over.
+     * Backspace forces game over, only used for debugging purposes.
+     *
+     * @param key a {@link javafx.scene.input.KeyEvent KeyEvent}, uses the {@link javafx.scene.input.KeyEvent#getCode() code} of the KeyEvent.
+     */
     private void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
@@ -127,6 +145,11 @@ public class GUIController implements IController
         }
     }
 
+    /**
+     * Leaves the pause menu and starts the game clock again.
+     *
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleResumeButtonPressed(ActionEvent action)
     {
         isPaused = false;
@@ -139,6 +162,11 @@ public class GUIController implements IController
         System.out.println("pressed save");
     }
 
+    /**
+     * Stops the animation timer to kill thread activity and goes back to the main menu.
+     *
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleBackButtonPressed(ActionEvent action)
     {
         gameTimer.stop();
@@ -146,14 +174,24 @@ public class GUIController implements IController
         App.setRoot(newController);
     }
 
+    /**
+     * Calls the {@link com.snake.Views.GUIView#setGameOverView() setGameOverView} function in GUIView.
+     */
     public void setGameOverView()
     {
         view.setGameOverView(this);
     }
 
+    /**
+     * Stops the animation timer to kill thread activity and goes to the new game menu.
+     *
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleNewGameButtonPressed(ActionEvent action)
     {
-        System.out.println("pressed new game");
+        gameTimer.stop();
+        NewGameController newController = new NewGameController();
+        App.setRoot(newController);
     }
 
     public void handleLoadGameButtonPressed(ActionEvent action)
