@@ -31,19 +31,17 @@ public class Snake
      */
     public void updatePosition(Tile[][] board)
     {
-        Vector nextHeadPosition = head.add(direction);
+        Vector nextHeadPosition =
+                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
         Vector tailDirection = ((SnakeTile) board[tail.y][tail.x]).targetDirection;
-        Vector nextTailPosition = tail.add(tailDirection);
+        Vector nextTailPosition =
+                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
 
-        nextHeadPosition = nextHeadPosition.modulo(Settings.columnCount, Settings.columnCount);
-        nextTailPosition = nextTailPosition.modulo(Settings.columnCount, Settings.columnCount);
-
-        Vector previousDirection = ((SnakeTile) board[head.y][head.x]).targetDirection;
-
-        if (board[nextHeadPosition.y][nextHeadPosition.x] == null)
+        Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
+        if (tileAtHead == null)
         {
             // update head
-            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
+            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
 
@@ -61,18 +59,23 @@ public class Snake
         else if (tileAtHead instanceof Fruit)
         {
             // update head
-            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, previousDirection, direction);
+            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
             fruit = tileAtHead;
             
             
 
+            snakeLength += 1;
             // Tail shouldn't be updated.
 
             // Save data
             head = nextHeadPosition;
             lastDirection = direction;
+        }
+        else if (tileAtHead instanceof SnakeTile)
+        {
+            snakeIsAlive = false;
         }
     }
 

@@ -25,6 +25,10 @@ public class GameModel
 
         apple = new Apple();
         board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
+        apple = new Apple();
+        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
+        apple = new Apple();
+        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
 
         speed = 2;
     }
