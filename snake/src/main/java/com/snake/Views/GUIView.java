@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 public class GUIView extends StackPane {
     private Parent gameView;
     private PauseView pauseView;
-    private Parent gameOverView;
+    private GameOverView gameOverView;
 
     private Label frameRateCounter;
     private Label currentScore;
@@ -37,6 +37,8 @@ public class GUIView extends StackPane {
     public void shiftFocus(KeyEvent key) {
         if (pauseView != null) {
             pauseView.shiftFocus(key);
+        } else if (gameOverView != null) {
+            gameOverView.shiftFocus(key);
         }
     }
 
@@ -56,5 +58,10 @@ public class GUIView extends StackPane {
     public void removePauseView() {
         getChildren().remove(pauseView);
         pauseView = null;
+    }
+
+    public void setGameOverView(GUIController controller) {
+        gameOverView = new GameOverView(controller);
+        getChildren().add(this.gameOverView);
     }
 }

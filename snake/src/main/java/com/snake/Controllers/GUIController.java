@@ -57,6 +57,10 @@ public class GUIController implements IController
                         && !isPaused)
                 {
                     isGameOver = gameController.executeNextStep();
+                    if (isGameOver)
+                    {
+                        setGameOverView();
+                    }
                     view.updateCurrentScore(gameController.getCurrentScore(0));
                     lastUpdate = now;
                 }
@@ -93,13 +97,20 @@ public class GUIController implements IController
                 break;
 
             case ESCAPE:
-                if (isPaused)
+                if (isPaused || isGameOver)
                 {
                     handleBackButtonPressed(null);
                 }
                 isPaused = true;
                 view.setPauseView(this);
                 break;
+
+            case BACK_SPACE:
+                if (!isGameOver && !isPaused)
+                {
+                    isGameOver = true;
+                    setGameOverView();
+                }
 
             default:
                 break;
@@ -123,5 +134,20 @@ public class GUIController implements IController
         gameTimer.stop();
         MenuController newController = new MenuController();
         App.setRoot(newController);
+    }
+
+    public void setGameOverView()
+    {
+        view.setGameOverView(this);
+    }
+
+    public void handleNewGameButtonPressed(ActionEvent action)
+    {
+        System.out.println("pressed new game");
+    }
+
+    public void handleLoadGameButtonPressed(ActionEvent action)
+    {
+        System.out.println("pressed load game");
     }
 }
