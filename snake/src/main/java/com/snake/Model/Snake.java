@@ -10,6 +10,7 @@ public class Snake
     private Vector direction;
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
+    private Fruit fruit;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection)
@@ -54,6 +55,7 @@ public class Snake
             tail = nextTailPosition;
             head = nextHeadPosition;
             lastDirection = direction;
+            fruit = null;
         }
         else if (tileAtHead instanceof Fruit)
         {
@@ -61,6 +63,8 @@ public class Snake
             board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
             board[nextHeadPosition.y][nextHeadPosition.x] =
                     new SnakeTile(TileType.Snakehead, direction, direction);
+            fruit = (Fruit)tileAtHead;
+
             snakeLength += 1;
             // Tail shouldn't be updated.
 
@@ -108,5 +112,10 @@ public class Snake
     public int getSnakeLength()
     {
         return snakeLength;
+    }
+
+    public Fruit Fruiteaten()
+    {
+        return fruit;
     }
 }

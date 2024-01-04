@@ -13,6 +13,7 @@ public class GameModel
     private Snake player1;
     private Snake player2;
     private Apple apple;
+    private Fruit fruit;
 
 
     public GameModel()
@@ -30,13 +31,18 @@ public class GameModel
         speed = 2;
     }
 
-
-
     public void nextState()
     {
         speed += acceleration;
         player1.updatePosition(board);
         player2.updatePosition(board);
+        fruit = player1.Fruiteaten() == null ? player2.Fruiteaten() : player1.Fruiteaten();
+        if (fruit != null)
+        {
+            apple = new Apple();
+            board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
+
+        }
     }
 
     public void setDirection(Vector direction, int player)
