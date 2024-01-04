@@ -4,12 +4,15 @@ public class Apple extends Fruit
 {
     public Vector applePosition;
 
-public Apple(Vector applePosition) 
-{
-    this.applePosition = applePosition;
-}
-public void getapplePosition(){
-    
-}
+    public Apple(Vector applePosition)
+    {
+        super(TileType.Apple);
+        this.applePosition = applePosition;
+    }
+
+    public void getapplePosition()
+    {
+
+    }
 
 }
