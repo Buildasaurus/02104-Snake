@@ -33,13 +33,13 @@ public class GameSettings
     }
 
     /**
-     * sets the player count if the given player count is valid, and can be handled.
+     * Sets the  {@link #playerCount player count} if the given player count is valid, and can be handled.
      *
      * @return Returns if the update was succesful
      */
     public boolean setPlayerCount(int newPlayerCount)
     {
-        if (playerCount > 0 && playerCount < 3)
+        if (newPlayerCount > 0 && newPlayerCount <= maxPlayerCount)
         {
             playerCount = newPlayerCount;
             return true;
@@ -82,5 +82,41 @@ public class GameSettings
         this.gameMode = gameMode;
     }
 
+    public int getSpeed()
+    {
+        switch (gameMode)
+        {
+            case Easy:
+                return 2;
+            case Normal:
+                return 3;
+            case Hard:
+                return 4;
+            case Insane:
+                return 6;
+            default: // shouldn't be hit
+                System.out.println(
+                        "something is wrong in gamesettings, getspeed() method. A gameMode isn't taken care of");
+                return -1;
+        }
+    }
 
+    public double getAcceleration()
+    {
+        switch (gameMode)
+        {
+            case Easy:
+                return 0.01;
+            case Normal:
+                return 0.03;
+            case Hard:
+                return 0.05;
+            case Insane:
+                return 0.1;
+            default: // shouldn't be hit
+                System.out.println(
+                        "something is wrong in gamesettings, getspeed() method. A gameMode isn't taken care of");
+                return -1;
+        }
+    }
 }

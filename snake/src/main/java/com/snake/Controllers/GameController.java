@@ -1,6 +1,7 @@
 package com.snake.Controllers;
 
 import com.snake.Model.GameModel;
+import com.snake.Model.GameSettings;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
@@ -12,8 +13,6 @@ public class GameController implements IController
     private GameView view;
     private GameModel model;
 
-    private boolean is2Player;
-
     public Parent getView()
     {
         return view;
@@ -23,11 +22,6 @@ public class GameController implements IController
     {
         this.view = new GameView(500, 500);
         this.model = new GameModel();
-        if (getPlayerCount() == 2) {
-            is2Player = true;
-        } else {
-            is2Player = false;
-        }
     }
 
     public boolean executeNextStep()
@@ -51,11 +45,13 @@ public class GameController implements IController
         return model.getSpeed();
     }
 
-    public int getCurrentScore(int player) {
+    public int getCurrentScore(int player)
+    {
         return model.getSnakeLength(player);
     }
 
-    public int getPlayerCount() {
+    public int getPlayerCount()
+    {
         return model.getPlayerCount();
     }
 
@@ -67,44 +63,26 @@ public class GameController implements IController
                 model.setDirection(new Vector(0, 1), 0);
                 break;
             case W:
-                if (is2Player) {
-                    model.setDirection(new Vector(0, 1), 1);
-                } else {
-                    model.setDirection(new Vector(0, 1), 0);
-                }
+                model.setDirection(new Vector(0, 1), 1);
                 break;
-
             case DOWN:
                 model.setDirection(new Vector(0, -1), 0);
                 break;
             case S:
-                if (is2Player) {
-                    model.setDirection(new Vector(0, -1), 1);
-                } else {
-                    model.setDirection(new Vector(0, -1), 0);
-                }
+                model.setDirection(new Vector(0, -1), 1);
                 break;
-
             case LEFT:
                 model.setDirection(new Vector(-1, 0), 0);
                 break;
             case A:
-                if (is2Player) {
-                    model.setDirection(new Vector(-1, 0), 1);
-                } else {
-                    model.setDirection(new Vector(-1, 0), 0);
-                }
+                model.setDirection(new Vector(-1, 0), 1);
                 break;
-
             case RIGHT:
                 model.setDirection(new Vector(1, 0), 0);
                 break;
             case D:
-                if (is2Player) {
-                    model.setDirection(new Vector(1, 0), 1);
-                } else {
-                    model.setDirection(new Vector(1, 0), 0);
-                }
+                model.setDirection(new Vector(1, 0), 1);
+
                 break;
 
             default:
