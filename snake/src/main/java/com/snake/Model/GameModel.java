@@ -24,7 +24,8 @@ public class GameModel
         // TODO make code for dynamically iniatializing the players, in case there are n players.
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
-            players[i] = new Snake(board, midpoint.add(0,i), midpoint.add(-1, i), new Vector(1, 0));
+            players[i] =
+                    new Snake(board, midpoint.add(0, i), midpoint.add(-1, i), new Vector(1, 0));
         }
 
         Apple apple = new Apple();
@@ -102,6 +103,7 @@ public class GameModel
 
     public int getSnakeLength(int player)
     {
+        player = player % Settings.getGameSettings().getPlayerCount();
         if (player == 0)
         {
             return players[0].getSnakeLength();
