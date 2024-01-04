@@ -9,7 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
-public class GUIController implements IController {
+public class GUIController implements IController
+{
     private GameController gameController;
 
     private GUIView view;
@@ -24,7 +25,8 @@ public class GUIController implements IController {
     private boolean isGameOver = false;
     private boolean isPaused = false;
 
-    public GUIController() {
+    public GUIController()
+    {
         this.gameController = new GameController();
         this.view = new GUIView(gameController.getView());
 
@@ -40,16 +42,19 @@ public class GUIController implements IController {
                 long oldFrameTime = frameTimes[frameTimeIndex];
                 frameTimes[frameTimeIndex] = now;
                 frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length;
-                if (frameTimeIndex == 0) {
+                if (frameTimeIndex == 0)
+                {
                     arrayFilled = true;
                 }
-                if (arrayFilled) {
+                if (arrayFilled)
+                {
                     long elapsedNanos = now - oldFrameTime;
                     long elapsedNanosPerFrame = elapsedNanos / frameTimes.length;
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed() && !isGameOver && !isPaused)
+                if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed() && !isGameOver
+                        && !isPaused)
                 {
                     isGameOver = gameController.executeNextStep();
                     view.updateCurrentScore(gameController.getCurrentScore(0));
@@ -60,12 +65,15 @@ public class GUIController implements IController {
         gameTimer.start();
     }
 
-    public Parent getView() {
+    public Parent getView()
+    {
         return view;
     }
 
-    private void handleKeyPressed(KeyEvent key) {
-        switch (key.getCode()) {
+    private void handleKeyPressed(KeyEvent key)
+    {
+        switch (key.getCode())
+        {
             case W:
             case S:
             case A:
@@ -74,15 +82,19 @@ public class GUIController implements IController {
             case RIGHT:
             case UP:
             case DOWN:
-                if (!isGameOver && !isPaused) {
+                if (!isGameOver && !isPaused)
+                {
                     gameController.handleKeyPressed(key);
-                } else {
+                }
+                else
+                {
                     view.shiftFocus(key);
                 }
                 break;
 
             case ESCAPE:
-                if (isPaused) {
+                if (isPaused)
+                {
                     handleBackButtonPressed(null);
                 }
                 isPaused = true;
@@ -94,17 +106,20 @@ public class GUIController implements IController {
         }
     }
 
-    public void handleResumeButtonPressed(ActionEvent action) {
+    public void handleResumeButtonPressed(ActionEvent action)
+    {
         isPaused = false;
         view.removePauseView();
         Platform.runLater(() -> view.requestFocus());
     }
 
-    public void handleSaveButtonPressed(ActionEvent action) {
+    public void handleSaveButtonPressed(ActionEvent action)
+    {
         System.out.println("pressed save");
     }
 
-    public void handleBackButtonPressed(ActionEvent action) {
+    public void handleBackButtonPressed(ActionEvent action)
+    {
         gameTimer.stop();
         MenuController newController = new MenuController();
         App.setRoot(newController);
