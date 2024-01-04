@@ -21,7 +21,7 @@ public class MenuController implements IController {
     }
 
     public void handlePlayButtonPressed(ActionEvent action) {
-        GUIController newController = new GUIController();
+        NewGameController newController = new NewGameController();
         App.setRoot(newController);
     }
 

@@ -19,7 +19,7 @@ public class GameSettings
      * GameMode can be a variant of different things. What changes is e.g. the acceleration of the
      * snake.
      */
-    private enum GameMode
+    public enum GameMode
     {
         Easy, Normal, Hard, Insane
     }
@@ -27,7 +27,7 @@ public class GameSettings
     /**
      * This can be extended with eg "block in the middle", "racetrack" or "maze"
      */
-    private enum Level
+    public enum Level
     {
         Empty
     }

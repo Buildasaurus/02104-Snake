@@ -58,7 +58,6 @@ public class GameModel
 
     public void setDirection(Vector direction, int player)
     {
-        // TODO You can later add an int player in the input
         if (player == 0)
         {
             players[0].setDirection(direction);
@@ -97,7 +96,6 @@ public class GameModel
 
     public int getSnakeLength(int player)
     {
-        // TODO You can later add an int player in the input
         if (player == 0)
         {
             return players[0].getSnakeLength();
