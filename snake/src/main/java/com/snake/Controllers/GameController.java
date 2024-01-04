@@ -12,6 +12,8 @@ public class GameController implements IController
     private GameView view;
     private GameModel model;
 
+    private boolean is2Player;
+
     public Parent getView()
     {
         return view;
@@ -21,6 +23,11 @@ public class GameController implements IController
     {
         this.view = new GameView(500, 500);
         this.model = new GameModel();
+        if (getPlayerCount() == 2) {
+            is2Player = true;
+        } else {
+            is2Player = false;
+        }
     }
 
     public boolean executeNextStep()
@@ -60,29 +67,44 @@ public class GameController implements IController
                 model.setDirection(new Vector(0, 1), 0);
                 break;
             case W:
-                model.setDirection(new Vector(0, 1), 1);
+                if (is2Player) {
+                    model.setDirection(new Vector(0, 1), 1);
+                } else {
+                    model.setDirection(new Vector(0, 1), 0);
+                }
                 break;
 
             case DOWN:
                 model.setDirection(new Vector(0, -1), 0);
                 break;
             case S:
-                model.setDirection(new Vector(0, -1), 1);
+                if (is2Player) {
+                    model.setDirection(new Vector(0, -1), 1);
+                } else {
+                    model.setDirection(new Vector(0, -1), 0);
+                }
                 break;
 
             case LEFT:
                 model.setDirection(new Vector(-1, 0), 0);
-
                 break;
             case A:
-                model.setDirection(new Vector(-1, 0), 1);
+                if (is2Player) {
+                    model.setDirection(new Vector(-1, 0), 1);
+                } else {
+                    model.setDirection(new Vector(-1, 0), 0);
+                }
                 break;
 
             case RIGHT:
                 model.setDirection(new Vector(1, 0), 0);
                 break;
             case D:
-                model.setDirection(new Vector(1, 0), 1);
+                if (is2Player) {
+                    model.setDirection(new Vector(1, 0), 1);
+                } else {
+                    model.setDirection(new Vector(1, 0), 0);
+                }
                 break;
 
             default:

@@ -27,6 +27,9 @@ public class GUIView extends StackPane {
 
         HBox topBox = new HBox(50.0);
 
+        frameRateCounter = new Label("fps: 0.0");
+        topBox.getChildren().add(frameRateCounter);
+
         currentScores = new Label[playerCount];
         for (int i = 0; i < playerCount; i++) {
             Label currentScore = new Label();
@@ -34,9 +37,7 @@ public class GUIView extends StackPane {
             currentScores[i] = currentScore;
             topBox.getChildren().add(currentScore);
         }
-
-        frameRateCounter = new Label("fps: 0.0");
-        topBox.getChildren().addAll(frameRateCounter);
+        
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
