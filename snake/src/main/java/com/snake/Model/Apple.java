@@ -2,17 +2,16 @@ package com.snake.Model;
 
 public class Apple extends Fruit
 {
-    private Vector applePosition;
 
-    public Apple(Vector applePosition)
+    public Apple()
     {
         super(TileType.Apple);
-        this.applePosition = applePosition;
+        this.fruitposition = fruitposition;
     }
 
     public Vector getapplePosition()
     {
-        return applePosition;
+        return fruitposition;
     }
 
 }

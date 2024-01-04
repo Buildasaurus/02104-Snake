@@ -11,7 +11,7 @@ public class GameModel
     private int rowCount;
     private int columnCount;
     private double speed;
-    private Vector apple;
+    private Apple apple;
     private double acceleration = 0.1;
     private Snake snake;
 
@@ -22,10 +22,14 @@ public class GameModel
         this.columnCount = Settings.columnCount;
 
         board = new Tile[rowCount][columnCount];
-        snake = new Snake(board, new Vector(rowCount / 2, columnCount / 2), new Vector(rowCount / 2 - 1, columnCount / 2), new Vector(1,0));
+        snake = new Snake(board, new Vector(rowCount / 2, columnCount / 2),
+                new Vector(rowCount / 2 - 1, columnCount / 2), new Vector(1, 0));
+
+        Apple apple = new Apple();
+        apple.randFruit();
+        board[apple.getapplePosition().y][apple.getapplePosition().x] = apple;
+
         speed = 2;
-        Random randint = new Random();
-        apple = new Vector(randint.nextInt(columnCount), randint.nextInt(rowCount));
     }
 
 
