@@ -48,6 +48,10 @@ public class GameController implements IController
         return model.getSnakeLength(player);
     }
 
+    public int getPlayerCount() {
+        return model.getPlayerCount();
+    }
+
     public void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
