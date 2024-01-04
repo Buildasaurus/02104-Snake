@@ -1,6 +1,9 @@
 package com.snake.Controllers;
 
+import java.util.Set;
 import com.snake.App;
+import com.snake.Settings;
+import com.snake.Model.GameSettings;
 import com.snake.Views.GUIView;
 
 import javafx.animation.AnimationTimer;
@@ -27,9 +30,10 @@ public class GUIController implements IController
 
     private int playerCount;
 
-    public GUIController() {
+    public GUIController()
+    {
         this.gameController = new GameController();
-        this.playerCount = gameController.getPlayerCount();
+        this.playerCount = Settings.getGameSettings().getPlayerCount();
         this.view = new GUIView(gameController.getView(), this.playerCount);
 
         view.setOnKeyPressed(this::handleKeyPressed);
@@ -63,7 +67,8 @@ public class GUIController implements IController
                     {
                         setGameOverView();
                     }
-                    for (int i = 0; i < playerCount; i++) {
+                    for (int i = 0; i < playerCount; i++)
+                    {
                         view.updateCurrentScore(gameController.getCurrentScore(i), i);
                     }
                     lastUpdate = now;
