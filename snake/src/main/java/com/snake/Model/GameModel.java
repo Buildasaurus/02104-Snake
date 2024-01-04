@@ -1,7 +1,5 @@
 package com.snake.Model;
 
-import java.util.Random;
-
 import com.snake.Settings;
 
 public class GameModel
@@ -14,6 +12,7 @@ public class GameModel
     private Vector apple;
     private double acceleration = 0.1;
     private Snake snake;
+    private Apple apple;
 
 
     public GameModel()
@@ -24,8 +23,8 @@ public class GameModel
         board = new Tile[rowCount][columnCount];
         snake = new Snake(board, new Vector(rowCount / 2, columnCount / 2), new Vector(rowCount / 2 - 1, columnCount / 2), new Vector(1,0));
         speed = 2;
-        Random randint = new Random();
-        apple = new Vector(randint.nextInt(columnCount), randint.nextInt(rowCount));
+        apple = new Apple();
+        
     }
 
 
