@@ -44,8 +44,8 @@ public class GameController implements IController
         return model.getSpeed();
     }
 
-    public int getCurrentScore() {
-        return model.getSnakeLength();
+    public int getCurrentScore(int player) {
+        return model.getSnakeLength(player);
     }
 
     public void handleKeyPressed(KeyEvent key)
