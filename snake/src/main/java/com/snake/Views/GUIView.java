@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class GUIView extends StackPane {
@@ -19,8 +20,9 @@ public class GUIView extends StackPane {
 
     private Label frameRateCounter;
     private Label[] currentScores;
+    private Label[] currentSpeeds;
 
-    public GUIView(Parent gameView, int playerCount) {
+    public GUIView(Parent gameView, int playerCount, double[] speedArray) {
         this.gameView = (GameView) gameView;
 
         BorderPane gameGroup = new BorderPane();
@@ -39,12 +41,25 @@ public class GUIView extends StackPane {
         currentScores = new Label[playerCount];
         for (int i = 0; i < playerCount; i++) {
             Label currentScore = new Label();
-            currentScore.setText("Player " + i + "'s score: 0");
+            currentScore.setText("Player " + (i + 1) + "'s score: 0");
             currentScores[i] = currentScore;
             currentScore.setFont(new Font(15.0));
             topBox.getChildren().add(currentScore);
         }
 
+        VBox leftBox = new VBox(20.0);
+        leftBox.setAlignment(Pos.CENTER);
+
+        currentSpeeds = new Label[playerCount];
+        for (int i = 0; i < playerCount; i++) {
+            Label currentSpeed = new Label();
+            currentSpeed.setText("Player " + (i + 1) + "'s \n speed: " + speedArray[i]);
+            currentSpeeds[i] = currentSpeed;
+            currentSpeed.setFont(new Font(15.0));
+            leftBox.getChildren().add(currentSpeed);
+        }
+
+        gameGroup.setLeft(leftBox);
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
@@ -63,7 +78,11 @@ public class GUIView extends StackPane {
     }
 
     public void updateCurrentScore(int score, int player) {
-        currentScores[player].setText("Player " + player + "'s score: " + score);
+        currentScores[player].setText("Player " + (player + 1) + "'s score: " + score);
+    }
+
+    public void updateCurrentSpeed(double speed, int player) {
+        currentSpeeds[player].setText("Player " + (player + 1) + "'s \n speed: " + speed);
     }
 
     public void setPauseView(GUIController controller) {

@@ -43,7 +43,11 @@ public class GUIController implements IController
     {
         this.gameController = new GameController();
         this.playerCount = Settings.getGameSettings().getPlayerCount();
-        this.view = new GUIView(gameController.getView(), this.playerCount);
+        double[] speedArray = new double[playerCount];
+        for (int i = 0; i < playerCount; i++) {
+            speedArray[i] = gameController.getSpeed(i);
+        }
+        this.view = new GUIView(gameController.getView(), this.playerCount, speedArray);
 
         view.setOnKeyPressed(this::handleKeyPressed);
         Platform.runLater(() -> view.requestFocus());
@@ -87,6 +91,7 @@ public class GUIController implements IController
                         }
                         for (int i : updateList) {
                             view.updateCurrentScore(gameController.getCurrentScore(i), i);
+                            view.updateCurrentSpeed(gameController.getSpeed(i), i);
                         }
                         updateList.clear();
                     }
