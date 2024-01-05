@@ -1,5 +1,6 @@
 package com.snake.Model;
 
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.snake.Settings;
@@ -41,6 +42,7 @@ public class GameModel
      */
     public void nextState(ArrayList<Integer> playersToUpdate)
     {
+        System.out.println(playersToUpdate.size());
         // for syncronization, find any snakes colliding head on, and tell them they are colliding.
         // These snakes won't update.
         Snake[] snakesToUpdate = new Snake[playersToUpdate.size()];
@@ -73,6 +75,7 @@ public class GameModel
         // disappear, if the snake eats an apple, or dies, or is colliding.
         boolean[] willClear = new boolean[players.length];
         int i = 0;
+        System.out.println(headPositions.size());
         for (Vector vec : headPositions)
         {
             willClear[i] = true;
@@ -85,49 +88,52 @@ public class GameModel
                         || (players[snakeTile.assignedPlayer].isColliding
                                 || players[snakeTile.assignedPlayer].willGrow(board)))
                 {
+                    System.out.println(
+                            snakeTile.tileType + " " + players[snakeTile.assignedPlayer].isColliding
+                                    + "  " + players[snakeTile.assignedPlayer].willGrow(board));
                     willClear[i] = false;
                 }
             }
             i++;
         }
-
-        ArrayList<Fruit> frutesToRespawn = new ArrayList<>();
+        ArrayList<Fruit> fruitsToRespawn = new ArrayList<>();
+        j = 0;
         for (Snake snake : snakesToUpdate)
         {
             if (snake.isAlive())
             {
-                snake.calculateNextFrame(willClear[snake.playerNumber]);
+                snake.calculateNextFrame(willClear[j]);
                 if (snake.Fruiteaten() != null)
-                    frutesToRespawn.add(snake.Fruiteaten());
+                    fruitsToRespawn.add(snake.Fruiteaten());
             }
+            else
+            {
+                System.out.println(snake.playerNumber);
+            }
+            j++;
         }
-        for (Fruit fruit : frutesToRespawn)
+        for (Fruit fruit : fruitsToRespawn)
         {
-
             // TODO - fix this, so that when someone wins the game, it isn't an infinite loop,
-            // and
-            // when they are close, it doesn't take forever
-            if (fruit instanceof Apple)
-            {
-                Apple apple = new Apple();
-                while (board[apple.getPosition().y][apple.getPosition().x] != null)
-                {
-                    apple.setRandomPosition();
-                }
-                board[apple.getPosition().y][apple.getPosition().x] = apple;
-            }
-            else if (fruit instanceof Cherry)
-            {
-                Cherry cherry = new Cherry();
-                while (board[cherry.getPosition().y][cherry.getPosition().x] != null)
-                {
-                    cherry.setRandomPosition();
-                }
-                board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
-            }
+            // and when they are close, it doesn't take forever
 
+            try
+            { // cursed code from
+              // https://stackoverflow.com/questions/5533702/instantiating-object-of-same-class-from-within-class-in-java
+                Constructor constructor = fruit.getClass().getConstructor();
+                Fruit piece = (Fruit) constructor.newInstance();
+                while (board[piece.getPosition().y][piece.getPosition().x] != null)
+                {
+                    piece.setRandomPosition();
+                }
+                board[piece.getPosition().y][piece.getPosition().x] = piece;
+            }
+            catch (Exception e)
+            {
+                System.out.println(e);
+                System.out.println("Your constructor stuff in gamemodel doesn't work...");
+            }
         }
-
     }
 
     public void setDirection(Vector direction, int player)
