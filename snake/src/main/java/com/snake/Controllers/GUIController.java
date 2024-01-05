@@ -41,7 +41,9 @@ public class GUIController implements IController
      */
     public GUIController()
     {
-        this.gameController = new GameController(Settings.windowWidth-50, Settings.windowHeight-50);
+        int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
+        int margin = 50; //should fit with the GUIView margins.
+        this.gameController = new GameController(dimension-margin, dimension-margin);
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         double[] speedArray = new double[playerCount];
         for (int i = 0; i < playerCount; i++) {
