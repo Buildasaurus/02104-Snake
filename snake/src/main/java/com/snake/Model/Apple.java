@@ -2,7 +2,6 @@ package com.snake.Model;
 
 public class Apple extends Fruit
 {
-
     public Apple()
     {
         super(TileType.Apple);
@@ -12,5 +11,4 @@ public class Apple extends Fruit
     {
         snake.grow();
     }
-
 }

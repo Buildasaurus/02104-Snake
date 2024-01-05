@@ -55,6 +55,7 @@ public class Snake
         else if (tileAtHead instanceof Fruit)
         {
             ((Fruit) tileAtHead).doEffect(this);
+            fruit = (Fruit) tileAtHead;
         }
         else if (tileAtHead instanceof SnakeTile)
         {
@@ -151,16 +152,12 @@ public class Snake
     {
         Vector nextHeadPosition =
                 head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
-        Vector nextTailPosition =
-                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
-        Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
 
         // update head
         board[head.y][head.x] =
                 new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
         board[nextHeadPosition.y][nextHeadPosition.x] =
                 new SnakeTile(TileType.Snakehead, direction, direction, playerNumber);
-        fruit = (Fruit) tileAtHead;
 
         snakeLength += 1;
         // Tail shouldn't be updated.
