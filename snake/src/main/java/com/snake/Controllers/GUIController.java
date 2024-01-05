@@ -18,6 +18,7 @@ public class GUIController implements IController
 
     private AnimationTimer gameTimer;
     private long lastUpdate;
+    private long[] playerProgress;
 
     private final long[] frameTimes = new long[100];
     private int frameTimeIndex = 0;
@@ -65,7 +66,8 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed() && !isGameOver
+                
+                if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed(0) && !isGameOver
                         && !isPaused)
                 {
                     isGameOver = gameController.executeNextStep();

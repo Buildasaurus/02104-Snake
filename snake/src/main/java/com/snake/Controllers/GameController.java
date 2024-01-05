@@ -40,9 +40,9 @@ public class GameController implements IController
         }
     }
 
-    public double getSpeed()
+    public double getSpeed(int playerIndex)
     {
-        return model.getSpeed();
+        return model.getSpeed(playerIndex);
     }
 
     public int getCurrentScore(int player)
