@@ -55,8 +55,8 @@ public class MenuView extends StackPane
         playButton.setTranslateY(50);
         getChildren().add(playButton);
 
-        exitButton.setTranslateX(290);
-        exitButton.setTranslateY(215);
+        exitButton.setTranslateX(270);
+        exitButton.setTranslateY(205);
         getChildren().add(exitButton);
     }
 
