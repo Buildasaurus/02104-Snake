@@ -19,8 +19,7 @@ public class GUIController implements IController
     private GUIView view;
 
     private AnimationTimer gameTimer;
-    private long lastUpdate;
-    private long[] playerProgress;
+    private int[] playerProgress;
     private ArrayList<Integer> updateList;
 
     private final long[] frameTimes = new long[100];
@@ -49,7 +48,7 @@ public class GUIController implements IController
         view.setOnKeyPressed(this::handleKeyPressed);
         Platform.runLater(() -> view.requestFocus());
 
-        playerProgress = new long[playerCount];
+        playerProgress = new int[playerCount];
         updateList = new ArrayList<Integer>();
 
         gameTimer = new AnimationTimer()
@@ -74,9 +73,10 @@ public class GUIController implements IController
                 }
                 if (!isGameOver && !isPaused) {
                     for (int i = 0; i < playerProgress.length; i++) {
-                        if (now - playerProgress[i] >= 1_000_000 / gameController.getSpeed(i)) {
+                        playerProgress[i] += gameController.getSpeed(i);
+                        if (playerProgress[i] > 100) {
                             updateList.add(i);
-                            playerProgress[i] = now;
+                            playerProgress[i] = 0;
                         }
                     }
                     if (!updateList.isEmpty()) {
@@ -88,6 +88,7 @@ public class GUIController implements IController
                         for (int i : updateList) {
                             view.updateCurrentScore(gameController.getCurrentScore(i), i);
                         }
+                        updateList.clear();
                     }
                 }
             }
