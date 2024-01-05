@@ -10,9 +10,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 public class GUIView extends StackPane {
-    private Parent gameView;
+    private GameView gameView;
     private PauseView pauseView;
     private GameOverView gameOverView;
 
@@ -20,15 +21,19 @@ public class GUIView extends StackPane {
     private Label[] currentScores;
 
     public GUIView(Parent gameView, int playerCount) {
-        this.gameView = gameView;
+        this.gameView = (GameView) gameView;
 
         BorderPane gameGroup = new BorderPane();
         gameGroup.setCenter(this.gameView);
         gameGroup.setPadding(new Insets(5, 5, 5, 5));
+        this.gameView.setAlignment(Pos.TOP_CENTER);
 
         HBox topBox = new HBox(50.0);
+        topBox.setPrefHeight(50.0);
+        topBox.setAlignment(Pos.CENTER);
 
         frameRateCounter = new Label("fps: 0.0");
+        frameRateCounter.setFont(new Font(15.0));
         topBox.getChildren().add(frameRateCounter);
 
         currentScores = new Label[playerCount];
@@ -36,6 +41,7 @@ public class GUIView extends StackPane {
             Label currentScore = new Label();
             currentScore.setText("Player " + i + "'s score: 0");
             currentScores[i] = currentScore;
+            currentScore.setFont(new Font(15.0));
             topBox.getChildren().add(currentScore);
         }
 
@@ -73,5 +79,9 @@ public class GUIView extends StackPane {
     public void setGameOverView(GUIController controller) {
         gameOverView = new GameOverView(controller);
         getChildren().add(this.gameOverView);
+    }
+
+    public void toggleGameOverButtonVisibility() {
+        gameOverView.toggleGameOverButtonVisibility();
     }
 }

@@ -202,4 +202,8 @@ public class GUIController implements IController
     {
         System.out.println("pressed load game");
     }
+
+    public void handleHideButtonPressed(ActionEvent action) {
+        view.toggleGameOverButtonVisibility();
+    }
 }
