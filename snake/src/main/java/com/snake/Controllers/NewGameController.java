@@ -14,10 +14,11 @@ import javafx.scene.Parent;
 public class NewGameController implements IController
 {
     NewGameView view;
-    GameSettings gameSettings = new GameSettings();
+    GameSettings gameSettings;
 
     public NewGameController()
     {
+        gameSettings = Settings.getGameSettings();
         view = new NewGameView(this, gameSettings.getAllPossiblePlayerCounts());
     }
 
@@ -59,6 +60,7 @@ public class NewGameController implements IController
     /**
      * Sets the next active window to the {@link com.snake.Controllers.GUIController GUI Controller}
      * and updates the {@link #gameSettings game settings} stored.
+     *
      * @param action
      */
     public void handlePlayButtonPressed(ActionEvent action)

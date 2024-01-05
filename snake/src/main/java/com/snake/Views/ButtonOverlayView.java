@@ -10,34 +10,41 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public abstract class ButtonOverlayView extends StackPane {
+public abstract class ButtonOverlayView extends StackPane
+{
     Button[] buttons;
     int focusElementIndex;
 
-    public void setBackground(Color overlayColor) {
+    public void setBackground(Color overlayColor)
+    {
         BackgroundFill bgFill = new BackgroundFill(overlayColor, null, getInsets());
         Background bg = new Background(bgFill);
         setBackground(bg);
     }
 
-    public void setBasicFormatting() {
+    public void setBasicFormatting()
+    {
         VBox buttonGroup = new VBox(20.0, buttons);
         buttonGroup.setAlignment(Pos.CENTER);
         getChildren().add(buttonGroup);
 
-        for (Button button : buttons) {
+        for (Button button : buttons)
+        {
             button.setFont(new Font(20));
             button.setPrefSize(300.0, 80.0);
         }
     }
 
-    public void shiftFocus(KeyEvent key) {
-        switch (key.getCode()) {
+    public void shiftFocus(KeyEvent key)
+    {
+        switch (key.getCode())
+        {
             case UP:
             case LEFT:
             case W:
             case A:
-                focusElementIndex = focusElementIndex == 0 ? buttons.length - 1 : focusElementIndex - 1;
+                focusElementIndex =
+                        focusElementIndex == 0 ? buttons.length - 1 : focusElementIndex - 1;
                 buttons[focusElementIndex].requestFocus();
                 break;
 
@@ -45,10 +52,11 @@ public abstract class ButtonOverlayView extends StackPane {
             case RIGHT:
             case S:
             case D:
-                focusElementIndex = focusElementIndex == buttons.length - 1 ? 0 : focusElementIndex + 1;
+                focusElementIndex =
+                        focusElementIndex == buttons.length - 1 ? 0 : focusElementIndex + 1;
                 buttons[focusElementIndex].requestFocus();
                 break;
-        
+
             default:
                 break;
         }

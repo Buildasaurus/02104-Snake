@@ -20,5 +20,5 @@ public class Settings
         return gameSettings;
     }
 
-    private static GameSettings gameSettings;
+    private static GameSettings gameSettings = new GameSettings();
 }

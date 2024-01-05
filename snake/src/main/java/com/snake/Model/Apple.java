@@ -8,4 +8,9 @@ public class Apple extends Fruit
         super(TileType.Apple);
     }
 
+    public void doEffect(Snake snake)
+    {
+
+    }
+
 }
