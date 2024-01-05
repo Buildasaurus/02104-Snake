@@ -13,6 +13,7 @@ public abstract class Fruit extends Tile
 
     public Fruit(TileType type)
     {
+
         super(type);
         setRandomPosition();
     }
