@@ -23,6 +23,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         System.out.println("Highscore at start of game is: " + Highscore.getHighscore());
+        stage.setResizable(false);
     }
 
     public static void setRoot(IController newController) {
