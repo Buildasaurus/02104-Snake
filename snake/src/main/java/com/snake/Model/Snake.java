@@ -93,7 +93,7 @@ public class Snake
      * @param nextHeadPosition
      * @param nextTailPosition
      */
-    private void updateSnakePosition(Tile[][] board, Vector nextHeadPosition,
+    void updateSnakePosition(Tile[][] board, Vector nextHeadPosition,
             Vector nextTailPosition)
     {
         // update old head
