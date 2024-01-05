@@ -41,6 +41,9 @@ public class Snake
     {
         if (isColliding || !willClear)
         {
+            System.out.printf("Snake %d just died.", playerNumber);
+            System.out.println("Is colliding: " + isColliding);
+            System.out.println("Wont clear: " + !willClear);
             snakeIsAlive = false;
             return;
         }
