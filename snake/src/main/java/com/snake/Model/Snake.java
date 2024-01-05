@@ -14,6 +14,7 @@ public class Snake
     private Fruit fruit;
     public int playerNumber;
     public boolean isColliding = false;
+    public double speed;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection, int player)
@@ -26,6 +27,7 @@ public class Snake
         board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction, player);
         lastDirection = startDirection;
         tailDirection = startDirection;
+        speed = 2;
     }
 
 
