@@ -140,9 +140,9 @@ public class GameModel
         return board;
     }
 
-    public double getSpeed()
+    public double getSpeed(int playerIndex)
     {
-        return speed;
+        return players[playerIndex].getSpeed();
     }
 
     public int getAlivePlayerCount()

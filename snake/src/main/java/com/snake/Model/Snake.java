@@ -14,7 +14,7 @@ public class Snake
     private Fruit fruit;
     public int playerNumber;
     public boolean isColliding = false;
-    public double speed;
+    private double speed;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection, int player)
@@ -176,5 +176,13 @@ public class Snake
     public Fruit Fruiteaten()
     {
         return fruit;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
     }
 }
