@@ -1,7 +1,6 @@
 package com.snake.Controllers;
 
 import com.snake.Model.GameModel;
-import com.snake.Model.GameSettings;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;

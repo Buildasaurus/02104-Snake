@@ -62,4 +62,30 @@ public class MenuView extends StackPane
     private void buttonstyling(Button button){
         button.setStyle("-fx-focus-color: transparent;-fx-background-color: transparent;-fx-cursor: hand; -fx-font-family: 'Arial'; -fx-font-size: 32");
     }
+    
+
+    /* private void initialize() {
+        // Creating buttons
+        Button playButton = new Button("Play");
+        Button exitButton = new Button("Quit");
+
+        // Setting button fonts and styles
+        playButton.setFont(new Font(30));
+        exitButton.setFont(new Font(30));
+        playButton.setStyle("-fx-background-color: lightgreen; -fx-text-fill: black;");
+        exitButton.setStyle("-fx-background-color: orangered; -fx-text-fill: white;");
+
+        // Setting action handlers from MenuController
+        playButton.setOnAction(controller::handlePlayButtonPressed);
+        exitButton.setOnAction(controller::handleExitButtonPressed);
+
+        // Organizing buttons in a vertical layout
+        VBox buttonBox = new VBox(playButton, exitButton);
+
+        // Adding buttons to the StackPane
+        getChildren().add(buttonBox);
+        buttonBox.setAlignment(Pos.CENTER);
+    }
+     */
 }
+

@@ -1,9 +1,7 @@
 package com.snake.Controllers;
 
-import java.util.Set;
 import com.snake.App;
 import com.snake.Settings;
-import com.snake.Model.GameSettings;
 import com.snake.Views.GUIView;
 
 import javafx.animation.AnimationTimer;

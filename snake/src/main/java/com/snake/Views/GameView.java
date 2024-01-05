@@ -2,11 +2,17 @@ package com.snake.Views;
 
 import com.snake.Settings;
 import com.snake.Model.Tile;
-import javafx.scene.image.ImageView;
 
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 
 public class GameView extends GridPane
 {
@@ -50,14 +56,59 @@ public class GameView extends GridPane
             RowConstraints row = new RowConstraints(height / rowCount);
             this.getRowConstraints().add(row);
         }
+
+        BackgroundFill bgFillDark = new BackgroundFill(Color.DARKGREEN, null, getInsets());
+        BackgroundFill bgFillLight = new BackgroundFill(Color.GREEN, null, getInsets());
+        Background bgDark = new Background(bgFillDark);
+        Background bgLight = new Background(bgFillLight);
+        boolean isLastDark = false;
+        for (int i = 0; i < rowCount; i++) {
+            for (int n = 0; n < columnCount; n++) {
+                Pane bgCell = new Pane();
+                if (i != 0 && n == 0) {
+                    if (rowCount % 2 == 0) {
+                        if (isLastDark) {
+                            isLastDark = false;
+                        } else {
+                            isLastDark = true;
+                        }
+                    }
+                }
+                if (isLastDark) {
+                    bgCell.setBackground(bgLight);
+                    isLastDark = false;
+                } else {
+                    bgCell.setBackground(bgDark);
+                    isLastDark = true;
+                }
+                this.add(bgCell, i, n);
+            }
+        }
     }
 
     public void update(Tile[][] board)
     {
         if (board != null)
         {
-            this.getChildren().clear(); // Clear the current view
+            //this.getChildren().clear(); // Clear the current view
 
+            /* */
+            ObservableList<Node> panes = this.getChildren();
+
+            for (Node node : panes) {
+                Pane pane = (Pane) node;
+                pane.getChildren().clear();
+                int row = GridPane.getRowIndex(pane);
+                int column = GridPane.getColumnIndex(pane);
+                if (board[rowCount - 1 - row][column] != null) {
+                    ImageView imageView = board[rowCount - 1 - row][column].getImage();
+                    imageView.setFitWidth(height / rowCount);
+                    imageView.setPreserveRatio(true);
+                    pane.getChildren().add(imageView);
+                }
+            }
+
+            /*
             for (int row = 0; row < rowCount; row++)
             {
                 for (int column = 0; column < columnCount; column++)
@@ -73,6 +124,7 @@ public class GameView extends GridPane
                     }
                 }
             }
+            */
         }
         else
         {
