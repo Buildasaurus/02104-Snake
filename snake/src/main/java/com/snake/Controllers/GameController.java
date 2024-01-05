@@ -23,6 +23,8 @@ public class GameController implements IController
     {
         this.view = new GameView(500, 500);
         this.model = new GameModel();
+
+        view.update(model.getBoard());
     }
 
     public boolean executeNextStep(ArrayList<Integer> updateList)
