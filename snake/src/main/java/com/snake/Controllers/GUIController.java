@@ -1,5 +1,7 @@
 package com.snake.Controllers;
 
+import java.util.ArrayList;
+
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Views.GUIView;
@@ -19,6 +21,7 @@ public class GUIController implements IController
     private AnimationTimer gameTimer;
     private long lastUpdate;
     private long[] playerProgress;
+    private ArrayList<Integer> updateList;
 
     private final long[] frameTimes = new long[100];
     private int frameTimeIndex = 0;
@@ -46,6 +49,9 @@ public class GUIController implements IController
         view.setOnKeyPressed(this::handleKeyPressed);
         Platform.runLater(() -> view.requestFocus());
 
+        playerProgress = new long[playerCount];
+        updateList = new ArrayList<Integer>();
+
         gameTimer = new AnimationTimer()
         {
             @Override
@@ -66,20 +72,23 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-
-                if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed(0) && !isGameOver
-                        && !isPaused)
-                {
-                    isGameOver = gameController.executeNextStep();
-                    if (isGameOver)
-                    {
-                        setGameOverView();
+                if (!isGameOver && !isPaused) {
+                    for (int i = 0; i < playerProgress.length; i++) {
+                        if (now - playerProgress[i] >= 1_000_000 / gameController.getSpeed(i)) {
+                            updateList.add(i);
+                            playerProgress[i] = now;
+                        }
                     }
-                    for (int i = 0; i < playerCount; i++)
-                    {
-                        view.updateCurrentScore(gameController.getCurrentScore(i), i);
+                    if (!updateList.isEmpty()) {
+                        isGameOver = gameController.executeNextStep(updateList);
+                        if (isGameOver)
+                        {
+                            setGameOverView();
+                        }
+                        for (int i : updateList) {
+                            view.updateCurrentScore(gameController.getCurrentScore(i), i);
+                        }
                     }
-                    lastUpdate = now;
                 }
             }
         };
