@@ -25,7 +25,7 @@ public class GameController implements IController
 
     public boolean executeNextStep()
     {
-        model.nextState();
+        model.nextState(new int[]{0,1,2});
         if (model.gameOver())
         {
             Highscore.setHighscore(model.getSnakeLength(0));

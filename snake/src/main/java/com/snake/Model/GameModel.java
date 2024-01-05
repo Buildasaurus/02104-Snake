@@ -37,25 +37,31 @@ public class GameModel
 
     }
 
-    // TODO - seems to be buggy, when snake eats apple, both stop moving for a frame?
-    public void nextState()
+    /**
+     * Updates the board  to the next state. Only updates the snakes whose id is in the playersToUpdate
+     * @param playersToUpdate
+     */
+    public void nextState(int[] playersToUpdate)
     {
-        if (speed < 10)
-        {
-            speed += acceleration;
-        }
         // for syncronization, find any snakes colliding head on, and tell them they are colliding.
         // These snakes won't update.
+        Snake[] snakesToUpdate = new Snake[playersToUpdate.length];
+        int j = 0;
+         //Gather the correct pointers for later use
+        for (int playerID : playersToUpdate) {
+            snakesToUpdate[j] = players[playerID];
+            j++;
+        }
         ArrayList<Vector> headPositions = new ArrayList<>();
         HashMap<String, Integer> nextHeadPositions = new HashMap<>();
-        for (int i = 0; i < getPlayerCount(); i++)
+        for (int i = 0; i < playersToUpdate.length; i++)
         {
-            Vector nextPosition = players[i].getNextHeadPosition();
+            Vector nextPosition = snakesToUpdate[i].getNextHeadPosition();
             headPositions.add(nextPosition);
             if (nextHeadPositions.containsKey(nextPosition.toString()))
             {
-                players[nextHeadPositions.get(nextPosition.toString())].isColliding = true;
-                players[i].isColliding = true;
+                snakesToUpdate[nextHeadPositions.get(nextPosition.toString())].isColliding = true;
+                snakesToUpdate[i].isColliding = true;
             }
             else
             {
@@ -87,13 +93,13 @@ public class GameModel
         }
 
         Fruit fruit = null;
-        for (Snake player : players)
+        for (Snake snake : snakesToUpdate)
         {
-            if (player.isAlive())
+            if (snake.isAlive())
             {
-                player.updatePosition(board, willClear[player.playerNumber]);
+                snake.updatePosition(board, willClear[snake.playerNumber]);
                 if (fruit == null)
-                    fruit = player.Fruiteaten();
+                    fruit = snake.Fruiteaten();
             }
         }
         if (fruit != null)
