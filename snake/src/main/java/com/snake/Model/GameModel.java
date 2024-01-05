@@ -28,10 +28,15 @@ public class GameModel
 
         Apple apple = new Apple();
         board[apple.getPosition().y][apple.getPosition().x] = apple;
+
+        Cherry cherry = new Cherry();
+        board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
     }
 
     /**
-     * Updates the board  to the next state. Only updates the snakes whose id is in the playersToUpdate
+     * Updates the board to the next state. Only updates the snakes whose id is in the
+     * playersToUpdate
+     *
      * @param playersToUpdate
      */
     public void nextState(ArrayList<Integer> playersToUpdate)
@@ -40,8 +45,9 @@ public class GameModel
         // These snakes won't update.
         Snake[] snakesToUpdate = new Snake[playersToUpdate.size()];
         int j = 0;
-         //Gather the correct pointers for later use
-        for (int playerID : playersToUpdate) {
+        // Gather the correct pointers for later use
+        for (int playerID : playersToUpdate)
+        {
             snakesToUpdate[j] = players[playerID];
             j++;
         }

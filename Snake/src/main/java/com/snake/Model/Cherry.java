@@ -1,16 +1,15 @@
 package com.snake.Model;
 
-public class Cherry
+public class Cherry extends Fruit
 {
-
-    public Cherry(TileType Cherry)
+    public Cherry()
     {
-        super();
+        super(TileType.Cherry);
     }
 
     public void doEffect(Snake snake)
     {
-        snake.setSpeed(2);
-        snake.updateSnakePosition(null, null, null);
+        snake.setSpeed(snake.getSpeed()*2);
+        snake.updateSnakePosition();
     }
 }
