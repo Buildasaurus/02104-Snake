@@ -1,5 +1,6 @@
 package com.snake.Model;
 
+import java.util.Set;
 import com.snake.Settings;
 
 public class GameModel
@@ -12,25 +13,31 @@ public class GameModel
     private double acceleration = 0.01;
     private Snake[] players;
 
-
     public GameModel()
     {
         this.rowCount = Settings.rowCount;
         this.columnCount = Settings.columnCount;
         Vector midpoint = new Vector(rowCount / 2, columnCount / 2);
         board = new Tile[rowCount][columnCount];
-        players = new Snake[2];
-        players[0] = new Snake(board, midpoint, midpoint.add(-1, 0), new Vector(1, 0));
-        players[1] =
-                new Snake(board, midpoint.add(2), midpoint.add(2).add(-1, 0), new Vector(1, 0));
+        players = new Snake[Settings.getGameSettings().getPlayerCount()];
+
+        // TODO make code for dynamically iniatializing the players, in case there are n players.
+        for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
+        {
+            players[i] =
+                    new Snake(board, midpoint.add(0, i), midpoint.add(-1, i), new Vector(1, 0), i);
+        }
 
         Apple apple = new Apple();
         board[apple.getPosition().y][apple.getPosition().x] = apple;
 
-        speed = 2;
+
+        speed = Settings.getGameSettings().getSpeed();
+        acceleration = Settings.getGameSettings().getAcceleration();
+
     }
 
-    //TODO - seems to be buggy, when snake eats apple, both stop moving for a frame?
+    // TODO - seems to be buggy, when snake eats apple, both stop moving for a frame?
     public void nextState()
     {
         speed += acceleration;
@@ -57,6 +64,7 @@ public class GameModel
 
     public void setDirection(Vector direction, int player)
     {
+        player = player % Settings.getGameSettings().getPlayerCount();
         if (player == 0)
         {
             players[0].setDirection(direction);
@@ -95,6 +103,7 @@ public class GameModel
 
     public int getSnakeLength(int player)
     {
+        player = player % Settings.getGameSettings().getPlayerCount();
         if (player == 0)
         {
             return players[0].getSnakeLength();

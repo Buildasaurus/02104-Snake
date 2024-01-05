@@ -5,6 +5,7 @@ import java.util.Random;
 import com.snake.Settings;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public abstract class Fruit extends Tile
 {
@@ -24,15 +25,17 @@ public abstract class Fruit extends Tile
     public void setRandomPosition()
     {
         Random randint = new Random();
-        fruitposition = new Vector(randint.nextInt(Settings.columnCount), randint.nextInt(Settings.rowCount));
+        fruitposition = new Vector(randint.nextInt(Settings.columnCount),
+                randint.nextInt(Settings.rowCount));
     }
 
-    public Image getImage()
+    public ImageView getImage()
     {
-        if (sprite == null){
+        if (sprite == null)
+        {
             String imageName = tileType.toString().toLowerCase();
             URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
-            sprite = new Image(url.toString());
+            sprite = new ImageView(new Image(url.toString()));
         }
         return sprite;
     }

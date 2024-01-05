@@ -44,23 +44,42 @@ public class NewGameView extends GridPane
         add(playerCountDropDown, 0, 0);
         playerCountDropDown.getSelectionModel()
                 .select(Integer.valueOf(controller.getPlayerCount()));
+        // listen for changes
+        playerCountDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
+            System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
+            System.out.println(controller
+                    .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
+        });
+
 
         // gamemode setting
-        ComboBox<String> gameModeDropDown = new ComboBox<String>();
+        ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
         {
-            gameModeDropDown.getItems().add(gameMode.toString());
+            gameModeDropDown.getItems().add(gameMode);
         }
         add(gameModeDropDown, 1, 0);
-        gameModeDropDown.getSelectionModel().select(controller.getGameMode().toString());
+        gameModeDropDown.getSelectionModel().select(controller.getGameMode()); // inital chosen item
+        // listen for changes
+        gameModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
+            System.out.println(gameModeDropDown.getSelectionModel().getSelectedItem());
+            controller.setGameMode(gameModeDropDown.getSelectionModel().getSelectedItem());
+        });
+
+
+
         // Level setting
-        ComboBox<String> levelModeDropDown = new ComboBox<String>();
+        ComboBox<Level> levelModeDropDown = new ComboBox<Level>();
         for (Level level : Level.values())
         {
-            levelModeDropDown.getItems().add(level.toString());
+            levelModeDropDown.getItems().add(level);
         }
         add(levelModeDropDown, 2, 0);
-        levelModeDropDown.getSelectionModel().select(controller.getLevel().toString());
+        levelModeDropDown.getSelectionModel().select(controller.getLevel());
+        levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
+            controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
+        });
+
 
 
         // Start game
@@ -68,8 +87,7 @@ public class NewGameView extends GridPane
         add(startGame, 1, 1);
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
-
-
+        // Center align
         for (Node node : getChildren())
         {
             setHalignment(node, HPos.CENTER); // To align horizontally in the cell

@@ -1,6 +1,8 @@
 package com.snake.Controllers;
 
+import java.util.Set;
 import com.snake.App;
+import com.snake.Settings;
 import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
@@ -44,9 +46,9 @@ public class NewGameController implements IController
         return gameSettings.getGameMode();
     }
 
-    public void setPlayerCount(int playerCount)
+    public boolean setPlayerCount(int playerCount)
     {
-        gameSettings.setPlayerCount(playerCount);
+        return gameSettings.setPlayerCount(playerCount);
     }
 
     public int getPlayerCount()
@@ -54,8 +56,14 @@ public class NewGameController implements IController
         return gameSettings.getPlayerCount();
     }
 
+    /**
+     * Sets the next active window to the {@link com.snake.Controllers.GUIController GUI Controller}
+     * and updates the {@link #gameSettings game settings} stored.
+     * @param action
+     */
     public void handlePlayButtonPressed(ActionEvent action)
     {
+        Settings.setGameSettings(gameSettings);
         GUIController newController = new GUIController();
         App.setRoot(newController);
     }
