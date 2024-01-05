@@ -19,9 +19,9 @@ public class GameController implements IController
         return view;
     }
 
-    public GameController()
+    public GameController(int width, int height)
     {
-        this.view = new GameView(500, 500);
+        this.view = new GameView(width, height);
         this.model = new GameModel();
 
         view.update(model.getBoard());
