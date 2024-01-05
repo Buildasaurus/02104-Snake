@@ -4,8 +4,8 @@ import com.snake.Model.GameSettings;
 
 public class Settings
 {
-    public static int windowHeight = 700;
-    public static int windowWidth = 700;
+    public static int windowHeight = 480;
+    public static int windowWidth = 640;
 
     public static int rowCount = 20;
     public static int columnCount = 20;
