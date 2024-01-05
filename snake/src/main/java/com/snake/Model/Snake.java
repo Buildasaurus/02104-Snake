@@ -138,7 +138,14 @@ public class Snake
 
     public Vector getNextHeadPosition()
     {
-        return head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
+        if (snakeIsAlive)
+        {
+            return head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
+        }
+        else
+        {
+            return head;
+        }
     }
 
     public boolean isAlive()

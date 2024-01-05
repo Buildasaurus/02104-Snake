@@ -1,6 +1,7 @@
 package com.snake.Model;
 
 import java.net.URL;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,7 +37,11 @@ public class SnakeTile extends Tile
                 sprite = new ImageView(LoadedImages.getImageByName(imageName));
                 if (assignedPlayer == 1)
                 {
-                    sprite.setOpacity(0.5);
+                    sprite.setBlendMode(BlendMode.DIFFERENCE);
+                }
+                if (assignedPlayer == 2)
+                {
+                    sprite.setBlendMode(BlendMode.GREEN);
                 }
             }
             catch (Exception e)

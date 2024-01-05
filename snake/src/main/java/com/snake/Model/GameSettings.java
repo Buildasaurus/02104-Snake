@@ -3,7 +3,7 @@ package com.snake.Model;
 public class GameSettings
 {
 
-    private int maxPlayerCount = 2;
+    public final static int maxPlayerCount = 3;
     private GameMode gameMode;
     private Level level;
     private int playerCount;

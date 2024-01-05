@@ -82,9 +82,19 @@ public class GameController implements IController
                 break;
             case D:
                 model.setDirection(new Vector(1, 0), 1);
-
                 break;
-
+            case J:
+                model.setDirection(new Vector(1, 0), 2);
+                break;
+            case G:
+                model.setDirection(new Vector(-1, 0), 2);
+                break;
+            case Y:
+                model.setDirection(new Vector(0,1), 2);
+                break;
+            case H:
+                model.setDirection(new Vector(0, -1), 2);
+                break;
             default:
                 break;
         }
