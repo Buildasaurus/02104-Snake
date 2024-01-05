@@ -1,5 +1,7 @@
 package com.snake.Model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Set;
 import com.snake.Settings;
 
@@ -21,11 +23,10 @@ public class GameModel
         board = new Tile[rowCount][columnCount];
         players = new Snake[Settings.getGameSettings().getPlayerCount()];
 
-        // TODO make code for dynamically iniatializing the players, in case there are n players.
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
-            players[i] =
-                    new Snake(board, midpoint.add(0, i), midpoint.add(-1, i), new Vector(1, 0), i);
+            players[i] = new Snake(board, midpoint.add(0, i * 2), midpoint.add(-1, i * 2),
+                    new Vector(1, 0), i);
         }
 
         Apple apple = new Apple();
@@ -40,18 +41,62 @@ public class GameModel
     // TODO - seems to be buggy, when snake eats apple, both stop moving for a frame?
     public void nextState()
     {
-        speed += acceleration;
+        if (speed < 10)
+        {
+            speed += acceleration;
+        }
+        // for syncronization, find any snakes colliding head on, and tell them they are colliding.
+        // These snakes won't update.
+        ArrayList<Vector> headPositions = new ArrayList<>();
+        HashMap<String, Integer> nextHeadPositions = new HashMap<>();
+        for (int i = 0; i < getPlayerCount(); i++)
+        {
+            Vector nextPosition = players[i].getNextHeadPosition();
+            headPositions.add(nextPosition);
+            if (nextHeadPositions.containsKey(nextPosition.toString()))
+            {
+                players[nextHeadPositions.get(nextPosition.toString())].isColliding = true;
+                players[i].isColliding = true;
+            }
+            else
+            {
+                nextHeadPositions.put(nextPosition.toString(), i);
+            }
+        }
+        // Now we check whether the next position will be clear, in the next frame.
+        // This the snakes won't know, as there might be a snake tail that disappears, or that
+        // doesn't
+        // disappear, if the snake eats an apple, or dies, or is colliding.
+        boolean[] willClear = new boolean[players.length];
+        int i = 0;
+        for (Vector vec : headPositions)
+        {
+            willClear[i] = true;
+            // essentially looping through the playerss
+            Tile tile = board[vec.y][vec.x];
+            if (tile instanceof SnakeTile)
+            {
+                SnakeTile snakeTile = ((SnakeTile) tile);
+                if (!(snakeTile.tileType == TileType.Snaketail)
+                        || (players[snakeTile.assignedPlayer].isColliding
+                                || players[snakeTile.assignedPlayer].willGrow(board)))
+                {
+                    willClear[i] = false;
+                }
+            }
+            i++;
+        }
+
         Fruit fruit = null;
         for (Snake player : players)
         {
-            player.updatePosition(board);
-            fruit = player.Fruiteaten();
-            if (fruit != null)
-                break;
+            player.updatePosition(board, willClear[player.playerNumber]);
+            if (fruit == null)
+                fruit = player.Fruiteaten();
         }
         if (fruit != null)
         {
-            // TODO - fix this, so that when someone wins the game, it isn't an infinite looop, and
+            // TODO - fix this, so that when someone wins the game, it isn't an infinite loop, and
             // when they are close, it doesn't take forever
             Apple apple = new Apple();
             while (board[apple.getPosition().y][apple.getPosition().x] != null)
@@ -77,18 +122,22 @@ public class GameModel
 
     public boolean gameOver()
     {
-        boolean playerIsDead = false;
-        for (Snake player : players)
+        // Single player
+        if (players.length == 1)
         {
-            if (!player.isAlive())
+            return !players[0].isAlive();
+        }
+        // multiplayer
+        else if (players.length > 1)
+        {
+            if (getAlivePlayerCount() < 2)
             {
-                playerIsDead = true;
-                break;
+                return true;
             }
+            return false;
         }
 
-        return playerIsDead;
-        // game over
+        return true; // Neither multiplayer or singleplayer?? Should not happen
     }
 
     public Tile[][] getBoard()
@@ -99,6 +148,20 @@ public class GameModel
     public double getSpeed()
     {
         return speed;
+    }
+
+    public int getAlivePlayerCount()
+    {
+        int alivePlayerCount = players.length;
+        for (Snake player : players)
+        {
+            if (!player.isAlive())
+            {
+                alivePlayerCount -= 1;
+            }
+        }
+
+        return alivePlayerCount;
     }
 
     public int getSnakeLength(int player)

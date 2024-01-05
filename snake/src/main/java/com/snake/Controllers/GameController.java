@@ -31,6 +31,7 @@ public class GameController implements IController
         {
             Highscore.setHighscore(model.getSnakeLength(0));
             Highscore.setHighscore(model.getSnakeLength(1));
+            System.out.printf("There are %d players alive.\n", model.getAlivePlayerCount());
             return true;
         }
         else

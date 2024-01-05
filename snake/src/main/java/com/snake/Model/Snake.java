@@ -7,11 +7,13 @@ public class Snake
     private Vector head;
     private Vector tail;
     private Vector lastDirection;
+    private Vector tailDirection;
     private Vector direction;
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
     private Fruit fruit;
-    private int player;
+    public int playerNumber;
+    public boolean isColliding = false;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection, int player)
@@ -19,10 +21,11 @@ public class Snake
         head = startHeadPosition;
         tail = startTailPosition;
         direction = startDirection; // initializing direction as right
-        this.player = player;
+        this.playerNumber = player;
         board[head.y][head.x] = new SnakeTile(TileType.Snakehead, direction, direction, player);
         board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction, player);
         lastDirection = startDirection;
+        tailDirection = startDirection;
     }
 
 
@@ -30,11 +33,15 @@ public class Snake
      * Modifies the given board! Updates the position of the snake saved, and handles death. If the
      * snake dies it will store that, and for future
      */
-    public void updatePosition(Tile[][] board)
+    public void updatePosition(Tile[][] board, boolean willClear)
     {
+        if (isColliding || !willClear)
+        {
+            snakeIsAlive = false;
+            return;
+        }
         Vector nextHeadPosition =
                 head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
-        Vector tailDirection = ((SnakeTile) board[tail.y][tail.x]).targetDirection;
         Vector nextTailPosition =
                 tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
 
@@ -47,9 +54,9 @@ public class Snake
         {
             // update head
             board[head.y][head.x] =
-                    new SnakeTile(TileType.Snakebody, lastDirection, direction, player);
+                    new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
             board[nextHeadPosition.y][nextHeadPosition.x] =
-                    new SnakeTile(TileType.Snakehead, direction, direction, player);
+                    new SnakeTile(TileType.Snakehead, direction, direction, playerNumber);
             fruit = (Fruit) tileAtHead;
 
             snakeLength += 1;
@@ -61,14 +68,10 @@ public class Snake
         }
         else if (tileAtHead instanceof SnakeTile)
         {
-            if (tileAtHead.tileType == TileType.Snaketail)
-            {
-                updateSnakePosition(board, nextHeadPosition, nextTailPosition);
-            }
-            else
-            {
-                snakeIsAlive = false;
-            }
+            // We can do this, because we assume that the "willClear" variable is correct
+            // and if there is a snaketile on the next tile, we know it will disappear, and can just
+            // overwrite it.
+            updateSnakePosition(board, nextHeadPosition, nextTailPosition);
         }
     }
 
@@ -83,6 +86,7 @@ public class Snake
 
     /**
      * Assumes that the nextTailPosition is a snaketile.
+     *
      * @param board
      * @param nextHeadPosition
      * @param nextTailPosition
@@ -91,24 +95,31 @@ public class Snake
             Vector nextTailPosition)
     {
         // update old head
-        board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction, player);
+        board[head.y][head.x] =
+                new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
 
 
         // update tail
         board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
                 ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
                 ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection,
-                player);
-        board[tail.y][tail.x] = null;
+                playerNumber);
+        // only remove tail, if it actually is a tail.
+        if (((SnakeTile) board[tail.y][tail.x]).tileType == TileType.Snaketail)
+        {
+            board[tail.y][tail.x] = null;
+        }
+
 
         // update new head
         board[nextHeadPosition.y][nextHeadPosition.x] =
-                new SnakeTile(TileType.Snakehead, direction, direction, player);
+                new SnakeTile(TileType.Snakehead, direction, direction, playerNumber);
 
         // save data for next time
         tail = nextTailPosition;
         head = nextHeadPosition;
         lastDirection = direction;
+        tailDirection = ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection;
         fruit = null;
     }
 
@@ -127,7 +138,7 @@ public class Snake
 
     public Vector getNextHeadPosition()
     {
-        return head.add(direction);
+        return head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
     }
 
     public boolean isAlive()
@@ -138,6 +149,19 @@ public class Snake
     public int getSnakeLength()
     {
         return snakeLength;
+    }
+
+    /**
+     * Returns if the snake thinks it will grow next frame. Takes into consideration, whether it
+     * might collide, in which case it won't grow.
+     *
+     * @param board
+     * @return
+     */
+    public boolean willGrow(Tile[][] board)
+    {
+        Vector nextHeadPosition = getNextHeadPosition();
+        return board[nextHeadPosition.y][nextHeadPosition.x] instanceof Fruit && !isColliding;
     }
 
     public Fruit Fruiteaten()

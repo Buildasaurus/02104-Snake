@@ -3,6 +3,7 @@ package com.snake.Views;
 import com.snake.Controllers.GUIController;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
@@ -37,7 +38,7 @@ public class GUIView extends StackPane {
             currentScores[i] = currentScore;
             topBox.getChildren().add(currentScore);
         }
-        
+
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
