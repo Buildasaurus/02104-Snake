@@ -10,7 +10,7 @@ public class Apple extends Fruit
 
     public void doEffect(Snake snake)
     {
-
+        snake.setSpeed(2);
     }
 
 }
