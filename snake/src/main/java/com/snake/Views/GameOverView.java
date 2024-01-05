@@ -10,10 +10,14 @@ public class GameOverView extends ButtonOverlayView {
     private boolean buttonsVisible;
     
     public GameOverView(GUIController controller) {
-        setBackground(new Color(0.5, 0.0, 0.0, 0.3));
-
         buttons = new Button[4];
         buttonsVisible = true;
+
+        initialize(controller);
+    }
+
+    public void initialize(GUIController controller) {
+        setBackground(new Color(0.5, 0.0, 0.0, 0.3));
 
         Button newGameButton = new Button("New Game");
         buttons[0] = newGameButton;
