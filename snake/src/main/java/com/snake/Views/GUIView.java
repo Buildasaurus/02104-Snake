@@ -24,21 +24,31 @@ public class GUIView extends StackPane {
 
     public GUIView(Parent gameView, int playerCount, double[] speedArray) {
         this.gameView = (GameView) gameView;
+        frameRateCounter = new Label("fps: 0.0");
+        currentScores = new Label[playerCount];
+        currentSpeeds = new Label[playerCount];
+        
+        initialize(playerCount, speedArray);
+    }
 
+    public void initialize(int playerCount, double[] speedArray) {
         BorderPane gameGroup = new BorderPane();
         gameGroup.setCenter(this.gameView);
         gameGroup.setPadding(new Insets(5, 5, 5, 5));
-        this.gameView.setAlignment(Pos.TOP_CENTER);
+        gameView.setAlignment(Pos.TOP_CENTER);
 
-        HBox topBox = new HBox(50.0);
+        HBox topBox = new HBox();
+        topBox.setSpacing(50.0);
         topBox.setPrefHeight(50.0);
         topBox.setAlignment(Pos.CENTER);
 
-        frameRateCounter = new Label("fps: 0.0");
+        VBox leftBox = new VBox();
+        leftBox.setSpacing(20.0);
+        leftBox.setAlignment(Pos.CENTER);
+
         frameRateCounter.setFont(new Font(15.0));
         topBox.getChildren().add(frameRateCounter);
 
-        currentScores = new Label[playerCount];
         for (int i = 0; i < playerCount; i++) {
             Label currentScore = new Label();
             currentScore.setText("Player " + (i + 1) + "'s score: 0");
@@ -47,10 +57,6 @@ public class GUIView extends StackPane {
             topBox.getChildren().add(currentScore);
         }
 
-        VBox leftBox = new VBox(20.0);
-        leftBox.setAlignment(Pos.CENTER);
-
-        currentSpeeds = new Label[playerCount];
         for (int i = 0; i < playerCount; i++) {
             Label currentSpeed = new Label();
             currentSpeed.setText("Player " + (i + 1) + "'s \n speed: " + speedArray[i]);
