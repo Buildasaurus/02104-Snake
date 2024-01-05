@@ -29,14 +29,15 @@ public class GUIController implements IController
     private int playerCount;
 
     /**
-     * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game logic via {@link GameController}.
-     * Main controller of the main view {@link com.snake.Views.GUIView GUIView}.
-     * Handles {@link #handleKeyPressed(KeyEvent) keypresses} of the view.
-     * Handles button actions of the {@link com.snake.Views.GUIView GUIView} subviews:
-     * {@link com.snake.Views.PauseView PauseView} and {@link com.snake.Views.GameOverView GameOverView},
-     * as well as switching to those views.
+     * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game
+     * logic via {@link GameController}. Main controller of the main view
+     * {@link com.snake.Views.GUIView GUIView}. Handles {@link #handleKeyPressed(KeyEvent)
+     * keypresses} of the view. Handles button actions of the {@link com.snake.Views.GUIView
+     * GUIView} subviews: {@link com.snake.Views.PauseView PauseView} and
+     * {@link com.snake.Views.GameOverView GameOverView}, as well as switching to those views.
      */
-    public GUIController() {
+    public GUIController()
+    {
         this.gameController = new GameController();
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         this.view = new GUIView(gameController.getView(), this.playerCount);
@@ -92,17 +93,21 @@ public class GUIController implements IController
     }
 
     /**
-     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}.
-     * WASD and arrow keys used to navigate in game or in menus.
-     * Escape pauses game or returns to main menu if paused or in game over.
-     * Backspace forces game over, only used for debugging purposes.
+     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}. WASD and arrow keys used to
+     * navigate in game or in menus. Escape pauses game or returns to main menu if paused or in game
+     * over. Backspace forces game over, only used for debugging purposes.
      *
-     * @param key a {@link javafx.scene.input.KeyEvent KeyEvent}, uses the {@link javafx.scene.input.KeyEvent#getCode() code} of the KeyEvent.
+     * @param key a {@link javafx.scene.input.KeyEvent KeyEvent}, uses the
+     *        {@link javafx.scene.input.KeyEvent#getCode() code} of the KeyEvent.
      */
     private void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
         {
+            case Y:
+            case G:
+            case H:
+            case J:
             case W:
             case S:
             case A:
@@ -173,7 +178,8 @@ public class GUIController implements IController
     }
 
     /**
-     * Calls the {@link com.snake.Views.GUIView#setGameOverView() setGameOverView} function in GUIView.
+     * Calls the {@link com.snake.Views.GUIView#setGameOverView() setGameOverView} function in
+     * GUIView.
      */
     public void setGameOverView()
     {

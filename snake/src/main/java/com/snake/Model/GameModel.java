@@ -2,7 +2,6 @@ package com.snake.Model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 import com.snake.Settings;
 
 public class GameModel
@@ -90,9 +89,12 @@ public class GameModel
         Fruit fruit = null;
         for (Snake player : players)
         {
-            player.updatePosition(board, willClear[player.playerNumber]);
-            if (fruit == null)
-                fruit = player.Fruiteaten();
+            if (player.isAlive())
+            {
+                player.updatePosition(board, willClear[player.playerNumber]);
+                if (fruit == null)
+                    fruit = player.Fruiteaten();
+            }
         }
         if (fruit != null)
         {
@@ -110,14 +112,7 @@ public class GameModel
     public void setDirection(Vector direction, int player)
     {
         player = player % Settings.getGameSettings().getPlayerCount();
-        if (player == 0)
-        {
-            players[0].setDirection(direction);
-        }
-        else if (player == 1)
-        {
-            players[1].setDirection(direction);
-        }
+        players[player].setDirection(direction);
     }
 
     public boolean gameOver()
@@ -167,20 +162,12 @@ public class GameModel
     public int getSnakeLength(int player)
     {
         player = player % Settings.getGameSettings().getPlayerCount();
-        if (player == 0)
-        {
-            return players[0].getSnakeLength();
-        }
-        else if (player == 1)
-        {
-            return players[1].getSnakeLength();
-        }
-        return -1;
+        return players[player].getSnakeLength();
     }
 
     public int getPlayerCount()
     {
         return players.length;
     }
-    
+
 }
