@@ -12,4 +12,10 @@ public class Cherry extends Fruit
         snake.setSpeed(snake.getSpeed()*2);
         snake.updateSnakePosition();
     }
+
+    public void playSound()
+    {
+        //TODO fox this.
+        Resources.playSoundByName("EatAppleSound");
+    }
 }

@@ -34,7 +34,7 @@ public class SnakeTile extends Tile
                     directionName = getDirectionName(targetDirection);
                 }
                 String imageName = tileType.toString().toLowerCase() + "_" + directionName;
-                sprite = new ImageView(LoadedImages.getImageByName(imageName));
+                sprite = new ImageView(Resources.getImageByName(imageName));
                 if (assignedPlayer == 1)
                 {
                     sprite.setBlendMode(BlendMode.DIFFERENCE);

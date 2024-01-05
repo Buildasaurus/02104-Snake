@@ -4,6 +4,8 @@
 # Log file
 *.log
 
+Highscores.txt
+
 # BlueJ files
 *.ctxt
 

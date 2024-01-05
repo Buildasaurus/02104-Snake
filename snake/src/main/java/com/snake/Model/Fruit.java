@@ -18,6 +18,8 @@ public abstract class Fruit extends Tile
         setRandomPosition();
     }
 
+    public abstract void playSound();
+
     public abstract void doEffect(Snake snake);
 
     public Vector getPosition()

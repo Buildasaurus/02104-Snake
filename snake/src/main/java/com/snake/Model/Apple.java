@@ -11,4 +11,9 @@ public class Apple extends Fruit
     {
         snake.grow();
     }
+
+    public void playSound()
+    {
+        Resources.playSoundByName("EatAppleSound");
+    }
 }

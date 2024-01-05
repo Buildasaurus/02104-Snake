@@ -44,6 +44,7 @@ public class Snake
             System.out.printf("Snake %d just died.", playerNumber);
             System.out.println("Is colliding: " + isColliding);
             System.out.println("Wont clear: " + !willClear);
+            Resources.playSoundByName("DeathSound");
             snakeIsAlive = false;
             return;
         }
@@ -59,6 +60,7 @@ public class Snake
         {
             ((Fruit) tileAtHead).doEffect(this);
             fruit = (Fruit) tileAtHead;
+            ((Fruit) tileAtHead).playSound();
         }
         else if (tileAtHead instanceof SnakeTile)
         {
