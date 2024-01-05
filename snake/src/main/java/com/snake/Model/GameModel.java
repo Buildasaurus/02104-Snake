@@ -91,27 +91,43 @@ public class GameModel
             i++;
         }
 
-        Fruit fruit = null;
+        ArrayList<Fruit> frutesToRespawn = new ArrayList<>();
         for (Snake snake : snakesToUpdate)
         {
             if (snake.isAlive())
             {
                 snake.calculateNextFrame(willClear[snake.playerNumber]);
-                if (fruit == null)
-                    fruit = snake.Fruiteaten();
+                if (snake.Fruiteaten() != null)
+                    frutesToRespawn.add(snake.Fruiteaten());
             }
         }
-        if (fruit != null)
+        for (Fruit fruit : frutesToRespawn)
         {
-            // TODO - fix this, so that when someone wins the game, it isn't an infinite loop, and
+
+            // TODO - fix this, so that when someone wins the game, it isn't an infinite loop,
+            // and
             // when they are close, it doesn't take forever
-            Apple apple = new Apple();
-            while (board[apple.getPosition().y][apple.getPosition().x] != null)
+            if (fruit instanceof Apple)
             {
-                apple = new Apple();
+                Apple apple = new Apple();
+                while (board[apple.getPosition().y][apple.getPosition().x] != null)
+                {
+                    apple.setRandomPosition();
+                }
+                board[apple.getPosition().y][apple.getPosition().x] = apple;
             }
-            board[apple.getPosition().y][apple.getPosition().x] = apple;
+            else if (fruit instanceof Cherry)
+            {
+                Cherry cherry = new Cherry();
+                while (board[cherry.getPosition().y][cherry.getPosition().x] != null)
+                {
+                    cherry.setRandomPosition();
+                }
+                board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
+            }
+
         }
+
     }
 
     public void setDirection(Vector direction, int player)
