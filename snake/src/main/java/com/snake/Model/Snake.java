@@ -11,14 +11,16 @@ public class Snake
     private Vector direction;
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
-    private Fruit fruit;
+    public Fruit fruit;
     public int playerNumber;
     public boolean isColliding = false;
     private double speed;
+    public Tile[][] board;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection, int player)
     {
+        this.board = board;
         head = startHeadPosition;
         tail = startTailPosition;
         direction = startDirection; // initializing direction as right
@@ -27,7 +29,7 @@ public class Snake
         board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction, player);
         lastDirection = startDirection;
         tailDirection = startDirection;
-        speed = 2;
+        speed = Settings.getGameSettings().getSpeed();
     }
 
 
@@ -35,7 +37,7 @@ public class Snake
      * Modifies the given board! Updates the position of the snake saved, and handles death. If the
      * snake dies it will store that, and for future
      */
-    public void updatePosition(Tile[][] board, boolean willClear)
+    public void calculateNextFrame(boolean willClear)
     {
         if (isColliding || !willClear)
         {
@@ -44,36 +46,22 @@ public class Snake
         }
         Vector nextHeadPosition =
                 head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
-        Vector nextTailPosition =
-                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
 
         Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
         if (tileAtHead == null)
         {
-            updateSnakePosition(board, nextHeadPosition, nextTailPosition);
+            updateSnakePosition();
         }
         else if (tileAtHead instanceof Fruit)
         {
-            // update head
-            board[head.y][head.x] =
-                    new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
-            board[nextHeadPosition.y][nextHeadPosition.x] =
-                    new SnakeTile(TileType.Snakehead, direction, direction, playerNumber);
-            fruit = (Fruit) tileAtHead;
-
-            snakeLength += 1;
-            // Tail shouldn't be updated.
-
-            // Save data
-            head = nextHeadPosition;
-            lastDirection = direction;
+            ((Fruit) tileAtHead).doEffect(this);
         }
         else if (tileAtHead instanceof SnakeTile)
         {
             // We can do this, because we assume that the "willClear" variable is correct
             // and if there is a snaketile on the next tile, we know it will disappear, and can just
             // overwrite it.
-            updateSnakePosition(board, nextHeadPosition, nextTailPosition);
+            updateSnakePosition();
         }
     }
 
@@ -86,16 +74,20 @@ public class Snake
         this.direction = direction;
     }
 
-    /**
-     * Assumes that the nextTailPosition is a snaketile.
-     *
-     * @param board
-     * @param nextHeadPosition
-     * @param nextTailPosition
-     */
-    private void updateSnakePosition(Tile[][] board, Vector nextHeadPosition,
-            Vector nextTailPosition)
+    public Vector getDirection()
     {
+        return direction;
+    }
+
+    /**
+     * updates the position of the snake on the board
+     */
+    public void updateSnakePosition()
+    {
+        Vector nextHeadPosition =
+                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
+        Vector nextTailPosition =
+                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
         // update old head
         board[head.y][head.x] =
                 new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
@@ -155,9 +147,37 @@ public class Snake
         return snakeIsAlive;
     }
 
+    public void grow()
+    {
+        Vector nextHeadPosition =
+                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
+        Vector nextTailPosition =
+                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
+        Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
+
+        // update head
+        board[head.y][head.x] =
+                new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
+        board[nextHeadPosition.y][nextHeadPosition.x] =
+                new SnakeTile(TileType.Snakehead, direction, direction, playerNumber);
+        fruit = (Fruit) tileAtHead;
+
+        snakeLength += 1;
+        // Tail shouldn't be updated.
+
+        // Save data
+        head = nextHeadPosition;
+        lastDirection = direction;
+    }
+
     public int getSnakeLength()
     {
         return snakeLength;
+    }
+
+    public void setSnakeLenght(int length)
+    {
+        this.snakeLength = length;
     }
 
     /**
@@ -186,5 +206,45 @@ public class Snake
     public void setSpeed(double speed)
     {
         this.speed = speed;
+    }
+
+    public Vector getHeadPosition()
+    {
+        return head;
+    }
+
+    public void setHeadPosition(Vector head)
+    {
+        this.head = head;
+    }
+
+    public Vector getTailPosition()
+    {
+        return tail;
+    }
+
+    public void setTailDirectionPosition(Vector direction)
+    {
+        this.tailDirection = direction;
+    }
+
+    public Vector getTailDirection()
+    {
+        return tailDirection;
+    }
+
+    public void setTailDirection(Vector tailDirection)
+    {
+        this.tailDirection = tailDirection;
+    }
+
+    public Vector getLastDirection()
+    {
+        return lastDirection;
+    }
+
+    public void setLastDirection(Vector lastDirection)
+    {
+        this.lastDirection = lastDirection;
     }
 }

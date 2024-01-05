@@ -10,8 +10,6 @@ public class GameModel
 
     private int rowCount;
     private int columnCount;
-    private double speed;
-    private double acceleration = 0.01;
     private Snake[] players;
 
     public GameModel()
@@ -30,11 +28,6 @@ public class GameModel
 
         Apple apple = new Apple();
         board[apple.getPosition().y][apple.getPosition().x] = apple;
-
-
-        speed = Settings.getGameSettings().getSpeed();
-        acceleration = Settings.getGameSettings().getAcceleration();
-
     }
 
     /**
@@ -97,7 +90,7 @@ public class GameModel
         {
             if (snake.isAlive())
             {
-                snake.updatePosition(board, willClear[snake.playerNumber]);
+                snake.calculateNextFrame(willClear[snake.playerNumber]);
                 if (fruit == null)
                     fruit = snake.Fruiteaten();
             }
