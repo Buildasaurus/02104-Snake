@@ -11,5 +11,6 @@ public class Cherry
     public void doEffect(Snake snake)
     {
         snake.setSpeed(2);
+        snake.updateSnakePosition(null, null, null);
     }
 }
