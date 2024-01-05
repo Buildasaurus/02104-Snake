@@ -41,11 +41,11 @@ public class GameModel
      * Updates the board  to the next state. Only updates the snakes whose id is in the playersToUpdate
      * @param playersToUpdate
      */
-    public void nextState(int[] playersToUpdate)
+    public void nextState(ArrayList<Integer> playersToUpdate)
     {
         // for syncronization, find any snakes colliding head on, and tell them they are colliding.
         // These snakes won't update.
-        Snake[] snakesToUpdate = new Snake[playersToUpdate.length];
+        Snake[] snakesToUpdate = new Snake[playersToUpdate.size()];
         int j = 0;
          //Gather the correct pointers for later use
         for (int playerID : playersToUpdate) {
@@ -54,7 +54,7 @@ public class GameModel
         }
         ArrayList<Vector> headPositions = new ArrayList<>();
         HashMap<String, Integer> nextHeadPositions = new HashMap<>();
-        for (int i = 0; i < playersToUpdate.length; i++)
+        for (int i = 0; i < playersToUpdate.size(); i++)
         {
             Vector nextPosition = snakesToUpdate[i].getNextHeadPosition();
             headPositions.add(nextPosition);

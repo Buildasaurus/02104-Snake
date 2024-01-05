@@ -66,7 +66,7 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                
+
                 if (now - lastUpdate >= 1_000_000_000 / gameController.getSpeed(0) && !isGameOver
                         && !isPaused)
                 {

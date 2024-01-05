@@ -1,5 +1,7 @@
 package com.snake.Controllers;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import com.snake.Model.GameModel;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
@@ -25,7 +27,8 @@ public class GameController implements IController
 
     public boolean executeNextStep()
     {
-        model.nextState(new int[]{0,1,2});
+        // TODO fix Temporary code
+        model.nextState(new ArrayList<Integer>(Arrays.asList(Integer.valueOf(0))));
         if (model.gameOver())
         {
             Highscore.setHighscore(model.getSnakeLength(0));
@@ -90,7 +93,7 @@ public class GameController implements IController
                 model.setDirection(new Vector(-1, 0), 2);
                 break;
             case Y:
-                model.setDirection(new Vector(0,1), 2);
+                model.setDirection(new Vector(0, 1), 2);
                 break;
             case H:
                 model.setDirection(new Vector(0, -1), 2);
