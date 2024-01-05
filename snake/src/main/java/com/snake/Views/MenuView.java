@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -53,10 +54,9 @@ public class MenuView extends StackPane
         buttonstyling(playButton);
         buttonstyling(exitButton);
 
-        HBox buttonspacing = new HBox(20);
+        VBox buttonspacing = new VBox(20);
         buttonspacing.getChildren().addAll(playButton, exitButton);
         getChildren().add(buttonspacing);
-        setAlignment(buttonspacing, Pos.BOTTOM_RIGHT);
     }
 
     private void buttonstyling(Button button){
