@@ -11,16 +11,17 @@ public class Snake
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
     private Fruit fruit;
+    private int player;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
-            Vector startDirection)
+            Vector startDirection, int player)
     {
         head = startHeadPosition;
         tail = startTailPosition;
         direction = startDirection; // initializing direction as right
-
-        board[head.y][head.x] = new SnakeTile(TileType.Snakehead, direction, direction);
-        board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction);
+        this.player = player;
+        board[head.y][head.x] = new SnakeTile(TileType.Snakehead, direction, direction, player);
+        board[tail.y][tail.x] = new SnakeTile(TileType.Snaketail, direction, direction, player);
         lastDirection = startDirection;
     }
 
@@ -40,30 +41,16 @@ public class Snake
         Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
         if (tileAtHead == null)
         {
-            // update head
-            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
-            board[nextHeadPosition.y][nextHeadPosition.x] =
-                    new SnakeTile(TileType.Snakehead, direction, direction);
-
-            // update tail
-            board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
-                    ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
-                    ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection);
-            board[tail.y][tail.x] = null;
-
-            // save data for next time
-            tail = nextTailPosition;
-            head = nextHeadPosition;
-            lastDirection = direction;
-            fruit = null;
+            updateSnakePosition(board, nextHeadPosition, nextTailPosition);
         }
         else if (tileAtHead instanceof Fruit)
         {
             // update head
-            board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction);
+            board[head.y][head.x] =
+                    new SnakeTile(TileType.Snakebody, lastDirection, direction, player);
             board[nextHeadPosition.y][nextHeadPosition.x] =
-                    new SnakeTile(TileType.Snakehead, direction, direction);
-            fruit = (Fruit)tileAtHead;
+                    new SnakeTile(TileType.Snakehead, direction, direction, player);
+            fruit = (Fruit) tileAtHead;
 
             snakeLength += 1;
             // Tail shouldn't be updated.
@@ -74,7 +61,14 @@ public class Snake
         }
         else if (tileAtHead instanceof SnakeTile)
         {
-            snakeIsAlive = false;
+            if (tileAtHead.tileType == TileType.Snaketail)
+            {
+                updateSnakePosition(board, nextHeadPosition, nextTailPosition);
+            }
+            else
+            {
+                snakeIsAlive = false;
+            }
         }
     }
 
@@ -86,6 +80,38 @@ public class Snake
         }
         this.direction = direction;
     }
+
+    /**
+     * Assumes that the nextTailPosition is a snaketile.
+     * @param board
+     * @param nextHeadPosition
+     * @param nextTailPosition
+     */
+    private void updateSnakePosition(Tile[][] board, Vector nextHeadPosition,
+            Vector nextTailPosition)
+    {
+        // update old head
+        board[head.y][head.x] = new SnakeTile(TileType.Snakebody, lastDirection, direction, player);
+
+
+        // update tail
+        board[nextTailPosition.y][nextTailPosition.x] = new SnakeTile(TileType.Snaketail,
+                ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).enterDirection,
+                ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection,
+                player);
+        board[tail.y][tail.x] = null;
+
+        // update new head
+        board[nextHeadPosition.y][nextHeadPosition.x] =
+                new SnakeTile(TileType.Snakehead, direction, direction, player);
+
+        // save data for next time
+        tail = nextTailPosition;
+        head = nextHeadPosition;
+        lastDirection = direction;
+        fruit = null;
+    }
+
 
     /**
      * if inside board limit

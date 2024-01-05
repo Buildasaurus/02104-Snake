@@ -56,6 +56,11 @@ public class NewGameController implements IController
         return gameSettings.getPlayerCount();
     }
 
+    /**
+     * Sets the next active window to the {@link com.snake.Controllers.GUIController GUI Controller}
+     * and updates the {@link #gameSettings game settings} stored.
+     * @param action
+     */
     public void handlePlayButtonPressed(ActionEvent action)
     {
         Settings.setGameSettings(gameSettings);

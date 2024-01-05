@@ -25,7 +25,7 @@ public class GameModel
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
             players[i] =
-                    new Snake(board, midpoint.add(0, i), midpoint.add(-1, i), new Vector(1, 0));
+                    new Snake(board, midpoint.add(0, i), midpoint.add(-1, i), new Vector(1, 0), i);
         }
 
         Apple apple = new Apple();

@@ -1,18 +1,18 @@
 package com.snake.Model;
 
-import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public abstract class Tile
 {
     protected TileType tileType;
-    protected Image sprite;
+    protected ImageView sprite;
 
     public Tile(TileType type)
     {
         tileType = type;
     }
 
-    public abstract Image getImage();
+    public abstract ImageView getImage();
 
     public boolean equals()
     {

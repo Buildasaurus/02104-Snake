@@ -2,23 +2,26 @@ package com.snake.Model;
 
 import java.net.URL;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class SnakeTile extends Tile
 {
     TileType tileType;
-    Image sprite;
     Vector enterDirection;
     Vector targetDirection;
+    int assignedPlayer;
 
-    public SnakeTile(TileType type, Vector enterDirection, Vector targetDirection)
+    public SnakeTile(TileType type, Vector enterDirection, Vector targetDirection,
+            int assignedPlayer)
     {
         super(type);
         tileType = type;
         this.enterDirection = enterDirection;
         this.targetDirection = targetDirection;
+        this.assignedPlayer = assignedPlayer;
     }
 
-    public Image getImage()
+    public ImageView getImage()
     {
         if (sprite == null)
         {
@@ -30,9 +33,11 @@ public class SnakeTile extends Tile
                     directionName = getDirectionName(targetDirection);
                 }
                 String imageName = tileType.toString().toLowerCase() + "_" + directionName;
-                URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
-                sprite = new Image(url.toString());
-
+                sprite = new ImageView(LoadedImages.getImageByName(imageName));
+                if (assignedPlayer == 1)
+                {
+                    sprite.setOpacity(0.5);
+                }
             }
             catch (Exception e)
             {
