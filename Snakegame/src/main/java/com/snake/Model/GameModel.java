@@ -84,7 +84,6 @@ public class GameModel
         // disappear, if the snake eats an apple, or dies, or is colliding.
         boolean[] willClear = new boolean[players.length];
         int i = 0;
-        System.out.println(headPositions.size());
         for (Vector vec : headPositions)
         {
             willClear[i] = true;
