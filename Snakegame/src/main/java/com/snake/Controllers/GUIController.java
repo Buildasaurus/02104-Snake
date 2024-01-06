@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.snake.App;
 import com.snake.Settings;
+import com.snake.Model.GameState;
 import com.snake.Views.GUIView;
 
 import javafx.animation.AnimationTimer;
@@ -44,6 +45,19 @@ public class GUIController implements IController
         int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
         int margin = 50; //should fit with the GUIView margins.
         this.gameController = new GameController(dimension-margin, dimension-margin);
+
+        initialize();
+    }
+
+    public GUIController(GameState gameState) {
+        int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
+        int margin = 50; //should fit with the GUIView margins.
+        this.gameController = new GameController(dimension-margin, dimension-margin, gameState);
+
+        initialize();
+    }
+
+    public void initialize() {
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         double[] speedArray = new double[playerCount];
         for (int i = 0; i < playerCount; i++) {
@@ -219,7 +233,10 @@ public class GUIController implements IController
 
     public void handleLoadGameButtonPressed(ActionEvent action)
     {
-        System.out.println("pressed load game");
+        // WARNING: loadview and loadcontroller are still in progress, only basic framework is present with no functionality
+        gameTimer.stop();
+        LoadController newController = new LoadController();
+        App.setRoot(newController);
     }
 
     public void handleHideButtonPressed(ActionEvent action) {

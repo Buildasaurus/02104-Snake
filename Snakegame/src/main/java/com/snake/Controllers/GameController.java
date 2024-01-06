@@ -3,6 +3,7 @@ package com.snake.Controllers;
 import java.util.ArrayList;
 
 import com.snake.Model.GameModel;
+import com.snake.Model.GameState;
 import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
 import com.snake.Views.GameView;
@@ -23,6 +24,13 @@ public class GameController implements IController
     {
         this.view = new GameView(width, height);
         this.model = new GameModel();
+
+        view.update(model.getBoard());
+    }
+
+    public GameController(int width, int height, GameState gameState) {
+        this.view = new GameView(height, width);
+        this.model = new GameModel(gameState);
 
         view.update(model.getBoard());
     }

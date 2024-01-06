@@ -44,6 +44,14 @@ public class GameModel
         board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
     }
 
+    public GameModel(GameState gameState) {
+        this.rowCount = Settings.rowCount;
+        this.columnCount = Settings.columnCount;
+
+        board = gameState.getBoard();
+        players = gameState.getPlayers();
+    }
+
     /**
      * Updates the board to the next state. Only updates the snakes whose id is in the
      * playersToUpdate
