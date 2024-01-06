@@ -7,12 +7,21 @@ import com.snake.Settings;
 
 public class GameModel
 {
+    /**
+     * The board of snake, of size rowcount and columncount stored in the {@link com.snake.Settings
+     * Settings}.
+     */
     public Tile[][] board;
 
     private int rowCount;
     private int columnCount;
     private Snake[] players;
 
+    /**
+     * Imports the current settings from {@link com.snake.Settings Settings} and initializes a board
+     * with tiles, and initializes the players. Also spawns random {@link com.snake.Model.Fruit
+     * fruits} on the level.
+     */
     public GameModel()
     {
         this.rowCount = Settings.rowCount;
@@ -27,6 +36,7 @@ public class GameModel
                     new Vector(1, 0), i);
         }
 
+        //TODO - fix that fruits might spawn on top of players.
         Apple apple = new Apple();
         board[apple.getPosition().y][apple.getPosition().x] = apple;
 
@@ -42,7 +52,6 @@ public class GameModel
      */
     public void nextState(ArrayList<Integer> playersToUpdate)
     {
-        System.out.println(playersToUpdate.size());
         // for syncronization, find any snakes colliding head on, and tell them they are colliding.
         // These snakes won't update.
         Snake[] snakesToUpdate = new Snake[playersToUpdate.size()];
@@ -86,7 +95,8 @@ public class GameModel
                 SnakeTile snakeTile = ((SnakeTile) tile);
                 if (!(snakeTile.tileType == TileType.Snaketail)
                         || (players[snakeTile.assignedPlayer].isColliding
-                                || players[snakeTile.assignedPlayer].willGrow(board)) || !playersToUpdate.contains(snakeTile.assignedPlayer))
+                                || players[snakeTile.assignedPlayer].willGrow(board))
+                        || !playersToUpdate.contains(snakeTile.assignedPlayer))
                 {
                     System.out.println(
                             snakeTile.tileType + " " + players[snakeTile.assignedPlayer].isColliding
