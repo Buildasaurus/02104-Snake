@@ -36,15 +36,25 @@ public class GameModel
                     new Vector(1, 0), i);
         }
 
-        //TODO - fix that fruits might spawn on top of players.
+        // level generation
+        LevelGenerator.generateLevel(board);
         Apple apple = new Apple();
+        while (board[apple.getPosition().y][apple.getPosition().x] != null)
+        {
+            apple.setRandomPosition();
+        }
         board[apple.getPosition().y][apple.getPosition().x] = apple;
 
         Cherry cherry = new Cherry();
+        while (board[cherry.getPosition().y][cherry.getPosition().x] != null)
+        {
+            cherry.setRandomPosition();
+        }
         board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
     }
 
-    public GameModel(GameState gameState) {
+    public GameModel(GameState gameState)
+    {
         this.rowCount = Settings.rowCount;
         this.columnCount = Settings.columnCount;
 

@@ -36,9 +36,16 @@ public class Snake
     /**
      * Modifies the given board! Updates the position of the snake saved, and handles death. If the
      * snake dies it will store that, and for future
+     *
+     * @param willClear If willClear is false, the snake will die, else if there is a snake on the
+     *        next tile, it is assumed it will disappear
      */
     public void calculateNextFrame(boolean willClear)
     {
+        if (!snakeIsAlive)
+        {
+            return;
+        }
         if (isColliding || !willClear)
         {
             System.out.printf("Snake %d just died.", playerNumber);
@@ -48,10 +55,9 @@ public class Snake
             snakeIsAlive = false;
             return;
         }
-        Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
-
+        Vector nextHeadPosition = getNextHeadPosition();
         Tile tileAtHead = board[nextHeadPosition.y][nextHeadPosition.x];
+
         if (tileAtHead == null)
         {
             updateSnakePosition();
@@ -68,6 +74,10 @@ public class Snake
             // and if there is a snaketile on the next tile, we know it will disappear, and can just
             // overwrite it.
             updateSnakePosition();
+        }
+        else if (tileAtHead instanceof Wall)
+        {
+            snakeIsAlive = false;
         }
     }
 
@@ -90,6 +100,10 @@ public class Snake
      */
     public void updateSnakePosition()
     {
+        if (!snakeIsAlive)
+        {
+            return;
+        }
         Vector nextHeadPosition =
                 head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
         Vector nextTailPosition =
