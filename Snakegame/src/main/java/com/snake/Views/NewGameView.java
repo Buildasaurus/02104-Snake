@@ -36,7 +36,7 @@ public class NewGameView extends GridPane
     {
 
         URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
-        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
+        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background background = new Background(backgroundImg);
         setBackground(background);
@@ -82,8 +82,6 @@ public class NewGameView extends GridPane
             controller.setGameMode(gameModeDropDown.getSelectionModel().getSelectedItem());
         });
 
-
-
         // Level setting
         ComboBox<Level> levelModeDropDown = new ComboBox<Level>();
         for (Level level : Level.values())
@@ -118,6 +116,3 @@ public class NewGameView extends GridPane
     }
 
     }
-
-
-
