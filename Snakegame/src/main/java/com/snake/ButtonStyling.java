@@ -1,19 +1,21 @@
 package com.snake;
 
-import java.io.File;
-import java.net.URL;
 import com.snake.Model.Resources;
+
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class ButtonStyling {
 
-    public static void transparentbackgroundandcursor(Button button){
+    public static void transparentbackground(Button button){
+        //also changes cursor to a hand when hovering over button
         button.setStyle("-fx-background-color: transparent;-fx-focus-color: transparent;-fx-cursor: hand");
     }
 
-    public void setImage(String name, Button button){
-        button.setGraphic(new ImageView(Resources.getImageByName(name)));
+    public static void setImage(String path, Button button){
+        Image buttonImg = Resources.getImageByName(path);
+        button.setGraphic(new ImageView(buttonImg));
     }
+    
 }

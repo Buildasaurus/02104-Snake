@@ -47,13 +47,12 @@ public class MenuView extends StackPane
         exitButton.setOnAction(controller::handleExitButtonPressed);
 
 
-        ButtonStyling.transparentbackgroundandcursor(playButton);
-        ButtonStyling.transparentbackgroundandcursor(exitButton);
+        ButtonStyling.transparentbackground(playButton);
+        ButtonStyling.transparentbackground(exitButton);
 
-        ButtonStyling styler = new ButtonStyling();
 
-        styler.setImage("playbutton",playButton);
-        styler.setImage("quitbutton",playButton);
+        ButtonStyling.setImage("playbutton",playButton);
+        ButtonStyling.setImage("quitbutton",exitButton);
 
         playButton.setTranslateY(50);
         getChildren().add(playButton);
@@ -62,7 +61,5 @@ public class MenuView extends StackPane
         exitButton.setTranslateY(205);
         getChildren().add(exitButton);
     }
-
-
 
 }
