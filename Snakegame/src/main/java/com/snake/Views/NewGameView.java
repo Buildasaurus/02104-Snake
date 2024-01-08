@@ -1,5 +1,7 @@
 package com.snake.Views;
 
+import java.net.URL;
+
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
@@ -10,6 +12,13 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -26,6 +35,14 @@ public class NewGameView extends GridPane
 
     private void initialize(int[] playerCounts)
     {
+
+        URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
+        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
+        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background background = new Background(backgroundImg);
+        setBackground(background);
+        //background image scaling
+
         for (int i = 0; i < 3; i++)
         {
             ColumnConstraints column = new ColumnConstraints(Settings.windowWidth / 3);
@@ -93,8 +110,9 @@ public class NewGameView extends GridPane
             setHalignment(node, HPos.CENTER); // To align horizontally in the cell
             setValignment(node, VPos.CENTER); // To align vertically in the cell
         }
-
+    }
+    
     }
 
 
-}
+
