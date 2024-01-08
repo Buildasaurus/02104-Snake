@@ -79,13 +79,45 @@ public class LevelGenerator
         return randomMap;
     }
 
-    ArrayList<Vector> getRegion(Vector startVector)
+    /**
+     * Returns an ArrayList of Vectors, that are all in the same region. A region is defined as
+     * elements that all are false in the given map, and where you can go from all elements to all
+     * elements, without going diagonally.
+     *
+     * @param startVector The start coordinate to
+     * @return
+     */
+    ArrayList<Vector> getRegion(Vector startVector, boolean[][] map)
     {
         LinkedList<Vector> tilesToLookAt = new LinkedList<Vector>();
         ArrayList<Vector> tilesInRegion = new ArrayList<Vector>();
+        boolean[][] alreadyLookedAtMap = new boolean[height][width];
+        alreadyLookedAtMap[startVector.y][startVector.x] = true;
         tilesToLookAt.add(startVector);
+        while (tilesToLookAt.size() > 0)
+        {
+            Vector currentPoint = tilesToLookAt.poll();
+            tilesInRegion.add(currentPoint);
+            for (int dx = -1; dx <= 1; dx++)
+            {
+                for (int dy = -1; dy <= 1; dy++)
+                {
+                    if (!(dy == 0 && dx == 0) && dy == 0 || dx == 0)
+                    {
+                        int modX = mod(dx, width);
+                        int modY = mod(dy, height);
+                        if (!alreadyLookedAtMap[modY][modX] && !map[modY][modX])
+                        {
+                            tilesToLookAt.add(new Vector(modX, modY));
+                            alreadyLookedAtMap[modY][modX] = true;
+                        }
+                    }
+                }
+            }
+        }
         return tilesInRegion;
     }
+
     /**
      * Will simplify the noise in the map. Will not modify the original map
      *
