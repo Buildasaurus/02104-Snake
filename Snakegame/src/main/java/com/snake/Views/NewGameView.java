@@ -8,13 +8,11 @@ import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -105,7 +103,7 @@ public class NewGameView extends GridPane
         add(startGame, 1, 1);
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
-        ButtonStyling.transparentbackgroundandcursor(startGame);
+        ButtonStyling.transparentbackground(startGame);
 
         // Center align
         for (Node node : getChildren())
