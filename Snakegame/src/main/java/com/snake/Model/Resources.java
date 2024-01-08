@@ -33,7 +33,7 @@ public class Resources
 
     public static void playSoundByName(String name)
     {
-        URL url = Resources.class.getResource("/com/snake/Sounds/" + name + ".mp3");
+        URL url = Resources.class.getResource("/com/snake/Sounds/" + name + ".wav");
         Media sound = new Media(url.toExternalForm());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
