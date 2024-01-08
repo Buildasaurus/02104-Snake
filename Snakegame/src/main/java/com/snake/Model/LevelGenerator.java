@@ -83,7 +83,7 @@ public class LevelGenerator
     {
         LinkedList<Vector> tilesToLookAt = new LinkedList<Vector>();
         ArrayList<Vector> tilesInRegion = new ArrayList<Vector>();
-        tilesToLookAt.add(null)
+        tilesToLookAt.add(startVector);
         return tilesInRegion;
     }
     /**
