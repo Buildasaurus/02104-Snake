@@ -1,5 +1,6 @@
 package com.snake.Views;
 
+import com.snake.ButtonStyling;
 import com.snake.Controllers.MenuController;
 
 import javafx.geometry.Insets;
@@ -14,6 +15,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
+
+import java.io.File;
 import java.net.URL;
 
 public class MenuView extends StackPane
@@ -44,13 +47,15 @@ public class MenuView extends StackPane
         exitButton.setOnAction(controller::handleExitButtonPressed);
 
 
-        buttonstyling(playButton);
-        buttonstyling(exitButton);
+        ButtonStyling.transparentbackgroundandcursor(playButton);
+        ButtonStyling.transparentbackgroundandcursor(exitButton);
+
+        ButtonStyling styler = new ButtonStyling();
         
-        URL playUrl = getClass().getResource("/com/snake/Graphics/playbutton.png");
-        playButton.setGraphic(new ImageView(new Image(playUrl.toString())));
-        URL quitUrl = getClass().getResource("/com/snake/Graphics/quitbutton.png");
-        exitButton.setGraphic(new ImageView(new Image(quitUrl.toString())));
+        File playbuttonimg = new File("/com/snake/Graphics/playbutton.png");
+        styler.setImage(playbuttonimg,playButton);
+        File quitbuttonimg = new File("/com/snake/Graphics/quitbutton.png");
+        styler.setImage(quitbuttonimg, exitButton);
         
         playButton.setTranslateY(50);
         getChildren().add(playButton);
@@ -60,9 +65,7 @@ public class MenuView extends StackPane
         getChildren().add(exitButton);
     }
 
-    private void buttonstyling(Button button){
-        button.setStyle("-fx-background-color: transparent; -fx-focus-color: transparent;-fx-cursor: hand; -fx-font-family: 'Arial'; -fx-font-size: 32");
-    }
+    
     
 }
 
