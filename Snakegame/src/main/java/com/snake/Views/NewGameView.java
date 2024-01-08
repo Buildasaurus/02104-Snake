@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import java.net.URL;
 
-import com.snake.ButtonStyling;
+import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
@@ -97,12 +97,9 @@ public class NewGameView extends GridPane
 
 
         // Start game
-        Button startGame = new Button("Start game");
+        OurButton startGame = new OurButton("Start game");
         add(startGame, 1, 1);
         startGame.setOnAction(controller::handlePlayButtonPressed);
-
-        ButtonStyling.transparentbackground(startGame);
-        ButtonStyling.setImage("playbt", startGame);
 
         startGame.setTranslateY(50);
         //getChildren().add(startGame);
