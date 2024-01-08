@@ -30,5 +30,7 @@ public class LoadView extends ButtonOverlayView {
         setBasicFormatting();
 
         Platform.runLater(() -> this.requestFocus());
+
+        
     }
 }
