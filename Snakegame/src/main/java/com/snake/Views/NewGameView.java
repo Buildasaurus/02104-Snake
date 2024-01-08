@@ -104,6 +104,10 @@ public class NewGameView extends GridPane
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
         ButtonStyling.transparentbackground(startGame);
+        ButtonStyling.setImage("playbt", startGame);
+
+        startGame.setTranslateY(50);
+        //getChildren().add(startGame);
 
         // Center align
         for (Node node : getChildren())
