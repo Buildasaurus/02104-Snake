@@ -1,5 +1,9 @@
 package com.snake.Model;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 import com.snake.Settings;
 
@@ -75,6 +79,13 @@ public class LevelGenerator
         return randomMap;
     }
 
+    ArrayList<Vector> getRegion(Vector startVector)
+    {
+        LinkedList<Vector> tilesToLookAt = new LinkedList<Vector>();
+        ArrayList<Vector> tilesInRegion = new ArrayList<Vector>();
+        tilesToLookAt.add(null)
+        return tilesInRegion;
+    }
     /**
      * Will simplify the noise in the map. Will not modify the original map
      *
