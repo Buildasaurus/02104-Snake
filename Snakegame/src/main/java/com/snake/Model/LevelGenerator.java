@@ -79,6 +79,28 @@ public class LevelGenerator
         return randomMap;
     }
 
+    public static ArrayList<ArrayList<Vector>> getRegions(boolean[][] map)
+    {
+        ArrayList<ArrayList<Vector>> regions = new ArrayList<ArrayList<Vector>>();
+        boolean[][] tilesAlreadyClassified = new boolean[height][width];
+        for (int row = 0; row < height; row++)
+        {
+            for (int column = 0; column < width; column++)
+            {
+                if (!map[row][column] && !tilesAlreadyClassified[row][column])
+                {
+                    ArrayList<Vector> region = getRegion(new Vector(column, row), map);
+                    for (Vector vector : region)
+                    {
+                        tilesAlreadyClassified[vector.y][vector.x] = true;
+                    }
+                    regions.add(region);
+                }
+            }
+        }
+        return regions;
+    }
+
     /**
      * Returns an ArrayList of Vectors, that are all in the same region. A region is defined as
      * elements that all are false in the given map, and where you can go from all elements to all
@@ -87,7 +109,7 @@ public class LevelGenerator
      * @param startVector The start coordinate to
      * @return
      */
-    ArrayList<Vector> getRegion(Vector startVector, boolean[][] map)
+    private static ArrayList<Vector> getRegion(Vector startVector, boolean[][] map)
     {
         LinkedList<Vector> tilesToLookAt = new LinkedList<Vector>();
         ArrayList<Vector> tilesInRegion = new ArrayList<Vector>();
@@ -102,10 +124,10 @@ public class LevelGenerator
             {
                 for (int dy = -1; dy <= 1; dy++)
                 {
-                    if (!(dy == 0 && dx == 0) && dy == 0 || dx == 0)
+                    if (!(dy == 0 && dx == 0) && (dy == 0 || dx == 0))
                     {
-                        int modX = mod(dx, width);
-                        int modY = mod(dy, height);
+                        int modX = mod(currentPoint.x + dx, width);
+                        int modY = mod(currentPoint.y + dy, height);
                         if (!alreadyLookedAtMap[modY][modX] && !map[modY][modX])
                         {
                             tilesToLookAt.add(new Vector(modX, modY));
@@ -181,6 +203,10 @@ public class LevelGenerator
 
     private static boolean[][] connectIslands(boolean[][] map)
     {
+        ArrayList<ArrayList<Vector>> regions = getRegions(map);
+        System.out.println(regions);
+        System.out.println(regions.size());
+
         return map;
         // TODO write this, to make map more smooth.
     }
