@@ -11,8 +11,9 @@ public class LevelGenerator
     static int height;
 
     /**
-     * Generates walls around the level. Will always have a clear 8x8 square in the middle
-     * Assumes non-jagged array
+     * Generates walls around the level. Will always have a clear 8x8 square in the middle Assumes
+     * non-jagged array
+     *
      * @param board The board to generate the level on. Will modify this board.
      */
     public static void generateLevel(Tile[][] board)
@@ -26,14 +27,17 @@ public class LevelGenerator
         width = board[0].length;
         double fill = Settings.getGameSettings().getLevelFill();
         boolean[][] map = generateMap(fill);
-        map = simplifyNoise(map);
+        for (int i = 0; i < 3; i++)
+        {
+            map = simplifyNoise(map);
+        }
         map = connectIslands(map);
-        //the number of free square in a central square
+        // the number of free square in a central square
         int margin = 4;
         // illegal squares, that are to be ignored
         // TODO for now just assuming height 20, width 20. Do maths later.
-        Vector illegalXVector = new Vector((height-margin)/2, (height+margin)/2);
-        Vector illegalYVector = new Vector((width-margin)/2, (width+margin)/2);
+        Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
+        Vector illegalYVector = new Vector((width - margin) / 2, (width + margin) / 2);
 
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
@@ -123,7 +127,7 @@ public class LevelGenerator
                             {
                                 continue;
                             }
-                            neighborMap[mod(row + dy, height)][mod(column + dx,width)] += 1;
+                            neighborMap[mod(row + dy, height)][mod(column + dx, width)] += 1;
                         }
                     }
                 }
