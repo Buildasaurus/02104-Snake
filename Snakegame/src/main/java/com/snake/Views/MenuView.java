@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.ButtonStyling;
 import com.snake.Controllers.MenuController;
-
+import com.snake.Model.Resources;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -33,7 +33,7 @@ public class MenuView extends StackPane
     private void initialize()
     {
         URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
-        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, 
+        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background background = new Background(backgroundImg);
         setBackground(background);
@@ -50,11 +50,11 @@ public class MenuView extends StackPane
         ButtonStyling.transparentbackground(playButton);
         ButtonStyling.transparentbackground(exitButton);
 
-        
-        ButtonStyling.setImage("playbutton", playButton);
-        ButtonStyling.setImage("quitbutton", exitButton);
+        ButtonStyling styler = new ButtonStyling();
 
-        
+        styler.setImage("playbutton",playButton);
+        styler.setImage("quitbutton",playButton);
+
         playButton.setTranslateY(50);
         getChildren().add(playButton);
 
@@ -63,7 +63,6 @@ public class MenuView extends StackPane
         getChildren().add(exitButton);
     }
 
-    
-    
-}
 
+
+}

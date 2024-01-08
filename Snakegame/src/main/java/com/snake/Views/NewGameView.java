@@ -2,6 +2,7 @@ package com.snake.Views;
 
 import java.net.URL;
 
+import com.snake.ButtonStyling;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
@@ -104,6 +105,8 @@ public class NewGameView extends GridPane
         add(startGame, 1, 1);
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
+        ButtonStyling.transparentbackgroundandcursor(startGame);
+
         // Center align
         for (Node node : getChildren())
         {
@@ -111,7 +114,7 @@ public class NewGameView extends GridPane
             setValignment(node, VPos.CENTER); // To align vertically in the cell
         }
     }
-    
+
     }
 
 
