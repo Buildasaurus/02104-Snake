@@ -201,11 +201,6 @@ public class GUIController implements IController
         Platform.runLater(() -> view.requestFocus());
     }
 
-    public void handleSaveButtonPressed(ActionEvent action)
-    {
-        System.out.println("pressed save");
-    }
-
     /**
      * Stops the animation timer to kill thread activity and goes back to the main menu.
      *
@@ -261,5 +256,10 @@ public class GUIController implements IController
      */
     public void handleHideButtonPressed(ActionEvent action) {
         view.toggleGameOverButtonVisibility();
+    }
+
+    public void handleSaveButtonPressed(ActionEvent action)
+    {
+        System.out.println("pressed save");
     }
 }

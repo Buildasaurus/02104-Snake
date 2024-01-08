@@ -1,14 +1,12 @@
 package com.snake.Controllers;
 
+import com.google.gson.Gson;
 import com.snake.Views.LoadView;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
-
-//TODO make this package accessible
-//import org.json.simple.JSONObject;
 
 public class LoadController implements IController {
     LoadView view;
@@ -32,5 +30,8 @@ public class LoadController implements IController {
         String saveName = actionOrigin.getText();
 
         //TODO JSON stuff here
+
+        Gson gson = new Gson();
+        
     }
 }
