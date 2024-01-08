@@ -28,11 +28,12 @@ public class GameSettings
      */
     public enum Level
     {
-        Empty
+        Empty, Random
     }
 
     /**
-     * Sets the  {@link #playerCount player count} if the given player count is valid, and can be handled.
+     * Sets the {@link #playerCount player count} if the given player count is valid, and can be
+     * handled.
      *
      * @return Returns if the update was succesful
      */
@@ -116,6 +117,30 @@ public class GameSettings
                 System.out.println(
                         "something is wrong in gamesettings, getspeed() method. A gameMode isn't taken care of");
                 return -1;
+        }
+    }
+
+    public double getLevelFill()
+    {
+        if (level == Level.Empty)
+        {
+            return 0;
+        }
+        else
+        {
+            switch (gameMode)
+            {
+                case Easy:
+                    return 0.3;
+                case Normal:
+                    return 0.35;
+                case Hard:
+                    return 0.4;
+                case Insane:
+                    return 0.45;
+                default:
+                    return 0;
+            }
         }
     }
 }

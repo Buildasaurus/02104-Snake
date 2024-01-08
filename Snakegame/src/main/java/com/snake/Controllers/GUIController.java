@@ -49,6 +49,11 @@ public class GUIController implements IController
         initialize();
     }
 
+    /**
+     * Constructor used for loading a save state.
+     * 
+     * @param gameState
+     */
     public GUIController(GameState gameState) {
         int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
         int margin = 50; //should fit with the GUIView margins.
@@ -57,6 +62,9 @@ public class GUIController implements IController
         initialize();
     }
 
+    /**
+     * Handles generic set-up not affected by different constructors.
+     */
     public void initialize() {
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         double[] speedArray = new double[playerCount];
@@ -231,6 +239,11 @@ public class GUIController implements IController
         App.setRoot(newController);
     }
 
+    /**
+     * Stops the animation timer to kill thread activity and goes to the load menu.
+     * 
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleLoadGameButtonPressed(ActionEvent action)
     {
         // WARNING: loadview and loadcontroller are still in progress, only basic framework is present with no functionality
@@ -239,6 +252,13 @@ public class GUIController implements IController
         App.setRoot(newController);
     }
 
+    /**
+     * Toggles game over button visibility. 
+     * Calls {@link com.snake.Views.GUIView#toggleGameOverButtonVisibility() toggleGameOverButtonVisibility}
+     * in {@link com.snake.Views.GUIView GUIView}.
+     * 
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleHideButtonPressed(ActionEvent action) {
         view.toggleGameOverButtonVisibility();
     }

@@ -7,8 +7,8 @@ public class Settings
     public static int windowHeight = 480;
     public static int windowWidth = 640;
 
-    public static int rowCount = 20;
-    public static int columnCount = 20;
+    public static int rowCount = 30;
+    public static int columnCount = 30;
 
     public static void setGameSettings(GameSettings settings)
     {
