@@ -31,7 +31,6 @@ public abstract class ButtonOverlayView extends StackPane
         for (Button button : buttons)
         {
             button.setFont(new Font(20));
-            button.setPrefSize(300.0, 80.0);
         }
     }
 
