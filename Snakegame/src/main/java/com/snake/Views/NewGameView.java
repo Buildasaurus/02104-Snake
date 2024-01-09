@@ -53,7 +53,7 @@ public class NewGameView extends GridPane
 
 
         // player count setting
-        /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
+        ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
         {
             playerCountDropDown.getItems().add(i);
@@ -66,9 +66,9 @@ public class NewGameView extends GridPane
             System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
             System.out.println(controller
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
-        });*/
+        });
 
-        CustomHBox playerselection = new CustomHBox();
+        /*CustomHBox playerselection = new CustomHBox();
 
         SelectionButton singlePlayer = new SelectionButton("1");
         SelectionButton twoPlayer = new SelectionButton("2");
@@ -97,11 +97,11 @@ public class NewGameView extends GridPane
         getChildren().add(vbox);
 
         vbox.getChildren().addAll(playerselection, gamemode, maptype);
-        
+        */
 
 
         // gamemode setting
-        /* ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
+         ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
         {
             gameModeDropDown.getItems().add(gameMode);
@@ -124,7 +124,7 @@ public class NewGameView extends GridPane
         levelModeDropDown.getSelectionModel().select(controller.getLevel());
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
-        }); */
+        }); 
 
 
 
