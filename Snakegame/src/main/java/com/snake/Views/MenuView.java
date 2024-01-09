@@ -1,6 +1,6 @@
 package com.snake.Views;
 
-import com.snake.ButtonStyling;
+import com.snake.OurButton;
 import com.snake.Controllers.MenuController;
 import com.snake.Model.Resources;
 import javafx.geometry.Insets;
@@ -40,26 +40,19 @@ public class MenuView extends StackPane
         //background image scaling
 
         //buttons
-        Button playButton = new Button();
-        Button exitButton = new Button();
+        OurButton playButton = new OurButton("play");
+        OurButton quitButton = new OurButton("quit");
+
 
         playButton.setOnAction(controller::handlePlayButtonPressed);
-        exitButton.setOnAction(controller::handleExitButtonPressed);
-
-
-        ButtonStyling.transparentbackground(playButton);
-        ButtonStyling.transparentbackground(exitButton);
-
-
-        ButtonStyling.setImage("playbutton",playButton);
-        ButtonStyling.setImage("quitbutton",exitButton);
+        quitButton.setOnAction(controller::handleExitButtonPressed);
 
         playButton.setTranslateY(50);
         getChildren().add(playButton);
 
-        exitButton.setTranslateX(270);
-        exitButton.setTranslateY(205);
-        getChildren().add(exitButton);
+        quitButton.setTranslateX(270);
+        quitButton.setTranslateY(205);
+        getChildren().add(quitButton);
     }
 
 }

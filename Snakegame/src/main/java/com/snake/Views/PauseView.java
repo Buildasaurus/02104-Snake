@@ -1,5 +1,6 @@
 package com.snake.Views;
 
+import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
 
 import javafx.application.Platform;
@@ -17,12 +18,16 @@ public class PauseView extends ButtonOverlayView {
     public void initialize(GUIController controller) {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
         
-        Button resumeButton = new Button("Resume");
+        OurButton resumeButton = new OurButton("Resume");
         buttons[0] = resumeButton;
-        Button saveButton = new Button("Save");
+
+        OurButton saveButton = new OurButton("Save");
         buttons[1] = saveButton;
-        Button backButton = new Button("Back to Main Menu");
+
+        OurButton backButton = new OurButton("Back to\nMain Menu");
+        //backButton.setStyle("-fx-text-align: center");
         buttons[2] = backButton;
+
 
         resumeButton.setOnAction(controller::handleResumeButtonPressed);
         saveButton.setOnAction(controller::handleSaveButtonPressed);

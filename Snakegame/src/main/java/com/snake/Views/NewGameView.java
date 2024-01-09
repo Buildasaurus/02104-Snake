@@ -2,12 +2,13 @@ package com.snake.Views;
 
 import java.net.URL;
 
-import com.snake.ButtonStyling;
+import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -20,7 +21,9 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 public class NewGameView extends GridPane
 {
@@ -35,16 +38,14 @@ public class NewGameView extends GridPane
     private void initialize(int[] playerCounts)
     {
 
-        URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
-        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-        Background background = new Background(backgroundImg);
-        setBackground(background);
+        URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
+        setStyle("-fx-background-image: url('" + url.toExternalForm() + "')");
+
         //background image scaling
 
         for (int i = 0; i < 3; i++)
         {
-            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth / 3);
+            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth /  3);
             RowConstraints row = new RowConstraints(Settings.windowHeight / 3);
             getColumnConstraints().add(column);
             getRowConstraints().add(row);
@@ -52,7 +53,7 @@ public class NewGameView extends GridPane
 
 
         // player count setting
-        ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
+        /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
         {
             playerCountDropDown.getItems().add(i);
@@ -65,11 +66,42 @@ public class NewGameView extends GridPane
             System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
             System.out.println(controller
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
-        });
+        });*/
+
+        CustomHBox playerselection = new CustomHBox();
+
+        SelectionButton singlePlayer = new SelectionButton("1");
+        SelectionButton twoPlayer = new SelectionButton("2");
+        SelectionButton threePlayer = new SelectionButton("3");
+        
+        playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
+
+        CustomHBox gamemode = new CustomHBox();
+
+        SelectionButton easy = new SelectionButton("Easy");
+        SelectionButton normal = new SelectionButton("Normal");
+        SelectionButton hard = new SelectionButton("Hard");
+        SelectionButton insane = new SelectionButton("Insane");
+
+        gamemode.getChildren().addAll(easy, normal, hard, insane);
+
+        CustomHBox maptype = new CustomHBox();
+
+        SelectionButton emtpy = new SelectionButton("Emtpy");
+        SelectionButton rand = new SelectionButton("Randome");
+
+        maptype.getChildren().addAll(emtpy, rand);
+
+        VBox vbox = new VBox(30);
+
+        getChildren().add(vbox);
+
+        vbox.getChildren().addAll(playerselection, gamemode, maptype);
+        
 
 
         // gamemode setting
-        ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
+        /* ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
         {
             gameModeDropDown.getItems().add(gameMode);
@@ -92,16 +124,17 @@ public class NewGameView extends GridPane
         levelModeDropDown.getSelectionModel().select(controller.getLevel());
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
-        });
+        }); */
 
 
 
         // Start game
-        Button startGame = new Button("Start game");
+        OurButton startGame = new OurButton("Start game");
         add(startGame, 1, 1);
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
-        ButtonStyling.transparentbackground(startGame);
+        startGame.setTranslateY(50);
+        //getChildren().add(startGame);
 
         // Center align
         for (Node node : getChildren())
