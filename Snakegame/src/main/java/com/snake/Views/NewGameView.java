@@ -8,6 +8,10 @@ import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
+<<<<<<< Updated upstream
+=======
+import javafx.geometry.Insets;
+>>>>>>> Stashed changes
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -51,7 +55,9 @@ public class NewGameView extends GridPane
             getRowConstraints().add(row);
         }
 
+        //playerselection hbox
 
+<<<<<<< Updated upstream
         // player count setting
         /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
@@ -83,11 +89,21 @@ public class NewGameView extends GridPane
         threePlayer.setOnAction(controller::handlethreePlayerButtonPressed);
         
         playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
+=======
+        CustomHBox playerselection = new CustomHBox();
+
+        for (int i : playerCounts){
+            SelectionButton button = new SelectionButton(Integer.toString(i));
+            button.setOnAction(controller::handlePlayerCounts);
+            playerselection.getChildren().add(button);
+        }
+>>>>>>> Stashed changes
 
         //gamemode hbox
 
         CustomHBox gamemode = new CustomHBox();
 
+<<<<<<< Updated upstream
         SelectionButton easy = new SelectionButton("Easy");
         SelectionButton normal = new SelectionButton("Normal");
         SelectionButton hard = new SelectionButton("Hard");
@@ -123,27 +139,41 @@ public class NewGameView extends GridPane
         for (GameMode gameMode : GameMode.values())
         {
             gameModeDropDown.getItems().add(gameMode);
+=======
+        for (GameMode mode : GameMode.values()){
+            SelectionButton button = new SelectionButton(mode.toString());
+            button.setOnAction(controller::handlegameMode);
+            gamemode.getChildren().add(button);
+>>>>>>> Stashed changes
         }
-        add(gameModeDropDown, 1, 0);
-        gameModeDropDown.getSelectionModel().select(controller.getGameMode()); // inital chosen item
-        // listen for changes
-        gameModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
-            System.out.println(gameModeDropDown.getSelectionModel().getSelectedItem());
-            controller.setGameMode(gameModeDropDown.getSelectionModel().getSelectedItem());
-        });
 
-        // Level setting
-        ComboBox<Level> levelModeDropDown = new ComboBox<Level>();
-        for (Level level : Level.values())
-        {
-            levelModeDropDown.getItems().add(level);
+        //maptype hbox
+
+        CustomHBox maptype = new CustomHBox();
+
+        for (Level level : Level.values()){
+            SelectionButton button = new SelectionButton(level.toString());
+            button.setOnAction(controller::handlelevel);
+            maptype.getChildren().add(button);
         }
+<<<<<<< Updated upstream
         add(levelModeDropDown, 2, 0);
         levelModeDropDown.getSelectionModel().select(controller.getLevel());
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
         }); 
         */
+=======
+
+        VBox vbox = new VBox(10);
+
+        setMargin(vbox,new Insets(500,100,100,0));
+
+        vbox.getChildren().addAll(playerselection,gamemode,maptype);
+
+        getChildren().add(vbox);
+
+>>>>>>> Stashed changes
 
 
         // Start game

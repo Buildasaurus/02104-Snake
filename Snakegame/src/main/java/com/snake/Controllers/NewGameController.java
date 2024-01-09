@@ -10,6 +10,7 @@ import com.snake.Views.GameView;
 import com.snake.Views.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 
 public class NewGameController implements IController
 {
@@ -70,6 +71,7 @@ public class NewGameController implements IController
         App.setRoot(newController);
     }
 
+<<<<<<< Updated upstream
     public void handlesinglePlayerButtonPressed(ActionEvent action){
         gameSettings.setPlayerCount(1);
     }
@@ -106,4 +108,20 @@ public class NewGameController implements IController
         gameSettings.setLevel(Level.Random);
     }
 
+=======
+    public void handlePlayerCounts(ActionEvent action){
+        Button actionOrigin = (Button) action.getSource();
+        gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
+    }
+
+    public void handlegameMode(ActionEvent action){
+        Button actionorigin = (Button) action.getSource();
+        gameSettings.setGameMode(GameMode.valueOf(actionorigin.getText()));
+    }
+
+    public void handlelevel(ActionEvent action){
+        Button actionorigin = (Button) action.getSource();
+        gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
+    }
+>>>>>>> Stashed changes
 }
