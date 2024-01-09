@@ -70,45 +70,6 @@ public class NewGameController implements IController
         GUIController newController = new GUIController();
         App.setRoot(newController);
     }
-
-<<<<<<< Updated upstream
-    public void handlesinglePlayerButtonPressed(ActionEvent action){
-        gameSettings.setPlayerCount(1);
-    }
-
-    public void handletwoPlayerButtonPressed(ActionEvent action){
-        gameSettings.setPlayerCount(2);
-    }
-
-    public void handlethreePlayerButtonPressed(ActionEvent action){
-        gameSettings.setPlayerCount(3);
-    }
-
-    public void handleeasyButtonPressed(ActionEvent action){
-        gameSettings.setGameMode(GameMode.Easy);
-    }
-
-    public void handlenormalButtonPressed(ActionEvent action){
-        gameSettings.setGameMode(GameMode.Normal);
-    }
-
-    public void handlehardButtonPressed(ActionEvent action){
-        gameSettings.setGameMode(GameMode.Hard);
-    }
-
-    public void handleinsaneButtonPressed(ActionEvent action){
-        gameSettings.setGameMode(GameMode.Insane);
-    }
-
-    public void handleemptyButtonPressed(ActionEvent action){
-        gameSettings.setLevel(Level.Empty);
-    }
-
-    public void handlerandomButtonPressed(ActionEvent action){
-        gameSettings.setLevel(Level.Random);
-    }
-
-=======
     public void handlePlayerCounts(ActionEvent action){
         Button actionOrigin = (Button) action.getSource();
         gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
@@ -123,5 +84,4 @@ public class NewGameController implements IController
         Button actionorigin = (Button) action.getSource();
         gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
     }
->>>>>>> Stashed changes
 }
