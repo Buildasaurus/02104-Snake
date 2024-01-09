@@ -8,6 +8,7 @@ public class SelectionButton extends Button {
     public SelectionButton(String buttonName){
         super(buttonName);
         setPrefSize(100.0,100.0);
+
     }
     
 }

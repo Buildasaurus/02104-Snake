@@ -67,11 +67,40 @@ public class NewGameView extends GridPane
         });*/
 
         HBox playerselection = new HBox(5);
+
+        SelectionButton singlePlayer = new SelectionButton("1");
+        SelectionButton twoPlayer = new SelectionButton("2");
+        SelectionButton threePlayer = new SelectionButton("3");
+        
+        playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
+
+        getChildren().add(playerselection);
+
+        HBox gamemode = new HBox(5);
+
+        SelectionButton easy = new SelectionButton("Easy");
+        SelectionButton normal = new SelectionButton("Normal");
+        SelectionButton hard = new SelectionButton("Hard");
+        SelectionButton insane = new SelectionButton("Insane");
+
+        gamemode.getChildren().addAll(easy, normal, hard, insane);
+
+        getChildren().add(gamemode);
+
+        HBox maptype = new HBox(5);
+
+        SelectionButton emtpy = new SelectionButton("Emtpy");
+        SelectionButton rand = new SelectionButton("Randome");
+
+        maptype.getChildren().addAll(emtpy, rand);
+
+        getChildren().add(maptype);
+
         
 
 
         // gamemode setting
-        ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
+        /* ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
         {
             gameModeDropDown.getItems().add(gameMode);
@@ -94,7 +123,7 @@ public class NewGameView extends GridPane
         levelModeDropDown.getSelectionModel().select(controller.getLevel());
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
-        });
+        }); */
 
 
 
