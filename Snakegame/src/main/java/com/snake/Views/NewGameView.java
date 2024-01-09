@@ -35,11 +35,13 @@ public class NewGameView extends GridPane
     private void initialize(int[] playerCounts)
     {
 
-        URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
-        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
+        /* BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background background = new Background(backgroundImg);
-        setBackground(background);
+        setBackground(background); */
+        setStyle("-fx-background-image: url('" + url.toExternalForm() + "')");
+
         //background image scaling
 
         for (int i = 0; i < 3; i++)
