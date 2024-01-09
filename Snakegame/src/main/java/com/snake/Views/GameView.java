@@ -1,12 +1,10 @@
 package com.snake.Views;
 
 import com.snake.Settings;
-import com.snake.Model.LevelGenerator;
 import com.snake.Model.Tile;
 import com.snake.Model.Wall;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -15,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class GameView extends GridPane
 {
@@ -23,6 +20,7 @@ public class GameView extends GridPane
     int columnCount;
     int height;
     int width;
+    int extraVisionDepth = 2;
 
     /**
      * Initialises the board with a height and width.
@@ -36,9 +34,10 @@ public class GameView extends GridPane
     {
         this.height = height;
         this.width = width;
-        this.rowCount = Settings.rowCount + 2; // +2 because this is for when "extravision" is
-                                               // turned on
-        this.columnCount = Settings.columnCount + 2;
+        this.rowCount = Settings.rowCount + extraVisionDepth * 2; // +2 because this is for when
+                                                                  // "extravision" is
+        // turned on
+        this.columnCount = Settings.columnCount + extraVisionDepth * 2;
         initialize();
     }
 
@@ -109,22 +108,28 @@ public class GameView extends GridPane
             for (Node node : panes)
             {
                 Pane pane = (Pane) node;
-                int row = GridPane.getRowIndex(pane) - 1;
-                int column = GridPane.getColumnIndex(pane) - 1;
+                int row = GridPane.getRowIndex(pane) - extraVisionDepth;
+                int column = GridPane.getColumnIndex(pane) - extraVisionDepth;
 
 
                 // if is on edge, set visible to whether extravision is true. Also these squares are
                 // special
-                if (row == -1 || row == rowCount - 2 || column == -1 || column == columnCount - 2)
+                if (row < 0 || row > rowCount - 1 - extraVisionDepth * 2 || column < 0
+                        || column > columnCount - 1 - extraVisionDepth * 2)
                 {
+                    column = column < 0 ? columnCount - extraVisionDepth * 2 + column : column;
+                    column = column > columnCount - 1 - extraVisionDepth * 2
+                            ? column - (columnCount - extraVisionDepth * 2)
+                            : column;
 
-                    column = column == -1 ? columnCount - 3 : column;
-                    column = column == columnCount - 2 ? 0 : column;
-
-                    row = row == -1 ? rowCount - 3 : row;
-                    row = row == rowCount - 2 ? 0 : row;
+                    row = row < 0 ? rowCount - extraVisionDepth * 2 + row : row;
+                    row = row > rowCount - 1 - extraVisionDepth * 2
+                            ? row - (rowCount - extraVisionDepth * 2)
+                            : row;
+                    pane.setVisible(extraVision);
+                    pane.setOpacity(0.6);
                 }
-                Tile tile = board[rowCount - 3 - row][column];
+                Tile tile = board[rowCount - 1 - extraVisionDepth * 2 - row][column];
 
                 if (tile instanceof Wall && !firstUdpdate)
                 {
@@ -132,8 +137,9 @@ public class GameView extends GridPane
                     continue;
                 }
                 pane.getChildren().clear();
-                //Label text = new Label(getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
-                //pane.getChildren().add(text);
+                // Label text = new Label(getColumnIndex(pane) + " " + getRowIndex(pane) + " : " +
+                // column + " " + row);
+                // pane.getChildren().add(text);
                 if (tile != null)
                 {
                     ImageView imageView = tile.getImage();
