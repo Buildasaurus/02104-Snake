@@ -36,10 +36,6 @@ public class NewGameView extends GridPane
     {
 
         URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
-        /* BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-        Background background = new Background(backgroundImg);
-        setBackground(background); */
         setStyle("-fx-background-image: url('" + url.toExternalForm() + "')");
 
         //background image scaling
