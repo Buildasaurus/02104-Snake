@@ -69,7 +69,7 @@ public class LevelGenerator
      */
     private static boolean[][] generateMap(double fillValue)
     {
-        boolean[][] randomMap = new boolean[width][height];
+        boolean[][] randomMap = new boolean[height][width];
         // Seed 1544738215 generates two rooms.
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();

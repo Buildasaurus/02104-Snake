@@ -6,9 +6,11 @@ public class GameSettings
     private GameMode gameMode;
     private Level level;
     private int playerCount;
+    private boolean extraVision;
 
     public GameSettings()
     {
+        extraVision = true;
         playerCount = 1;
         gameMode = GameMode.Normal;
         level = Level.Empty;
@@ -142,5 +144,9 @@ public class GameSettings
                     return 0;
             }
         }
+    }
+    public boolean getExtraVision()
+    {
+        return extraVision;
     }
 }

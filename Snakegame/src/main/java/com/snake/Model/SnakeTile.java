@@ -24,31 +24,20 @@ public class SnakeTile extends Tile
 
     public ImageView getImage()
     {
-        if (sprite == null)
+        String directionName = getDirectionName(enterDirection, targetDirection);
+        if (tileType == TileType.Snaketail && directionName.contains("_"))
         {
-            try
-            {
-                String directionName = getDirectionName(enterDirection, targetDirection);
-                if (tileType == TileType.Snaketail && directionName.contains("_"))
-                {
-                    directionName = getDirectionName(targetDirection);
-                }
-                String imageName = tileType.toString().toLowerCase() + "_" + directionName;
-                sprite = new ImageView(Resources.getImageByName(imageName));
-                if (assignedPlayer == 1)
-                {
-                    sprite.setBlendMode(BlendMode.DIFFERENCE);
-                }
-                if (assignedPlayer == 2)
-                {
-                    sprite.setBlendMode(BlendMode.GREEN);
-                }
-            }
-            catch (Exception e)
-            {
-                System.out.println(e);
-                System.out.println("Image not found");
-            }
+            directionName = getDirectionName(targetDirection);
+        }
+        String imageName = tileType.toString().toLowerCase() + "_" + directionName;
+        ImageView sprite = new ImageView(Resources.getImageByName(imageName));
+        if (assignedPlayer == 1)
+        {
+            sprite.setBlendMode(BlendMode.DIFFERENCE);
+        }
+        if (assignedPlayer == 2)
+        {
+            sprite.setBlendMode(BlendMode.GREEN);
         }
         return sprite;
     }

@@ -1,7 +1,7 @@
 package com.snake.Controllers;
 
 import java.util.ArrayList;
-
+import java.util.Set;
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameState;
@@ -32,6 +32,8 @@ public class GUIController implements IController
 
     private int playerCount;
 
+
+
     /**
      * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game
      * logic via {@link GameController}. Main controller of the main view
@@ -42,22 +44,37 @@ public class GUIController implements IController
      */
     public GUIController()
     {
-        int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
-        int margin = 50; //should fit with the GUIView margins.
-        this.gameController = new GameController(dimension-margin, dimension-margin);
+        int margin = 50; // should fit with the GUIView margins.
+
+        int height = Settings.windowHeight - margin;
+        int width = Settings.windowWidth - margin;
+        int potentialBoxHeight = height / Settings.rowCount;
+        int potentialBoxWidth = width / Settings.columnCount;
+        int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
+        int gameHeight = boxDimension * Settings.rowCount;
+        int gameWidth = boxDimension * Settings.columnCount;
+        this.gameController = new GameController(gameHeight, gameWidth);
 
         initialize();
     }
 
     /**
      * Constructor used for loading a save state.
-     * 
+     *
      * @param gameState
      */
-    public GUIController(GameState gameState) {
-        int dimension = Math.min(Settings.windowHeight, Settings.windowWidth);
-        int margin = 50; //should fit with the GUIView margins.
-        this.gameController = new GameController(dimension-margin, dimension-margin, gameState);
+    public GUIController(GameState gameState)
+    {
+        int margin = 50; // should fit with the GUIView margins.
+
+        int height = Settings.windowHeight - margin;
+        int width = Settings.windowWidth - margin;
+        int potentialBoxHeight = height / Settings.rowCount;
+        int potentialBoxWidth = width / Settings.columnCount;
+        int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
+        int gameHeight = boxDimension * Settings.rowCount;
+        int gameWidth = boxDimension * Settings.columnCount;
+        this.gameController = new GameController(gameHeight, gameWidth, gameState);
 
         initialize();
     }
@@ -65,10 +82,12 @@ public class GUIController implements IController
     /**
      * Handles generic set-up not affected by different constructors.
      */
-    public void initialize() {
+    public void initialize()
+    {
         this.playerCount = Settings.getGameSettings().getPlayerCount();
         double[] speedArray = new double[playerCount];
-        for (int i = 0; i < playerCount; i++) {
+        for (int i = 0; i < playerCount; i++)
+        {
             speedArray[i] = gameController.getSpeed(i);
         }
         this.view = new GUIView(gameController.getView(), this.playerCount, speedArray);
@@ -99,21 +118,26 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                if (!isGameOver && !isPaused) {
-                    for (int i = 0; i < playerProgress.length; i++) {
+                if (!isGameOver && !isPaused)
+                {
+                    for (int i = 0; i < playerProgress.length; i++)
+                    {
                         playerProgress[i] += gameController.getSpeed(i);
-                        if (playerProgress[i] > 100) {
+                        if (playerProgress[i] > 100)
+                        {
                             updateList.add(i);
                             playerProgress[i] = 0;
                         }
                     }
-                    if (!updateList.isEmpty()) {
+                    if (!updateList.isEmpty())
+                    {
                         isGameOver = gameController.executeNextStep(updateList);
                         if (isGameOver)
                         {
                             setGameOverView();
                         }
-                        for (int i : updateList) {
+                        for (int i : updateList)
+                        {
                             view.updateCurrentScore(gameController.getCurrentScore(i), i);
                             view.updateCurrentSpeed(gameController.getSpeed(i), i);
                         }
@@ -236,25 +260,27 @@ public class GUIController implements IController
 
     /**
      * Stops the animation timer to kill thread activity and goes to the load menu.
-     * 
+     *
      * @param action generic button parameter, unused and null safe.
      */
     public void handleLoadGameButtonPressed(ActionEvent action)
     {
-        // WARNING: loadview and loadcontroller are still in progress, only basic framework is present with no functionality
+        // WARNING: loadview and loadcontroller are still in progress, only basic framework is
+        // present with no functionality
         gameTimer.stop();
         LoadController newController = new LoadController();
         App.setRoot(newController);
     }
 
     /**
-     * Toggles game over button visibility. 
-     * Calls {@link com.snake.Views.GUIView#toggleGameOverButtonVisibility() toggleGameOverButtonVisibility}
-     * in {@link com.snake.Views.GUIView GUIView}.
-     * 
+     * Toggles game over button visibility. Calls
+     * {@link com.snake.Views.GUIView#toggleGameOverButtonVisibility()
+     * toggleGameOverButtonVisibility} in {@link com.snake.Views.GUIView GUIView}.
+     *
      * @param action generic button parameter, unused and null safe.
      */
-    public void handleHideButtonPressed(ActionEvent action) {
+    public void handleHideButtonPressed(ActionEvent action)
+    {
         view.toggleGameOverButtonVisibility();
     }
 
