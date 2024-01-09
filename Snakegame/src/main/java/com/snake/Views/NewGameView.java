@@ -53,7 +53,7 @@ public class NewGameView extends GridPane
 
 
         // player count setting
-        ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
+        /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
         {
             playerCountDropDown.getItems().add(i);
@@ -66,15 +66,25 @@ public class NewGameView extends GridPane
             System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
             System.out.println(controller
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
-        });
+        })*/
 
-        /*CustomHBox playerselection = new CustomHBox();
+        //playerselection hbox
+
+        CustomHBox playerselection = new CustomHBox();
 
         SelectionButton singlePlayer = new SelectionButton("1");
         SelectionButton twoPlayer = new SelectionButton("2");
         SelectionButton threePlayer = new SelectionButton("3");
+
+        //set button actions
+
+        singlePlayer.setOnAction(controller::handlesinglePlayerButtonPressed);
+        twoPlayer.setOnAction(controller::handletwoPlayerButtonPressed);
+        threePlayer.setOnAction(controller::handlethreePlayerButtonPressed);
         
         playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
+
+        //gamemode hbox
 
         CustomHBox gamemode = new CustomHBox();
 
@@ -83,23 +93,31 @@ public class NewGameView extends GridPane
         SelectionButton hard = new SelectionButton("Hard");
         SelectionButton insane = new SelectionButton("Insane");
 
+        easy.setOnAction(controller::handleeasyButtonPressed);
+        normal.setOnAction(controller::handlenormalButtonPressed);
+        hard.setOnAction(controller::handlehardButtonPressed);
+        insane.setOnAction(controller::handleinsaneButtonPressed);
+
         gamemode.getChildren().addAll(easy, normal, hard, insane);
 
         CustomHBox maptype = new CustomHBox();
 
-        SelectionButton emtpy = new SelectionButton("Emtpy");
-        SelectionButton rand = new SelectionButton("Randome");
+        SelectionButton empty = new SelectionButton("Emptt");
+        SelectionButton random = new SelectionButton("Random");
 
-        maptype.getChildren().addAll(emtpy, rand);
+        empty.setOnAction(controller::handleemptyButtonPressed);
+        random.setOnAction(controller::handlerandomButtonPressed);
+
+        maptype.getChildren().addAll(empty,random);
 
         VBox vbox = new VBox(30);
 
         getChildren().add(vbox);
 
-        vbox.getChildren().addAll(playerselection, gamemode, maptype);
-        */
+        vbox.getChildren().addAll(playerselection,gamemode);
+        
 
-
+        /*
         // gamemode setting
          ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
@@ -125,7 +143,7 @@ public class NewGameView extends GridPane
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
         }); 
-
+        */
 
 
         // Start game
