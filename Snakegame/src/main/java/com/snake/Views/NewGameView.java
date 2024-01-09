@@ -8,6 +8,7 @@ import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -67,7 +68,7 @@ public class NewGameView extends GridPane
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
         });*/
 
-        HBox playerselection = new HBox(5);
+        CustomHBox playerselection = new CustomHBox();
 
         SelectionButton singlePlayer = new SelectionButton("1");
         SelectionButton twoPlayer = new SelectionButton("2");
@@ -75,7 +76,7 @@ public class NewGameView extends GridPane
         
         playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
 
-        HBox gamemode = new HBox(5);
+        CustomHBox gamemode = new CustomHBox();
 
         SelectionButton easy = new SelectionButton("Easy");
         SelectionButton normal = new SelectionButton("Normal");
@@ -84,7 +85,7 @@ public class NewGameView extends GridPane
 
         gamemode.getChildren().addAll(easy, normal, hard, insane);
 
-        HBox maptype = new HBox(15);
+        CustomHBox maptype = new CustomHBox();
 
         SelectionButton emtpy = new SelectionButton("Emtpy");
         SelectionButton rand = new SelectionButton("Randome");
