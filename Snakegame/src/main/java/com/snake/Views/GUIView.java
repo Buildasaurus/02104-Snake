@@ -1,5 +1,6 @@
 package com.snake.Views;
 
+import com.snake.Settings;
 import com.snake.Controllers.GUIController;
 
 import javafx.geometry.Insets;
@@ -27,7 +28,7 @@ public class GUIView extends StackPane {
         frameRateCounter = new Label("fps: 0.0");
         currentScores = new Label[playerCount];
         currentSpeeds = new Label[playerCount];
-        
+
         initialize(playerCount, speedArray);
     }
 
@@ -38,12 +39,14 @@ public class GUIView extends StackPane {
         gameView.setAlignment(Pos.TOP_CENTER);
 
         HBox topBox = new HBox();
-        topBox.setSpacing(50.0);
-        topBox.setPrefHeight(50.0);
+        int heightOfHBOX = Settings.windowHeight - gameView.height;
+        topBox.setSpacing(heightOfHBOX);
+        topBox.setPrefHeight(heightOfHBOX);
         topBox.setAlignment(Pos.CENTER);
 
         VBox leftBox = new VBox();
-        leftBox.setSpacing(20.0);
+        int widthOfVBOX = Settings.windowWidth - gameView.width;
+        leftBox.setSpacing(widthOfVBOX);
         leftBox.setAlignment(Pos.CENTER);
 
         frameRateCounter.setFont(new Font(15.0));
