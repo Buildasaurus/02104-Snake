@@ -1,6 +1,7 @@
 package com.snake.Views;
 
 import com.snake.Settings;
+import com.snake.Model.LevelGenerator;
 import com.snake.Model.Tile;
 import com.snake.Model.Wall;
 import javafx.collections.ObservableList;
@@ -33,10 +34,12 @@ public class GameView extends GridPane
     {
         this.height = height;
         this.width = width;
-        this.rowCount = Settings.rowCount;
-        this.columnCount = Settings.columnCount;
+        this.rowCount = Settings.rowCount + 2; // +2 because this is for when "extravision" is
+                                               // turned on
+        this.columnCount = Settings.columnCount + 2;
         initialize();
     }
+
     boolean firstUdpdate = true;
 
     /**
@@ -93,6 +96,10 @@ public class GameView extends GridPane
 
     public void update(Tile[][] board)
     {
+
+        // This variable might change from frame to frame, so
+        boolean extraVision = Settings.getGameSettings().getExtraVision();
+        System.out.println("update");
         if (board != null)
         {
             ObservableList<Node> panes = this.getChildren();
@@ -100,9 +107,23 @@ public class GameView extends GridPane
             for (Node node : panes)
             {
                 Pane pane = (Pane) node;
-                int row = GridPane.getRowIndex(pane);
-                int column = GridPane.getColumnIndex(pane);
-                Tile tile = board[rowCount - 1 - row][column];
+                int row = GridPane.getRowIndex(pane) - 1;
+                int column = GridPane.getColumnIndex(pane) - 1;
+
+
+                // if is on edge, set visible to whether extravision is true. Also these squares are
+                // special
+                if (row == -1 || row == rowCount - 2 || column == -1 || column == columnCount - 2)
+                {
+
+                    column = column == -1 ? columnCount - 3 : column;
+                    column = column == columnCount - 2 ? 0 : column;
+
+                    row = row == -1 ? rowCount - 3 : row;
+                    row = row == rowCount - 2 ? 0 : row;
+                }
+                Tile tile = board[rowCount - 3 - row][column];
+
                 if (tile instanceof Wall && !firstUdpdate)
                 {
                     firstUdpdate = false;
@@ -112,26 +133,34 @@ public class GameView extends GridPane
 
                 if (tile != null)
                 {
-                    ImageView imageView = board[rowCount - 1 - row][column].getImage();
+
+                    ImageView imageView = tile.getImage();
                     imageView.setFitWidth(height / rowCount);
                     imageView.setPreserveRatio(true);
+
                     pane.getChildren().add(imageView);
+                    if (row == 5 && column == 0)
+                    {
+                        System.out.println("0, 10");
+                        System.out.println(GridPane.getColumnIndex(pane));
+                        System.out.println(GridPane.getRowIndex(pane));
+                        System.out.println("tile changed");
+                        System.out.println(imageView);
+                        System.out.println(pane.getChildren());
+                        ObservableList<Node> children = pane.getChildren();
+                        for (Node child : children)
+                        {
+                            System.out.println(child);
+                        }
+                    }
+
                 }
             }
-
-            /*
-             * for (int row = 0; row < rowCount; row++) { for (int column = 0; column < columnCount;
-             * column++) { // Text text = new Text(x + " " + y); // this.add(text, x, 7 - y); if
-             * (board[row][column] != null) { ImageView imageView = board[row][column].getImage();
-             * imageView.setFitWidth(height / rowCount); imageView.setPreserveRatio(true);
-             * this.add(imageView, column, rowCount - row); } } }
-             */
         }
         else
         {
             System.out.println("board isnull");
 
         }
-
     }
 }

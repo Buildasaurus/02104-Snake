@@ -48,7 +48,6 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int min = Math.min(height, width);
         int potentialBoxHeight = height / Settings.rowCount;
         int potentialBoxWidth = width / Settings.columnCount;
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
@@ -70,7 +69,6 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int min = Math.min(height, width);
         int potentialBoxHeight = height / Settings.rowCount;
         int potentialBoxWidth = width / Settings.columnCount;
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
