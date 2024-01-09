@@ -4,8 +4,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
 import com.snake.Model.Save;
+import com.snake.Model.Tile;
 
 public class SaveHandler {
     private static Save[] saves = new Save[3];
@@ -68,7 +70,9 @@ public class SaveHandler {
     }
 
     private static void readSavesToLocal() throws Exception {
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(Tile.class, new TileInstanceCreator());
+        Gson gson = gsonBuilder.create();
 
         for (int i = 1; i <= 3; i++) {
             String path = "Save" + i + ".txt";
@@ -77,7 +81,11 @@ public class SaveHandler {
             Save[] tempArray = new Save[1];
             tempArray = gson.fromJson(reader, Save[].class);
 
-            saves[i - 1] = tempArray[0];
+            if (tempArray != null) {
+                saves[i - 1] = tempArray[0];
+            } else {
+                saves[i - 1] = null;
+            }
         }
     }
 }
