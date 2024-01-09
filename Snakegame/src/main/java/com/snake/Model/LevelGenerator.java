@@ -66,8 +66,11 @@ public class LevelGenerator
     private static boolean[][] generateMap(double fillValue)
     {
         boolean[][] randomMap = new boolean[width][height];
-        //Seed 6 generates two rooms.
-        Random rand = new Random();
+        //Seed 1544738215 generates two rooms.
+        Random randseedGenerator = new Random();
+        //int seed = randseedGenerator.nextInt();
+        //System.out.println("seed used is " + seed);
+        Random rand = new Random(1544738215);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -295,7 +298,7 @@ public class LevelGenerator
             for (int column = 0; column < width; column++)
             {
                 Vector point = new Vector(column, row);
-                if (minimumDistance(tileB, tileA, point) < 2)
+                if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA), new DoubleVector(point)) < 2)
                 {
                     System.out.println("creating passage at " + point);
                     map[row][column] = false;
@@ -304,7 +307,7 @@ public class LevelGenerator
         }
     }
 
-    public static double minimumDistance(Vector v, Vector w, Vector p)
+    public static double minimumDistance(DoubleVector v, DoubleVector w, DoubleVector p)
     {
         double l2 = v.distance(w);
         l2 *= l2;
@@ -312,10 +315,10 @@ public class LevelGenerator
         if (l2 == 0.0)
             return p.distance(v);
 
-        int t = (int) Math.round(((p.subtract(v)).dotProduct(w.subtract(v))) / l2);
+        double t = ((p.subtract(v)).dotProduct(w.subtract(v))) / l2;
         t = Math.max(0, Math.min(1, t));
 
-        Vector projection = v.add((w.subtract(v)).multiply(t));
+        DoubleVector projection = v.add((w.subtract(v)).multiply(t));
 
         return p.distance(projection);
     }
