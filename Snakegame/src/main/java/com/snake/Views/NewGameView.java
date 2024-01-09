@@ -22,6 +22,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 public class NewGameView extends GridPane
 {
@@ -74,8 +75,6 @@ public class NewGameView extends GridPane
         
         playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
 
-        getChildren().add(playerselection);
-
         HBox gamemode = new HBox(5);
 
         SelectionButton easy = new SelectionButton("Easy");
@@ -85,17 +84,18 @@ public class NewGameView extends GridPane
 
         gamemode.getChildren().addAll(easy, normal, hard, insane);
 
-        getChildren().add(gamemode);
-
-        HBox maptype = new HBox(5);
+        HBox maptype = new HBox(15);
 
         SelectionButton emtpy = new SelectionButton("Emtpy");
         SelectionButton rand = new SelectionButton("Randome");
 
         maptype.getChildren().addAll(emtpy, rand);
 
-        getChildren().add(maptype);
+        VBox vbox = new VBox(30);
 
+        getChildren().add(vbox);
+
+        vbox.getChildren().addAll(playerselection, gamemode, maptype);
         
 
 
