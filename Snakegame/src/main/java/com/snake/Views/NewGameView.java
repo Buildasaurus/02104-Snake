@@ -5,9 +5,12 @@ import java.net.URL;
 import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
+import com.snake.Model.GameSettings.GameMode;
+import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -29,11 +32,11 @@ public class NewGameView extends GridPane
         URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
         setStyle("-fx-background-image: url('" + url.toExternalForm() + "')");
 
-        //background image scaling
+        // background image scaling
 
         for (int i = 0; i < 3; i++)
         {
-            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth /  3);
+            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth / 3);
             RowConstraints row = new RowConstraints(Settings.windowHeight / 3);
             getColumnConstraints().add(column);
             getRowConstraints().add(row);
@@ -41,7 +44,7 @@ public class NewGameView extends GridPane
 
 
         // player count setting
-        /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
+        ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
         {
             playerCountDropDown.getItems().add(i);
@@ -54,42 +57,41 @@ public class NewGameView extends GridPane
             System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
             System.out.println(controller
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
-        });*/
+        });
 
-        CustomHBox playerselection = new CustomHBox();
-
-        SelectionButton singlePlayer = new SelectionButton("1");
-        SelectionButton twoPlayer = new SelectionButton("2");
-        SelectionButton threePlayer = new SelectionButton("3");
-
-        playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
-
-        CustomHBox gamemode = new CustomHBox();
-
-        SelectionButton easy = new SelectionButton("Easy");
-        SelectionButton normal = new SelectionButton("Normal");
-        SelectionButton hard = new SelectionButton("Hard");
-        SelectionButton insane = new SelectionButton("Insane");
-
-        gamemode.getChildren().addAll(easy, normal, hard, insane);
-
-        CustomHBox maptype = new CustomHBox();
-
-        SelectionButton emtpy = new SelectionButton("Emtpy");
-        SelectionButton rand = new SelectionButton("Randome");
-
-        maptype.getChildren().addAll(emtpy, rand);
-
-        VBox vbox = new VBox(30);
-
-        getChildren().add(vbox);
-
-        vbox.getChildren().addAll(playerselection, gamemode, maptype);
-
+        /*
+         * CustomHBox playerselection = new CustomHBox();
+         *
+         * SelectionButton singlePlayer = new SelectionButton("1"); SelectionButton twoPlayer = new
+         * SelectionButton("2"); SelectionButton threePlayer = new SelectionButton("3");
+         *
+         * playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
+         *
+         * CustomHBox gamemode = new CustomHBox();
+         *
+         * SelectionButton easy = new SelectionButton("Easy"); SelectionButton normal = new
+         * SelectionButton("Normal"); SelectionButton hard = new SelectionButton("Hard");
+         * SelectionButton insane = new SelectionButton("Insane");
+         *
+         * gamemode.getChildren().addAll(easy, normal, hard, insane);
+         *
+         * CustomHBox maptype = new CustomHBox();
+         *
+         * SelectionButton emtpy = new SelectionButton("Emtpy"); SelectionButton rand = new
+         * SelectionButton("Randome");
+         *
+         * maptype.getChildren().addAll(emtpy, rand);
+         *
+         * VBox vbox = new VBox(30);
+         *
+         * getChildren().add(vbox);
+         *
+         * vbox.getChildren().addAll(playerselection, gamemode, maptype);
+         */
 
 
         // gamemode setting
-        /* ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
+        ComboBox<GameMode> gameModeDropDown = new ComboBox<GameMode>();
         for (GameMode gameMode : GameMode.values())
         {
             gameModeDropDown.getItems().add(gameMode);
@@ -112,7 +114,7 @@ public class NewGameView extends GridPane
         levelModeDropDown.getSelectionModel().select(controller.getLevel());
         levelModeDropDown.getSelectionModel().selectedItemProperty().addListener((s) -> {
             controller.setLevel(levelModeDropDown.getSelectionModel().getSelectedItem());
-        }); */
+        });
 
 
 
@@ -122,7 +124,7 @@ public class NewGameView extends GridPane
         startGame.setOnAction(controller::handlePlayButtonPressed);
 
         startGame.setTranslateY(50);
-        //getChildren().add(startGame);
+        // getChildren().add(startGame);
 
         // Center align
         for (Node node : getChildren())
@@ -132,4 +134,4 @@ public class NewGameView extends GridPane
         }
     }
 
-    }
+}
