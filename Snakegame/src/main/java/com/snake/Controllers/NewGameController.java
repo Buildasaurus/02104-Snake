@@ -10,6 +10,7 @@ import com.snake.Views.GameView;
 import com.snake.Views.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 
 public class NewGameController implements IController
 {
@@ -68,5 +69,19 @@ public class NewGameController implements IController
         Settings.setGameSettings(gameSettings);
         GUIController newController = new GUIController();
         App.setRoot(newController);
+    }
+    public void handlePlayerCounts(ActionEvent action){
+        Button actionOrigin = (Button) action.getSource();
+        gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
+    }
+
+    public void handlegameMode(ActionEvent action){
+        Button actionorigin = (Button) action.getSource();
+        gameSettings.setGameMode(GameMode.valueOf(actionorigin.getText()));
+    }
+
+    public void handlelevel(ActionEvent action){
+        Button actionorigin = (Button) action.getSource();
+        gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
     }
 }
