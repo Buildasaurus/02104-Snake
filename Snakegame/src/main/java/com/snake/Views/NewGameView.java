@@ -20,6 +20,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 
 public class NewGameView extends GridPane
@@ -42,7 +43,7 @@ public class NewGameView extends GridPane
 
         for (int i = 0; i < 3; i++)
         {
-            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth / 3);
+            ColumnConstraints column = new ColumnConstraints(Settings.windowWidth /  3);
             RowConstraints row = new RowConstraints(Settings.windowHeight / 3);
             getColumnConstraints().add(column);
             getRowConstraints().add(row);
@@ -50,7 +51,7 @@ public class NewGameView extends GridPane
 
 
         // player count setting
-        ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
+        /*ComboBox<Integer> playerCountDropDown = new ComboBox<Integer>();
         for (int i : playerCounts)
         {
             playerCountDropDown.getItems().add(i);
@@ -63,7 +64,10 @@ public class NewGameView extends GridPane
             System.out.println(playerCountDropDown.getSelectionModel().getSelectedItem());
             System.out.println(controller
                     .setPlayerCount(playerCountDropDown.getSelectionModel().getSelectedItem()));
-        });
+        });*/
+
+        HBox playerselection = new HBox(5);
+        
 
 
         // gamemode setting
