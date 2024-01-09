@@ -5,7 +5,7 @@ import javafx.scene.image.ImageView;
 public abstract class Tile
 {
     protected TileType tileType;
-    protected ImageView sprite;
+    protected transient ImageView sprite;
 
     public Tile(TileType type)
     {

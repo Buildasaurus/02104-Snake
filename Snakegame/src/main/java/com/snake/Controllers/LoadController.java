@@ -1,6 +1,9 @@
 package com.snake.Controllers;
 
-import com.google.gson.Gson;
+import com.snake.App;
+import com.snake.Settings;
+import com.snake.Model.Save;
+import com.snake.Utils.SaveHandler;
 import com.snake.Views.LoadView;
 
 import javafx.event.ActionEvent;
@@ -22,16 +25,29 @@ public class LoadController implements IController {
     }
 
     public void handleKeyPressed(KeyEvent key) {
-
+        switch (key.getCode()) {
+            case ESCAPE:
+                handleBackButtonPressed(null);
+                break;
+        
+            default:
+                break;
+        }
     }
 
     public void handleLoadSaveButtonPressed(ActionEvent action) {
         Button actionOrigin = (Button) action.getSource();
         String saveName = actionOrigin.getText();
 
-        //TODO JSON stuff here
-
-        Gson gson = new Gson();
+        Save save = SaveHandler.readSave(saveName);
         
+        Settings.setGameSettings(save.getGameSettings());
+        GUIController newController = new GUIController(save.getGameState());
+        App.setRoot(newController);
+    }
+
+    public void handleBackButtonPressed(ActionEvent action) {
+        MenuController newController = new MenuController();
+        App.setRoot(newController);
     }
 }

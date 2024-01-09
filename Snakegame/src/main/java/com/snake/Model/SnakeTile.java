@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 
 public class SnakeTile extends Tile
 {
-    TileType tileType;
     Vector enterDirection;
     Vector targetDirection;
     int assignedPlayer;

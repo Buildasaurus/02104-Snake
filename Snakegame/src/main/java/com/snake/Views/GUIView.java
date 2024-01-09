@@ -17,6 +17,7 @@ public class GUIView extends StackPane {
     private GameView gameView;
     private PauseView pauseView;
     private GameOverView gameOverView;
+    private SaveView saveView;
 
     private Label frameRateCounter;
     private Label[] currentScores;
@@ -108,5 +109,17 @@ public class GUIView extends StackPane {
 
     public void toggleGameOverButtonVisibility() {
         gameOverView.toggleGameOverButtonVisibility();
+    }
+
+    public void setSaveView(GUIController controller, String[] saveNames) {
+        removePauseView();
+        saveView = new SaveView(controller, saveNames);
+        getChildren().add(this.saveView);
+    }
+
+    public void removeSaveView(GUIController controller) {
+        getChildren().remove(saveView);
+        saveView = null;
+        setPauseView(controller);
     }
 }

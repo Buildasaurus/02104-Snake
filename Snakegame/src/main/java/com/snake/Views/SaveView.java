@@ -7,28 +7,38 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class SaveView extends ButtonOverlayView {
-    public SaveView(GUIController controller) {
+    public SaveView(GUIController controller, String[] saveNames) {
         buttons = new Button[4];
         focusElementIndex = 0;
 
-        initialize(controller);
+        initialize(controller, saveNames);
     }
 
-    public void initialize(GUIController controller) {
+    public void initialize(GUIController controller, String[] saveNames) {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
-        //TODO take String[] in constructor with save names and give them to the buttons
-
         for (int i = 0; i < 3; i++) {
-            Button saveButton = new Button("Save " + (i + 1));
+            Button saveButton = new Button();
             buttons[i] = saveButton;
             saveButton.setOnAction(controller::handleSaveButtonPressed);
         }
-        Button backButton = new Button("Back to Main Menu");
+        updateButtonNames(saveNames);
+
+        Button backButton = new Button("Back to Pause Menu");
         buttons[3] = backButton;
+        backButton.setOnAction(controller::handlePauseButtonPressed);
 
         setBasicFormatting();
 
         Platform.runLater(() -> this.requestFocus());
-    } 
+    }
+
+    public void updateButtonNames(String[] newNames) {
+        for (int i = 0; i < 3; i++) {
+            String buttonName = "" + (i + 1) + " ";
+            buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
+
+            buttons[i].setText(buttonName);
+        }
+    }
 }

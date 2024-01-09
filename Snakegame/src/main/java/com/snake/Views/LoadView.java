@@ -26,6 +26,7 @@ public class LoadView extends ButtonOverlayView {
         }
         Button backButton = new Button("Back to Main Menu");
         buttons[3] = backButton;
+        backButton.setOnAction(controller::handleBackButtonPressed);
 
         setBasicFormatting();
 

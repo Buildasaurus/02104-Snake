@@ -21,7 +21,7 @@ public class PauseView extends ButtonOverlayView {
         OurButton resumeButton = new OurButton("Resume");
         buttons[0] = resumeButton;
 
-        OurButton saveButton = new OurButton("Save");
+        OurButton saveButton = new OurButton("Save Menu");
         buttons[1] = saveButton;
 
         OurButton backButton = new OurButton("Back to\nMain Menu");
@@ -30,7 +30,7 @@ public class PauseView extends ButtonOverlayView {
 
 
         resumeButton.setOnAction(controller::handleResumeButtonPressed);
-        saveButton.setOnAction(controller::handleSaveButtonPressed);
+        saveButton.setOnAction(controller::handleSaveMenuButtonPressed);
         backButton.setOnAction(controller::handleBackButtonPressed);
 
         setBasicFormatting();

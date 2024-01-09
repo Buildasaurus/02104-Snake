@@ -224,4 +224,7 @@ public class GameModel
         return players.length;
     }
 
+    public GameState getGameState() {
+        return new GameState(board, players);
+    }
 }

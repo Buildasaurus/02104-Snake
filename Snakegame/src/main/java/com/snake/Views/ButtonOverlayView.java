@@ -38,8 +38,6 @@ public abstract class ButtonOverlayView extends StackPane
     {
         switch (key.getCode())
         {
-            case UP:
-            case LEFT:
             case W:
             case A:
                 focusElementIndex =
@@ -47,8 +45,6 @@ public abstract class ButtonOverlayView extends StackPane
                 buttons[focusElementIndex].requestFocus();
                 break;
 
-            case DOWN:
-            case RIGHT:
             case S:
             case D:
                 focusElementIndex =
