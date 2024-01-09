@@ -5,7 +5,8 @@ public class Vector
     int y;
     int x;
 
-    public Vector(){
+    public Vector()
+    {
         this.x = 0;
         this.y = 0;
     }
@@ -39,6 +40,11 @@ public class Vector
     public Vector subtract(int scalar)
     {
         return new Vector(x - scalar, y - scalar);
+    }
+
+    double dotProduct(Vector v)
+    {
+        return this.x * v.x + this.y * v.y;
     }
 
     public Vector subtract(int _x, int _y)
@@ -86,31 +92,33 @@ public class Vector
     }
 
     /**
-     * Returns the largest distance between two squares, on the x, and y coordinate
+     * Returns the positive distance between the tow vectors
      *
      * @param other the other point to compare distance to.
-     * @return the largest distance between two points
+     * @return the distance between two points
      */
-    public int distance(Vector other)
+    public double distance(Vector other)
     {
-        return Math.max(Math.abs(other.x - x), Math.abs(other.y - y));
+        return this.subtract(other).length();
     }
 
     public int crossProduct(Vector other)
     {
         return this.x * other.y - this.y * other.x;
     }
+
     private int correctModulo(int a, int b)
     {
-        int mod = a%b;
+        int mod = a % b;
         if (mod < 0)
         {
-            return mod+b;
+            return mod + b;
         }
         return mod;
     }
+
     public Vector modulo(int x, int y)
     {
-        return new Vector(correctModulo(this.x, x), correctModulo(this.y%y, y));
+        return new Vector(correctModulo(this.x, x), correctModulo(this.y % y, y));
     }
 }
