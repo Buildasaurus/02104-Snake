@@ -10,6 +10,14 @@ import com.snake.Model.GameSettings.Level;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
+
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
+import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StackPane
@@ -28,7 +36,6 @@ public class NewGameView extends StackPane
         URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
         setStyle("-fx-background-image: url('" + url.toExternalForm() + "')");
 
-        //playerselection hbox
 
         CustomHBox playerselection = new CustomHBox("Players");
 
@@ -65,6 +72,7 @@ public class NewGameView extends StackPane
         vbox.getChildren().addAll(playerselection,gamemode,maptype);
 
         getChildren().add(vbox);
+       
 
 
 
@@ -75,6 +83,7 @@ public class NewGameView extends StackPane
         startGame.setTranslateY(165);
         getChildren().add(startGame);
 
+
         //vbox adjust
         vbox.setTranslateY(-200);
         vbox.setTranslateX(-200);
@@ -82,4 +91,4 @@ public class NewGameView extends StackPane
         setPadding(new Insets(0,120,0,120));
     }
 
-    }
+}
