@@ -35,6 +35,10 @@ public class LevelGenerator
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
         System.out.println("regionCount before" + regions.size());
         map = connectIslands(map);
+        for (int i = 0; i < 6; i++)
+        {
+            map = simplifyNoise(map);
+        }
         regions = getRegions(map);
         System.out.println("regionCount after" + regions.size());
         // the number of free square in a central square
@@ -66,11 +70,11 @@ public class LevelGenerator
     private static boolean[][] generateMap(double fillValue)
     {
         boolean[][] randomMap = new boolean[width][height];
-        //Seed 1544738215 generates two rooms.
+        // Seed 1544738215 generates two rooms.
         Random randseedGenerator = new Random();
-        //int seed = randseedGenerator.nextInt();
-        //System.out.println("seed used is " + seed);
-        Random rand = new Random(1544738215);
+        int seed = randseedGenerator.nextInt();
+        System.out.println("seed used is " + seed);
+        Random rand = new Random(seed);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -298,7 +302,8 @@ public class LevelGenerator
             for (int column = 0; column < width; column++)
             {
                 Vector point = new Vector(column, row);
-                if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA), new DoubleVector(point)) < 2)
+                if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA),
+                        new DoubleVector(point)) < 2)
                 {
                     System.out.println("creating passage at " + point);
                     map[row][column] = false;
