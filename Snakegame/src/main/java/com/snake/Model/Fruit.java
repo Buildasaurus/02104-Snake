@@ -36,12 +36,9 @@ public abstract class Fruit extends Tile
 
     public ImageView getImage()
     {
-        if (sprite == null)
-        {
-            String imageName = tileType.toString().toLowerCase();
-            URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
-            sprite = new ImageView(new Image(url.toString()));
-        }
+        String imageName = tileType.toString().toLowerCase();
+        URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
+        ImageView sprite = new ImageView(new Image(url.toString()));
         return sprite;
     }
 

@@ -6,6 +6,7 @@ import com.snake.Model.Tile;
 import com.snake.Model.Wall;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class GameView extends GridPane
 {
@@ -130,30 +132,15 @@ public class GameView extends GridPane
                     continue;
                 }
                 pane.getChildren().clear();
-
+                //Label text = new Label(getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
+                //pane.getChildren().add(text);
                 if (tile != null)
                 {
-
                     ImageView imageView = tile.getImage();
                     imageView.setFitWidth(height / rowCount);
                     imageView.setPreserveRatio(true);
 
                     pane.getChildren().add(imageView);
-                    if (row == 5 && column == 0)
-                    {
-                        System.out.println("0, 10");
-                        System.out.println(GridPane.getColumnIndex(pane));
-                        System.out.println(GridPane.getRowIndex(pane));
-                        System.out.println("tile changed");
-                        System.out.println(imageView);
-                        System.out.println(pane.getChildren());
-                        ObservableList<Node> children = pane.getChildren();
-                        for (Node child : children)
-                        {
-                            System.out.println(child);
-                        }
-                    }
-
                 }
             }
         }
