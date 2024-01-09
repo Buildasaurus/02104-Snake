@@ -66,7 +66,8 @@ public class LevelGenerator
     private static boolean[][] generateMap(double fillValue)
     {
         boolean[][] randomMap = new boolean[width][height];
-        Random rand = new Random(6);
+        //Seed 6 generates two rooms.
+        Random rand = new Random();
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)

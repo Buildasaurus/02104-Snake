@@ -5,23 +5,11 @@ import java.net.URL;
 import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
-import com.snake.Model.GameSettings.GameMode;
-import com.snake.Model.GameSettings.Level;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
@@ -73,7 +61,7 @@ public class NewGameView extends GridPane
         SelectionButton singlePlayer = new SelectionButton("1");
         SelectionButton twoPlayer = new SelectionButton("2");
         SelectionButton threePlayer = new SelectionButton("3");
-        
+
         playerselection.getChildren().addAll(singlePlayer, twoPlayer, threePlayer);
 
         CustomHBox gamemode = new CustomHBox();
@@ -97,7 +85,7 @@ public class NewGameView extends GridPane
         getChildren().add(vbox);
 
         vbox.getChildren().addAll(playerselection, gamemode, maptype);
-        
+
 
 
         // gamemode setting
