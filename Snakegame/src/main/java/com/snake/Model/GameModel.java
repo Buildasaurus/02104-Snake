@@ -45,6 +45,7 @@ public class GameModel
         }
 
 
+        LevelGenerator.generateLevel(board);
 
         // Nice StackOverflow code to dynamiccaly get all classes that extends fruit, and spawn them
         // https://stackoverflow.com/questions/205573/at-runtime-find-all-classes-in-a-java-application-that-extend-a-base-class
@@ -102,7 +103,8 @@ public class GameModel
         {
             board[apple.getPosition().y][apple.getPosition().x] = apple;
         }
-        for (Banana banana : gameState.getBananas()) {
+        for (Banana banana : gameState.getBananas())
+        {
             board[banana.getPosition().y][banana.getPosition().x] = banana;
         }
         for (Cherry cherry : gameState.getCherries())
@@ -201,11 +203,15 @@ public class GameModel
             if (snake.isAlive())
             {
                 snake.calculateNextFrame(willClear[j]);
-                if (snake.Fruiteaten() != null) {
+                if (snake.Fruiteaten() != null)
+                {
                     fruitsToRespawn.add(snake.Fruiteaten());
-                    if (snake.Fruiteaten().tileType == TileType.Banana) {
-                        for (Snake player : players) {
-                            if (Settings.getGameSettings().getSpeed() < player.getSpeed()) {
+                    if (snake.Fruiteaten().tileType == TileType.Banana)
+                    {
+                        for (Snake player : players)
+                        {
+                            if (Settings.getGameSettings().getSpeed() < player.getSpeed())
+                            {
                                 player.setSpeed(player.getSpeed() - 1);
                             }
                         }

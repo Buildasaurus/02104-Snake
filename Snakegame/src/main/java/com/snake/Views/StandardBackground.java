@@ -10,7 +10,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 
-public class StandardBackground extends StackPane {
+public class StandardBackground extends StackPane{
     public StandardBackground(){
         URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
         BackgroundImage backgroundImage = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, 

@@ -48,7 +48,7 @@ public class LevelGenerator
         System.out.println("regionCount after" + regions.size());
         removeSuicideCells(map);
         // the number of free square in a central square
-        int margin = 8;
+        int margin = 16;
         // illegal squares, that are to be ignored
         // TODO for now just assuming height 20, width 20. Do maths later.
         Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
@@ -80,7 +80,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(127952939);
+        Random rand = new Random(seed);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)

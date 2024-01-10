@@ -4,17 +4,14 @@ import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.MenuController;
 
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.StackPane;
+import javafx.geometry.Pos;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
-import java.net.URL;
-
-public class MenuView extends StackPane
+public class MenuView extends StandardBackground
 {
     MenuController controller;
 
@@ -27,12 +24,14 @@ public class MenuView extends StackPane
 
     private void initialize()
     {
-        URL url = getClass().getResource("/com/snake/Graphics/titlescreen.png");
-        BackgroundImage backgroundImg = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
-        Background background = new Background(backgroundImg);
-        setBackground(background);
-        //background image scaling
+
+        //title
+        Text title = new Text("Snake!");
+        title.setFill(Color.BLACK);
+        title.setFont(Font.font("Arial", FontWeight.BOLD, 60));
+        setAlignment(title,Pos.TOP_CENTER);
+        getChildren().add(title);
+        title.setTranslateY(Settings.windowHeight*0.1);
 
         //buttons
         OurButton playButton = new OurButton("play");
@@ -45,7 +44,7 @@ public class MenuView extends StackPane
         loadButton.setOnAction(controller::handleLoadButtonPressed);
         quitButton.setOnAction(controller::handleExitButtonPressed);
 
-        //TODO fix this in another way, ideally make button and background scale the same
+        /*//TODO fix this in another way, ideally make button and background scale the same
         //playButton.setTranslateY(Settings.windowHeight*0.1);
         getChildren().add(playButton);
 
@@ -53,7 +52,13 @@ public class MenuView extends StackPane
         getChildren().add(continueButton);
 
         loadButton.setTranslateY(Settings.windowHeight*0.4);
-        getChildren().add(loadButton);
+        getChildren().add(loadButton);*/
+        VBox vbox = new VBox(0.05);
+        vbox.getChildren().addAll(playButton,continueButton,loadButton);
+        vbox.setStyle("-fx-alignment: center");
+        vbox.setTranslateY(Settings.windowWidth*0.05);
+        getChildren().add(vbox);
+
 
         quitButton.setTranslateX(Settings.windowWidth*0.5 - (quitButton.getPrefWidth()*0.6));
         quitButton.setTranslateY(Settings.windowHeight*0.5 - (quitButton.getPrefHeight()*0.5));

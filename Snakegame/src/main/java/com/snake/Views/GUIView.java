@@ -41,14 +41,15 @@ public class GUIView extends StackPane {
         gameView.setAlignment(Pos.TOP_CENTER);
 
         HBox topBox = new HBox();
-        int heightOfHBOX = Settings.windowHeight - gameView.height;
-        topBox.setSpacing(heightOfHBOX);
+        double heightOfHBOX = (Settings.windowHeight - gameView.height) * 0.5;
+        topBox.setSpacing(50.0);
         topBox.setPrefHeight(heightOfHBOX);
         topBox.setAlignment(Pos.CENTER);
 
         VBox leftBox = new VBox();
-        int widthOfVBOX = Settings.windowWidth - gameView.width;
-        leftBox.setSpacing(widthOfVBOX);
+        double widthOfVBOX = (Settings.windowWidth - gameView.width) * 0.5;
+        leftBox.setSpacing(50.0);
+        leftBox.setPrefWidth(widthOfVBOX);
         leftBox.setAlignment(Pos.CENTER);
 
         frameRateCounter.setFont(new Font(15.0));
@@ -66,6 +67,7 @@ public class GUIView extends StackPane {
         toggleExtraVision.setOnAction((s) -> {
             Settings.getGameSettings().setExtraVision(toggleExtraVision.isSelected());
         });
+        toggleExtraVision.setFocusTraversable(false);
         topBox.getChildren().add(toggleExtraVision);
 
         for (int i = 0; i < playerCount; i++) {

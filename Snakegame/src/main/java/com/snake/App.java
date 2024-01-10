@@ -8,6 +8,7 @@ import java.io.IOException;
 import com.snake.Controllers.IController;
 import com.snake.Controllers.MenuController;
 import com.snake.Utils.Highscore;
+import com.snake.Utils.SaveHandler;
 
 /**
  * JavaFX App
@@ -23,6 +24,7 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         System.out.println("Highscore at start of game is: " + Highscore.getHighscore());
+        SaveHandler.createDummySaves();
         stage.setResizable(false);
     }
 
@@ -33,5 +35,11 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public void stop()
+    {
+        System.out.println(controller);
+        System.out.println("closing app");
     }
 }

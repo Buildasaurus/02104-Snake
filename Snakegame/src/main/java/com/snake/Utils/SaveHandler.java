@@ -1,7 +1,9 @@
 package com.snake.Utils;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -113,6 +115,18 @@ public class SaveHandler
             JsonReader reader = new JsonReader(new FileReader(path));
 
             saves[i] = gson.fromJson(reader, Save.class);
+        }
+    }
+
+    public static void createDummySaves() throws IOException {
+        String path;
+        for (int i = 0; i < 4; i++) {
+            path = "Save" + i + ".json";
+            File myObj = new File(path);
+            if (!myObj.exists() && !myObj.isDirectory()) {
+                myObj.createNewFile();
+                System.out.println("created file: " + path);
+            }
         }
     }
 }
