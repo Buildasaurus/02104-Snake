@@ -10,23 +10,22 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class SelectionButton extends Button {
+
+    private URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
     
     public  SelectionButton(String buttonName) 
     {
         super(buttonName);
-       URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
        setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
        setPrefSize(300.0, 130.0);
   
     }
-    public void horizontally(Stage Stage) {
-        
-        // create a HBox 
-            HBox hbox = new HBox(); 
-  
-            // create a label 
-            Label label = new Label("this is HBox example");
+    
+    public void changeback(){
+        setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
+    }
 
-            hbox.getChildren().add(label);
+    public void pressed(){
+        setStyle("-fx-color: red");
     }
 }

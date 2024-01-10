@@ -24,17 +24,10 @@ public class CustomHBox extends HBox{
     }
 
     public void buttonPressed(SelectionButton action){
-        buttonOpacity(action);
-        if (previousButtonPressed != null) {
-            noOpacity(previousButtonPressed);
+        action.pressed();
+        if (previousButtonPressed != null && action != previousButtonPressed) {
+            previousButtonPressed.changeback();
         }
         previousButtonPressed = action;
     }
-    private void buttonOpacity(SelectionButton button){
-        button.setStyle("-fx-background-color: grey);");
-    }
-    private void noOpacity(SelectionButton button){
-        button.setStyle("-fx-color: red");
-    }
-
 }
