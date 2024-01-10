@@ -156,9 +156,9 @@ public class GameView extends GridPane
         Tile tile = board[row][column];
 
         pane.getChildren().clear();
-        Label text = new Label(
-                getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
-        pane.getChildren().add(text);
+        // Label text = new Label(
+        // getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
+        // pane.getChildren().add(text);
         if (tile != null)
         {
             ImageView imageView = tile.getImage();
@@ -191,7 +191,6 @@ public class GameView extends GridPane
             {
                 gridPositions
                         .add(new Vector(gridCoordinate.x, gridCoordinate.y - Settings.rowCount));
-
             }
             if (position.x >= Settings.columnCount - extraVisionDepth)
             {
@@ -199,6 +198,19 @@ public class GameView extends GridPane
                         .add(new Vector(gridCoordinate.x - Settings.columnCount, gridCoordinate.y));
 
             }
+            if (position.x < extraVisionDepth && position.y < extraVisionDepth)
+            {
+                gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x,
+                        gridCoordinate.y - Settings.rowCount));
+            }
+            if (position.y >= Settings.rowCount - extraVisionDepth
+                    && position.x >= Settings.columnCount - extraVisionDepth)
+            {
+                gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount,
+                        gridCoordinate.y - Settings.rowCount));
+            }
+
+
 
         }
 
