@@ -3,6 +3,7 @@ module com.snake {
     requires javafx.fxml;
     requires javafx.media;
     requires com.google.gson;
+    requires org.reflections;
 
     opens com.snake to javafx.fxml;
     opens com.snake.Model to com.google.gson;
