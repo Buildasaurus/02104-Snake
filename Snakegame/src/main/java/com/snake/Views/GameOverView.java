@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
-import com.snake.Model.Highscore;
+import com.snake.Utils.Highscore;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;

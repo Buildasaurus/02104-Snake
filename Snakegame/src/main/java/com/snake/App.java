@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import com.snake.Controllers.IController;
 import com.snake.Controllers.MenuController;
-import com.snake.Model.Highscore;
+import com.snake.Utils.Highscore;
 
 /**
  * JavaFX App

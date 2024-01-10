@@ -4,6 +4,8 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.snake.Utils.LevelGenerator;
+
 public class Region
 {
     public ArrayList<Vector> coords;
