@@ -3,8 +3,12 @@ package com.snake.Model;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import com.snake.Settings;
 import com.snake.Utils.LevelGenerator;
+import org.reflections.Reflections;
 
 public class GameModel
 {
@@ -40,25 +44,48 @@ public class GameModel
             changedTiles.add(midpoint.add(-1, i * 2));
         }
 
-        // level generation
-        LevelGenerator.generateLevel(board);
-        Apple apple = new Apple();
-        while (board[apple.getPosition().y][apple.getPosition().x] != null)
+
+
+        // Nice StackOverflow code to dynamiccaly get all classes that extends fruit, and spawn them
+        // https://stackoverflow.com/questions/205573/at-runtime-find-all-classes-in-a-java-application-that-extend-a-base-class
+        System.out.println("Trying to find subclasses");
+        Reflections reflections = new Reflections("com.snake");
+        Set<Class<? extends Fruit>> classes =
+                reflections.getSubTypesOf(com.snake.Model.Fruit.class);
+        for (Class<? extends Fruit> aClass : classes)
         {
-            apple.setRandomPosition();
+            System.out.println("subclass: " + aClass.getName());
+            try
+            { // cursed code from
+              // https://stackoverflow.com/questions/5533702/instantiating-object-of-same-class-from-within-class-in-java
+                Constructor constructor = aClass.getConstructor();
+                Fruit piece = (Fruit) constructor.newInstance();
+                while (board[piece.getPosition().y][piece.getPosition().x] != null)
+                {
+                    piece.setRandomPosition();
+                }
+                changedTiles.add(piece.getPosition());
+                board[piece.getPosition().y][piece.getPosition().x] = piece;
+            }
+            catch (Exception e)
+            {
+                System.out.println("Your constructor stuff in gamemodel doesn't work...");
+                System.out.println(e);
+            }
         }
-        changedTiles.add(apple.getPosition());
 
-        board[apple.getPosition().y][apple.getPosition().x] = apple;
 
-        Cherry cherry = new Cherry();
-        while (board[cherry.getPosition().y][cherry.getPosition().x] != null)
-        {
-            cherry.setRandomPosition();
-        }
-        board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
-        changedTiles.add(cherry.getPosition());
-
+        /*
+         * // level generation LevelGenerator.generateLevel(board); Apple apple = new Apple(); while
+         * (board[apple.getPosition().y][apple.getPosition().x] != null) {
+         * apple.setRandomPosition(); } changedTiles.add(apple.getPosition());
+         * board[apple.getPosition().y][apple.getPosition().x] = apple;
+         *
+         * Cherry cherry = new Cherry(); while
+         * (board[cherry.getPosition().y][cherry.getPosition().x] != null) {
+         * cherry.setRandomPosition(); } board[cherry.getPosition().y][cherry.getPosition().x] =
+         * cherry; changedTiles.add(cherry.getPosition());
+         */
     }
 
     public GameModel(GameState gameState)
