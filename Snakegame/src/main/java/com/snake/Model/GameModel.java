@@ -75,6 +75,9 @@ public class GameModel
         {
             board[apple.getPosition().y][apple.getPosition().x] = apple;
         }
+        for (Banana banana : gameState.getBananas()) {
+            board[banana.getPosition().y][banana.getPosition().x] = banana;
+        }
         for (Cherry cherry : gameState.getCherries())
         {
             board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
@@ -281,6 +284,7 @@ public class GameModel
     {
         ArrayList<SnakeTile> snakeTiles = new ArrayList<>();
         ArrayList<Apple> apples = new ArrayList<>();
+        ArrayList<Banana> bananas = new ArrayList<>();
         ArrayList<Cherry> cherries = new ArrayList<>();
         ArrayList<Wall> walls = new ArrayList<>();
 
@@ -303,6 +307,10 @@ public class GameModel
                             apples.add((Apple) board[i][n]);
                             break;
 
+                        case Banana:
+                            bananas.add((Banana) board[i][n]);
+                            break;
+
                         case Cherry:
                             cherries.add((Cherry) board[i][n]);
                             break;
@@ -319,6 +327,6 @@ public class GameModel
             }
         }
 
-        return new GameState(snakeTiles, apples, cherries, walls, players);
+        return new GameState(snakeTiles, apples, bananas, cherries, walls, players);
     }
 }
