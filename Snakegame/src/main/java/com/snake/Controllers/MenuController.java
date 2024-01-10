@@ -1,6 +1,9 @@
 package com.snake.Controllers;
 
 import com.snake.App;
+import com.snake.Settings;
+import com.snake.Model.Save;
+import com.snake.Utils.SaveHandler;
 import com.snake.Views.MenuView;
 
 import javafx.application.Platform;
@@ -23,6 +26,16 @@ public class MenuController implements IController {
     public void handlePlayButtonPressed(ActionEvent action) {
         NewGameController newController = new NewGameController();
         App.setRoot(newController);
+    }
+
+    public void handleContinueButtonPressed(ActionEvent action) {
+        Save save = SaveHandler.readSave(0);
+        
+        if (save != null) {
+            Settings.setGameSettings(save.getGameSettings());
+            GUIController newController = new GUIController(save.getGameState());
+            App.setRoot(newController);
+        }
     }
 
     public void handleLoadButtonPressed(ActionEvent action) {

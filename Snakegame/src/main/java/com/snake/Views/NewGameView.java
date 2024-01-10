@@ -31,27 +31,30 @@ public class NewGameView extends StandardBackground
 
         playerselection = new CustomHBox("Players");
 
-        for (int i : playerCounts){
+        for (int i : playerCounts)
+        {
             SelectionButton button = new SelectionButton(Integer.toString(i));
             button.setOnAction(controller::handlePlayerCounts);
             playerselection.getChildren().add(button);
         }
 
-        //gamemode hbox
+        // gamemode hbox
 
         gamemode = new CustomHBox("Game Mode");
 
-        for (GameMode mode : GameMode.values()){
+        for (GameMode mode : GameMode.values())
+        {
             SelectionButton button = new SelectionButton(mode.toString());
             button.setOnAction(controller::handlegameMode);
             gamemode.getChildren().add(button);
         }
 
-        //maptype hbox
+        // maptype hbox
 
         maptype = new CustomHBox("Map Type");
 
-        for (Level level : Level.values()){
+        for (Level level : Level.values())
+        {
             SelectionButton button = new SelectionButton(level.toString());
             button.setOnAction(controller::handlelevel);
             maptype.getChildren().add(button);
@@ -59,12 +62,11 @@ public class NewGameView extends StandardBackground
 
         VBox vbox = new VBox(10);
 
-        setMargin(vbox,new Insets(500,-300,200,100));
+        setMargin(vbox, new Insets(500, -300, 200, 100));
 
-        vbox.getChildren().addAll(playerselection,gamemode,maptype);
+        vbox.getChildren().addAll(playerselection, gamemode, maptype);
 
         getChildren().add(vbox);
-       
 
 
 
@@ -76,7 +78,7 @@ public class NewGameView extends StandardBackground
         getChildren().add(startGame);
 
 
-        //vbox adjust
+        // vbox adjust
         vbox.setTranslateY(-200);
         vbox.setTranslateX(-200);
 

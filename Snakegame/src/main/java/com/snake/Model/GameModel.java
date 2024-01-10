@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.snake.Settings;
+import com.snake.Utils.LevelGenerator;
 
 public class GameModel
 {

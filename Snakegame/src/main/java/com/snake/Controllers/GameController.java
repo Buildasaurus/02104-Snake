@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import com.snake.Model.GameModel;
 import com.snake.Model.GameState;
-import com.snake.Model.Highscore;
 import com.snake.Model.Vector;
+import com.snake.Utils.Highscore;
 import com.snake.Views.GameView;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;

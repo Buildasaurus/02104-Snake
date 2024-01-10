@@ -1,13 +1,11 @@
 package com.snake.Controllers;
 
-import java.util.Set;
 import com.snake.App;
 import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
-import com.snake.Views.GameView;
 import com.snake.Views.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -23,6 +21,7 @@ public class NewGameController implements IController
     {
         gameSettings = Settings.getGameSettings();
         view = new NewGameView(this, gameSettings.getAllPossiblePlayerCounts());
+        view.setOnKeyPressed(this::handleKeyPressed);
     }
 
     public Parent getView()
@@ -58,6 +57,18 @@ public class NewGameController implements IController
     public int getPlayerCount()
     {
         return gameSettings.getPlayerCount();
+    }
+
+    public void handleKeyPressed(KeyEvent key) {
+        switch (key.getCode()) {
+            case ESCAPE:
+                MenuController newController = new MenuController();
+                App.setRoot(newController);
+                break;
+        
+            default:
+                break;
+        }
     }
 
     /**

@@ -6,6 +6,7 @@ import com.snake.Controllers.GUIController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -60,6 +61,12 @@ public class GUIView extends StackPane {
             currentScore.setFont(new Font(15.0));
             topBox.getChildren().add(currentScore);
         }
+        CheckBox toggleExtraVision = new CheckBox();
+        toggleExtraVision.setSelected(Settings.getGameSettings().getExtraVision());
+        toggleExtraVision.setOnAction((s) -> {
+            Settings.getGameSettings().setExtraVision(toggleExtraVision.isSelected());
+        });
+        topBox.getChildren().add(toggleExtraVision);
 
         for (int i = 0; i < playerCount; i++) {
             Label currentSpeed = new Label();

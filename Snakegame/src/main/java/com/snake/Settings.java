@@ -4,8 +4,8 @@ import com.snake.Model.GameSettings;
 
 public class Settings
 {
-    public static int windowHeight = (int)Math.round(1417/2);
-    public static int windowWidth = (int)Math.round(1890/2);
+    public static int windowHeight = (int) Math.round(1417 / 2);
+    public static int windowWidth = (int) Math.round(1890 / 2);
 
     public static int rowCount = 50;
     public static int columnCount = 50;
@@ -21,12 +21,14 @@ public class Settings
     }
 
     /**
-     * Calculates the ratio between the rows and columns. 30 rows and 20 columns would return 1.5 as ratio.
+     * Calculates the ratio between the rows and columns. 30 rows and 20 columns would return 1.5 as
+     * ratio.
+     *
      * @return The calculated ratio.
      */
     public static double getRowColumnRatio()
     {
-        return columnCount/rowCount;
+        return columnCount / rowCount;
     }
 
     private static GameSettings gameSettings = new GameSettings();

@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 public class CustomHBox extends HBox{
     private Button previousButtonPressed;
     String boxlabel;
-    
+
     public CustomHBox(String boxlabel){
 
         super(15);

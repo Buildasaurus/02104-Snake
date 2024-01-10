@@ -1,4 +1,4 @@
-package com.snake.Model;
+package com.snake.Utils;
 
 import java.io.File;
 import java.io.FileWriter;

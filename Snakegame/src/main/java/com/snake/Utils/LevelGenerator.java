@@ -1,10 +1,15 @@
-package com.snake.Model;
+package com.snake.Utils;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import com.snake.Settings;
+import com.snake.Model.DoubleVector;
+import com.snake.Model.Region;
+import com.snake.Model.Tile;
+import com.snake.Model.Vector;
+import com.snake.Model.Wall;
 
 public class LevelGenerator
 {
@@ -213,7 +218,6 @@ public class LevelGenerator
     private static boolean[][] connectIslands(boolean[][] map)
     {
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
-        double[][] distances = new double[regions.size()][regions.size()];
 
         // foreach region, create a Room class.
         /*

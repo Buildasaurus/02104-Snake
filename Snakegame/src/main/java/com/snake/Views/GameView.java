@@ -53,6 +53,9 @@ public class GameView extends GridPane
     public void initialize(Tile[][] board)
     {
         nodes = new Node[rowCount][columnCount];
+        Settings.getGameSettings().addExtraVisionListener(() -> {
+            toggleExtraVisionSquares(Settings.getGameSettings().getExtraVision());
+        });
         this.getColumnConstraints().clear();
         this.getRowConstraints().clear();
 
@@ -113,7 +116,6 @@ public class GameView extends GridPane
     {
         // This variable might change from frame to frame, so
         boolean extraVision = Settings.getGameSettings().getExtraVision();
-        System.out.println("update");
         if (board != null)
         {
             for (Vector position : relevantPositions)
@@ -169,60 +171,74 @@ public class GameView extends GridPane
         }
     }
 
+    public void toggleExtraVisionSquares(boolean visible)
+    {
+        for (int row = 0; row < extraVisionDepth; row++)
+        {
+            for (int column = 0; column < columnCount; column++)
+            {
+                nodes[row][column].setVisible(visible);
+                nodes[column][row].setVisible(visible);
+
+            }
+        }
+        for (int column = columnCount - 1; column >= Settings.columnCount + extraVisionDepth; column--)
+        {
+            for (int row = 0; row < rowCount; row++)
+            {
+                nodes[row][column].setVisible(visible);
+                nodes[column][row].setVisible(visible);
+            }
+        }
+    }
+
     public void updatePoint(Vector position, Tile[][] board, boolean extraVision)
     {
         Vector gridCoordinate = position.add(extraVisionDepth);
         ArrayList<Vector> gridPositions = new ArrayList<Vector>();
         gridPositions.add(gridCoordinate);
-        if (extraVision)
+
+        // if is on edge, Several panes should be refreshed, if extravision is true
+        if (position.x < extraVisionDepth)
         {
-            // if is on edge, Several panes should be refreshed, if extravision is true
-            if (position.x < extraVisionDepth)
+            gridPositions
+                    .add(new Vector(Settings.columnCount + gridCoordinate.x, gridCoordinate.y));
+        }
+        if (position.y < extraVisionDepth)
+        {
+            gridPositions.add(new Vector(gridCoordinate.x, Settings.rowCount + gridCoordinate.y));
+            if (position.x < extraVisionDepth) // topleft corner.
             {
-                gridPositions
-                        .add(new Vector(Settings.columnCount + gridCoordinate.x, gridCoordinate.y));
+                gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x,
+                        gridCoordinate.y + Settings.rowCount));
             }
-            if (position.y < extraVisionDepth)
+            if (position.x >= Settings.columnCount - extraVisionDepth)// topright corner
             {
-                gridPositions
-                        .add(new Vector(gridCoordinate.x, Settings.rowCount + gridCoordinate.y));
-                if (position.x < extraVisionDepth) // topleft corner.
-                {
-                    gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x,
-                            gridCoordinate.y + Settings.rowCount));
-                }
-                if (position.x >= Settings.columnCount - extraVisionDepth)// topright corner
-                {
-                    gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount,
-                            Settings.rowCount + gridCoordinate.y));
-                }
+                gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount,
+                        Settings.rowCount + gridCoordinate.y));
             }
-            if (position.y >= Settings.rowCount - extraVisionDepth)
+        }
+        if (position.y >= Settings.rowCount - extraVisionDepth)
+        {
+            int convertedY = gridCoordinate.y - Settings.rowCount;
+            gridPositions.add(new Vector(gridCoordinate.x, convertedY));
+
+            if (position.x < extraVisionDepth) // buttomLeft corner.
             {
-                int convertedY = gridCoordinate.y - Settings.rowCount;
-                gridPositions.add(new Vector(gridCoordinate.x, convertedY));
-
-                if (position.x < extraVisionDepth) // buttomLeft corner.
-                {
-                    gridPositions
-                            .add(new Vector(Settings.columnCount + gridCoordinate.x, convertedY));
-                }
-                if (position.x >= Settings.columnCount - extraVisionDepth)// buttomright corner
-                {
-                    gridPositions
-                            .add(new Vector(gridCoordinate.x - Settings.columnCount, convertedY));
-                }
+                gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x, convertedY));
             }
-            if (position.x >= Settings.columnCount - extraVisionDepth)
+            if (position.x >= Settings.columnCount - extraVisionDepth)// buttomright corner
             {
-                gridPositions
-                        .add(new Vector(gridCoordinate.x - Settings.columnCount, gridCoordinate.y));
-
+                gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount, convertedY));
             }
-
-
+        }
+        if (position.x >= Settings.columnCount - extraVisionDepth)
+        {
+            gridPositions
+                    .add(new Vector(gridCoordinate.x - Settings.columnCount, gridCoordinate.y));
 
         }
+
 
         for (Vector vector : gridPositions)
         {
