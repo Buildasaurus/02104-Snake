@@ -125,4 +125,8 @@ public class GUIView extends StackPane {
         saveView = null;
         setPauseView(controller);
     }
+
+    public void updateSaveNames(String[] saveNames) {
+        saveView.updateButtonNames(saveNames);
+    }
 }
