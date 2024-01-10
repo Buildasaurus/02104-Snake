@@ -9,7 +9,7 @@ public class Cherry extends Fruit
 
     public void doEffect(Snake snake)
     {
-        snake.setSpeed(snake.getSpeed() + 1);
+        snake.setSpeed(snake.getSpeed() + 3);
         snake.updateSnakePosition();
     }
 
