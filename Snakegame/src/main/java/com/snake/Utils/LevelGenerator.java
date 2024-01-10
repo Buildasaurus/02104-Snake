@@ -48,7 +48,7 @@ public class LevelGenerator
         System.out.println("regionCount after" + regions.size());
         removeSuicideCells(map);
         // the number of free square in a central square
-        int margin = 8;
+        int margin = 16;
         // illegal squares, that are to be ignored
         // TODO for now just assuming height 20, width 20. Do maths later.
         Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
