@@ -20,17 +20,14 @@ public class SelectionButton extends Button {
 
     private double scaler = 6.0;
 
-    private double x = Settings.windowWidth/scaler;
-
-    private double y = Settings.windowHeight/scaler;
+    private URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
     
     public  SelectionButton(String buttonName) 
+
     {
         super(buttonName);
-        this.scaler = scaler;
 
-       
-       URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
+        URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
         Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
@@ -39,20 +36,14 @@ public class SelectionButton extends Button {
         setStyle("-fx-cursor: hand; -fx-font-size: 50");
         setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
        
-
-
-        
+  
     }
-  
     
-    public void horizontally(Stage Stage) {
-        
-        // create a HBox 
-            HBox hbox = new HBox(); 
-  
-            // create a label 
-            Label label = new Label("this is HBox example");
+    public void changeback(){
+        setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
+    }
 
-            hbox.getChildren().add(label);
+    public void pressed(){
+        setStyle("-fx-color: red");
     }
 }
