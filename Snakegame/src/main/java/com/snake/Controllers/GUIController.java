@@ -328,4 +328,8 @@ public class GUIController implements IController
         isSaving = false;
         view.removeSaveView(this);
     }
+
+    public GameController getGameController(){
+        return gameController;
+    }
 }
