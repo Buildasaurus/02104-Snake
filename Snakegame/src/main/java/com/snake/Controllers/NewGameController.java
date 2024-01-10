@@ -7,11 +7,12 @@ import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import com.snake.Views.NewGameView;
 import com.snake.Views.SelectionButton;
+
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
+
 
 public class NewGameController implements IController
 {
@@ -66,7 +67,7 @@ public class NewGameController implements IController
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
                 break;
-
+        
             default:
                 break;
         }
@@ -85,13 +86,15 @@ public class NewGameController implements IController
         App.setRoot(newController);
     }
     public void handlePlayerCounts(ActionEvent action){
-        Button actionOrigin = (Button) action.getSource();
+        SelectionButton actionOrigin = (SelectionButton) action.getSource();
         gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
+        view.playerselection.buttonPressed(actionOrigin);
     }
 
     public void handlegameMode(ActionEvent action){
-        Button actionorigin = (Button) action.getSource();
+        SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setGameMode(GameMode.valueOf(actionorigin.getText()));
+        view.gamemode.buttonPressed(actionorigin);
     }
 
     public void handlelevel(ActionEvent action){
