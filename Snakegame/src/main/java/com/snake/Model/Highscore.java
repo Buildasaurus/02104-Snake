@@ -42,7 +42,6 @@ public class Highscore
                     result = Integer.parseInt(data);
                     System.out.println(data);
                 }
-                System.out.println("htljal");
                 myReader.close();
             }
         }

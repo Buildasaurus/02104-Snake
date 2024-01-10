@@ -5,5 +5,6 @@ module com.snake {
     requires com.google.gson;
 
     opens com.snake to javafx.fxml;
+    opens com.snake.Model to com.google.gson;
     exports com.snake;
 }

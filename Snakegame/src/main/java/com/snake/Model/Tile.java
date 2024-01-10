@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 public abstract class Tile
 {
     protected TileType tileType;
+    protected Vector position;
 
     public Tile(TileType type)
     {
@@ -12,6 +13,10 @@ public abstract class Tile
     }
 
     public abstract ImageView getImage();
+
+    public Vector getPosition() {
+        return position;
+    }
 
     public boolean equals()
     {

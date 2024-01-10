@@ -1,16 +1,22 @@
 package com.snake.Controllers;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Set;
 import com.snake.App;
 import com.snake.Settings;
+import com.snake.Model.GameSettings;
 import com.snake.Model.GameState;
+import com.snake.Model.Save;
+import com.snake.Utils.SaveHandler;
 import com.snake.Views.GUIView;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 public class GUIController implements IController
@@ -29,6 +35,7 @@ public class GUIController implements IController
 
     private boolean isGameOver = false;
     private boolean isPaused = false;
+    private boolean isSaving = false;
 
     private int playerCount;
 
@@ -118,10 +125,8 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                if (!isGameOver && !isPaused)
-                {
-                    for (int i = 0; i < playerProgress.length; i++)
-                    {
+                if (!isGameOver && !isPaused && !isSaving) {
+                    for (int i = 0; i < playerProgress.length; i++) {
                         playerProgress[i] += gameController.getSpeed(i);
                         if (playerProgress[i] > 100)
                         {
@@ -169,18 +174,10 @@ public class GUIController implements IController
     {
         switch (key.getCode())
         {
-            case Y:
-            case G:
-            case H:
-            case J:
             case W:
             case S:
             case A:
             case D:
-            case LEFT:
-            case RIGHT:
-            case UP:
-            case DOWN:
                 if (!isGameOver && !isPaused)
                 {
                     gameController.handleKeyPressed(key);
@@ -191,13 +188,27 @@ public class GUIController implements IController
                 }
                 break;
 
+            case Y:
+            case G:
+            case H:
+            case J:
+            case LEFT:
+            case RIGHT:
+            case UP:
+            case DOWN:
+                gameController.handleKeyPressed(key);
+                break;
+
             case ESCAPE:
                 if (isPaused || isGameOver)
                 {
                     handleBackButtonPressed(null);
+                } else if (isSaving) {
+                    handlePauseButtonPressed(null);
+                } else {
+                    isPaused = true;
+                    view.setPauseView(this);
                 }
-                isPaused = true;
-                view.setPauseView(this);
                 break;
 
             // debugging keybind
@@ -286,6 +297,30 @@ public class GUIController implements IController
 
     public void handleSaveButtonPressed(ActionEvent action)
     {
-        System.out.println("pressed save");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime now = LocalDateTime.now();
+        String name = dtf.format(now);
+
+        GameSettings gameSettings = Settings.getGameSettings();
+        GameState gameState = gameController.getGameState();
+
+        Button actionOrigin = (Button) action.getSource();
+        String saveName = actionOrigin.getText();
+        int index = Integer.parseInt(saveName.substring(0, 1));
+
+        Save save = new Save(name, gameSettings, gameState);
+        SaveHandler.writeSave(save, index);
+    }
+
+    public void handleSaveMenuButtonPressed(ActionEvent action) {
+        isSaving = true;
+        isPaused = false;
+        view.setSaveView(this, SaveHandler.getSaveNames());
+    }
+
+    public void handlePauseButtonPressed(ActionEvent action) {
+        isPaused = true;
+        isSaving = false;
+        view.removeSaveView(this);
     }
 }

@@ -1,13 +1,10 @@
 package com.snake.Model;
 
-import java.net.URL;
 import javafx.scene.effect.BlendMode;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class SnakeTile extends Tile
 {
-    TileType tileType;
     Vector enterDirection;
     Vector targetDirection;
     int assignedPlayer;

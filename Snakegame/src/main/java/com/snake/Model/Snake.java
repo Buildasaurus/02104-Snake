@@ -15,7 +15,7 @@ public class Snake
     public int playerNumber;
     public boolean isColliding = false;
     private double speed;
-    public Tile[][] board;
+    public transient Tile[][] board;
 
     public Snake(Tile[][] board, Vector startHeadPosition, Vector startTailPosition,
             Vector startDirection, int player)
@@ -262,5 +262,9 @@ public class Snake
     public void setLastDirection(Vector lastDirection)
     {
         this.lastDirection = lastDirection;
+    }
+
+    public void setBoard(Tile[][] board) {
+        this.board = board;
     }
 }
