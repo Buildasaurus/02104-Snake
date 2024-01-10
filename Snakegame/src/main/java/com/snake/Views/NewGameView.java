@@ -9,11 +9,15 @@ import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StandardBackground
 {
     NewGameController controller;
+    public CustomHBox playerselection;
+    public CustomHBox gamemode;
+    public CustomHBox maptype;
 
     public NewGameView(NewGameController controller, int[] playerCounts)
     {
@@ -25,7 +29,7 @@ public class NewGameView extends StandardBackground
     {
 
 
-        CustomHBox playerselection = new CustomHBox("Players");
+        playerselection = new CustomHBox("Players");
 
         for (int i : playerCounts){
             SelectionButton button = new SelectionButton(Integer.toString(i));
@@ -35,7 +39,7 @@ public class NewGameView extends StandardBackground
 
         //gamemode hbox
 
-        CustomHBox gamemode = new CustomHBox("Game Mode");
+        gamemode = new CustomHBox("Game Mode");
 
         for (GameMode mode : GameMode.values()){
             SelectionButton button = new SelectionButton(mode.toString());
@@ -45,7 +49,7 @@ public class NewGameView extends StandardBackground
 
         //maptype hbox
 
-        CustomHBox maptype = new CustomHBox("Map Type");
+        maptype = new CustomHBox("Map Type");
 
         for (Level level : Level.values()){
             SelectionButton button = new SelectionButton(level.toString());
@@ -77,6 +81,8 @@ public class NewGameView extends StandardBackground
         vbox.setTranslateX(-200);
 
         setPadding(new Insets(0,120,0,120));
+
+    
     }
 
 }

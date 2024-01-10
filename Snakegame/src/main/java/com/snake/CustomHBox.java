@@ -2,13 +2,16 @@ package com.snake;
 
 import java.net.URL;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class CustomHBox extends HBox{
-
+    private Button previousButtonPressed;
     String boxlabel;
     
     public CustomHBox(String boxlabel){
@@ -22,9 +25,13 @@ public class CustomHBox extends HBox{
         setAlignment(Pos.CENTER);
         setPadding(new Insets(10));
 
-        //URL url = getClass().getResource("/com/snake/Graphics/menu.png");
-       // setStyle("-fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-position: fixed");
-
     }
-    
+
+    public void buttonPressed(SelectionButton action){
+        action.setVisible(false);
+
+        if (previousButtonPressed != null) {
+            previousButtonPressed.setVisible(true); 
+        }   
+    }  
 }
