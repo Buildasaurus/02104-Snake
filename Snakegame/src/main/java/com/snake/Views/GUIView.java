@@ -66,6 +66,7 @@ public class GUIView extends StackPane {
         toggleExtraVision.setOnAction((s) -> {
             Settings.getGameSettings().setExtraVision(toggleExtraVision.isSelected());
         });
+        toggleExtraVision.setFocusTraversable(false);
         topBox.getChildren().add(toggleExtraVision);
 
         for (int i = 0; i < playerCount; i++) {
