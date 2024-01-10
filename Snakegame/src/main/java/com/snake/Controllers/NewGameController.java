@@ -84,17 +84,19 @@ public class NewGameController implements IController
         App.setRoot(newController);
     }
     public void handlePlayerCounts(ActionEvent action){
-        Button actionOrigin = (Button) action.getSource();
+        SelectionButton actionOrigin = (SelectionButton) action.getSource();
         gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
+        view.playerselection.buttonPressed(actionOrigin);
     }
 
     public void handlegameMode(ActionEvent action){
-        Button actionorigin = (Button) action.getSource();
+        SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setGameMode(GameMode.valueOf(actionorigin.getText()));
+        view.gamemode.buttonPressed(actionorigin);
     }
 
     public void handlelevel(ActionEvent action){
-        Button actionorigin = (Button) action.getSource();
+        SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
         view.maptype.buttonPressed(actionorigin);
     }
