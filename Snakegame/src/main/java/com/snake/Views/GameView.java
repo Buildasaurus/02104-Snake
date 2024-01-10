@@ -186,28 +186,38 @@ public class GameView extends GridPane
             {
                 gridPositions
                         .add(new Vector(gridCoordinate.x, Settings.rowCount + gridCoordinate.y));
+                if (position.x < extraVisionDepth) // topleft corner.
+                {
+                    gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x,
+                            gridCoordinate.y + Settings.rowCount));
+                }
+                if (position.x >= Settings.columnCount - extraVisionDepth)// topright corner
+                {
+                    gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount,
+                            Settings.rowCount + gridCoordinate.y));
+                }
             }
             if (position.y >= Settings.rowCount - extraVisionDepth)
             {
-                gridPositions
-                        .add(new Vector(gridCoordinate.x, gridCoordinate.y - Settings.rowCount));
+                int convertedY = gridCoordinate.y - Settings.rowCount;
+                gridPositions.add(new Vector(gridCoordinate.x, convertedY));
+
+                if (position.x < extraVisionDepth) // buttomLeft corner.
+                {
+                    gridPositions
+                            .add(new Vector(Settings.columnCount + gridCoordinate.x, convertedY));
+                }
+                if (position.x >= Settings.columnCount - extraVisionDepth)// buttomright corner
+                {
+                    gridPositions
+                            .add(new Vector(gridCoordinate.x - Settings.columnCount, convertedY));
+                }
             }
             if (position.x >= Settings.columnCount - extraVisionDepth)
             {
                 gridPositions
                         .add(new Vector(gridCoordinate.x - Settings.columnCount, gridCoordinate.y));
 
-            }
-            if (position.x < extraVisionDepth && position.y < extraVisionDepth)
-            {
-                gridPositions.add(new Vector(Settings.columnCount + gridCoordinate.x,
-                        gridCoordinate.y - Settings.rowCount));
-            }
-            if (position.y >= Settings.rowCount - extraVisionDepth
-                    && position.x >= Settings.columnCount - extraVisionDepth)
-            {
-                gridPositions.add(new Vector(gridCoordinate.x - Settings.columnCount,
-                        gridCoordinate.y - Settings.rowCount));
             }
 
 

@@ -7,46 +7,65 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.snake.Model.Save;
 
-public class SaveHandler {
+public class SaveHandler
+{
     private static Save[] saves = new Save[3];
 
-    public static String[] getSaveNames() {
+    public static String[] getSaveNames()
+    {
         String[] saveNames = new String[3];
-        try {
+        try
+        {
             readSavesToLocal();
-            
-            for (int i = 0; i < 3; i++) {
-                if (saves[i] != null) {
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (saves[i] != null)
+                {
                     saveNames[i] = saves[i].getName();
-                } else {
+                }
+                else
+                {
                     saveNames[i] = null;
                 }
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            System.out.println("An error occured in SaveHandler");
             System.out.println(e);
         }
         return saveNames;
     }
 
-    public static Save readSave(int index) {
+    public static Save readSave(int index)
+    {
         Save save = null;
 
-        try {
+        try
+        {
             readSavesToLocal();
 
             save = saves[index - 1];
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            System.out.println("An error occured in SaveHandler");
+
             System.out.println(e);
         }
-        if (save == null) {
+        if (save == null)
+        {
             System.out.println("Save is empty");
         }
 
         return save;
     }
 
-    public static void writeSave(Save save, int index) {
-        try {
+    public static void writeSave(Save save, int index)
+    {
+        try
+        {
             readSavesToLocal();
 
             saves[index - 1] = save;
@@ -60,24 +79,33 @@ public class SaveHandler {
             writer.close();
 
             System.out.println("Wrote to: " + index);
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
+            System.out.println("An error occured in SaveHandler");
+
             System.out.println(e);
         }
     }
 
-    private static void readSavesToLocal() throws Exception {
+    private static void readSavesToLocal() throws Exception
+    {
         Gson gson = new Gson();
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 3; i++)
+        {
             String path = "Save" + i + ".txt";
             JsonReader reader = new JsonReader(new FileReader(path));
 
             Save[] tempArray = new Save[1];
             tempArray = gson.fromJson(reader, Save[].class);
 
-            if (tempArray != null) {
+            if (tempArray != null)
+            {
                 saves[i - 1] = tempArray[0];
-            } else {
+            }
+            else
+            {
                 saves[i - 1] = null;
             }
         }

@@ -47,7 +47,7 @@ public class Highscore
         }
         catch (IOException e)
         {
-            System.out.println("An error occurred.");
+            System.out.println("An error occurred in Highscore.");
             e.printStackTrace();
         }
         highscore = result;
@@ -75,7 +75,7 @@ public class Highscore
             }
             catch (IOException e)
             {
-                System.out.println("An error occurred.");
+                System.out.println("An error occurred. in Highscore");
                 e.printStackTrace();
             }
         }

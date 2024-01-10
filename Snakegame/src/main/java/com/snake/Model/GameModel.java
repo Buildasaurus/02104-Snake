@@ -66,21 +66,26 @@ public class GameModel
         this.columnCount = Settings.columnCount;
 
         board = new Tile[rowCount][columnCount];
-        for (SnakeTile snakeTile : gameState.getSnakeTiles()) {
+        for (SnakeTile snakeTile : gameState.getSnakeTiles())
+        {
             board[snakeTile.getPosition().y][snakeTile.getPosition().x] = snakeTile;
         }
-        for (Apple apple : gameState.getApples()) {
+        for (Apple apple : gameState.getApples())
+        {
             board[apple.getPosition().y][apple.getPosition().x] = apple;
         }
-        for (Cherry cherry : gameState.getCherries()) {
+        for (Cherry cherry : gameState.getCherries())
+        {
             board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
         }
-        for (Wall wall : gameState.getWalls()) {
+        for (Wall wall : gameState.getWalls())
+        {
             board[wall.getPosition().y][wall.getPosition().x] = wall;
         }
 
         players = gameState.getPlayers();
-        for (Snake player : players) {
+        for (Snake player : players)
+        {
             player.setBoard(board);
         }
     }
@@ -193,8 +198,8 @@ public class GameModel
             }
             catch (Exception e)
             {
-                System.out.println(e);
                 System.out.println("Your constructor stuff in gamemodel doesn't work...");
+                System.out.println(e);
             }
         }
     }
@@ -265,20 +270,25 @@ public class GameModel
         return players.length;
     }
 
-    public GameState getGameState() {
+    public GameState getGameState()
+    {
         ArrayList<SnakeTile> snakeTiles = new ArrayList<>();
         ArrayList<Apple> apples = new ArrayList<>();
         ArrayList<Cherry> cherries = new ArrayList<>();
         ArrayList<Wall> walls = new ArrayList<>();
 
-        for (int i = 0; i < board.length; i++) {
-            for (int n = 0; n < board[i].length; n++) {
-                if (board[i][n] != null) {
-                    switch (board[i][n].tileType) {
+        for (int i = 0; i < board.length; i++)
+        {
+            for (int n = 0; n < board[i].length; n++)
+            {
+                if (board[i][n] != null)
+                {
+                    switch (board[i][n].tileType)
+                    {
                         case Snakehead:
                         case Snakebody:
                         case Snaketail:
-                            board[i][n].position = new Vector(n,i);
+                            board[i][n].position = new Vector(n, i);
                             snakeTiles.add((SnakeTile) board[i][n]);
                             break;
 
@@ -291,10 +301,10 @@ public class GameModel
                             break;
 
                         case Wall:
-                            board[i][n].position = new Vector(n,i);
+                            board[i][n].position = new Vector(n, i);
                             walls.add((Wall) board[i][n]);
                             break;
-                    
+
                         default:
                             break;
                     }
