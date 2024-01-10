@@ -123,7 +123,7 @@ public class SaveHandler
         for (int i = 0; i < 4; i++) {
             path = "Saves" + i + ".json";
             File myObj = new File(path);
-            if (myObj.exists() && !myObj.isDirectory()) {
+            if (!myObj.exists() && !myObj.isDirectory()) {
                 myObj.createNewFile();
                 System.out.println("created file: " + path);
             }
