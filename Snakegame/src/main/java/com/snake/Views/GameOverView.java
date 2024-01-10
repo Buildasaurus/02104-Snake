@@ -2,9 +2,11 @@ package com.snake.Views;
 
 import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
+import com.snake.Model.Highscore;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class GameOverView extends ButtonOverlayView {  
@@ -21,7 +23,15 @@ public class GameOverView extends ButtonOverlayView {
     public void initialize(GUIController controller) {
         setBackground(new Color(0.5, 0.0, 0.0, 0.3));
 
-        OurButton newGameButton = new OurButton("newGamebutton");
+        Highscoretext score = new Highscoretext("Your score: " + controller.getGameController().getCurrentScore(focusElementIndex));
+        Highscoretext highscore = new Highscoretext("Highscore: " + Highscore.getHighscore());
+
+        VBox scorebox = new VBox(6);
+        
+        scorebox.getChildren().addAll(score,highscore);
+        getChildren().add(scorebox);
+
+        OurButton newGameButton = new OurButton("New Game");
         buttons[0] = newGameButton;
         
         OurButton loadGameButton = new OurButton("Load Game");
@@ -38,6 +48,7 @@ public class GameOverView extends ButtonOverlayView {
         hideButton.setOnAction(controller::handleHideButtonPressed);
 
         setBasicFormatting();
+
 
         Platform.runLater(() -> newGameButton.requestFocus());
     }
