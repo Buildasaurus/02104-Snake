@@ -171,8 +171,14 @@ public class GameModel
             if (snake.isAlive())
             {
                 snake.calculateNextFrame(willClear[j]);
-                if (snake.Fruiteaten() != null)
+                if (snake.Fruiteaten() != null) {
                     fruitsToRespawn.add(snake.Fruiteaten());
+                    if (snake.Fruiteaten().tileType == TileType.Banana) {
+                        for (Snake player : players) {
+                            player.setSpeed(player.getSpeed() - 1);
+                        }
+                    }
+                }
             }
             else
             {
