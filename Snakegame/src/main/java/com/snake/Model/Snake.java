@@ -239,6 +239,18 @@ public class Snake
         return tail;
     }
 
+    public Vector getNextTailPosition()
+    {
+        if (snakeIsAlive)
+        {
+            return tail.add(tailDirection).modulo(Settings.columnCount, Settings.rowCount);
+        }
+        else
+        {
+            return tail;
+        }
+    }
+
     public void setTailDirectionPosition(Vector direction)
     {
         this.tailDirection = direction;

@@ -1,10 +1,13 @@
 package com.snake.Views;
 
+import java.util.ArrayList;
 import com.snake.Settings;
 import com.snake.Model.Tile;
+import com.snake.Model.Vector;
 import com.snake.Model.Wall;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -21,6 +24,7 @@ public class GameView extends GridPane
     int height;
     int width;
     int extraVisionDepth = 2;
+    Node[][] nodes;
 
     /**
      * Initialises the board with a height and width.
@@ -30,7 +34,7 @@ public class GameView extends GridPane
      * @param height The height of the board in pixels
      * @param width The width of the board in pixels
      */
-    public GameView(int height, int width)
+    public GameView(int height, int width, Tile[][] board)
     {
         this.height = height;
         this.width = width;
@@ -38,7 +42,7 @@ public class GameView extends GridPane
                                                                   // "extravision" is
         // turned on
         this.columnCount = Settings.columnCount + extraVisionDepth * 2;
-        initialize();
+        initialize(board);
     }
 
     boolean firstUdpdate = true;
@@ -46,8 +50,9 @@ public class GameView extends GridPane
     /**
      * Initializes the board with the height and width stored.
      */
-    public void initialize()
+    public void initialize(Tile[][] board)
     {
+        nodes = new Node[rowCount][columnCount];
         this.getColumnConstraints().clear();
         this.getRowConstraints().clear();
 
@@ -91,69 +96,115 @@ public class GameView extends GridPane
                 }
                 isLastDark = !isLastDark;
                 this.add(bgCell, column, row);
+
             }
+        }
+        // Save all nodes for later easy access.
+        for (Node node : this.getChildren())
+        {
+            nodes[GridPane.getRowIndex(node)][GridPane.getColumnIndex(node)] = node;
+            refreshPoint(new Vector(GridPane.getColumnIndex(node), GridPane.getRowIndex(node)),
+                    board, Settings.getGameSettings().getExtraVision());
+
         }
     }
 
-    public void update(Tile[][] board)
+    public void update(Tile[][] board, ArrayList<Vector> relevantPositions)
     {
-
         // This variable might change from frame to frame, so
         boolean extraVision = Settings.getGameSettings().getExtraVision();
         System.out.println("update");
         if (board != null)
         {
-            ObservableList<Node> panes = this.getChildren();
-
-            for (Node node : panes)
+            for (Vector position : relevantPositions)
             {
-                Pane pane = (Pane) node;
-                int row = GridPane.getRowIndex(pane) - extraVisionDepth;
-                int column = GridPane.getColumnIndex(pane) - extraVisionDepth;
-
-
-                // if is on edge, set visible to whether extravision is true. Also these squares are
-                // special
-                if (row < 0 || row > rowCount - 1 - extraVisionDepth * 2 || column < 0
-                        || column > columnCount - 1 - extraVisionDepth * 2)
-                {
-                    column = column < 0 ? columnCount - extraVisionDepth * 2 + column : column;
-                    column = column > columnCount - 1 - extraVisionDepth * 2
-                            ? column - (columnCount - extraVisionDepth * 2)
-                            : column;
-
-                    row = row < 0 ? rowCount - extraVisionDepth * 2 + row : row;
-                    row = row > rowCount - 1 - extraVisionDepth * 2
-                            ? row - (rowCount - extraVisionDepth * 2)
-                            : row;
-                    pane.setVisible(extraVision);
-                    pane.setOpacity(0.6);
-                }
-                Tile tile = board[rowCount - 1 - extraVisionDepth * 2 - row][column];
-
-                if (tile instanceof Wall && !firstUdpdate)
-                {
-                    firstUdpdate = false;
-                    continue;
-                }
-                pane.getChildren().clear();
-                // Label text = new Label(getColumnIndex(pane) + " " + getRowIndex(pane) + " : " +
-                // column + " " + row);
-                // pane.getChildren().add(text);
-                if (tile != null)
-                {
-                    ImageView imageView = tile.getImage();
-                    imageView.setFitWidth(height / rowCount);
-                    imageView.setPreserveRatio(true);
-
-                    pane.getChildren().add(imageView);
-                }
+                updatePoint(position, board, extraVision);
             }
         }
         else
         {
             System.out.println("board isnull");
 
+        }
+    }
+
+
+    public void refreshPoint(Vector position, Tile[][] board, boolean extraVision)
+    {
+        Pane pane = (Pane) nodes[position.y][position.x];
+        int row = getRowIndex(pane) - extraVisionDepth;
+        int column = getColumnIndex(pane) - extraVisionDepth;
+
+
+        // if is on edge, set visible to whether extravision is true. Also these squares are
+        // special
+        if (row < 0 || row > rowCount - 1 - extraVisionDepth * 2 || column < 0
+                || column > columnCount - 1 - extraVisionDepth * 2)
+        {
+            column = column < 0 ? columnCount - extraVisionDepth * 2 + column : column;
+            column = column > columnCount - 1 - extraVisionDepth * 2
+                    ? column - (columnCount - extraVisionDepth * 2)
+                    : column;
+
+            row = row < 0 ? rowCount - extraVisionDepth * 2 + row : row;
+            row = row > rowCount - 1 - extraVisionDepth * 2
+                    ? row - (rowCount - extraVisionDepth * 2)
+                    : row;
+            pane.setVisible(extraVision);
+            pane.setOpacity(0.6);
+        }
+        Tile tile = board[row][column];
+
+        pane.getChildren().clear();
+        Label text = new Label(
+                getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
+        pane.getChildren().add(text);
+        if (tile != null)
+        {
+            ImageView imageView = tile.getImage();
+            imageView.setFitWidth(height / rowCount);
+            imageView.setPreserveRatio(true);
+
+            pane.getChildren().add(imageView);
+        }
+    }
+
+    public void updatePoint(Vector position, Tile[][] board, boolean extraVision)
+    {
+        Vector gridCoordinate = position.add(extraVisionDepth);
+        ArrayList<Vector> gridPositions = new ArrayList<Vector>();
+        gridPositions.add(gridCoordinate);
+        if (extraVision)
+        {
+            // if is on edge, Several panes should be refreshed, if extravision is true
+            if (position.x < extraVisionDepth)
+            {
+                gridPositions
+                        .add(new Vector(Settings.columnCount + gridCoordinate.x, gridCoordinate.y));
+            }
+            if (position.y < extraVisionDepth)
+            {
+                gridPositions
+                        .add(new Vector(gridCoordinate.x, Settings.rowCount + gridCoordinate.y));
+            }
+            if (position.y >= Settings.rowCount - extraVisionDepth)
+            {
+                gridPositions
+                        .add(new Vector(gridCoordinate.x, gridCoordinate.y - Settings.rowCount));
+
+            }
+            if (position.x >= Settings.columnCount - extraVisionDepth)
+            {
+                gridPositions
+                        .add(new Vector(gridCoordinate.x - Settings.columnCount, gridCoordinate.y));
+
+            }
+
+        }
+
+        for (Vector vector : gridPositions)
+        {
+            refreshPoint(vector, board, extraVision);
         }
     }
 }

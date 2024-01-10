@@ -22,17 +22,20 @@ public class GameController implements IController
 
     public GameController(int width, int height)
     {
-        this.view = new GameView(width, height);
         this.model = new GameModel();
+        this.view = new GameView(width, height, model.getBoard());
 
-        view.update(model.getBoard());
+
+        view.update(model.getBoard(), model.getChangedPositions());
     }
 
-    public GameController(int width, int height, GameState gameState) {
-        this.view = new GameView(height, width);
+    public GameController(int width, int height, GameState gameState)
+    {
         this.model = new GameModel(gameState);
+        this.view = new GameView(height, width, model.getBoard());
 
-        view.update(model.getBoard());
+
+        view.update(model.getBoard(), model.getChangedPositions());
     }
 
     public boolean executeNextStep(ArrayList<Integer> updateList)
@@ -47,7 +50,7 @@ public class GameController implements IController
         }
         else
         {
-            view.update(model.getBoard());
+            view.update(model.getBoard(), model.getChangedPositions());
             return false;
         }
     }
@@ -72,16 +75,16 @@ public class GameController implements IController
         switch (key.getCode())
         {
             case UP:
-                model.setDirection(new Vector(0, 1), 0);
-                break;
-            case W:
-                model.setDirection(new Vector(0, 1), 1);
-                break;
-            case DOWN:
                 model.setDirection(new Vector(0, -1), 0);
                 break;
-            case S:
+            case W:
                 model.setDirection(new Vector(0, -1), 1);
+                break;
+            case DOWN:
+                model.setDirection(new Vector(0, 1), 0);
+                break;
+            case S:
+                model.setDirection(new Vector(0, 1), 1);
                 break;
             case LEFT:
                 model.setDirection(new Vector(-1, 0), 0);
@@ -102,10 +105,10 @@ public class GameController implements IController
                 model.setDirection(new Vector(-1, 0), 2);
                 break;
             case Y:
-                model.setDirection(new Vector(0, 1), 2);
+                model.setDirection(new Vector(0, -1), 2);
                 break;
             case H:
-                model.setDirection(new Vector(0, -1), 2);
+                model.setDirection(new Vector(0, 1), 2);
                 break;
             default:
                 break;
