@@ -46,6 +46,7 @@ public class LevelGenerator
         }
         regions = getRegions(map);
         System.out.println("regionCount after" + regions.size());
+        removeSuicideCells(map);
         // the number of free square in a central square
         int margin = 8;
         // illegal squares, that are to be ignored
@@ -79,7 +80,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(seed);
+        Random rand = new Random(127952939);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -152,6 +153,75 @@ public class LevelGenerator
             }
         }
         return tilesInRegion;
+    }
+
+
+    /**
+     * Finds all cells that have 3 neighboring cells - not on the diagonal. If this is the case,
+     * then it makes sure to fill that cell, and any surrounding cells, that perheaps then also
+     * become suicide cells
+     *
+     * @param map The map in which to remove the suicide cells.
+     */
+    private static boolean[][] removeSuicideCells(boolean[][] map)
+    {
+        for (int row = 0; row < height; row++)
+        {
+            for (int column = 0; column < width; column++)
+            {
+                Vector newPoint = new Vector(column, row);
+                if (!map[row][column] && getHorisontalNeighbors(map, newPoint) > 2)
+                {
+                    map = removeSuicideCell(map, newPoint);
+                }
+            }
+        }
+        return map;
+    }
+
+    private static Vector[] horisontalDirections =
+    {new Vector(1, 0), new Vector(0, 1), new Vector(-1, 0), new Vector(0, -1)};
+
+    /**
+     * Removes a suicide cell at a given point, and recursively any possible sucide cells around it.
+     *
+     * @param map
+     * @param point
+     * @return
+     */
+    private static boolean[][] removeSuicideCell(boolean[][] map, Vector point)
+    {
+        System.out.println("removed suicide cell at " + point);
+        map[point.y][point.x] = true;
+
+        for (Vector vector : horisontalDirections)
+        {
+            vector = point.add(vector).modulo(width, height);
+            if (!map[vector.y][vector.x] && getHorisontalNeighbors(map, vector) > 2)
+            {
+                removeSuicideCell(map, vector);
+            }
+        }
+        return map;
+    }
+
+    /**
+     * Calculates how many horisontal neighbors a cell have at a given point.
+     *
+     * @param map
+     * @param point
+     * @return Returns the neighborCount
+     */
+    private static int getHorisontalNeighbors(boolean[][] map, Vector vector)
+    {
+        int horisontalNeighborCount = 0;
+
+        for (Vector direction : horisontalDirections)
+        {
+            direction = vector.add(direction).modulo(width, height);
+            horisontalNeighborCount += map[direction.y][direction.x] ? 1 : 0;
+        }
+        return horisontalNeighborCount;
     }
 
     /**

@@ -1,8 +1,7 @@
 package com.snake;
 
 import java.net.URL;
-
-import javafx.event.ActionEvent;
+import com.snake.Views.SelectionButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -31,7 +30,7 @@ public class CustomHBox extends HBox{
         action.setVisible(false);
 
         if (previousButtonPressed != null) {
-            previousButtonPressed.setVisible(true); 
-        }   
-    }  
+            previousButtonPressed.setVisible(true);
+        }
+    }
 }
