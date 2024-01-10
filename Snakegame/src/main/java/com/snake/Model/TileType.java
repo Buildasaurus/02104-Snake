@@ -7,6 +7,7 @@ public enum TileType {
     Snakebody,
     Snaketail,
     Apple,
+    Banana,
     Cherry,
     Wall
 }
