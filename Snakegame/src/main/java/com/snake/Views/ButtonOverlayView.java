@@ -12,8 +12,8 @@ import javafx.scene.text.Font;
 
 public abstract class ButtonOverlayView extends StackPane
 {
-    Button[] buttons;
-    int focusElementIndex;
+    protected Button[] buttons;
+    protected int focusElementIndex;
 
     public void setBackground(Color overlayColor)
     {

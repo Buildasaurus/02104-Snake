@@ -15,7 +15,7 @@ public class LoadController implements IController {
     LoadView view;
 
     public LoadController() {
-        this.view = new LoadView(this);
+        this.view = new LoadView(this, SaveHandler.getSaveNames());
 
         view.setOnKeyPressed(this::handleKeyPressed);
     }
@@ -41,9 +41,11 @@ public class LoadController implements IController {
 
         Save save = SaveHandler.readSave(saveName);
         
-        Settings.setGameSettings(save.getGameSettings());
-        GUIController newController = new GUIController(save.getGameState());
-        App.setRoot(newController);
+        if (save != null) {
+            Settings.setGameSettings(save.getGameSettings());
+            GUIController newController = new GUIController(save.getGameState());
+            App.setRoot(newController);
+        }
     }
 
     public void handleBackButtonPressed(ActionEvent action) {

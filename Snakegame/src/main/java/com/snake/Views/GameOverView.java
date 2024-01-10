@@ -1,18 +1,10 @@
 package com.snake.Views;
 
-import java.net.URL;
-
 import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.paint.Color;
 
 public class GameOverView extends ButtonOverlayView {  

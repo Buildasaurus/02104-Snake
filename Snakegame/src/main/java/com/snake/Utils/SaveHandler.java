@@ -37,15 +37,17 @@ public class SaveHandler {
             readSavesToLocal();
 
             for (int i = 0; i < 3; i++) {
-                if (saves[i].getName().equals(saveName)); {
-                    save = saves[i];
+                if (saves[i] != null) {
+                    if (saves[i].getName().equals(saveName)) {
+                        save = saves[i];
+                    }
                 }
             }
         } catch (Exception e) {
             System.out.println(e);
         }
         if (save == null) {
-            System.out.println("Couldn't find save");
+            System.out.println("Couldn't find save or save is empty");
         }
 
         return save;
@@ -57,12 +59,15 @@ public class SaveHandler {
 
             saves[index - 1] = save;
 
-            Gson gson = new Gson();
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+
             String path = "Save" + index + ".txt";
             FileWriter writer = new FileWriter(path);
             gson.toJson(saves, writer);
             writer.flush();
             writer.close();
+
             System.out.println("Wrote to: " + index);
         } catch (Exception e) {
             System.out.println(e);
@@ -71,7 +76,6 @@ public class SaveHandler {
 
     private static void readSavesToLocal() throws Exception {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(Tile.class, new TileInstanceCreator());
         Gson gson = gsonBuilder.create();
 
         for (int i = 1; i <= 3; i++) {

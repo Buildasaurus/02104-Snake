@@ -9,8 +9,6 @@ import javafx.scene.image.ImageView;
 
 public abstract class Fruit extends Tile
 {
-    protected Vector fruitposition;
-
     public Fruit(TileType type)
     {
 
@@ -22,15 +20,10 @@ public abstract class Fruit extends Tile
 
     public abstract void doEffect(Snake snake);
 
-    public Vector getPosition()
-    {
-        return fruitposition;
-    }
-
     public void setRandomPosition()
     {
         Random randint = new Random();
-        fruitposition = new Vector(randint.nextInt(Settings.columnCount),
+        position = new Vector(randint.nextInt(Settings.columnCount),
                 randint.nextInt(Settings.rowCount));
     }
 
