@@ -7,6 +7,7 @@ public class Settings
     public static int windowHeight = (int)Math.round(480*1.5);
     public static int windowWidth = (int)Math.round(640*1.5);
 
+
     public static int rowCount = 40;
     public static int columnCount = 40;
 

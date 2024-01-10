@@ -25,6 +25,11 @@ public class MenuController implements IController {
         App.setRoot(newController);
     }
 
+    public void handleLoadButtonPressed(ActionEvent action) {
+        LoadController newController = new LoadController();
+        App.setRoot(newController);
+    }
+
     public void handleExitButtonPressed(ActionEvent action) {
         Platform.exit();
     }
