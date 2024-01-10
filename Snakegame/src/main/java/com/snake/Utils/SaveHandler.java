@@ -38,6 +38,21 @@ public class SaveHandler
         return saveNames;
     }
 
+    public static boolean isSavePresent(int index) {
+        boolean res = false;
+
+        try {
+            readSavesToLocal();
+
+            if (saves[index - 1] != null) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return res;
+    }
+
     public static Save readSave(int index)
     {
         Save save = null;
@@ -72,9 +87,9 @@ public class SaveHandler
 
             Gson gson = new Gson();
 
-            String path = "Save" + index + ".txt";
+            String path = "Save" + index + ".json";
             FileWriter writer = new FileWriter(path);
-            gson.toJson(saves, writer);
+            gson.toJson(saves[index - 1], writer);
             writer.flush();
             writer.close();
 
@@ -94,20 +109,10 @@ public class SaveHandler
 
         for (int i = 1; i <= 3; i++)
         {
-            String path = "Save" + i + ".txt";
+            String path = "Save" + i + ".json";
             JsonReader reader = new JsonReader(new FileReader(path));
 
-            Save[] tempArray = new Save[1];
-            tempArray = gson.fromJson(reader, Save[].class);
-
-            if (tempArray != null)
-            {
-                saves[i - 1] = tempArray[0];
-            }
-            else
-            {
-                saves[i - 1] = null;
-            }
+            saves[i - 1] = gson.fromJson(reader, Save.class);
         }
     }
 }
