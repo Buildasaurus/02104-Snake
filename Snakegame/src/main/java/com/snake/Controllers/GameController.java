@@ -70,6 +70,10 @@ public class GameController implements IController
         return model.getPlayerCount();
     }
 
+    public GameState getGameState() {
+        return model.getGameState();
+    }
+
     public void handleKeyPressed(KeyEvent key)
     {
         switch (key.getCode())
