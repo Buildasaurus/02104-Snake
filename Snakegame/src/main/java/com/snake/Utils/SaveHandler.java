@@ -28,24 +28,18 @@ public class SaveHandler {
         return saveNames;
     }
 
-    public static Save readSave(String saveName) {
+    public static Save readSave(int index) {
         Save save = null;
 
         try {
             readSavesToLocal();
 
-            for (int i = 0; i < 3; i++) {
-                if (saves[i] != null) {
-                    if (saves[i].getName().equals(saveName)) {
-                        save = saves[i];
-                    }
-                }
-            }
+            save = saves[index - 1];
         } catch (Exception e) {
             System.out.println(e);
         }
         if (save == null) {
-            System.out.println("Couldn't find save or save is empty");
+            System.out.println("Save is empty");
         }
 
         return save;

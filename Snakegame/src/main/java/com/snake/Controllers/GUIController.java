@@ -3,7 +3,6 @@ package com.snake.Controllers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Set;
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;

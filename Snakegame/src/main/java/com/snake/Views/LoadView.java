@@ -35,7 +35,8 @@ public class LoadView extends ButtonOverlayView {
 
     public void updateButtonNames(String[] newNames) {
         for (int i = 0; i < 3; i++) {
-            String buttonName = newNames[i] != null ? newNames[i] : "Empty Save";
+            String buttonName = "" + (i + 1) + " ";
+            buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
 
             buttons[i].setText(buttonName);
         }

@@ -38,8 +38,9 @@ public class LoadController implements IController {
     public void handleLoadSaveButtonPressed(ActionEvent action) {
         Button actionOrigin = (Button) action.getSource();
         String saveName = actionOrigin.getText();
+        int index = Integer.parseInt(saveName.substring(0, 1));
 
-        Save save = SaveHandler.readSave(saveName);
+        Save save = SaveHandler.readSave(index);
         
         if (save != null) {
             Settings.setGameSettings(save.getGameSettings());
