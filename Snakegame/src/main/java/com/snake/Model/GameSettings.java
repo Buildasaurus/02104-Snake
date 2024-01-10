@@ -1,7 +1,11 @@
 package com.snake.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameSettings
 {
+    private List<Runnable> listeners = new ArrayList<>();
     public final static int maxPlayerCount = 3;
     private GameMode gameMode;
     private Level level;
@@ -145,8 +149,23 @@ public class GameSettings
             }
         }
     }
+
     public boolean getExtraVision()
     {
         return extraVision;
+    }
+
+    public void setExtraVision(boolean value)
+    {
+        extraVision = value;
+        for (Runnable listener : listeners)
+        {
+            listener.run();
+        }
+    }
+
+    public void addExtraVisionListener(Runnable listener)
+    {
+        listeners.add(listener);
     }
 }

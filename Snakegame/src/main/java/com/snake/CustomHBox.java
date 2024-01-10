@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 public class CustomHBox extends HBox{
 
     String boxlabel;
-    
+
     public CustomHBox(String boxlabel){
 
         super(15);
@@ -26,5 +26,5 @@ public class CustomHBox extends HBox{
         setStyle("-fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-position: fixed");
 
     }
-    
+
 }
