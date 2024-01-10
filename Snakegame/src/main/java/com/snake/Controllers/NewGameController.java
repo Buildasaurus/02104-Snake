@@ -10,6 +10,7 @@ import com.snake.Views.NewGameView;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
 public class NewGameController implements IController
