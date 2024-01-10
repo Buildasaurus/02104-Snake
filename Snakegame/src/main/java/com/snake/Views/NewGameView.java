@@ -4,13 +4,21 @@ import java.net.URL;
 
 import com.snake.CustomHBox;
 import com.snake.OurButton;
+import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
+import javafx.scene.transform.Scale;
 
 public class NewGameView extends StandardBackground
 {
@@ -30,6 +38,7 @@ public class NewGameView extends StandardBackground
 
 
         playerselection = new CustomHBox("Players");
+
 
         for (int i : playerCounts)
         {
