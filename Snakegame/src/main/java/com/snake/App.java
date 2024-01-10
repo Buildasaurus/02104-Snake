@@ -36,4 +36,10 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public void stop()
+    {
+        System.out.println(controller);
+        System.out.println("closing app");
+    }
 }
