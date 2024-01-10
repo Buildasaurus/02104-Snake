@@ -21,8 +21,8 @@ public class SelectionButton extends Button {
     private double scaler = 6.0;
 
     private URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-    
-    public  SelectionButton(String buttonName) 
+
+    public  SelectionButton(String buttonName)
 
     {
         super(buttonName);
@@ -33,12 +33,12 @@ public class SelectionButton extends Button {
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
-        setStyle("-fx-cursor: hand; -fx-font-size: 50");
+        setStyle("-fx-cursor: hand; -fx-font-size: 30");
         setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
-       
-  
+
+
     }
-    
+
     public void changeback(){
         setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
     }
