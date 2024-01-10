@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.Settings;
 import com.snake.Model.Tile;
-
+import com.snake.Model.Wall;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -20,6 +20,7 @@ public class GameView extends GridPane
     int columnCount;
     int height;
     int width;
+    int extraVisionDepth = 2;
 
     /**
      * Initialises the board with a height and width.
@@ -33,10 +34,14 @@ public class GameView extends GridPane
     {
         this.height = height;
         this.width = width;
-        this.rowCount = Settings.rowCount;
-        this.columnCount = Settings.columnCount;
+        this.rowCount = Settings.rowCount + extraVisionDepth * 2; // +2 because this is for when
+                                                                  // "extravision" is
+        // turned on
+        this.columnCount = Settings.columnCount + extraVisionDepth * 2;
         initialize();
     }
+
+    boolean firstUdpdate = true;
 
     /**
      * Initializes the board with the height and width stored.
@@ -57,80 +62,98 @@ public class GameView extends GridPane
             this.getRowConstraints().add(row);
         }
 
-        BackgroundFill bgFillDark = new BackgroundFill(new Color(0,0.6,0.1,1), null, getInsets());
-        BackgroundFill bgFillLight = new BackgroundFill(new Color(0,0.5,0.1,1), null, getInsets());
+        BackgroundFill bgFillDark =
+                new BackgroundFill(new Color(0, 0.6, 0.1, 1), null, getInsets());
+        BackgroundFill bgFillLight =
+                new BackgroundFill(new Color(0, 0.5, 0.1, 1), null, getInsets());
         Background bgDark = new Background(bgFillDark);
         Background bgLight = new Background(bgFillLight);
         boolean isLastDark = false;
-        for (int i = 0; i < rowCount; i++) {
-            for (int n = 0; n < columnCount; n++) {
+        for (int row = 0; row < rowCount; row++)
+        {
+            for (int column = 0; column < columnCount; column++)
+            {
                 Pane bgCell = new Pane();
-                if (i != 0 && n == 0) {
-                    if (rowCount % 2 == 0) {
-                        if (isLastDark) {
-                            isLastDark = false;
-                        } else {
-                            isLastDark = true;
-                        }
+                if (row != 0 && column == 0)
+                {
+                    if (rowCount % 2 == 0)
+                    {
+                        isLastDark = !isLastDark;
                     }
                 }
-                if (isLastDark) {
+                if (isLastDark)
+                {
                     bgCell.setBackground(bgLight);
-                    isLastDark = false;
-                } else {
-                    bgCell.setBackground(bgDark);
-                    isLastDark = true;
                 }
-                this.add(bgCell, i, n);
+                else
+                {
+                    bgCell.setBackground(bgDark);
+                }
+                isLastDark = !isLastDark;
+                this.add(bgCell, column, row);
             }
         }
     }
 
     public void update(Tile[][] board)
     {
+
+        // This variable might change from frame to frame, so
+        boolean extraVision = Settings.getGameSettings().getExtraVision();
+        System.out.println("update");
         if (board != null)
         {
-            //this.getChildren().clear(); // Clear the current view
-
-            /* */
             ObservableList<Node> panes = this.getChildren();
 
-            for (Node node : panes) {
+            for (Node node : panes)
+            {
                 Pane pane = (Pane) node;
+                int row = GridPane.getRowIndex(pane) - extraVisionDepth;
+                int column = GridPane.getColumnIndex(pane) - extraVisionDepth;
+
+
+                // if is on edge, set visible to whether extravision is true. Also these squares are
+                // special
+                if (row < 0 || row > rowCount - 1 - extraVisionDepth * 2 || column < 0
+                        || column > columnCount - 1 - extraVisionDepth * 2)
+                {
+                    column = column < 0 ? columnCount - extraVisionDepth * 2 + column : column;
+                    column = column > columnCount - 1 - extraVisionDepth * 2
+                            ? column - (columnCount - extraVisionDepth * 2)
+                            : column;
+
+                    row = row < 0 ? rowCount - extraVisionDepth * 2 + row : row;
+                    row = row > rowCount - 1 - extraVisionDepth * 2
+                            ? row - (rowCount - extraVisionDepth * 2)
+                            : row;
+                    pane.setVisible(extraVision);
+                    pane.setOpacity(0.6);
+                }
+                Tile tile = board[rowCount - 1 - extraVisionDepth * 2 - row][column];
+
+                if (tile instanceof Wall && !firstUdpdate)
+                {
+                    firstUdpdate = false;
+                    continue;
+                }
                 pane.getChildren().clear();
-                int row = GridPane.getRowIndex(pane);
-                int column = GridPane.getColumnIndex(pane);
-                if (board[rowCount - 1 - row][column] != null) {
-                    ImageView imageView = board[rowCount - 1 - row][column].getImage();
+                // Label text = new Label(getColumnIndex(pane) + " " + getRowIndex(pane) + " : " +
+                // column + " " + row);
+                // pane.getChildren().add(text);
+                if (tile != null)
+                {
+                    ImageView imageView = tile.getImage();
                     imageView.setFitWidth(height / rowCount);
                     imageView.setPreserveRatio(true);
+
                     pane.getChildren().add(imageView);
                 }
             }
-
-            /*
-            for (int row = 0; row < rowCount; row++)
-            {
-                for (int column = 0; column < columnCount; column++)
-                {
-                    // Text text = new Text(x + " " + y);
-                    // this.add(text, x, 7 - y);
-                    if (board[row][column] != null)
-                    {
-                        ImageView imageView = board[row][column].getImage();
-                        imageView.setFitWidth(height / rowCount);
-                        imageView.setPreserveRatio(true);
-                        this.add(imageView, column, rowCount - row);
-                    }
-                }
-            }
-            */
         }
         else
         {
             System.out.println("board isnull");
 
         }
-
     }
 }

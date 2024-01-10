@@ -26,7 +26,7 @@ public class GameModel
     {
         this.rowCount = Settings.rowCount;
         this.columnCount = Settings.columnCount;
-        Vector midpoint = new Vector(rowCount / 2, columnCount / 2);
+        Vector midpoint = new Vector(columnCount / 2, rowCount / 2);
         board = new Tile[rowCount][columnCount];
         players = new Snake[Settings.getGameSettings().getPlayerCount()];
 

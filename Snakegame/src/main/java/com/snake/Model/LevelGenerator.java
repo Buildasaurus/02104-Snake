@@ -2,15 +2,12 @@ package com.snake.Model;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.List;
 import java.util.Random;
 import com.snake.Settings;
 
 public class LevelGenerator
 {
-
-
     static int width;
     static int height;
 
@@ -35,9 +32,17 @@ public class LevelGenerator
         {
             map = simplifyNoise(map);
         }
+        ArrayList<ArrayList<Vector>> regions = getRegions(map);
+        System.out.println("regionCount before" + regions.size());
         map = connectIslands(map);
+        for (int i = 0; i < 6; i++)
+        {
+            map = simplifyNoise(map);
+        }
+        regions = getRegions(map);
+        System.out.println("regionCount after" + regions.size());
         // the number of free square in a central square
-        int margin = 4;
+        int margin = 8;
         // illegal squares, that are to be ignored
         // TODO for now just assuming height 20, width 20. Do maths later.
         Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
@@ -64,8 +69,12 @@ public class LevelGenerator
      */
     private static boolean[][] generateMap(double fillValue)
     {
-        boolean[][] randomMap = new boolean[width][height];
-        Random rand = new Random();
+        boolean[][] randomMap = new boolean[height][width];
+        // Seed 1544738215 generates two rooms.
+        Random randseedGenerator = new Random();
+        int seed = randseedGenerator.nextInt();
+        System.out.println("seed used is " + seed);
+        Random rand = new Random(seed);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -204,11 +213,175 @@ public class LevelGenerator
     private static boolean[][] connectIslands(boolean[][] map)
     {
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
-        System.out.println(regions);
-        System.out.println(regions.size());
+        double[][] distances = new double[regions.size()][regions.size()];
+
+        // foreach region, create a Room class.
+        /*
+         * for (int firstIndex = 0; firstIndex < regions.size(); firstIndex++) { for (int
+         * secondIndex = 0; secondIndex < regions.size(); secondIndex++) { if (firstIndex ==
+         * secondIndex) continue; distances[firstIndex][secondIndex] =
+         * shortestDistanceBetweenRegions( regions.get(firstIndex), regions.get(secondIndex)); } }
+         */
+        ArrayList<Region> allRooms = new ArrayList<Region>();
+        for (ArrayList<Vector> region : regions)
+        {
+            Region reg = new Region(region, map);
+            allRooms.add(reg);
+        }
+        connectRegions(allRooms, map);
+
+        // now figure out how to connect the regions in the best way, where each region is connected
+        // to the one closest to itself. This might still result it some larger regions, that again
+        // should be connected.
 
         return map;
-        // TODO write this, to make map more smooth.
+    }
+
+
+    private static void connectRegions(ArrayList<Region> allRooms, boolean[][] map)
+    {
+        List<Region> roomListA = new ArrayList<Region>();
+        List<Region> roomListB = new ArrayList<Region>();
+        roomListA = allRooms;
+        roomListB = allRooms;
+        double bestDistance = 0;
+        Vector bestTileA = new Vector();
+        Vector bestTileB = new Vector();
+        Region bestRoomA = new Region();
+        Region bestRoomB = new Region();
+        boolean possibleConnectionFound = false;
+
+        for (Region roomA : roomListA)
+        {
+            for (Region roomB : roomListB)
+            {
+                if (roomA == roomB || roomA.IsConnected(roomB))
+                {
+                    continue;
+                }
+
+                for (int tileIndexA = 0; tileIndexA < roomA.edgeTiles.size(); tileIndexA++)
+                {
+                    for (int tileIndexB = 0; tileIndexB < roomB.edgeTiles.size(); tileIndexB++)
+                    {
+                        Vector tileA = roomA.edgeTiles.get(tileIndexA);
+                        Vector tileB = roomB.edgeTiles.get(tileIndexB);
+                        double distanceBetweenRooms = tileA.distance(tileB);
+
+                        if (distanceBetweenRooms < bestDistance || !possibleConnectionFound)
+                        {
+                            bestDistance = distanceBetweenRooms;
+                            possibleConnectionFound = true;
+                            bestTileA = tileA;
+                            bestTileB = tileB;
+                            bestRoomA = roomA;
+                            bestRoomB = roomB;
+                        }
+                    }
+                }
+            }
+        }
+        // At this point, every region will be connected to the closeset region to it.
+        // Yet there might still be larger regions, now consisting of several regions
+
+        if (possibleConnectionFound) // this means there was a room that just got connected to
+                                     // another.
+        {
+            CreatePassage(bestRoomA, bestRoomB, bestTileA, bestTileB, map);
+            Region.ConnectRooms(bestRoomA, bestRoomB);
+            connectRegions(allRooms, map);
+        }
+    }
+
+    private static void CreatePassage(Region roomA, Region roomB, Vector tileA, Vector tileB,
+            boolean[][] map)
+    {
+        System.out.println(tileA + " connects to " + tileB);
+        for (int row = 0; row < height; row++)
+        {
+            for (int column = 0; column < width; column++)
+            {
+                Vector point = new Vector(column, row);
+                if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA),
+                        new DoubleVector(point)) < 2)
+                {
+                    System.out.println("creating passage at " + point);
+                    map[row][column] = false;
+                }
+            }
+        }
+    }
+
+    public static double minimumDistance(DoubleVector v, DoubleVector w, DoubleVector p)
+    {
+        double l2 = v.distance(w);
+        l2 *= l2;
+
+        if (l2 == 0.0)
+            return p.distance(v);
+
+        double t = ((p.subtract(v)).dotProduct(w.subtract(v))) / l2;
+        t = Math.max(0, Math.min(1, t));
+
+        DoubleVector projection = v.add((w.subtract(v)).multiply(t));
+
+        return p.distance(projection);
+    }
+
+    /**
+     * Calculates which elements in a graph are connected, and what regions exist.
+     *
+     * @param graph
+     * @return The regions that exists. Eg [[1,2,3][4,5]]
+     */
+    public static ArrayList<ArrayList<Integer>> getRegions(ArrayList<ArrayList<Integer>> graph)
+    {
+        ArrayList<ArrayList<Integer>> regions = new ArrayList<ArrayList<Integer>>();
+        boolean[] nodesAlreadyClassified = new boolean[graph.size()];
+        for (int nodeIndex = 0; nodeIndex < graph.size(); nodeIndex++)
+        {
+            if (!nodesAlreadyClassified[nodeIndex])
+            {
+                ArrayList<Integer> region = getRegion(nodeIndex, graph);
+                for (int nodeInRegion : region)
+                {
+                    nodesAlreadyClassified[nodeInRegion] = true;
+                }
+                regions.add(region);
+            }
+        }
+        return regions;
+    }
+
+    /**
+     * Returns an ArrayList of Vectors, that are all in the same region. A region is defined as
+     * elements that all are false in the given map, and where you can go from all elements to all
+     * elements, without going diagonally.
+     *
+     * @param startNode The start coordinate to
+     * @return
+     */
+    private static ArrayList<Integer> getRegion(int startNode, ArrayList<ArrayList<Integer>> map)
+    {
+        LinkedList<Integer> nodesToLookAt = new LinkedList<Integer>();
+        ArrayList<Integer> nodesInRegion = new ArrayList<Integer>();
+        boolean[] alreadyLookedAtMap = new boolean[map.size()];
+        alreadyLookedAtMap[startNode] = true;
+        nodesToLookAt.add(startNode);
+        while (nodesToLookAt.size() > 0)
+        {
+            int currentNode = nodesToLookAt.poll();
+            nodesInRegion.add(currentNode);
+            for (int connectedNode : map.get(currentNode))
+            {
+                if (!alreadyLookedAtMap[connectedNode])
+                {
+                    nodesToLookAt.add(connectedNode);
+                    alreadyLookedAtMap[connectedNode] = true;
+                }
+            }
+        }
+        return nodesInRegion;
     }
 
     private static boolean isInInterval(int value, Vector interval)
@@ -216,12 +389,7 @@ public class LevelGenerator
         return value > interval.x && value < interval.y;
     }
 
-    private static boolean isInRange(int x, int y, int[][] map)
-    {
-        return x > 0 && x < width && y > 0 && y < height;
-    }
-
-    private static int mod(int a, int b)
+    public static int mod(int a, int b)
     {
         int mod = a % b;
         if (mod < 0)

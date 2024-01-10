@@ -105,9 +105,9 @@ public class Snake
             return;
         }
         Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
+                head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
         Vector nextTailPosition =
-                tail.add(tailDirection).modulo(Settings.columnCount, Settings.columnCount);
+                tail.add(tailDirection).modulo(Settings.columnCount, Settings.rowCount);
         // update old head
         board[head.y][head.x] =
                 new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);

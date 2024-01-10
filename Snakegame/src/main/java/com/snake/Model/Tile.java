@@ -6,7 +6,6 @@ public abstract class Tile
 {
     protected TileType tileType;
     protected Vector position;
-    protected transient ImageView sprite;
 
     public Tile(TileType type)
     {
