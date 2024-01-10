@@ -2,8 +2,8 @@ package com.snake.Model;
 
 public class Vector
 {
-    int y;
-    int x;
+    public int y;
+    public int x;
 
     public Vector()
     {
