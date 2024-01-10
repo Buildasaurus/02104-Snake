@@ -205,7 +205,9 @@ public class GameModel
                     fruitsToRespawn.add(snake.Fruiteaten());
                     if (snake.Fruiteaten().tileType == TileType.Banana) {
                         for (Snake player : players) {
-                            player.setSpeed(player.getSpeed() - 1);
+                            if (Settings.getGameSettings().getSpeed() < player.getSpeed()) {
+                                player.setSpeed(player.getSpeed() - 1);
+                            }
                         }
                     }
                 }

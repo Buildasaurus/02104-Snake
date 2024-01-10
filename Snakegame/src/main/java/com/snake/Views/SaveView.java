@@ -2,6 +2,7 @@ package com.snake.Views;
 
 import java.util.Optional;
 
+import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
 
 import javafx.application.Platform;
@@ -29,13 +30,13 @@ public class SaveView extends ButtonOverlayView {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
         for (int i = 0; i < 3; i++) {
-            Button saveButton = new Button();
+            OurButton saveButton = new OurButton();
             buttons[i] = saveButton;
             saveButton.setOnAction(this::handleSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
-        Button backButton = new Button("Back to Pause Menu");
+        OurButton backButton = new OurButton("Back to Pause Menu");
         buttons[3] = backButton;
         backButton.setOnAction(controller::handlePauseButtonPressed);
 
@@ -56,7 +57,7 @@ public class SaveView extends ButtonOverlayView {
     }
 
     public void handleSaveButtonPressed(ActionEvent action) {
-        Button actionOrigin = (Button) action.getSource();
+        OurButton actionOrigin = (OurButton) action.getSource();
         String saveName = actionOrigin.getText();
         saveIndex = Integer.parseInt(saveName.substring(0, 1));
         controller.handleSaveButtonPressed(saveIndex);

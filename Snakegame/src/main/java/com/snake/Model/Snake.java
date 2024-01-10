@@ -11,7 +11,7 @@ public class Snake
     private Vector direction;
     private int snakeLength = 2;
     private boolean snakeIsAlive = true;
-    public Fruit fruit;
+    public transient Fruit fruit;
     public int playerNumber;
     public boolean isColliding = false;
     private double speed;

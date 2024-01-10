@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GameSettings
 {
-    private List<Runnable> listeners = new ArrayList<>();
+    private transient List<Runnable> listeners = new ArrayList<>();
     public final static int maxPlayerCount = 3;
     private GameMode gameMode;
     private Level level;
