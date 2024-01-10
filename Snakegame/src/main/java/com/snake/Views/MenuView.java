@@ -1,6 +1,7 @@
 package com.snake.Views;
 
 import com.snake.OurButton;
+import com.snake.Settings;
 import com.snake.Controllers.MenuController;
 
 import javafx.scene.image.Image;
@@ -35,17 +36,22 @@ public class MenuView extends StackPane
 
         //buttons
         OurButton playButton = new OurButton("play");
+        OurButton loadButton = new OurButton("load");
         OurButton quitButton = new OurButton("quit");
 
-
         playButton.setOnAction(controller::handlePlayButtonPressed);
+        loadButton.setOnAction(controller::handleLoadButtonPressed);
         quitButton.setOnAction(controller::handleExitButtonPressed);
 
-        playButton.setTranslateY(50);
+        //TODO fix this in another way, ideally make button and background scale the same
+        //playButton.setTranslateY(Settings.windowHeight*0.1);
         getChildren().add(playButton);
 
-        quitButton.setTranslateX(270);
-        quitButton.setTranslateY(205);
+        loadButton.setTranslateY(Settings.windowHeight*0.2);
+        getChildren().add(loadButton);
+
+        quitButton.setTranslateX(Settings.windowWidth*0.5 - (quitButton.getPrefWidth()*0.5));
+        quitButton.setTranslateY(Settings.windowHeight*0.5 - (quitButton.getPrefHeight()*0.5));
         getChildren().add(quitButton);
     }
 
