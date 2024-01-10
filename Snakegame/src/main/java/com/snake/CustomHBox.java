@@ -27,7 +27,7 @@ public class CustomHBox extends HBox{
 
     }
 
-    public void buttonPressed(SelectionButton action){
+    public void buttonPressed(Button action){
         action.setVisible(false);
 
         if (previousButtonPressed != null) {

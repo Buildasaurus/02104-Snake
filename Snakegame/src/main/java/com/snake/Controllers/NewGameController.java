@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 
 public class NewGameController implements IController
 {
@@ -95,7 +94,7 @@ public class NewGameController implements IController
     }
 
     public void handlelevel(ActionEvent action){
-        SelectionButton actionorigin = (SelectionButton) action.getSource();
+        Button actionorigin = (Button) action.getSource();
         gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
         view.maptype.buttonPressed(actionorigin);
     }
