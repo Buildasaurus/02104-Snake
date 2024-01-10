@@ -60,6 +60,13 @@ public class GameController implements IController
         return model.getSpeed(playerIndex);
     }
 
+    /**
+     * Returns the current score for the given player. Players are indexed from 0. You can use
+     * {@link #getPlayerCount()} to get the playerocunt
+     *
+     * @param player
+     * @return
+     */
     public int getCurrentScore(int player)
     {
         return model.getSnakeLength(player);
@@ -70,7 +77,8 @@ public class GameController implements IController
         return model.getPlayerCount();
     }
 
-    public GameState getGameState() {
+    public GameState getGameState()
+    {
         return model.getGameState();
     }
 
