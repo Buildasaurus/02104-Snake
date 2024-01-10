@@ -309,6 +309,8 @@ public class GUIController implements IController
 
         Save save = new Save(name, gameSettings, gameState);
         SaveHandler.writeSave(save, index);
+
+        view.updateSaveNames(SaveHandler.getSaveNames());
     }
 
     public void handleSaveMenuButtonPressed(ActionEvent action) {

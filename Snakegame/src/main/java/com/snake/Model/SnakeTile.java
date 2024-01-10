@@ -66,9 +66,9 @@ public class SnakeTile extends Tile
                     return "right";
                 else if (firstDirection.x == -1 && firstDirection.y == 0)
                     return "left";
-                else if (firstDirection.x == 0 && firstDirection.y == 1)
-                    return "up";
                 else if (firstDirection.x == 0 && firstDirection.y == -1)
+                    return "up";
+                else if (firstDirection.x == 0 && firstDirection.y == 1)
                     return "down";
                 else
                 {
@@ -80,15 +80,16 @@ public class SnakeTile extends Tile
                 firstDirection = secondDirection.multiply(-1);
                 secondDirection = temp;
             case -1:
-                // They are parallel, so now we can figure out in which direction
+                // They are not parallel. So now depending on the firstdirection, the second should
+                // change
                 if (firstDirection.x == 1 && firstDirection.y == 0)
-                    return "turn_down";
-                else if (firstDirection.x == -1 && firstDirection.y == 0)
-                    return "turn_up";
-                else if (firstDirection.x == 0 && firstDirection.y == 1)
-                    return "turn_right";
-                else if (firstDirection.x == 0 && firstDirection.y == -1)
                     return "turn_left";
+                else if (firstDirection.x == -1 && firstDirection.y == 0)
+                    return "turn_right";
+                else if (firstDirection.x == 0 && firstDirection.y == 1)
+                    return "turn_up";
+                else if (firstDirection.x == 0 && firstDirection.y == -1)
+                    return "turn_down";
                 else
                 {
                     System.out.println("vectors are weird, or something is wrong.");
@@ -110,9 +111,9 @@ public class SnakeTile extends Tile
             return "right";
         else if (direction.x == -1 && direction.y == 0)
             return "left";
-        else if (direction.x == 0 && direction.y == 1)
-            return "up";
         else if (direction.x == 0 && direction.y == -1)
+            return "up";
+        else if (direction.x == 0 && direction.y == 1)
             return "down";
         else
         {

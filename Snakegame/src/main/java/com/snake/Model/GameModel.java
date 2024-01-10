@@ -30,10 +30,13 @@ public class GameModel
         board = new Tile[rowCount][columnCount];
         players = new Snake[Settings.getGameSettings().getPlayerCount()];
 
+        changedTiles = new ArrayList<>();
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
             players[i] = new Snake(board, midpoint.add(0, i * 2), midpoint.add(-1, i * 2),
                     new Vector(1, 0), i);
+            changedTiles.add(midpoint.add(0, i * 2));
+            changedTiles.add(midpoint.add(-1, i * 2));
         }
 
         // level generation
@@ -43,6 +46,8 @@ public class GameModel
         {
             apple.setRandomPosition();
         }
+        changedTiles.add(apple.getPosition());
+
         board[apple.getPosition().y][apple.getPosition().x] = apple;
 
         Cherry cherry = new Cherry();
@@ -51,6 +56,8 @@ public class GameModel
             cherry.setRandomPosition();
         }
         board[cherry.getPosition().y][cherry.getPosition().x] = cherry;
+        changedTiles.add(cherry.getPosition());
+
     }
 
     public GameModel(GameState gameState)
@@ -78,6 +85,8 @@ public class GameModel
         }
     }
 
+    ArrayList<Vector> changedTiles = new ArrayList<Vector>();
+
     /**
      * Updates the board to the next state. Only updates the snakes whose id is in the
      * playersToUpdate
@@ -86,6 +95,7 @@ public class GameModel
      */
     public void nextState(ArrayList<Integer> playersToUpdate)
     {
+        changedTiles.clear();
         // for syncronization, find any snakes colliding head on, and tell them they are colliding.
         // These snakes won't update.
         Snake[] snakesToUpdate = new Snake[playersToUpdate.size()];
@@ -112,6 +122,15 @@ public class GameModel
                 nextHeadPositions.put(nextPosition.toString(), i);
             }
         }
+        // save which tiles have been modified
+        changedTiles.addAll(headPositions);
+        for (Snake snake : snakesToUpdate)
+        {
+            changedTiles.add(snake.getHeadPosition());
+            changedTiles.add(snake.getTailPosition());
+            changedTiles.add(snake.getNextTailPosition());
+        }
+
         // Now we check whether the next position will be clear, in the next frame.
         // This the snakes won't know, as there might be a snake tail that disappears, or that
         // doesn't
@@ -169,6 +188,7 @@ public class GameModel
                 {
                     piece.setRandomPosition();
                 }
+                changedTiles.add(piece.getPosition());
                 board[piece.getPosition().y][piece.getPosition().x] = piece;
             }
             catch (Exception e)
@@ -177,6 +197,11 @@ public class GameModel
                 System.out.println("Your constructor stuff in gamemodel doesn't work...");
             }
         }
+    }
+
+    public ArrayList<Vector> getChangedPositions()
+    {
+        return changedTiles;
     }
 
     public void setDirection(Vector direction, int player)
