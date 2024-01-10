@@ -121,7 +121,7 @@ public class SaveHandler
     public static void createDummySaves() throws IOException {
         String path;
         for (int i = 0; i < 4; i++) {
-            path = "Saves" + i + ".json";
+            path = "Save" + i + ".json";
             File myObj = new File(path);
             if (!myObj.exists() && !myObj.isDirectory()) {
                 myObj.createNewFile();
