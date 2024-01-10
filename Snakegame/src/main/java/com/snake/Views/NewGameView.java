@@ -7,17 +7,9 @@ import com.snake.OurButton;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.layout.StackPane;
 
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.geometry.Insets;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StackPane

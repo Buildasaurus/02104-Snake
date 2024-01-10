@@ -2,13 +2,8 @@ package com.snake.Views;
 
 import com.snake.OurButton;
 import com.snake.Controllers.MenuController;
-import com.snake.Model.Resources;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -16,7 +11,6 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 
-import java.io.File;
 import java.net.URL;
 
 public class MenuView extends StackPane
