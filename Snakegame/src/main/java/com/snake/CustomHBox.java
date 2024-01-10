@@ -22,8 +22,8 @@ public class CustomHBox extends HBox{
         setAlignment(Pos.CENTER);
         setPadding(new Insets(10));
 
-        URL url = getClass().getResource("/com/snake/Graphics/menu.png");
-        setStyle("-fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-position: fixed");
+        //URL url = getClass().getResource("/com/snake/Graphics/menu.png");
+       // setStyle("-fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-position: fixed");
 
     }
 

@@ -136,4 +136,8 @@ public class GUIView extends StackPane {
     public void updateSaveNames(String[] saveNames) {
         saveView.updateButtonNames(saveNames);
     }
+
+    public void showAlert() {
+        saveView.showAlert();
+    }
 }

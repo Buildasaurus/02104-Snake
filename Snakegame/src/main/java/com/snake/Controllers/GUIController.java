@@ -294,18 +294,22 @@ public class GUIController implements IController
         view.toggleGameOverButtonVisibility();
     }
 
-    public void handleSaveButtonPressed(ActionEvent action)
+    public void handleSaveButtonPressed(int index)
     {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        if (SaveHandler.isSavePresent(index)) {
+            view.showAlert();
+        } else {
+            handleSaving(index);
+        }
+    }
+
+    public void handleSaving(int index) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime now = LocalDateTime.now();
         String name = dtf.format(now);
 
         GameSettings gameSettings = Settings.getGameSettings();
         GameState gameState = gameController.getGameState();
-
-        Button actionOrigin = (Button) action.getSource();
-        String saveName = actionOrigin.getText();
-        int index = Integer.parseInt(saveName.substring(0, 1));
 
         Save save = new Save(name, gameSettings, gameState);
         SaveHandler.writeSave(save, index);
@@ -323,5 +327,9 @@ public class GUIController implements IController
         isPaused = true;
         isSaving = false;
         view.removeSaveView(this);
+    }
+
+    public GameController getGameController(){
+        return gameController;
     }
 }
