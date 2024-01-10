@@ -37,7 +37,7 @@ public class MenuView extends StackPane
         //buttons
         OurButton playButton = new OurButton("play");
         OurButton loadButton = new OurButton("load");
-        OurButton quitButton = new OurButton("quit");
+        OurButton quitButton = new OurButton("quit", 6.5);
 
         playButton.setOnAction(controller::handlePlayButtonPressed);
         loadButton.setOnAction(controller::handleLoadButtonPressed);
@@ -50,7 +50,7 @@ public class MenuView extends StackPane
         loadButton.setTranslateY(Settings.windowHeight*0.2);
         getChildren().add(loadButton);
 
-        quitButton.setTranslateX(Settings.windowWidth*0.5 - (quitButton.getPrefWidth()*0.5));
+        quitButton.setTranslateX(Settings.windowWidth*0.5 - (quitButton.getPrefWidth()*0.6));
         quitButton.setTranslateY(Settings.windowHeight*0.5 - (quitButton.getPrefHeight()*0.5));
         getChildren().add(quitButton);
     }

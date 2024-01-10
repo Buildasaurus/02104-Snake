@@ -1,10 +1,18 @@
 package com.snake.Views;
 
+import java.net.URL;
+
+import com.snake.OurButton;
 import com.snake.Controllers.LoadController;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
-import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 
 public class LoadView extends ButtonOverlayView {
     public LoadView(LoadController controller, String[] saveNames) {
@@ -15,16 +23,20 @@ public class LoadView extends ButtonOverlayView {
     }
 
     public void initialize(LoadController controller, String[] saveNames) {
-        setBackground(new Color(1.0, 1.0, 1.0, 1.0));
+        URL url = getClass().getResource("/com/snake/Graphics/baggrund.png");
+        BackgroundImage backgroundImage = new BackgroundImage(new Image(url.toString()), BackgroundRepeat.NO_REPEAT, 
+        BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background background = new Background(backgroundImage);
+        setBackground(background);
 
         for (int i = 0; i < 3; i++) {
-            Button saveButton = new Button();
+            OurButton saveButton = new OurButton();
             buttons[i] = saveButton;
             saveButton.setOnAction(controller::handleLoadSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
-        Button backButton = new Button("Back to Main Menu");
+        OurButton backButton = new OurButton("Back to Main Menu");
         buttons[3] = backButton;
         backButton.setOnAction(controller::handleBackButtonPressed);
 
@@ -37,7 +49,6 @@ public class LoadView extends ButtonOverlayView {
         for (int i = 0; i < 3; i++) {
             String buttonName = "" + (i + 1) + " ";
             buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
-
             buttons[i].setText(buttonName);
         }
     }
