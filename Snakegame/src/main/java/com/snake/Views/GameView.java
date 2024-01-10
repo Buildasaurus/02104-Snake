@@ -116,7 +116,6 @@ public class GameView extends GridPane
     {
         // This variable might change from frame to frame, so
         boolean extraVision = Settings.getGameSettings().getExtraVision();
-        System.out.println("update");
         if (board != null)
         {
             for (Vector position : relevantPositions)
