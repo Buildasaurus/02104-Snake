@@ -9,7 +9,7 @@ import com.snake.Model.Save;
 
 public class SaveHandler
 {
-    private static Save[] saves = new Save[3];
+    private static Save[] saves = new Save[4];
 
     public static String[] getSaveNames()
     {
@@ -18,15 +18,15 @@ public class SaveHandler
         {
             readSavesToLocal();
 
-            for (int i = 0; i < 3; i++)
+            for (int i = 1; i < 4; i++)
             {
                 if (saves[i] != null)
                 {
-                    saveNames[i] = saves[i].getName();
+                    saveNames[i - 1] = saves[i].getName();
                 }
                 else
                 {
-                    saveNames[i] = null;
+                    saveNames[i - 1] = null;
                 }
             }
         }
@@ -44,7 +44,7 @@ public class SaveHandler
         try {
             readSavesToLocal();
 
-            if (saves[index - 1] != null) {
+            if (saves[index] != null) {
                 return true;
             }
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class SaveHandler
         {
             readSavesToLocal();
 
-            save = saves[index - 1];
+            save = saves[index];
         }
         catch (Exception e)
         {
@@ -83,13 +83,13 @@ public class SaveHandler
         {
             readSavesToLocal();
 
-            saves[index - 1] = save;
-
             Gson gson = new Gson();
+
+            saves[index] = save;
 
             String path = "Save" + index + ".json";
             FileWriter writer = new FileWriter(path);
-            gson.toJson(saves[index - 1], writer);
+            gson.toJson(saves[index], writer);
             writer.flush();
             writer.close();
 
@@ -107,12 +107,12 @@ public class SaveHandler
     {
         Gson gson = new Gson();
 
-        for (int i = 1; i <= 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             String path = "Save" + i + ".json";
             JsonReader reader = new JsonReader(new FileReader(path));
 
-            saves[i - 1] = gson.fromJson(reader, Save.class);
+            saves[i] = gson.fromJson(reader, Save.class);
         }
     }
 }

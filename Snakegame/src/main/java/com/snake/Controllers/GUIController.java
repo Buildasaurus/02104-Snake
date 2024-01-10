@@ -15,7 +15,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
 public class GUIController implements IController
@@ -242,6 +241,9 @@ public class GUIController implements IController
      */
     public void handleBackButtonPressed(ActionEvent action)
     {
+        if (isPaused) {
+            handleSaving(0);
+        }
         gameTimer.stop();
         MenuController newController = new MenuController();
         App.setRoot(newController);
@@ -314,7 +316,9 @@ public class GUIController implements IController
         Save save = new Save(name, gameSettings, gameState);
         SaveHandler.writeSave(save, index);
 
-        view.updateSaveNames(SaveHandler.getSaveNames());
+        if (0 < index) {
+            view.updateSaveNames(SaveHandler.getSaveNames());
+        }
     }
 
     public void handleSaveMenuButtonPressed(ActionEvent action) {
