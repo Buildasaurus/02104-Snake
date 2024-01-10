@@ -10,5 +10,4 @@ public class SelectionButton extends Button {
         setPrefSize(100.0,100.0);
 
     }
-    
 }

@@ -1,6 +1,7 @@
 package com.snake.Controllers;
 
 import com.snake.App;
+import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
@@ -10,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 
 public class NewGameController implements IController
 {
@@ -93,7 +95,9 @@ public class NewGameController implements IController
     }
 
     public void handlelevel(ActionEvent action){
-        Button actionorigin = (Button) action.getSource();
+        SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
+        view.maptype.buttonPressed(actionorigin);
     }
+
 }
