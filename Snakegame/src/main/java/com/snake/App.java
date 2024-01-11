@@ -48,6 +48,9 @@ public class App extends Application
         catch (Exception e)
         {
             // TODO: handle exception
+            System.out.println(e);
+            System.out.println(
+                    "Input arguments weren't correct. Expecting two values width, height, that  are between 5 and 100");
         }
         launch();
     }
