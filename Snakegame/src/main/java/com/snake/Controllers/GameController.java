@@ -25,7 +25,6 @@ public class GameController implements IController
         this.model = new GameModel();
         this.view = new GameView(width, height, model.getBoard());
 
-
         view.update(model.getBoard(), model.getChangedPositions());
     }
 

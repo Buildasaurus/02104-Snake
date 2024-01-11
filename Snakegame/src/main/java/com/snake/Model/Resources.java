@@ -1,5 +1,6 @@
 package com.snake.Model;
 
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URL;
@@ -28,6 +29,7 @@ public class Resources
             URL url = Resources.class.getResource("/com/snake/Graphics/" + name + ".png");
             Image image = new Image(url.toString());
             map.put(name, image);
+
         }
         return map.get(name);
     }
@@ -45,8 +47,8 @@ public class Resources
     public static void playSoundByName(String name)
     {
         URL url = Resources.class.getResource("/com/snake/Sounds/" + name + ".wav");
-        Media sound = new Media(url.toExternalForm());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        // Media sound = new Media(url.toExternalForm());
+        AudioClip mediaPlayer = new AudioClip(url.toExternalForm());
         mediaPlayer.play();
     }
 }

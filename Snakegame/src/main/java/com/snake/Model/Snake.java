@@ -105,9 +105,11 @@ public class Snake
             return;
         }
         Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
+                head.add(direction).modulo(Settings.getGameSettings().getColumnCount(),
+                        Settings.getGameSettings().getRowCount());
         Vector nextTailPosition =
-                tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
+                tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(),
+                        Settings.getGameSettings().getRowCount());
         // update old head
         board[head.y][head.x] =
                 new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
@@ -141,7 +143,8 @@ public class Snake
     {
         if (snakeIsAlive)
         {
-            return head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
+            return head.add(direction).modulo(Settings.getGameSettings().getColumnCount(),
+                    Settings.getGameSettings().getRowCount());
         }
         else
         {
@@ -156,8 +159,8 @@ public class Snake
 
     public void grow()
     {
-        Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
+        Vector nextHeadPosition = getNextHeadPosition();
+
 
         // update head
         board[head.y][head.x] =
@@ -230,7 +233,8 @@ public class Snake
     {
         if (snakeIsAlive)
         {
-            return tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
+            return tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(),
+                    Settings.getGameSettings().getRowCount());
         }
         else
         {
@@ -263,7 +267,8 @@ public class Snake
         this.lastDirection = lastDirection;
     }
 
-    public void setBoard(Tile[][] board) {
+    public void setBoard(Tile[][] board)
+    {
         this.board = board;
     }
 }
