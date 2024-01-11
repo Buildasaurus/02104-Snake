@@ -297,7 +297,7 @@ public class GameModel
         {
             if (getAlivePlayerCount() < 2 || freeSquares == -1)
             {
-                gameWon = getAlivePlayerCount() > 0;
+                gameWon = getAlivePlayerCount() > 0 && freeSquares == -1;
                 return true;
             }
             return false;
