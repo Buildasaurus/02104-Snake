@@ -42,6 +42,7 @@ public class Snake
      */
     public void calculateNextFrame(boolean willClear)
     {
+        fruit = null;
         if (!snakeIsAlive)
         {
             return;
@@ -136,7 +137,6 @@ public class Snake
         head = nextHeadPosition;
         lastDirection = direction;
         tailDirection = ((SnakeTile) board[nextTailPosition.y][nextTailPosition.x]).targetDirection;
-        fruit = null;
     }
 
     public Vector getNextHeadPosition()

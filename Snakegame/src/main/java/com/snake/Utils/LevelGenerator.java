@@ -15,7 +15,7 @@ public class LevelGenerator
 {
     static int width;
     static int height;
-
+    public static int wallCount;
     /**
      * Generates walls around the level. Will always have a clear 8x8 square in the middle Assumes
      * non-jagged array
@@ -24,6 +24,7 @@ public class LevelGenerator
      */
     public static void generateLevel(Tile[][] board)
     {
+        wallCount = 0;
         // Early return if board is too small
         if (board.length < 1 || (board.length < 8 && board[0].length < 8))
         {
@@ -62,6 +63,7 @@ public class LevelGenerator
                         && isInInterval(columnCount, illegalXVector)) && map[rowCount][columnCount])
                 {
                     board[rowCount][columnCount] = new Wall();
+                    wallCount++;
                 }
             }
         }

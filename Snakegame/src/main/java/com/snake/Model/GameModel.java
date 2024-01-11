@@ -20,6 +20,7 @@ public class GameModel
     private int columnCount;
     private Snake[] players;
     public int winner = -1;
+    int freeSquares = 0;
 
     /**
      * Imports the current settings from {@link com.snake.Settings Settings} and initializes a board
@@ -30,22 +31,22 @@ public class GameModel
     {
         this.rowCount = Settings.getGameSettings().getRowCount();
         this.columnCount = Settings.getGameSettings().getColumnCount();
-        Vector midpoint = new Vector(columnCount / 2, rowCount / 2);
         board = new Tile[rowCount][columnCount];
         players = new Snake[Settings.getGameSettings().getPlayerCount()];
+        Vector startSpawnPoint = new Vector(columnCount / 2, rowCount / 2 - (getPlayerCount() - 1));
 
         changedTiles = new ArrayList<>();
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
-            players[i] = new Snake(board, midpoint.add(0, i * 2), midpoint.add(-1, i * 2),
-                    new Vector(1, 0), i);
-            changedTiles.add(midpoint.add(0, i * 2));
-            changedTiles.add(midpoint.add(-1, i * 2));
+            players[i] = new Snake(board, startSpawnPoint.add(0, i * 2),
+                    startSpawnPoint.add(-1, i * 2), new Vector(1, 0), i);
+            changedTiles.add(startSpawnPoint.add(0, i * 2));
+            changedTiles.add(startSpawnPoint.add(-1, i * 2));
         }
 
 
         LevelGenerator.generateLevel(board);
-
+        int fruitCount = 0;
         // Nice StackOverflow code to dynamiccaly get all classes that extends fruit, and spawn them
         // https://stackoverflow.com/questions/205573/at-runtime-find-all-classes-in-a-java-application-that-extend-a-base-class
         System.out.println("Trying to find subclasses");
@@ -66,12 +67,16 @@ public class GameModel
                 }
                 changedTiles.add(piece.getPosition());
                 board[piece.getPosition().y][piece.getPosition().x] = piece;
+                fruitCount++;
             }
             catch (Exception e)
             {
                 System.out.println("Your constructor stuff in gamemodel doesn't work...");
                 System.out.println(e);
             }
+            freeSquares = rowCount * columnCount - LevelGenerator.wallCount - fruitCount
+                    - players.length * 2;
+
         }
 
 
@@ -233,12 +238,23 @@ public class GameModel
               // https://stackoverflow.com/questions/5533702/instantiating-object-of-same-class-from-within-class-in-java
                 Constructor constructor = fruit.getClass().getConstructor();
                 Fruit piece = (Fruit) constructor.newInstance();
+                if (fruit instanceof Apple)
+                {
+                    freeSquares--;
+
+                }
+                if (freeSquares < 0)
+                {
+                    break;
+                }
+
                 while (board[piece.getPosition().y][piece.getPosition().x] != null)
                 {
                     piece.setRandomPosition();
                 }
                 changedTiles.add(piece.getPosition());
                 board[piece.getPosition().y][piece.getPosition().x] = piece;
+
             }
             catch (Exception e)
             {
@@ -259,18 +275,29 @@ public class GameModel
         players[player].setDirection(direction);
     }
 
+    boolean gameWon = false;
+
     public boolean gameOver()
     {
+        System.out.println("free squares at gameover Called: " + freeSquares);
+
         // Single player
         if (players.length == 1)
         {
+            System.out.println(players[0].isAlive());
+            if (freeSquares == -1)
+            {
+                gameWon = players[0].isAlive();
+                return true;
+            }
             return !players[0].isAlive();
         }
         // multiplayer
         else if (players.length > 1)
         {
-            if (getAlivePlayerCount() < 2)
+            if (getAlivePlayerCount() < 2 || freeSquares == -1)
             {
+                gameWon = getAlivePlayerCount() > 0;
                 return true;
             }
             return false;
@@ -286,22 +313,24 @@ public class GameModel
      */
     public String getGameOverText()
     {
-        String gameoverText = "";
         if (gameOver())
         {
+            if (gameWon)
+            {
+                return "You defeated snake!\nThere is no more space \nleft to spawn fruits.";
+            }
             int playerID = getAlivePlayerID();
             if (playerID == -1 && players.length > 1)
             {
-                gameoverText = "All the remaining players\ndied at the same time!";
+                return "All the remaining players\ndied at the same time!";
             }
             else
             {
-                gameoverText =
-                        players.length == 1 ? "You lost" : "Player " + (playerID + 1) + " Won!";
+                return players.length == 1 ? "You lost" : "Player " + (playerID + 1) + " Won!";
             }
 
         }
-        return gameoverText;
+        return "Game is not over yet";
     }
 
     public Tile[][] getBoard()
