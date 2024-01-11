@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 public class PauseView extends ButtonOverlayView {
     public PauseView(GUIController controller) {
-        buttons = new Button[3];
+        buttons = new OurButton[3];
         focusElementIndex = 0;
 
         initialize(controller);
@@ -29,9 +29,9 @@ public class PauseView extends ButtonOverlayView {
         buttons[2] = backButton;
 
 
-        resumeButton.setOnAction(controller::handleResumeButtonPressed);
-        saveButton.setOnAction(controller::handleSaveMenuButtonPressed);
-        backButton.setOnAction(controller::handleBackButtonPressed);
+        resumeButton.button.setOnAction(controller::handleResumeButtonPressed);
+        saveButton.button.setOnAction(controller::handleSaveMenuButtonPressed);
+        backButton.button.setOnAction(controller::handleBackButtonPressed);
 
         setBasicFormatting();
 

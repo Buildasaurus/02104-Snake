@@ -85,7 +85,7 @@ public class NewGameView extends StandardBackground
 
         // Start game
         OurButton startGame = new OurButton("Start game");
-        startGame.setOnAction(controller::handlePlayButtonPressed);
+        startGame.button.setOnAction(controller::handlePlayButtonPressed);
 
         startGame.setTranslateY(165);
         getChildren().add(startGame);

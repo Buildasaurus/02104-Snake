@@ -19,7 +19,7 @@ public class SaveView extends ButtonOverlayView {
     GUIController controller;
 
     public SaveView(GUIController controller, String[] saveNames) {
-        buttons = new Button[4];
+        buttons = new OurButton[4];
         focusElementIndex = 0;
         this.controller = controller;
 
@@ -30,15 +30,15 @@ public class SaveView extends ButtonOverlayView {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
         for (int i = 0; i < 3; i++) {
-            OurButton saveButton = new OurButton();
+            OurButton saveButton = new OurButton("");
             buttons[i] = saveButton;
-            saveButton.setOnAction(this::handleSaveButtonPressed);
+            saveButton.button.setOnAction(this::handleSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
         OurButton backButton = new OurButton("Back to Pause Menu");
         buttons[3] = backButton;
-        backButton.setOnAction(controller::handlePauseButtonPressed);
+        backButton.button.setOnAction(controller::handlePauseButtonPressed);
 
         confirmationAlert = new Alert(AlertType.CONFIRMATION, "You are going to overwrite a save, continue?");
 
@@ -52,13 +52,13 @@ public class SaveView extends ButtonOverlayView {
             String buttonName = "" + (i + 1) + " ";
             buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
 
-            buttons[i].setText(buttonName);
+            buttons[i].button.setText(buttonName);
         }
     }
 
     public void handleSaveButtonPressed(ActionEvent action) {
         OurButton actionOrigin = (OurButton) action.getSource();
-        String saveName = actionOrigin.getText();
+        String saveName = actionOrigin.button.getText();
         saveIndex = Integer.parseInt(saveName.substring(0, 1));
         controller.handleSaveButtonPressed(saveIndex);
     }

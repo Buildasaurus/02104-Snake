@@ -39,10 +39,10 @@ public class MenuView extends StandardBackground
         OurButton loadButton = new OurButton("load");
         OurButton quitButton = new OurButton("quit", 6.5);
 
-        playButton.setOnAction(controller::handlePlayButtonPressed);
-        continueButton.setOnAction(controller::handleContinueButtonPressed);
-        loadButton.setOnAction(controller::handleLoadButtonPressed);
-        quitButton.setOnAction(controller::handleExitButtonPressed);
+        playButton.button.setOnAction(controller::handlePlayButtonPressed);
+        continueButton.button.setOnAction(controller::handleContinueButtonPressed);
+        loadButton.button.setOnAction(controller::handleLoadButtonPressed);
+        quitButton.button.setOnAction(controller::handleExitButtonPressed);
 
         /*//TODO fix this in another way, ideally make button and background scale the same
         //playButton.setTranslateY(Settings.windowHeight*0.1);

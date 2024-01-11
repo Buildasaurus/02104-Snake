@@ -14,7 +14,7 @@ import javafx.scene.layout.BackgroundSize;
 
 public class LoadView extends ButtonOverlayView {
     public LoadView(LoadController controller, String[] saveNames) {
-        buttons = new Button[4];
+        buttons = new OurButton[4];
         focusElementIndex = 0;
 
         initialize(controller, saveNames);
@@ -27,15 +27,15 @@ public class LoadView extends ButtonOverlayView {
         setBackground(background);
 
         for (int i = 0; i < 3; i++) {
-            OurButton saveButton = new OurButton();
+            OurButton saveButton = new OurButton("");
             buttons[i] = saveButton;
-            saveButton.setOnAction(controller::handleLoadSaveButtonPressed);
+            saveButton.button.setOnAction(controller::handleLoadSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
         OurButton backButton = new OurButton("Back to Main Menu");
         buttons[3] = backButton;
-        backButton.setOnAction(controller::handleBackButtonPressed);
+        backButton.button.setOnAction(controller::handleBackButtonPressed);
 
         setBasicFormatting();
 
@@ -46,7 +46,7 @@ public class LoadView extends ButtonOverlayView {
         for (int i = 0; i < 3; i++) {
             String buttonName = "" + (i + 1) + " ";
             buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
-            buttons[i].setText(buttonName);
+            buttons[i].button.setText(buttonName);
         }
     }
 }
