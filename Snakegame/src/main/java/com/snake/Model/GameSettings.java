@@ -11,8 +11,8 @@ public class GameSettings
     private Level level;
     private int playerCount;
     private boolean extraVision;
-    private int columnCount = 20;
-    private int rowCount = 20;
+    private int columnCount = 30;
+    private int rowCount = 30;
 
     public GameSettings()
     {
