@@ -23,7 +23,7 @@ public class GameOverView extends ButtonOverlayView
 
     public GameOverView(GUIController controller)
     {
-        buttons = new Button[4];
+        buttons = new OurButton[4];
         buttonsVisible = true;
         focusElementIndex = 0;
 
@@ -80,10 +80,10 @@ public class GameOverView extends ButtonOverlayView
         OurButton hideButton = new OurButton("Hide Buttons");
         buttons[3] = hideButton;
 
-        newGameButton.setOnAction(controller::handleNewGameButtonPressed);
-        loadGameButton.setOnAction(controller::handleLoadGameButtonPressed);
-        backButton.setOnAction(controller::handleBackButtonPressed);
-        hideButton.setOnAction(controller::handleHideButtonPressed);
+        newGameButton.button.setOnAction(controller::handleNewGameButtonPressed);
+        loadGameButton.button.setOnAction(controller::handleLoadGameButtonPressed);
+        backButton.button.setOnAction(controller::handleBackButtonPressed);
+        hideButton.button.setOnAction(controller::handleHideButtonPressed);
 
 
         setBasicFormatting();
