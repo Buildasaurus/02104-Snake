@@ -4,6 +4,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 import java.util.HashMap;
+
+import com.snake.Settings;
+
 import javafx.scene.image.Image;
 
 public class Resources
@@ -24,6 +27,16 @@ public class Resources
         {
             URL url = Resources.class.getResource("/com/snake/Graphics/" + name + ".png");
             Image image = new Image(url.toString());
+            map.put(name, image);
+        }
+        return map.get(name);
+    }
+
+    public static Image getImageByNamesetWidth(String name, double scaler){
+        if (!map.containsKey(name))
+        {
+            URL url = Resources.class.getResource("/com/snake/Graphics/" + name + ".png");
+            Image image = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
             map.put(name, image);
         }
         return map.get(name);
