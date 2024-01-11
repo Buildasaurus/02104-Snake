@@ -16,6 +16,7 @@ public class LevelGenerator
     static int width;
     static int height;
     public static int wallCount;
+
     /**
      * Generates walls around the level. Will always have a clear 8x8 square in the middle Assumes
      * non-jagged array
@@ -45,30 +46,60 @@ public class LevelGenerator
         {
             map = simplifyNoise(map);
         }
-        regions = getRegions(map);
-        System.out.println("regionCount after" + regions.size());
-        removeSuicideCells(map);
-        // the number of free square in a central square
-        int margin = 10;
 
+        // Make safe square in middle of board
         // illegal squares, that are to be ignored
-        // TODO for now just assuming height 20, width 20. Do maths later.
+        int margin = 8;
         Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
         Vector illegalYVector = new Vector((width - margin) / 2, (width + margin) / 2);
+        map = createSafeSquare(map, illegalXVector, illegalYVector);
+
+        regions = getRegions(map);
+        System.out.println("regionCount after" + regions.size());
+
+        if (regions.size() > 1)
+        // in the incredible case that the safesquare was inside a hugeblock of wall, and thus you
+        // don't have acces to the rest of the level
+        {
+            map = connectIslands(map);
+            map = simplifyNoise(map);
+        }
+        removeSuicideCells(map);
+
+        fillBoardWithMap(board, map);
+    }
+
+
+    private static boolean[][] createSafeSquare(boolean[][] map, Vector xInterval, Vector yInterval)
+    {
+        for (int rowCount = 0; rowCount < height; rowCount++)
+        {
+            for (int columnCount = 0; columnCount < width; columnCount++)
+            {
+                if (isInInterval(rowCount, xInterval) && isInInterval(columnCount, yInterval)
+                        && map[rowCount][columnCount])
+                {
+                    map[rowCount][columnCount] = false;
+                }
+            }
+        }
+        return map;
+    }
+
+    private static void fillBoardWithMap(Tile[][] board, boolean[][] map)
+    {
 
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
             {
-                if (!(isInInterval(rowCount, illegalYVector)
-                        && isInInterval(columnCount, illegalXVector)) && map[rowCount][columnCount])
+                if (map[rowCount][columnCount])
                 {
                     board[rowCount][columnCount] = new Wall();
                     wallCount++;
                 }
             }
         }
-        // Generate noise, use this for walls.
     }
 
     /**

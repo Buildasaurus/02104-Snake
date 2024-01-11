@@ -121,13 +121,13 @@ public class GameSettings
             switch (gameMode)
             {
                 case Easy:
-                    return 0.3;
-                case Normal:
                     return 0.35;
+                case Normal:
+                    return 0.41;
                 case Hard:
-                    return 0.4;
-                case Insane:
                     return 0.45;
+                case Insane:
+                    return 0.52;
                 default:
                     return 0;
             }
