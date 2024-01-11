@@ -53,13 +53,11 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight = height / (Settings.getGameSettings().getRowCount()
-                + Settings.getGameSettings().getExtraVisionDepth());
-        int potentialBoxWidth = width / (Settings.getGameSettings().getColumnCount()
-                + Settings.getGameSettings().getExtraVisionDepth());
+        int potentialBoxHeight = height / (Settings.getGameSettings().getExtendedRowCount());
+        int potentialBoxWidth = width / (Settings.getGameSettings().getExtendedColumnCount());
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = boxDimension * Settings.getGameSettings().getRowCount();
-        int gameWidth = boxDimension * Settings.getGameSettings().getColumnCount();
+        int gameHeight = boxDimension * Settings.getGameSettings().getExtendedRowCount();
+        int gameWidth = boxDimension * Settings.getGameSettings().getExtendedColumnCount();
         this.gameController = new GameController(gameHeight, gameWidth);
 
         initialize();
@@ -76,11 +74,11 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight = height / Settings.getGameSettings().getRowCount();
-        int potentialBoxWidth = width / Settings.getGameSettings().getColumnCount();
+        int potentialBoxHeight = height / (Settings.getGameSettings().getExtendedRowCount());
+        int potentialBoxWidth = width / (Settings.getGameSettings().getExtendedColumnCount());
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = boxDimension * Settings.getGameSettings().getRowCount();
-        int gameWidth = boxDimension * Settings.getGameSettings().getColumnCount();
+        int gameHeight = boxDimension * Settings.getGameSettings().getExtendedRowCount();
+        int gameWidth = boxDimension * Settings.getGameSettings().getExtendedColumnCount();
         this.gameController = new GameController(gameHeight, gameWidth, gameState);
 
         initialize();

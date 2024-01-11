@@ -12,8 +12,8 @@ public class GameSettings
     private int playerCount;
     private boolean extraVision;
     private int extraVisionDepth = 2;
-    private int columnCount = 20;
-    private int rowCount = 20;
+    private int columnCount = 6;
+    private int rowCount = 100;
 
     public GameSettings()
     {
@@ -158,19 +158,44 @@ public class GameSettings
         listeners.add(listener);
     }
 
-    public int getColumnCount() {
+    public int getColumnCount()
+    {
         return columnCount;
     }
 
-    public void setColumnCount(int columnCount) {
+    public void setColumnCount(int columnCount)
+    {
         this.columnCount = columnCount;
     }
 
-    public int getRowCount() {
+    public int getRowCount()
+    {
         return rowCount;
     }
 
-    public void setRowCount(int rowCount) {
+    public void setRowCount(int rowCount)
+    {
         this.rowCount = rowCount;
+    }
+
+    /**
+     * Calculates the actual rowcount, after extravision depth has been added.
+     *
+     * @return
+     */
+    public int getExtendedRowCount()
+    {
+        return rowCount + extraVisionDepth*2;
+    }
+
+
+    /**
+     * Calculates the actual columncount, after extravision depth has been added.
+     * @return
+     */
+    public int getExtendedColumnCount()
+    {
+        return columnCount + extraVisionDepth*2;
+
     }
 }
