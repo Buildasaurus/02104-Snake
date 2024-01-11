@@ -1,12 +1,12 @@
 package com.snake.Controllers;
 
 import com.snake.App;
+import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import com.snake.Views.NewGameView;
-import com.snake.Views.SelectionButton;
 
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;

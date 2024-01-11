@@ -1,6 +1,5 @@
-package com.snake.Views;
+package com.snake;
 
-import com.snake.Settings;
 import com.snake.Model.Resources;
 
 import javafx.scene.control.Button;
