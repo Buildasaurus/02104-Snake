@@ -31,7 +31,7 @@ public class GameController implements IController
     public GameController(int width, int height, GameState gameState)
     {
         this.model = new GameModel(gameState);
-        this.view = new GameView(height, width, model.getBoard());
+        this.view = new GameView(width, height, model.getBoard());
 
 
         view.update(model.getBoard(), model.getChangedPositions());
