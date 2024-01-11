@@ -14,7 +14,6 @@ import com.snake.Model.Save;
 import com.snake.Utils.SaveHandler;
 import com.snake.Views.GUIView;
 
-import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
@@ -156,57 +155,6 @@ public class GUIController implements IController
 
         gameTimer = new Timer();
         gameTimer.scheduleAtFixedRate(timeLoop, 16, 16);
-        /*
-        gameTimer = new AnimationTimer()
-        {
-            @Override
-            public void handle(long now)
-            {
-                // DON'T TRUST THE FRAMERATE!!!
-                long oldFrameTime = frameTimes[frameTimeIndex];
-                frameTimes[frameTimeIndex] = now;
-                frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length;
-                if (frameTimeIndex == 0)
-                {
-                    arrayFilled = true;
-                }
-                if (arrayFilled)
-                {
-                    long elapsedNanos = now - oldFrameTime;
-                    long elapsedNanosPerFrame = elapsedNanos / frameTimes.length;
-                    double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
-                    view.updateFrameRate(frameRate);
-                }
-                if (!isGameOver && !isPaused && !isSaving)
-                {
-                    for (int i = 0; i < playerProgress.length; i++)
-                    {
-                        playerProgress[i] += gameController.getSpeed(i);
-                        if (playerProgress[i] > 100)
-                        {
-                            updateList.add(i);
-                            playerProgress[i] = 0;
-                        }
-                    }
-                    if (!updateList.isEmpty())
-                    {
-                        isGameOver = gameController.executeNextStep(updateList);
-                        if (isGameOver)
-                        {
-                            setGameOverView();
-                        }
-                        for (int i : updateList)
-                        {
-                            view.updateCurrentScore(gameController.getCurrentScore(i), i);
-                            view.updateCurrentSpeed(gameController.getSpeed(i), i);
-                        }
-                        updateList.clear();
-                    }
-                }
-            }
-        };
-        gameTimer.start();
-        */
     }
 
     /**
