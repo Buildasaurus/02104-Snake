@@ -81,8 +81,7 @@ public class GameView extends GridPane
                 Pane bgCell = new Pane();
                 if (row != 0 && column == 0)
                 {
-                    if (rowCount % 2 == 0)
-                    {
+                    if (columnCount % 2 == 0) {
                         isLastDark = !isLastDark;
                     }
                 }
