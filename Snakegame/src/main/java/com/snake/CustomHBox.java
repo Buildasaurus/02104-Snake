@@ -7,6 +7,8 @@ import javafx.scene.text.Text;
 
 public class CustomHBox extends HBox{
     public SelectionButton previousButtonPressed;
+    public SelectionButton defaultButton;
+
     String boxlabel;
 
     public CustomHBox(String boxlabel){
@@ -23,10 +25,13 @@ public class CustomHBox extends HBox{
     }
 
     public void buttonPressed(SelectionButton action){
-        action.pressed();
+        if (previousButtonPressed == null && action != defaultButton){
+            defaultButton.changeback();
+        }
         if (previousButtonPressed != null && action != previousButtonPressed) {
             previousButtonPressed.changeback();
         }
+        action.pressed();
         previousButtonPressed = action;
     }
 }

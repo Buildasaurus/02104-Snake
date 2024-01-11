@@ -4,7 +4,9 @@ package com.snake.Views;
 import com.snake.CustomHBox;
 import com.snake.OurButton;
 import com.snake.SelectionButton;
+import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
+import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 
@@ -33,6 +35,10 @@ public class NewGameView extends StandardBackground
         for (int i : playerCounts)
         {
             SelectionButton button = new SelectionButton(Integer.toString(i));
+            if (Settings.getGameSettings().getPlayerCount() == i){
+                button.pressed();
+                playerselection.defaultButton = button;
+            }
             button.setOnAction(controller::handlePlayerCounts);
             playerselection.getChildren().add(button);
         }
@@ -44,6 +50,10 @@ public class NewGameView extends StandardBackground
         for (GameMode mode : GameMode.values())
         {
             SelectionButton button = new SelectionButton(mode.toString());
+            if (Settings.getGameSettings().getGameMode() == mode){
+                button.pressed();
+                gamemode.defaultButton = button;
+            }
             button.setOnAction(controller::handlegameMode);
             gamemode.getChildren().add(button);
         }
@@ -55,6 +65,10 @@ public class NewGameView extends StandardBackground
         for (Level level : Level.values())
         {
             SelectionButton button = new SelectionButton(level.toString());
+            if (Settings.getGameSettings().getLevel() == level){
+                button.pressed();
+                maptype.defaultButton = button;
+            }
             button.setOnAction(controller::handlelevel);
             maptype.getChildren().add(button);
         }
@@ -66,6 +80,7 @@ public class NewGameView extends StandardBackground
         vbox.getChildren().addAll(playerselection, gamemode, maptype);
 
         getChildren().add(vbox);
+
 
 
 
