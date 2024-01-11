@@ -12,8 +12,8 @@ public class GameSettings
     private int playerCount;
     private boolean extraVision;
     private int extraVisionDepth = 2;
-    private int columnCount = 100;
-    private int rowCount = 100;
+    private int columnCount = 26;
+    private int rowCount = 20;
 
     public GameSettings()
     {
