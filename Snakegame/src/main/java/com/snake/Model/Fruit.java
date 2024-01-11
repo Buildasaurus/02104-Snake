@@ -1,10 +1,8 @@
 package com.snake.Model;
 
-import java.net.URL;
 import java.util.Random;
 import com.snake.Settings;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public abstract class Fruit extends Tile
@@ -30,8 +28,7 @@ public abstract class Fruit extends Tile
     public ImageView getImage()
     {
         String imageName = tileType.toString().toLowerCase();
-        URL url = getClass().getResource("/com/snake/Graphics/" + imageName + ".png");
-        ImageView sprite = new ImageView(new Image(url.toString()));
+        ImageView sprite = new ImageView(Resources.getImageByName(imageName));
         return sprite;
     }
 
