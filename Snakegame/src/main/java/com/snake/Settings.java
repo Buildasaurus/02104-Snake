@@ -8,7 +8,7 @@ public class Settings
     public static int windowWidth = (int) Math.round(1890 / 2);
 
     public static int rowCount = 50;
-    public static int columnCount = 50;
+    public static int columnCount = 5;
 
     public static void setGameSettings(GameSettings settings)
     {

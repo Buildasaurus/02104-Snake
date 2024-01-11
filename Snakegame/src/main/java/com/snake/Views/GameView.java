@@ -20,7 +20,7 @@ public class GameView extends GridPane
     int columnCount;
     int height;
     int width;
-    int extraVisionDepth = 2;
+    int extraVisionDepth;
     Node[][] nodes;
 
     /**
@@ -33,11 +33,11 @@ public class GameView extends GridPane
      */
     public GameView(int height, int width, Tile[][] board)
     {
+        this.extraVisionDepth = Settings.getGameSettings().getExtraVisionDepth();
         this.height = height;
         this.width = width;
-        this.rowCount = Settings.rowCount + extraVisionDepth * 2; // +2 because this is for when
-                                                                  // "extravision" is
-        // turned on
+        this.rowCount = Settings.rowCount + extraVisionDepth * 2;
+
         this.columnCount = Settings.columnCount + extraVisionDepth * 2;
         initialize(board);
     }

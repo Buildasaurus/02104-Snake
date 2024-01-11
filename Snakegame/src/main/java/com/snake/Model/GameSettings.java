@@ -11,6 +11,7 @@ public class GameSettings
     private Level level;
     private int playerCount;
     private boolean extraVision;
+    private int extraVisionDepth = 2;
 
     public GameSettings()
     {
@@ -153,6 +154,11 @@ public class GameSettings
     public boolean getExtraVision()
     {
         return extraVision;
+    }
+
+    public int getExtraVisionDepth()
+    {
+        return extraVisionDepth;
     }
 
     public void setExtraVision(boolean value)

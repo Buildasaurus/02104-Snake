@@ -53,8 +53,10 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight = height / Settings.rowCount;
-        int potentialBoxWidth = width / Settings.columnCount;
+        int potentialBoxHeight =
+                height / (Settings.rowCount + Settings.getGameSettings().getExtraVisionDepth());
+        int potentialBoxWidth =
+                width / (Settings.columnCount + Settings.getGameSettings().getExtraVisionDepth());
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
         int gameHeight = boxDimension * Settings.rowCount;
         int gameWidth = boxDimension * Settings.columnCount;
@@ -123,8 +125,10 @@ public class GUIController implements IController
                     double frameRate = 1_000_000_000.0 / elapsedNanosPerFrame;
                     view.updateFrameRate(frameRate);
                 }
-                if (!isGameOver && !isPaused && !isSaving) {
-                    for (int i = 0; i < playerProgress.length; i++) {
+                if (!isGameOver && !isPaused && !isSaving)
+                {
+                    for (int i = 0; i < playerProgress.length; i++)
+                    {
                         playerProgress[i] += gameController.getSpeed(i);
                         if (playerProgress[i] > 100)
                         {
@@ -201,9 +205,13 @@ public class GUIController implements IController
                 if (isPaused || isGameOver)
                 {
                     handleBackButtonPressed(null);
-                } else if (isSaving) {
+                }
+                else if (isSaving)
+                {
                     handlePauseButtonPressed(null);
-                } else {
+                }
+                else
+                {
                     isPaused = true;
                     view.setPauseView(this);
                 }
@@ -241,7 +249,8 @@ public class GUIController implements IController
      */
     public void handleBackButtonPressed(ActionEvent action)
     {
-        if (isPaused) {
+        if (isPaused)
+        {
             handleSaving(0);
         }
         gameTimer.stop();
@@ -298,14 +307,18 @@ public class GUIController implements IController
 
     public void handleSaveButtonPressed(int index)
     {
-        if (SaveHandler.isSavePresent(index)) {
+        if (SaveHandler.isSavePresent(index))
+        {
             view.showAlert();
-        } else {
+        }
+        else
+        {
             handleSaving(index);
         }
     }
 
-    public void handleSaving(int index) {
+    public void handleSaving(int index)
+    {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime now = LocalDateTime.now();
         String name = dtf.format(now);
@@ -316,24 +329,28 @@ public class GUIController implements IController
         Save save = new Save(name, gameSettings, gameState);
         SaveHandler.writeSave(save, index);
 
-        if (0 < index) {
+        if (0 < index)
+        {
             view.updateSaveNames(SaveHandler.getSaveNames());
         }
     }
 
-    public void handleSaveMenuButtonPressed(ActionEvent action) {
+    public void handleSaveMenuButtonPressed(ActionEvent action)
+    {
         isSaving = true;
         isPaused = false;
         view.setSaveView(this, SaveHandler.getSaveNames());
     }
 
-    public void handlePauseButtonPressed(ActionEvent action) {
+    public void handlePauseButtonPressed(ActionEvent action)
+    {
         isPaused = true;
         isSaving = false;
         view.removeSaveView(this);
     }
 
-    public GameController getGameController(){
+    public GameController getGameController()
+    {
         return gameController;
     }
 }

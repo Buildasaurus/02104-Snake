@@ -170,7 +170,7 @@ public class Snake
     public void grow()
     {
         Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
+                head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
 
         // update head
         board[head.y][head.x] =
