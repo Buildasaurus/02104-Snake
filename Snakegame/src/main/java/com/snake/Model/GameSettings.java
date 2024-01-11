@@ -11,6 +11,8 @@ public class GameSettings
     private Level level;
     private int playerCount;
     private boolean extraVision;
+    private int columnCount = 20;
+    private int rowCount = 20;
 
     public GameSettings()
     {
@@ -107,25 +109,6 @@ public class GameSettings
         }
     }
 
-    public double getAcceleration()
-    {
-        switch (gameMode)
-        {
-            case Easy:
-                return 0.01;
-            case Normal:
-                return 0.03;
-            case Hard:
-                return 0.05;
-            case Insane:
-                return 0.1;
-            default: // shouldn't be hit
-                System.out.println(
-                        "something is wrong in gamesettings, getspeed() method. A gameMode isn't taken care of");
-                return -1;
-        }
-    }
-
     public double getLevelFill()
     {
         if (level == Level.Empty)
@@ -167,5 +150,21 @@ public class GameSettings
     public void addExtraVisionListener(Runnable listener)
     {
         listeners.add(listener);
+    }
+
+    public int getColumnCount() {
+        return columnCount;
+    }
+
+    public void setColumnCount(int columnCount) {
+        this.columnCount = columnCount;
+    }
+
+    public int getRowCount() {
+        return rowCount;
+    }
+
+    public void setRowCount(int rowCount) {
+        this.rowCount = rowCount;
     }
 }

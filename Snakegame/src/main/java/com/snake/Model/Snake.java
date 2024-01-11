@@ -105,9 +105,9 @@ public class Snake
             return;
         }
         Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
+                head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
         Vector nextTailPosition =
-                tail.add(tailDirection).modulo(Settings.columnCount, Settings.rowCount);
+                tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
         // update old head
         board[head.y][head.x] =
                 new SnakeTile(TileType.Snakebody, lastDirection, direction, playerNumber);
@@ -137,24 +137,11 @@ public class Snake
         fruit = null;
     }
 
-
-    /**
-     * if inside board limit
-     *
-     * @param position
-     * @return
-     */
-    private boolean isInRange(Vector position)
-    {
-        return position.x >= 0 && position.x < Settings.rowCount && position.y >= 0
-                && position.y < Settings.columnCount;
-    }
-
     public Vector getNextHeadPosition()
     {
         if (snakeIsAlive)
         {
-            return head.add(direction).modulo(Settings.columnCount, Settings.rowCount);
+            return head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
         }
         else
         {
@@ -170,7 +157,7 @@ public class Snake
     public void grow()
     {
         Vector nextHeadPosition =
-                head.add(direction).modulo(Settings.columnCount, Settings.columnCount);
+                head.add(direction).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
 
         // update head
         board[head.y][head.x] =
@@ -243,7 +230,7 @@ public class Snake
     {
         if (snakeIsAlive)
         {
-            return tail.add(tailDirection).modulo(Settings.columnCount, Settings.rowCount);
+            return tail.add(tailDirection).modulo(Settings.getGameSettings().getColumnCount(), Settings.getGameSettings().getRowCount());
         }
         else
         {

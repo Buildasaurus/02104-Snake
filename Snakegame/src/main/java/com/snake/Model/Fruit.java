@@ -23,8 +23,8 @@ public abstract class Fruit extends Tile
     public void setRandomPosition()
     {
         Random randint = new Random();
-        position = new Vector(randint.nextInt(Settings.columnCount),
-                randint.nextInt(Settings.rowCount));
+        position = new Vector(randint.nextInt(Settings.getGameSettings().getColumnCount()),
+                randint.nextInt(Settings.getGameSettings().getRowCount()));
     }
 
     public ImageView getImage()
