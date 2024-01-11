@@ -51,6 +51,9 @@ public class OurButton extends StackPane
     }
 
     private void setBackground(){
+
+        this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
+
         URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
         Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
