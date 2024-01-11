@@ -37,7 +37,7 @@ public class GUIController implements IController
 
     private int playerCount;
 
-    int margin = 100;
+    int margin = 150;
 
 
     /**
