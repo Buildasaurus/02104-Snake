@@ -21,6 +21,7 @@ public class GameModel
     private int rowCount;
     private int columnCount;
     private Snake[] players;
+    public int winner = -1;
 
     /**
      * Imports the current settings from {@link com.snake.Settings Settings} and initializes a board
@@ -280,9 +281,58 @@ public class GameModel
         return true; // Neither multiplayer or singleplayer?? Should not happen
     }
 
+    /**
+     * Returns the text describing what player won.
+     *
+     * @return
+     */
+    public String getGameOverText()
+    {
+        String gameoverText = "";
+        if (gameOver())
+        {
+            int playerID = getAlivePlayerID();
+            if (playerID == -1 && players.length > 1)
+            {
+                gameoverText = "All the remaining players\ndied at the same time!";
+            }
+            else
+            {
+                gameoverText =
+                        players.length == 1 ? "You lost" : "Player " + (playerID + 1) + " Won!";
+            }
+
+        }
+        return gameoverText;
+    }
+
     public Tile[][] getBoard()
     {
         return board;
+    }
+
+    /**
+     * Figures out what the ID of the player that is alive is. If there is more or less than one
+     * player alive, it returns -1
+     *
+     * @return The ID of the snake alive, from 0 to the playercount - 1.
+     */
+    public int getAlivePlayerID()
+    {
+        if (getAlivePlayerCount() == 1)
+        {
+            int playerID = -1;
+            for (Snake snake : players)
+            {
+                if (snake.isAlive())
+                {
+                    playerID = snake.playerNumber;
+                }
+            }
+            return playerID;
+        }
+        return -1;
+
     }
 
     public double getSpeed(int playerIndex)

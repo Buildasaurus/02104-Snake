@@ -59,6 +59,14 @@ public class GameOverView extends ButtonOverlayView
         scorebox.getChildren().add(highscore);
 
 
+        // Winning player- if any
+        Text winner = new Text(controller.getGameController().getGameModel().getGameOverText());
+        winner.setFill(Color.BLACK);
+        winner.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+        winner.setTextAlignment(TextAlignment.CENTER);
+        scorebox.getChildren().add(winner);
+
+
         getChildren().add(scorebox);
 
         OurButton newGameButton = new OurButton("New Game");

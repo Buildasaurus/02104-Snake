@@ -126,4 +126,8 @@ public class GameController implements IController
                 break;
         }
     }
+    public GameModel getGameModel()
+    {
+        return model;
+    }
 }

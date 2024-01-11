@@ -35,8 +35,6 @@ public class SelectionButton extends Button {
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand; -fx-font-size: 30");
         setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
-
-
     }
 
     public void changeback(){
