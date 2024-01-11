@@ -80,7 +80,8 @@ public class GameView extends GridPane
                 Pane bgCell = new Pane();
                 if (row != 0 && column == 0)
                 {
-                    if (columnCount % 2 == 0) {
+                    if (columnCount % 2 == 0)
+                    {
                         isLastDark = !isLastDark;
                     }
                 }
@@ -173,16 +174,29 @@ public class GameView extends GridPane
             for (int column = 0; column < columnCount; column++)
             {
                 nodes[row][column].setVisible(visible);
-                nodes[column][row].setVisible(visible);
-
             }
         }
-        for (int column = columnCount - 1; column >= Settings.getGameSettings().getColumnCount() + extraVisionDepth; column--)
+        for (int column = 0; column < extraVisionDepth; column++)
         {
             for (int row = 0; row < rowCount; row++)
             {
                 nodes[row][column].setVisible(visible);
-                nodes[column][row].setVisible(visible);
+            }
+        }
+        for (int column = columnCount - 1; column >= Settings.getGameSettings().getColumnCount()
+                + extraVisionDepth; column--)
+        {
+            for (int row = 0; row < rowCount; row++)
+            {
+                nodes[row][column].setVisible(visible);
+            }
+        }
+        for (int row = rowCount - 1; row >= Settings.getGameSettings().getRowCount()
+                + extraVisionDepth; row--)
+        {
+            for (int column = 0; column < columnCount; column++)
+            {
+                nodes[row][column].setVisible(visible);
             }
         }
     }
@@ -197,20 +211,25 @@ public class GameView extends GridPane
         if (position.x < extraVisionDepth)
         {
             gridPositions
-                    .add(new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x, gridCoordinate.y));
+                    .add(new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x,
+                            gridCoordinate.y));
         }
         if (position.y < extraVisionDepth)
         {
-            gridPositions.add(new Vector(gridCoordinate.x, Settings.getGameSettings().getRowCount() + gridCoordinate.y));
+            gridPositions.add(new Vector(gridCoordinate.x,
+                    Settings.getGameSettings().getRowCount() + gridCoordinate.y));
             if (position.x < extraVisionDepth) // topleft corner.
             {
-                gridPositions.add(new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x,
-                        gridCoordinate.y + Settings.getGameSettings().getRowCount()));
+                gridPositions.add(
+                        new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x,
+                                gridCoordinate.y + Settings.getGameSettings().getRowCount()));
             }
-            if (position.x >= Settings.getGameSettings().getColumnCount() - extraVisionDepth)// topright corner
+            if (position.x >= Settings.getGameSettings().getColumnCount() - extraVisionDepth)// topright
+                                                                                             // corner
             {
-                gridPositions.add(new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(),
-                        Settings.getGameSettings().getRowCount() + gridCoordinate.y));
+                gridPositions.add(
+                        new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(),
+                                Settings.getGameSettings().getRowCount() + gridCoordinate.y));
             }
         }
         if (position.y >= Settings.getGameSettings().getRowCount() - extraVisionDepth)
@@ -220,17 +239,23 @@ public class GameView extends GridPane
 
             if (position.x < extraVisionDepth) // buttomLeft corner.
             {
-                gridPositions.add(new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x, convertedY));
+                gridPositions.add(
+                        new Vector(Settings.getGameSettings().getColumnCount() + gridCoordinate.x,
+                                convertedY));
             }
-            if (position.x >= Settings.getGameSettings().getColumnCount() - extraVisionDepth)// buttomright corner
+            if (position.x >= Settings.getGameSettings().getColumnCount() - extraVisionDepth)// buttomright
+                                                                                             // corner
             {
-                gridPositions.add(new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(), convertedY));
+                gridPositions.add(
+                        new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(),
+                                convertedY));
             }
         }
         if (position.x >= Settings.getGameSettings().getColumnCount() - extraVisionDepth)
         {
             gridPositions
-                    .add(new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(), gridCoordinate.y));
+                    .add(new Vector(gridCoordinate.x - Settings.getGameSettings().getColumnCount(),
+                            gridCoordinate.y));
 
         }
 
