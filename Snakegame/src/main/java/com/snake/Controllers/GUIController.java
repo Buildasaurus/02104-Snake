@@ -53,13 +53,13 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight =
-                height / (Settings.rowCount + Settings.getGameSettings().getExtraVisionDepth());
-        int potentialBoxWidth =
-                width / (Settings.columnCount + Settings.getGameSettings().getExtraVisionDepth());
+        int potentialBoxHeight = height / (Settings.getGameSettings().getRowCount()
+                + Settings.getGameSettings().getExtraVisionDepth());
+        int potentialBoxWidth = width / (Settings.getGameSettings().getColumnCount()
+                + Settings.getGameSettings().getExtraVisionDepth());
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = boxDimension * Settings.rowCount;
-        int gameWidth = boxDimension * Settings.columnCount;
+        int gameHeight = boxDimension * Settings.getGameSettings().getRowCount();
+        int gameWidth = boxDimension * Settings.getGameSettings().getColumnCount();
         this.gameController = new GameController(gameHeight, gameWidth);
 
         initialize();
@@ -76,11 +76,11 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight = height / Settings.rowCount;
-        int potentialBoxWidth = width / Settings.columnCount;
+        int potentialBoxHeight = height / Settings.getGameSettings().getRowCount();
+        int potentialBoxWidth = width / Settings.getGameSettings().getColumnCount();
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = boxDimension * Settings.rowCount;
-        int gameWidth = boxDimension * Settings.columnCount;
+        int gameHeight = boxDimension * Settings.getGameSettings().getRowCount();
+        int gameWidth = boxDimension * Settings.getGameSettings().getColumnCount();
         this.gameController = new GameController(gameHeight, gameWidth, gameState);
 
         initialize();

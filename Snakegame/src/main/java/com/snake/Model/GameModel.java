@@ -28,8 +28,8 @@ public class GameModel
      */
     public GameModel()
     {
-        this.rowCount = Settings.rowCount;
-        this.columnCount = Settings.columnCount;
+        this.rowCount = Settings.getGameSettings().getRowCount();
+        this.columnCount = Settings.getGameSettings().getColumnCount();
         Vector midpoint = new Vector(columnCount / 2, rowCount / 2);
         board = new Tile[rowCount][columnCount];
         players = new Snake[Settings.getGameSettings().getPlayerCount()];
@@ -90,8 +90,8 @@ public class GameModel
 
     public GameModel(GameState gameState)
     {
-        this.rowCount = Settings.rowCount;
-        this.columnCount = Settings.columnCount;
+        this.rowCount = Settings.getGameSettings().getRowCount();
+        this.columnCount = Settings.getGameSettings().getColumnCount();
 
         board = new Tile[rowCount][columnCount];
         for (SnakeTile snakeTile : gameState.getSnakeTiles())
