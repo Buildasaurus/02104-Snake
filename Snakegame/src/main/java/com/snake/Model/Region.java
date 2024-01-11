@@ -1,8 +1,6 @@
 package com.snake.Model;
 
-import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.List;
 
 import com.snake.Utils.LevelGenerator;
 

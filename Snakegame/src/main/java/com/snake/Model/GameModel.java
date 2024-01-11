@@ -3,8 +3,6 @@ package com.snake.Model;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import com.snake.Settings;
 import com.snake.Utils.LevelGenerator;
