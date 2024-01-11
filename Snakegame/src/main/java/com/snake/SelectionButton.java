@@ -1,9 +1,6 @@
-package com.snake.Views;
+package com.snake;
 
-import java.net.URL;
-
-import com.snake.OurButton;
-import com.snake.Settings;
+import com.snake.Model.Resources;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -17,15 +14,11 @@ public class SelectionButton extends Button {
 
     private double scaler = 6.0;
 
-    private URL urlnormal = SelectionButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-
-    private URL urlpressed = SelectionButton.class.getResource("/com/snake/Graphics/smallplaybtpressed.png");
-
     public  SelectionButton(String buttonName)
 
     {
         super(buttonName);
-        Image buttonbackgroundimgfile = new Image(urlnormal.toString(), Settings.windowWidth/scaler, 0, true, false);
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
@@ -35,7 +28,7 @@ public class SelectionButton extends Button {
     }
 
     public void changeback(){
-        Image buttonbackgroundimgfile = new Image(urlnormal.toString(), Settings.windowWidth/scaler, 0, true, false);
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
@@ -43,7 +36,7 @@ public class SelectionButton extends Button {
     }
 
     public void pressed(){
-        Image buttonbackgroundimgfile = new Image(urlpressed.toString(), Settings.windowWidth/scaler, 0, true, false);
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybtpressed", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);

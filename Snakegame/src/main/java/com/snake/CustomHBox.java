@@ -1,6 +1,5 @@
 package com.snake;
 
-import com.snake.Views.SelectionButton;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
