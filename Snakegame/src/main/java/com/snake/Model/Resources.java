@@ -2,11 +2,9 @@ package com.snake.Model;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import javafx.scene.image.Image;
-import javafx.scene.media.Media;
 
 public class Resources
 {
