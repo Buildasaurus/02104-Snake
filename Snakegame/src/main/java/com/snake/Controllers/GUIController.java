@@ -58,7 +58,7 @@ public class GUIController implements IController
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
         int gameHeight = boxDimension * Settings.getGameSettings().getExtendedRowCount();
         int gameWidth = boxDimension * Settings.getGameSettings().getExtendedColumnCount();
-        this.gameController = new GameController(gameHeight, gameWidth);
+        this.gameController = new GameController(gameWidth, gameHeight);
 
         initialize();
     }
@@ -79,7 +79,7 @@ public class GUIController implements IController
         int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
         int gameHeight = boxDimension * Settings.getGameSettings().getExtendedRowCount();
         int gameWidth = boxDimension * Settings.getGameSettings().getExtendedColumnCount();
-        this.gameController = new GameController(gameHeight, gameWidth, gameState);
+        this.gameController = new GameController(gameWidth, gameHeight, gameState);
 
         initialize();
     }

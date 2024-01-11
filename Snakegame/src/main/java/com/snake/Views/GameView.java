@@ -31,7 +31,7 @@ public class GameView extends GridPane
      * @param height The height of the board in pixels
      * @param width The width of the board in pixels
      */
-    public GameView(int height, int width, Tile[][] board)
+    public GameView(int width, int height, Tile[][] board)
     {
         this.extraVisionDepth = Settings.getGameSettings().getExtraVisionDepth();
         this.height = height;

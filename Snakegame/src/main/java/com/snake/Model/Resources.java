@@ -26,6 +26,7 @@ public class Resources
             URL url = Resources.class.getResource("/com/snake/Graphics/" + name + ".png");
             Image image = new Image(url.toString());
             map.put(name, image);
+
         }
         return map.get(name);
     }
@@ -33,7 +34,7 @@ public class Resources
     public static void playSoundByName(String name)
     {
         URL url = Resources.class.getResource("/com/snake/Sounds/" + name + ".wav");
-        //Media sound = new Media(url.toExternalForm());
+        // Media sound = new Media(url.toExternalForm());
         AudioClip mediaPlayer = new AudioClip(url.toExternalForm());
         mediaPlayer.play();
     }
