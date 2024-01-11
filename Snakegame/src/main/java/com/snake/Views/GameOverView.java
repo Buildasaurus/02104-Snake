@@ -35,7 +35,7 @@ public class GameOverView extends ButtonOverlayView
     public void initialize(GUIController controller)
     {
         setBackground(new Color(0.5, 0.0, 0.0, 0.3));
-
+        
         ArrayList<Integer> scores = new ArrayList<Integer>();
         int playerCount = Settings.getGameSettings().getPlayerCount();
         VBox scorebox = new VBox(6);
