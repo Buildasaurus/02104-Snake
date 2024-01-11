@@ -3,6 +3,9 @@ package com.snake.Controllers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.snake.App;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;
@@ -23,7 +26,7 @@ public class GUIController implements IController
 
     private GUIView view;
 
-    private AnimationTimer gameTimer;
+    private Timer gameTimer;
     private int[] playerProgress;
     private ArrayList<Integer> updateList;
 
@@ -103,6 +106,57 @@ public class GUIController implements IController
         playerProgress = new int[playerCount];
         updateList = new ArrayList<Integer>();
 
+        TimerTask timeLoop = new TimerTask() {
+            public void run() {
+                // DON'T TRUST THE FRAMERATE!!!
+                Platform.runLater(() -> {
+                    long oldFrameTime = frameTimes[frameTimeIndex];
+                    frameTimes[frameTimeIndex] = System.currentTimeMillis();
+                    frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length;
+                    if (frameTimeIndex == 0)
+                    {
+                        arrayFilled = true;
+                    }
+                    if (arrayFilled)
+                    {
+                        long elapsedMillis = System.currentTimeMillis() - oldFrameTime;
+                        long elapsedNanosPerFrame = elapsedMillis / frameTimes.length;
+                        double frameRate = 1_000.0 / elapsedNanosPerFrame;
+                        view.updateFrameRate(frameRate);
+                    }
+                    if (!isGameOver && !isPaused && !isSaving)
+                    {
+                        for (int i = 0; i < playerProgress.length; i++)
+                        {
+                            playerProgress[i] += gameController.getSpeed(i);
+                            if (playerProgress[i] > 100)
+                            {
+                                updateList.add(i);
+                                playerProgress[i] = 0;
+                            }
+                        }
+                        if (!updateList.isEmpty())
+                        {
+                            isGameOver = gameController.executeNextStep(updateList);
+                            if (isGameOver)
+                            {
+                                setGameOverView();
+                            }
+                            for (int i : updateList)
+                            {
+                                view.updateCurrentScore(gameController.getCurrentScore(i), i);
+                                view.updateCurrentSpeed(gameController.getSpeed(i), i);
+                            }
+                            updateList.clear();
+                        }
+                    }
+                });
+            }
+        };
+
+        gameTimer = new Timer();
+        gameTimer.scheduleAtFixedRate(timeLoop, 16, 16);
+        /*
         gameTimer = new AnimationTimer()
         {
             @Override
@@ -152,6 +206,7 @@ public class GUIController implements IController
             }
         };
         gameTimer.start();
+        */
     }
 
     /**
@@ -251,7 +306,7 @@ public class GUIController implements IController
         {
             handleSaving(0);
         }
-        gameTimer.stop();
+        gameTimer.cancel();
         MenuController newController = new MenuController();
         App.setRoot(newController);
     }
@@ -272,7 +327,7 @@ public class GUIController implements IController
      */
     public void handleNewGameButtonPressed(ActionEvent action)
     {
-        gameTimer.stop();
+        gameTimer.cancel();
         NewGameController newController = new NewGameController();
         App.setRoot(newController);
     }
@@ -286,7 +341,7 @@ public class GUIController implements IController
     {
         // WARNING: loadview and loadcontroller are still in progress, only basic framework is
         // present with no functionality
-        gameTimer.stop();
+        gameTimer.cancel();
         LoadController newController = new LoadController();
         App.setRoot(newController);
     }
