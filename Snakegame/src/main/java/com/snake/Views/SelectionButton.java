@@ -17,15 +17,15 @@ public class SelectionButton extends Button {
 
     private double scaler = 6.0;
 
-    private URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
+    private URL urlnormal = SelectionButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
+
+    private URL urlpressed = SelectionButton.class.getResource("/com/snake/Graphics/smallplaybtpressed.png");
 
     public  SelectionButton(String buttonName)
 
     {
         super(buttonName);
-
-        URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-        Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
+        Image buttonbackgroundimgfile = new Image(urlnormal.toString(), Settings.windowWidth/scaler, 0, true, false);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
@@ -35,10 +35,18 @@ public class SelectionButton extends Button {
     }
 
     public void changeback(){
-        setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
+        Image buttonbackgroundimgfile = new Image(urlnormal.toString(), Settings.windowWidth/scaler, 0, true, false);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background buttonbackground = new Background(buttonbackgroundimg);
+        setBackground(buttonbackground);
     }
 
     public void pressed(){
-        setStyle("-fx-color: red");
+        Image buttonbackgroundimgfile = new Image(urlpressed.toString(), Settings.windowWidth/scaler, 0, true, false);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background buttonbackground = new Background(buttonbackgroundimg);
+        setBackground(buttonbackground);
     }
 }

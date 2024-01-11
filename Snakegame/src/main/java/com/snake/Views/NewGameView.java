@@ -26,7 +26,6 @@ public class NewGameView extends StandardBackground
     private void initialize(int[] playerCounts)
     {
 
-
         playerselection = new CustomHBox("Players");
 
 
