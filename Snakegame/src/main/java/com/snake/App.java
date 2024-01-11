@@ -13,12 +13,14 @@ import com.snake.Utils.SaveHandler;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class App extends Application
+{
     private static Scene scene;
     private static IController controller;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException
+    {
         controller = new MenuController();
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
@@ -28,12 +30,25 @@ public class App extends Application {
         stage.setResizable(false);
     }
 
-    public static void setRoot(IController newController) {
+    public static void setRoot(IController newController)
+    {
         controller = newController;
         scene.setRoot(controller.getView());
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
+        try
+        {
+            int width = Integer.parseInt(args[0]);
+            int height = Integer.parseInt(args[1]);
+            Settings.getGameSettings().setColumnCount(width);
+            Settings.getGameSettings().setRowCount(height);
+        }
+        catch (Exception e)
+        {
+            // TODO: handle exception
+        }
         launch();
     }
 
