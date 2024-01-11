@@ -47,10 +47,9 @@ public class App extends Application
         }
         catch (Exception e)
         {
-            // TODO: handle exception
-            System.out.println(e);
+            System.out.println("Incorrect/no args, defaulting to 30x30 board.");
             System.out.println(
-                    "Input arguments weren't correct. Expecting two values width, height, that  are between 5 and 100");
+                    "Expected: two integer values width, height, that  are between 5 and 100");
         }
         launch();
     }
