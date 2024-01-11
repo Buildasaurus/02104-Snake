@@ -6,7 +6,6 @@ import com.snake.OurButton;
 import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
-import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 
