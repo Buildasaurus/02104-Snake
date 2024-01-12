@@ -49,9 +49,10 @@ public class LevelGenerator
 
         // Make safe square in middle of board
         // illegal squares, that are to be ignored
-        int margin = 8;
-        Vector illegalXVector = new Vector((height - margin) / 2, (height + margin) / 2);
-        Vector illegalYVector = new Vector((width - margin) / 2, (width + margin) / 2);
+        int yMargin = 8;
+        int xMargin = 14;
+        Vector illegalXVector = new Vector((width - xMargin) / 2, (width + xMargin) / 2);
+        Vector illegalYVector = new Vector((height - yMargin) / 2, (height + yMargin) / 2);
         map = createSafeSquare(map, illegalXVector, illegalYVector);
 
         regions = getRegions(map);
@@ -76,7 +77,7 @@ public class LevelGenerator
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
             {
-                if (isInInterval(rowCount, xInterval) && isInInterval(columnCount, yInterval)
+                if (isInInterval(columnCount, xInterval) && isInInterval(rowCount, yInterval)
                         && map[rowCount][columnCount])
                 {
                     map[rowCount][columnCount] = false;
@@ -114,7 +115,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(seed);
+        Random rand = new Random(-439862863);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
