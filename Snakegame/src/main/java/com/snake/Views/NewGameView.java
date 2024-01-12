@@ -38,7 +38,7 @@ public class NewGameView extends StandardBackground
                 button.pressed();
                 playerselection.defaultButton = button;
             }
-            button.setOnAction(controller::handlePlayerCounts);
+            button.button.setOnAction(controller::handlePlayerCounts);
             playerselection.getChildren().add(button);
         }
 
@@ -53,7 +53,7 @@ public class NewGameView extends StandardBackground
                 button.pressed();
                 gamemode.defaultButton = button;
             }
-            button.setOnAction(controller::handlegameMode);
+            button.button.setOnAction(controller::handlegameMode);
             gamemode.getChildren().add(button);
         }
 
@@ -68,7 +68,7 @@ public class NewGameView extends StandardBackground
                 button.pressed();
                 maptype.defaultButton = button;
             }
-            button.setOnAction(controller::handlelevel);
+            button.button.setOnAction(controller::handlelevel);
             maptype.getChildren().add(button);
         }
 

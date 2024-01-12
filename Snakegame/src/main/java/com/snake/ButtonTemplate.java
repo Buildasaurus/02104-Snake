@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 public class ButtonTemplate extends StackPane {
     public Button button;
 
-    private double scaler = 7.0;
+    private double scaler = 6;
 
     public ButtonTemplate(String buttonName){
         super();
@@ -39,15 +39,15 @@ public class ButtonTemplate extends StackPane {
 
     private void setBackground(){
 
-        this.button.setBackground(new Background(new BackgroundFill(new Color(1, 0, 0, 0.5), null, null)));
+        this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        this.button.setStyle("-fx-cursor: hand; -fx-font-size: 20");
-        this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+        this.button.setStyle("-fx-cursor: hand; -fx-font-size: 40");
+        //this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
 //transperant till knappen
 //set size på button ikke our button
 //benjamins hjælp
@@ -57,7 +57,7 @@ public class ButtonTemplate extends StackPane {
             this.button.getHeight() / 100 * 35, 
             this.button.getWidth() / 100 * 14), 
             this.button.widthProperty(), this.button.heightProperty()));
-        }
+    }
     
 }
 

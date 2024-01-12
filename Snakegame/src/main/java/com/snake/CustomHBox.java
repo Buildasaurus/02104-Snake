@@ -25,7 +25,7 @@ public class CustomHBox extends HBox{
     }
 
     public void buttonPressed(SelectionButton action){
-        if (previousButtonPressed == null && action != defaultButton){
+        if (previousButtonPressed == null && action.button != defaultButton){
             defaultButton.changeback();
         }
         if (previousButtonPressed != null && action != previousButtonPressed) {

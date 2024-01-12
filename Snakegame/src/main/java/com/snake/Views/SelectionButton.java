@@ -11,6 +11,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
 
 
 public class SelectionButton extends StackPane {
@@ -28,13 +29,9 @@ public class SelectionButton extends StackPane {
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         button.setBackground(buttonbackground);
-        button.setStyle("-fx-cursor: hand; -fx-font-size: 30");
-        button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+        button.setStyle("-fx-cursor: hand");
+        button.setFont(new Font(10));
         getChildren().add(button);
-        
-        //setFont(new Font("Arial", Font.PLAIN, 2));
-        //setPreferredSize(new Dimension(25,25));
-        //setText("1");
 
     }
 
