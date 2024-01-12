@@ -1,7 +1,6 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
-
+import com.snake.Templates.OurButton;
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;

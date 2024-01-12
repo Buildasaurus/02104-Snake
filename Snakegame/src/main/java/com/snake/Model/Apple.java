@@ -1,5 +1,7 @@
 package com.snake.Model;
 
+import com.snake.Utils.Resources;
+
 public class Apple extends Fruit
 {
     public Apple()
@@ -14,6 +16,6 @@ public class Apple extends Fruit
 
     public void playSound()
     {
-        Resources.playSoundByName("EatAppleSound");
+        Resources.playSoundByName("EatAppleSound", 1);
     }
 }

@@ -1,14 +1,14 @@
 package com.snake.Views;
 
 
-import com.snake.CustomHBox;
-import com.snake.OurButton;
-import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
-
+import com.snake.Templates.CustomHBox;
+import com.snake.Templates.OurButton;
+import com.snake.Templates.SelectionButton;
+import com.snake.Templates.StandardBackground;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

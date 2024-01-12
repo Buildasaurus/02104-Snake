@@ -1,9 +1,8 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
-import com.snake.Model.Resources;
-
+import com.snake.Templates.OurButton;
+import com.snake.Utils.Resources;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
@@ -20,10 +19,10 @@ public class PauseView extends ButtonOverlayView {
 
     public void initialize(GUIController controller) {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
-        
+
         OurButton resumeButton = new OurButton("Resume");
         buttons[0] = resumeButton;
-        
+
 
         OurButton saveButton = new OurButton("Save Menu");
         buttons[1] = saveButton;

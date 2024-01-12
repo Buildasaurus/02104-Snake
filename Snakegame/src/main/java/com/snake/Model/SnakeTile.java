@@ -1,5 +1,6 @@
 package com.snake.Model;
 
+import com.snake.Utils.Resources;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 

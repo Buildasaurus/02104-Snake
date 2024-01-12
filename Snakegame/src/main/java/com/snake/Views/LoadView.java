@@ -1,9 +1,8 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
 import com.snake.Controllers.LoadController;
-import com.snake.Model.Resources;
-
+import com.snake.Templates.OurButton;
+import com.snake.Utils.Resources;
 import javafx.application.Platform;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -22,7 +21,7 @@ public class LoadView extends ButtonOverlayView {
     }
 
     public void initialize(LoadController controller, String[] saveNames) {
-        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByName("baggrund"), BackgroundRepeat.NO_REPEAT, 
+        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByName("baggrund"), BackgroundRepeat.NO_REPEAT,
         BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background background = new Background(backgroundImage);
         setBackground(background);
