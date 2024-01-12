@@ -7,12 +7,10 @@ import com.snake.Controllers.GUIController;
 import com.snake.Utils.Highscore;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
@@ -26,7 +24,6 @@ public class GameOverView extends ButtonOverlayView
         buttons = new OurButton[4];
         buttonsVisible = true;
         focusElementIndex = 0;
-
 
         initialize(controller);
     }
@@ -85,10 +82,7 @@ public class GameOverView extends ButtonOverlayView
         backButton.button.setOnAction(controller::handleBackButtonPressed);
         hideButton.button.setOnAction(controller::handleHideButtonPressed);
 
-
         setBasicFormatting();
-
-
 
         Platform.runLater(() -> newGameButton.requestFocus());
     }

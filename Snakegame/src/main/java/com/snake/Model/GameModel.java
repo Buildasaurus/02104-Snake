@@ -49,7 +49,6 @@ public class GameModel
         int fruitCount = 0;
         // Nice StackOverflow code to dynamiccaly get all classes that extends fruit, and spawn them
         // https://stackoverflow.com/questions/205573/at-runtime-find-all-classes-in-a-java-application-that-extend-a-base-class
-        System.out.println("Following warnings are inconsequential:");
         Reflections reflections = new Reflections("com.snake");
         Set<Class<? extends Fruit>> classes =
                 reflections.getSubTypesOf(com.snake.Model.Fruit.class);

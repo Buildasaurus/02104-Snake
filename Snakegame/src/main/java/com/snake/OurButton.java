@@ -2,8 +2,6 @@ package com.snake;
 
 import java.net.URL;
 
-import com.snake.Model.Resources;
-
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -17,7 +15,6 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class OurButton extends StackPane
 

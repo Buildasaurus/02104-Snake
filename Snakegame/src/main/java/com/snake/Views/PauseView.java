@@ -4,7 +4,6 @@ import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class PauseView extends ButtonOverlayView {

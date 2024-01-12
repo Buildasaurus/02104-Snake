@@ -12,8 +12,8 @@ public class GameSettings
     private int playerCount;
     private boolean extraVision;
     private int extraVisionDepth = 2;
-    private int columnCount = 30;
-    private int rowCount = 30;
+    private int columnCount = 100;
+    private int rowCount = 10;
 
     public GameSettings()
     {
@@ -96,13 +96,13 @@ public class GameSettings
         switch (gameMode)
         {
             case Easy:
-                return 2;
-            case Normal:
                 return 3;
+            case Normal:
+                return 5;
             case Hard:
-                return 4;
+                return 7;
             case Insane:
-                return 6;
+                return 10;
             default: // shouldn't be hit
                 System.out.println(
                         "something is wrong in gamesettings, getspeed() method. A gameMode isn't taken care of");

@@ -39,7 +39,7 @@ public class GUIController implements IController
 
     private int playerCount;
 
-    int margin = 150;
+    int margin = 175;
 
 
     /**
@@ -76,11 +76,12 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        int potentialBoxHeight = height / (Settings.getGameSettings().getExtendedRowCount());
-        int potentialBoxWidth = width / (Settings.getGameSettings().getExtendedColumnCount());
-        int boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = boxDimension * Settings.getGameSettings().getExtendedRowCount();
-        int gameWidth = boxDimension * Settings.getGameSettings().getExtendedColumnCount();
+        double potentialBoxHeight = ((double)height) / (Settings.getGameSettings().getExtendedRowCount());
+        double potentialBoxWidth = ((double)width) / (Settings.getGameSettings().getExtendedColumnCount());
+        double boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
+        int gameHeight = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedRowCount());
+        int gameWidth = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedColumnCount());
+        System.out.println(gameHeight + " "  + gameWidth);
         this.gameController = new GameController(gameWidth, gameHeight, gameState);
 
         initialize();
