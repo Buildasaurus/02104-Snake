@@ -38,8 +38,8 @@ public class SelectionButton extends Button
         double width = Settings.windowWidth/scaler;
         double height = Settings.windowHeight/scaler;
         setMinSize(width, height);
-        setMaxSize(width, height);
-        setPrefSize(width, height);
+        setMaxSize(20, 20);
+        setPrefSize(15, 15);
     }
 
 

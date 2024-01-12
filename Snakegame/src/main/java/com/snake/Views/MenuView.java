@@ -61,9 +61,6 @@ public class MenuView extends StandardBackground
         vbox.setStyle("-fx-alignment: center");
         vbox.setTranslateY(Settings.windowWidth*0.05);
         getChildren().add(vbox);
-        
-        /*quitButton.setPadding(new Insets(25,25,25,25));
-        quitButton.setAlignment(Pos.TOP_RIGHT);*/
 
         quitButton.setTranslateX(Settings.windowWidth*0.4 - (quitButton.getPrefWidth()*0.6));
         quitButton.setTranslateY(Settings.windowHeight*0.4 - (quitButton.getPrefHeight()*0.4));
