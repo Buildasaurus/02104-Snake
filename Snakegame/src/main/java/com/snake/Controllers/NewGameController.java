@@ -1,11 +1,11 @@
 package com.snake.Controllers;
 
 import com.snake.App;
-import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Model.GameSettings;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
+import com.snake.Templates.SelectionButton;
 import com.snake.Views.NewGameView;
 
 import javafx.event.ActionEvent;
@@ -66,7 +66,7 @@ public class NewGameController implements IController
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
                 break;
-        
+
             default:
                 break;
         }

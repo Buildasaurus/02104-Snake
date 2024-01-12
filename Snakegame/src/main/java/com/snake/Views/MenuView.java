@@ -1,10 +1,10 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.MenuController;
-import com.snake.Model.Resources;
-
+import com.snake.Templates.OurButton;
+import com.snake.Templates.StandardBackground;
+import com.snake.Utils.Resources;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;

@@ -1,10 +1,8 @@
 package com.snake.Views;
 
 import java.util.Optional;
-
-import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
-
+import com.snake.Templates.OurButton;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;

@@ -8,6 +8,7 @@ import java.io.IOException;
 import com.snake.Controllers.IController;
 import com.snake.Controllers.MenuController;
 import com.snake.Utils.Highscore;
+import com.snake.Utils.Resources;
 import com.snake.Utils.SaveHandler;
 
 /**
@@ -21,6 +22,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
+        Resources.playSoundByName("BackgroundMusic",0.03, true);
         controller = new MenuController();
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);

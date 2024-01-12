@@ -1,8 +1,9 @@
 package com.snake.Model;
 
 import com.snake.Settings;
+import com.snake.Utils.Resources;
 
-//Made by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 public class Snake
 {
@@ -51,11 +52,7 @@ public class Snake
         }
         if (isColliding || !willClear)
         {
-            System.out.printf("Snake %d just died.", playerNumber);
-            System.out.println("Is colliding: " + isColliding);
-            System.out.println("Wont clear: " + !willClear);
-            Resources.playSoundByName("DeathSound");
-            snakeIsAlive = false;
+            killSnake();
             return;
         }
         Vector nextHeadPosition = getNextHeadPosition();
@@ -80,7 +77,8 @@ public class Snake
         }
         else if (tileAtHead instanceof Wall)
         {
-            snakeIsAlive = false;
+            killSnake();
+
         }
     }
 
@@ -96,6 +94,14 @@ public class Snake
     public Vector getDirection()
     {
         return direction;
+    }
+
+    private void killSnake()
+    {
+        System.out.printf("Snake %d just died.", playerNumber);
+        System.out.println("Is colliding: " + isColliding);
+        Resources.playSoundByName("DeathSound", 1.0);
+        snakeIsAlive = false;
     }
 
     /**
