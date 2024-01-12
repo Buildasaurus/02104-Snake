@@ -5,7 +5,6 @@ import com.snake.Controllers.LoadController;
 import com.snake.Model.Resources;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
