@@ -185,16 +185,6 @@ public class GUIController implements IController
             case S:
             case A:
             case D:
-                if (!isGameOver && !isPaused)
-                {
-                    gameController.handleKeyPressed(key);
-                }
-                else
-                {
-                    view.shiftFocus(key);
-                }
-                break;
-
             case Y:
             case G:
             case H:

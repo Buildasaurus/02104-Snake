@@ -349,7 +349,6 @@ public class LevelGenerator
             Region reg = new Region(region, map);
             allRooms.add(reg);
         }
-        long startGraf = System.nanoTime();
         connectRegions(allRooms, map);
         // now figure out how to connect the regions in the best way, where each region is connected
         // to the one closest to itself. This might still result it some larger regions, that again

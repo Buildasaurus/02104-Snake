@@ -10,7 +10,6 @@ import com.snake.Templates.OurButton;
 import com.snake.Templates.SelectionButton;
 import com.snake.Templates.StandardBackground;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StandardBackground
