@@ -2,6 +2,7 @@ package com.snake.Views;
 
 import com.snake.Settings;
 import com.snake.Controllers.GUIController;
+import com.snake.Model.Resources;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +10,11 @@ import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -32,6 +38,9 @@ public class GUIView extends StackPane {
         frameRateCounter = new Label("fps: 0.0");
         currentScores = new Label[playerCount];
         currentSpeeds = new Label[playerCount];
+        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByNamesetWidth("baggrund", 3), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        Background background = new Background(backgroundImage);
+        this.setBackground(background);
 
         initialize(playerCount, speedArray);
     }
