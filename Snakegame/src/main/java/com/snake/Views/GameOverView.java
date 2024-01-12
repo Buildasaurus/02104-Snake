@@ -1,13 +1,12 @@
 package com.snake.Views;
 
 import java.util.ArrayList;
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 import com.snake.Settings;
 import com.snake.Controllers.GUIController;
 import com.snake.Utils.Highscore;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -23,7 +22,7 @@ public class GameOverView extends ButtonOverlayView
 
     public GameOverView(GUIController controller)
     {
-        buttons = new OurButton[4];
+        buttons = new ButtonTemplate[4];
         buttonsVisible = true;
         focusElementIndex = 0;
 
@@ -69,15 +68,15 @@ public class GameOverView extends ButtonOverlayView
 
         getChildren().add(scorebox);
 
-        OurButton newGameButton = new OurButton("New Game");
+        ButtonTemplate newGameButton = new ButtonTemplate("New Game");
         buttons[0] = newGameButton;
 
-        OurButton loadGameButton = new OurButton("Load Game");
+        ButtonTemplate loadGameButton = new ButtonTemplate("Load Game");
         buttons[1] = loadGameButton;
 
-        OurButton backButton = new OurButton("Back to Main Menu");
+        ButtonTemplate backButton = new ButtonTemplate("Back to Main Menu");
         buttons[2] = backButton;
-        OurButton hideButton = new OurButton("Hide Buttons");
+        ButtonTemplate hideButton = new ButtonTemplate("Hide Buttons");
         buttons[3] = hideButton;
 
         newGameButton.button.setOnAction(controller::handleNewGameButtonPressed);

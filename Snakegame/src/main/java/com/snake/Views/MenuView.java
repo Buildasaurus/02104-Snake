@@ -1,6 +1,6 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 import com.snake.Settings;
 import com.snake.Controllers.MenuController;
 
@@ -34,10 +34,10 @@ public class MenuView extends StandardBackground
         title.setTranslateY(Settings.windowHeight*0.1);
 
         //buttons
-        OurButton playButton = new OurButton("play");
-        OurButton continueButton = new OurButton("continue");
-        OurButton loadButton = new OurButton("load");
-        OurButton quitButton = new OurButton("quit", 6.5);
+        ButtonTemplate playButton = new ButtonTemplate("play");
+        ButtonTemplate continueButton = new ButtonTemplate("continue");
+        ButtonTemplate loadButton = new ButtonTemplate("load");
+        ButtonTemplate quitButton = new ButtonTemplate("quit", 6.5);
 
         playButton.button.setOnAction(controller::handlePlayButtonPressed);
         continueButton.button.setOnAction(controller::handleContinueButtonPressed);

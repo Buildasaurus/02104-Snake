@@ -1,7 +1,5 @@
 package com.snake;
 
-import java.net.URL;
-
 import com.snake.Model.Resources;
 
 import javafx.beans.binding.Bindings;
@@ -17,45 +15,32 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
-public class OurButton extends StackPane
-
-{
-    public final Button button;
+public class ButtonTemplate extends StackPane {
+    public Button button;
 
     private double scaler = 4.5;
 
-    private double x = Settings.windowWidth/scaler;
-
-    private double y = Settings.windowHeight/scaler;
-
-    /*public OurButton(){
+    public ButtonTemplate(String buttonName){
         super();
-        setBackground();
-    }*/
-
-    public OurButton(String buttonName) 
-    {
-       this(buttonName, 6.5);    
+       this.button = new Button(buttonName);
+       this.getChildren().add(this.button);
+       setBackground();
     }
 
-     public OurButton(String buttonName, double scaler){
+
+    public ButtonTemplate(String buttonName, double scaler){
         super();
         this.scaler = scaler;
        this.button = new Button(buttonName);
        this.getChildren().add(this.button);
        setBackground();
-
-
     }
 
     private void setBackground(){
 
         this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
-
-        URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-        Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);

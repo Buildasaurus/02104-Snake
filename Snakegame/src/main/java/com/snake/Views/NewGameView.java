@@ -2,7 +2,7 @@ package com.snake.Views;
 
 
 import com.snake.CustomHBox;
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 import com.snake.SelectionButton;
 import com.snake.Settings;
 import com.snake.Controllers.NewGameController;
@@ -84,7 +84,7 @@ public class NewGameView extends StandardBackground
 
 
         // Start game
-        OurButton startGame = new OurButton("Start game");
+        ButtonTemplate startGame = new ButtonTemplate("Start game");
         startGame.button.setOnAction(controller::handlePlayButtonPressed);
 
         startGame.setTranslateY(165);

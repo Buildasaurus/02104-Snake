@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import java.util.Optional;
 
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 import com.snake.Controllers.GUIController;
 
 import javafx.application.Platform;
@@ -19,7 +19,7 @@ public class SaveView extends ButtonOverlayView {
     GUIController controller;
 
     public SaveView(GUIController controller, String[] saveNames) {
-        buttons = new OurButton[4];
+        buttons = new ButtonTemplate[4];
         focusElementIndex = 0;
         this.controller = controller;
 
@@ -30,13 +30,13 @@ public class SaveView extends ButtonOverlayView {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
         for (int i = 0; i < 3; i++) {
-            OurButton saveButton = new OurButton("");
+            ButtonTemplate saveButton = new ButtonTemplate("");
             buttons[i] = saveButton;
             saveButton.button.setOnAction(this::handleSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
-        OurButton backButton = new OurButton("Back to Pause Menu");
+        ButtonTemplate backButton = new ButtonTemplate("Back to Pause Menu");
         buttons[3] = backButton;
         backButton.button.setOnAction(controller::handlePauseButtonPressed);
 
@@ -57,8 +57,8 @@ public class SaveView extends ButtonOverlayView {
     }
 
     public void handleSaveButtonPressed(ActionEvent action) {
-        OurButton actionOrigin = (OurButton) action.getSource();
-        String saveName = actionOrigin.button.getText();
+        Button actionOrigin = (Button) action.getSource();
+        String saveName = actionOrigin.getText();
         saveIndex = Integer.parseInt(saveName.substring(0, 1));
         controller.handleSaveButtonPressed(saveIndex);
     }

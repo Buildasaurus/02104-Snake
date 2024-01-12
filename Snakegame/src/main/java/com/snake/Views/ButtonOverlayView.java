@@ -1,6 +1,6 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 
 import javafx.geometry.Pos;
 import javafx.scene.input.KeyEvent;
@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 
 public abstract class ButtonOverlayView extends StackPane
 {
-    protected OurButton[] buttons;
+    protected ButtonTemplate[] buttons;
     protected int focusElementIndex;
 
     public void setBackground(Color overlayColor)
@@ -29,7 +29,7 @@ public abstract class ButtonOverlayView extends StackPane
         buttonGroup.setAlignment(Pos.CENTER);
         getChildren().add(buttonGroup);
 
-        for (OurButton button : buttons)
+        for (ButtonTemplate button : buttons)
         {
             button.button.setFont(new Font(20));
         }

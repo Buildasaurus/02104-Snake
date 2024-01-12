@@ -1,43 +1,36 @@
 package com.snake.Views;
 
-import java.net.URL;
-
-import com.snake.OurButton;
 import com.snake.Settings;
+import com.snake.Model.Resources;
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
 
 
-public class SelectionButton extends Button {
-//padding
-//stackpane
+public class SelectionButton extends StackPane {
+
+    public Button button;
     private double scaler = 6.0;
-
-    private URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
 
     public  SelectionButton(String buttonName)
 
     {
-        super(buttonName);
-
-        URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-        Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
+        super();
+        this.button = new Button(buttonName);
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
-        setBackground(buttonbackground);
-        setStyle("-fx-cursor: hand; -fx-font-size: 30");
-        setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+        button.setBackground(buttonbackground);
+        button.setStyle("-fx-cursor: hand; -fx-font-size: 30");
+        button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+        getChildren().add(button);
         
         //setFont(new Font("Arial", Font.PLAIN, 2));
         //setPreferredSize(new Dimension(25,25));
@@ -46,10 +39,18 @@ public class SelectionButton extends Button {
     }
 
     public void changeback(){
-        setStyle("-fx-cursor: hand; -fx-background-image: url('" + url.toExternalForm() + "'); -fx-background-color: transparent; -fx-font-size: 20; -fx-background-attachment: fixed; -fx-background-position: 50% 50%; -fx-background-repeat: no-repeat");
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, false));
+        Background buttonbackground = new Background(buttonbackgroundimg);
+        button.setBackground(buttonbackground);
     }
 
     public void pressed(){
-        setStyle("-fx-color: red");
+        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybtpressed", scaler);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, false, false));
+        Background buttonbackground = new Background(buttonbackgroundimg);
+        button.setBackground(buttonbackground);
     }
 }

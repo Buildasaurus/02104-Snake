@@ -1,11 +1,10 @@
 package com.snake.Views;
 
-import com.snake.OurButton;
+import com.snake.ButtonTemplate;
 import com.snake.Controllers.LoadController;
 import com.snake.Model.Resources;
 
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -14,7 +13,7 @@ import javafx.scene.layout.BackgroundSize;
 
 public class LoadView extends ButtonOverlayView {
     public LoadView(LoadController controller, String[] saveNames) {
-        buttons = new OurButton[4];
+        buttons = new ButtonTemplate[4];
         focusElementIndex = 0;
 
         initialize(controller, saveNames);
@@ -27,13 +26,13 @@ public class LoadView extends ButtonOverlayView {
         setBackground(background);
 
         for (int i = 0; i < 3; i++) {
-            OurButton saveButton = new OurButton("");
+            ButtonTemplate saveButton = new ButtonTemplate("");
             buttons[i] = saveButton;
             saveButton.button.setOnAction(controller::handleLoadSaveButtonPressed);
         }
         updateButtonNames(saveNames);
 
-        OurButton backButton = new OurButton("Back to Main Menu");
+        ButtonTemplate backButton = new ButtonTemplate("Back to Main Menu");
         buttons[3] = backButton;
         backButton.button.setOnAction(controller::handleBackButtonPressed);
 
