@@ -15,6 +15,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+// Made by Marinus Juhl
+
 public class GUIView extends StackPane {
     private GameView gameView;
     private PauseView pauseView;

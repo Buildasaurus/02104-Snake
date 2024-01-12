@@ -12,6 +12,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 
+// Made by Marinus Juhl
+
 public class SaveView extends ButtonOverlayView {
     Alert confirmationAlert;
     int saveIndex;

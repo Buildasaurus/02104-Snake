@@ -11,6 +11,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
+// Made by Marinus Juhl
+
 public class MenuController implements IController {
     private MenuView view;
     public MenuController() {

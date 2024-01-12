@@ -1,5 +1,7 @@
 package com.snake.Model;
 
+// Made by Marinus Juhl
+
 public class Banana extends Fruit {
     public Banana() {
         super(TileType.Banana);

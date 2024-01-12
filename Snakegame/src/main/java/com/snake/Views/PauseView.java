@@ -6,6 +6,8 @@ import com.snake.Controllers.GUIController;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
+// Made by Marinus Juhl
+
 public class PauseView extends ButtonOverlayView {
     public PauseView(GUIController controller) {
         buttons = new OurButton[3];
