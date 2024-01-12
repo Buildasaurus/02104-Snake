@@ -2,17 +2,12 @@ package com.snake.Views;
 
 import java.util.ArrayList;
 import com.snake.Settings;
-import com.snake.Model.Resources;
 import com.snake.Model.Tile;
 import com.snake.Model.Vector;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;

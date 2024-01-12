@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.Settings;
 import com.snake.Controllers.GUIController;
-import com.snake.Model.Resources;
+import com.snake.Utils.Resources;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
