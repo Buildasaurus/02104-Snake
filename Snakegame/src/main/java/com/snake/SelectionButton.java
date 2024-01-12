@@ -21,7 +21,6 @@ public class SelectionButton extends Button {
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(1,1, true, true, false, false));
-        //BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand; -fx-font-size: 30");
