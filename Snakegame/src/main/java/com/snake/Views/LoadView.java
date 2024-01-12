@@ -11,6 +11,8 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 
+// Made by Marinus Juhl
+
 public class LoadView extends ButtonOverlayView {
     public LoadView(LoadController controller, String[] saveNames) {
         buttons = new OurButton[4];

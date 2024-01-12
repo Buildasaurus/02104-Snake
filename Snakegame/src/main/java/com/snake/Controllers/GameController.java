@@ -10,6 +10,8 @@ import com.snake.Views.GameView;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
+// Made by Marinus Juhl
+
 public class GameController implements IController
 {
     private GameView view;

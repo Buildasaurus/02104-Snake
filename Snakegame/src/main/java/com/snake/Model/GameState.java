@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import java.util.ArrayList;
 
+// Made by Marinus Juhl
+
 public class GameState {
     private ArrayList<SnakeTile> snakeTiles;
     private ArrayList<Apple> apples;

@@ -8,6 +8,8 @@ import com.snake.Settings;
 import com.snake.Utils.LevelGenerator;
 import org.reflections.Reflections;
 
+//Primarily Jonathan Sommerlund - but selected methods by Marinus - the GameState constructor
+
 public class GameModel
 {
     /**
@@ -78,17 +80,7 @@ public class GameModel
         }
 
 
-        /*
-         * // level generation LevelGenerator.generateLevel(board); Apple apple = new Apple(); while
-         * (board[apple.getPosition().y][apple.getPosition().x] != null) {
-         * apple.setRandomPosition(); } changedTiles.add(apple.getPosition());
-         * board[apple.getPosition().y][apple.getPosition().x] = apple;
-         *
-         * Cherry cherry = new Cherry(); while
-         * (board[cherry.getPosition().y][cherry.getPosition().x] != null) {
-         * cherry.setRandomPosition(); } board[cherry.getPosition().y][cherry.getPosition().x] =
-         * cherry; changedTiles.add(cherry.getPosition());
-         */
+
     }
 
     public GameModel(GameState gameState)
@@ -228,9 +220,6 @@ public class GameModel
         }
         for (Fruit fruit : fruitsToRespawn)
         {
-            // TODO - fix this, so that when someone wins the game, it isn't an infinite loop,
-            // and when they are close, it doesn't take forever
-
             try
             { // cursed code from
               // https://stackoverflow.com/questions/5533702/instantiating-object-of-same-class-from-within-class-in-java

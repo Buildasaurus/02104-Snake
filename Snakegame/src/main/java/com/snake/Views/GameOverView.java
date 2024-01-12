@@ -14,6 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+// Made by Marinus Juhl
 
 public class GameOverView extends ButtonOverlayView
 {

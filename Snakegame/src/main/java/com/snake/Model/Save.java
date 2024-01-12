@@ -1,5 +1,7 @@
 package com.snake.Model;
 
+// Made by Marinus Juhl
+
 public class Save {
     private String name;
     private GameSettings gameSettings;

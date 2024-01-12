@@ -11,6 +11,8 @@ import com.snake.Model.Tile;
 import com.snake.Model.Vector;
 import com.snake.Model.Wall;
 
+//Made by Jonathan Sommerlund
+
 public class LevelGenerator
 {
     static int width;
@@ -285,7 +287,6 @@ public class LevelGenerator
             }
         }
         return map;
-        // TODO write this, to make map more smooth.
     }
 
     /**

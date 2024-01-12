@@ -5,6 +5,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+//Made by Jonathan Sommerlund
+
 /*
  * Static class for accesing high scores.
  */
