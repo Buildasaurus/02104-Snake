@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.Controllers.GUIController;
 import com.snake.Templates.OurButton;
-import com.snake.Utils.Resources;
+
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 

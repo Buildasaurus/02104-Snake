@@ -1,6 +1,5 @@
 package com.snake.Views;
 
-import java.util.ArrayList;
 import com.snake.Settings;
 import com.snake.Controllers.GUIController;
 import com.snake.Templates.OurButton;
@@ -34,7 +33,6 @@ public class GameOverView extends ButtonOverlayView
     {
         setBackground(new Color(0.5, 0.0, 0.0, 0.3));
 
-        ArrayList<Integer> scores = new ArrayList<Integer>();
         int playerCount = Settings.getGameSettings().getPlayerCount();
         VBox scorebox = new VBox(6);
 

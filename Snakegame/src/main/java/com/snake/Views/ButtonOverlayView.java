@@ -2,7 +2,6 @@ package com.snake.Views;
 
 import com.snake.Templates.OurButton;
 import javafx.geometry.Pos;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
@@ -33,29 +32,6 @@ public abstract class ButtonOverlayView extends StackPane
         for (OurButton button : buttons)
         {
             button.button.setFont(new Font(20));
-        }
-    }
-
-    public void shiftFocus(KeyEvent key)
-    {
-        switch (key.getCode())
-        {
-            case W:
-            case A:
-                focusElementIndex =
-                        focusElementIndex == 0 ? buttons.length - 1 : focusElementIndex - 1;
-                buttons[focusElementIndex].requestFocus();
-                break;
-
-            case S:
-            case D:
-                focusElementIndex =
-                        focusElementIndex == buttons.length - 1 ? 0 : focusElementIndex + 1;
-                buttons[focusElementIndex].requestFocus();
-                break;
-
-            default:
-                break;
         }
     }
 }
