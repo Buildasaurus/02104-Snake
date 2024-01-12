@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import com.snake.Settings;
 
+//Made by Jonathan Sommerlund
+
 public class Snake
 {
     private Vector head;

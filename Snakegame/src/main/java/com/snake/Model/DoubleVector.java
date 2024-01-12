@@ -1,4 +1,6 @@
 package com.snake.Model;
+//MAde by Jonathan Sommerlund
+
 public class DoubleVector
 {
     double x, y;

@@ -5,6 +5,8 @@ import com.snake.Settings;
 
 import javafx.scene.image.ImageView;
 
+//Everyone has done things in here at some point.
+
 public abstract class Fruit extends Tile
 {
     public Fruit(TileType type)
