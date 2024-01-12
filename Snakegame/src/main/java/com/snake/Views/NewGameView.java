@@ -97,7 +97,7 @@ public class NewGameView extends StandardBackground
 
         setPadding(new Insets(0,120,0,120));
 
-    
+
     }
 
 }

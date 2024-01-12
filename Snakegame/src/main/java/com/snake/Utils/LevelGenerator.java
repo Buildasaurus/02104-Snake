@@ -80,8 +80,8 @@ public class LevelGenerator
         // don't have acces to the rest of the level
         {
             map = connectIslands(map);
-            map = simplifyNoise(map);
         }
+        map = simplifyNoise(map);
         removeSuicideCells(map);
 
         fillBoardWithMap(board, map);
