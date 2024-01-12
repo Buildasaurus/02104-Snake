@@ -9,6 +9,7 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.text.Font;
 
 public class SelectionButton extends Button {
 
@@ -23,7 +24,9 @@ public class SelectionButton extends Button {
         new BackgroundSize(1,1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
-        setStyle("-fx-cursor: hand; -fx-font-size: 30");
+        setStyle("-fx-cursor: hand");
+        Font font = Resources.getFontByName("crimes", 30);
+        setFont(font);
         setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
     }
 

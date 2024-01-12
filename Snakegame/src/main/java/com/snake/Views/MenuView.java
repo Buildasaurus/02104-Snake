@@ -3,6 +3,7 @@ package com.snake.Views;
 import com.snake.OurButton;
 import com.snake.Settings;
 import com.snake.Controllers.MenuController;
+import com.snake.Model.Resources;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,10 +27,11 @@ public class MenuView extends StandardBackground
     private void initialize()
     {
 
-        //title
+        //titl
         Text title = new Text("Snake!");
         title.setFill(Color.BLACK);
-        title.setFont(Font.font("Arial", FontWeight.BOLD, 60));
+        Font crimes = Resources.getFontByName("crimes", 70);
+        title.setFont(crimes);
         setAlignment(title,Pos.TOP_CENTER);
         getChildren().add(title);
         title.setTranslateY(Settings.windowHeight*0.1);

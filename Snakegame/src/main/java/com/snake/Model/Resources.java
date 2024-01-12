@@ -1,6 +1,8 @@
 package com.snake.Model;
 
 import javafx.scene.media.AudioClip;
+import javafx.scene.text.Font;
+
 import java.net.URL;
 import java.util.HashMap;
 
@@ -39,6 +41,12 @@ public class Resources
             map.put(name, image);
         }
         return map.get(name);
+    }
+
+    public static Font getFontByName(String name, int size){
+        URL url = Resources.class.getResource("/com/snake/Fonts/" + name + ".ttf");
+        Font font = Font.loadFont(url.toString(), size);
+        return font;
     }
 
     public static void playSoundByName(String name)

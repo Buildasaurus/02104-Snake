@@ -2,6 +2,8 @@ package com.snake;
 
 import java.net.URL;
 
+import com.snake.Model.Resources;
+
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class OurButton extends StackPane
 
@@ -43,8 +46,6 @@ public class OurButton extends StackPane
         this.button = new Button(buttonName);
         this.getChildren().add(this.button);
         setBackground();
-
-
     }
 
     private void setBackground(){
@@ -58,7 +59,10 @@ public class OurButton extends StackPane
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
-        this.button.setStyle("-fx-cursor: hand; -fx-font-size: 20");
+        this.button.setStyle("-fx-cursor: hand");
+        //set up font
+        Font crimes = Resources.getFontByName("crimes", 20);
+        button.setFont(crimes);
         this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
 //transperant till knappen
 //set size på button ikke our button
