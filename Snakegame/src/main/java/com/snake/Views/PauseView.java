@@ -2,9 +2,11 @@ package com.snake.Views;
 
 import com.snake.OurButton;
 import com.snake.Controllers.GUIController;
+import com.snake.Model.Resources;
 
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
+
 
 // Made by Marinus Juhl
 
@@ -21,6 +23,7 @@ public class PauseView extends ButtonOverlayView {
         
         OurButton resumeButton = new OurButton("Resume");
         buttons[0] = resumeButton;
+        
 
         OurButton saveButton = new OurButton("Save Menu");
         buttons[1] = saveButton;

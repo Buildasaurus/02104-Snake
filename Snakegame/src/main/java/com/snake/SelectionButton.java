@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 public class SelectionButton extends Button
 {
 
-    private double scaler = 6.0;
+    private double scaler = 8.0;
 
     public SelectionButton(String buttonName) {
         super(buttonName);
@@ -31,15 +31,15 @@ public class SelectionButton extends Button
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand");
-        Font font = Resources.getFontByName("crimes", 30); // Set your desired font size here
+        Font font = Resources.getFontByName("crimes", 20); // Set your desired font size here
         setFont(font);
 
         // Set a fixed size for the button
         double width = Settings.windowWidth/scaler;
         double height = Settings.windowHeight/scaler;
         setMinSize(width, height);
-        setMaxSize(width, height);
-        setPrefSize(width, height);
+        setMaxSize(10, 10);
+        setPrefSize(10, 10);
     }
 
 
