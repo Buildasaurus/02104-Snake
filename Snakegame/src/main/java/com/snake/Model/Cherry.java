@@ -17,6 +17,6 @@ public class Cherry extends Fruit
 
     public void playSound()
     {
-        Resources.playSoundByName("EatAppleSound",1);
+        Resources.playSoundByName("EatAppleSound", 1);
     }
 }
