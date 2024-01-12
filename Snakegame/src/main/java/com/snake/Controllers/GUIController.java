@@ -157,7 +157,7 @@ public class GUIController implements IController
         };
 
         gameTimer = new Timer();
-        gameTimer.scheduleAtFixedRate(timeLoop, 16, 16);
+        gameTimer.scheduleAtFixedRate(timeLoop, 300, 16);
     }
 
     /**

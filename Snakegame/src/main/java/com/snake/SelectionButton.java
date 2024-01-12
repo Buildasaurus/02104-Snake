@@ -20,7 +20,7 @@ public class SelectionButton extends Button {
         super(buttonName);
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        new BackgroundSize(1,1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand; -fx-font-size: 30");
@@ -30,7 +30,7 @@ public class SelectionButton extends Button {
     public void changeback(){
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
     }
@@ -38,7 +38,7 @@ public class SelectionButton extends Button {
     public void pressed(){
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybtpressed", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
     }
