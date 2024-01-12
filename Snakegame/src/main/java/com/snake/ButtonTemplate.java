@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 public class ButtonTemplate extends StackPane {
     public Button button;
 
-    private double scaler = 4.5;
+    private double scaler = 7.0;
 
     public ButtonTemplate(String buttonName){
         super();
@@ -39,7 +39,7 @@ public class ButtonTemplate extends StackPane {
 
     private void setBackground(){
 
-        this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
+        this.button.setBackground(new Background(new BackgroundFill(new Color(1, 0, 0, 0.5), null, null)));
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(1, 1, true, true, false, false));
@@ -57,7 +57,7 @@ public class ButtonTemplate extends StackPane {
             this.button.getHeight() / 100 * 35, 
             this.button.getWidth() / 100 * 14), 
             this.button.widthProperty(), this.button.heightProperty()));
-    }
+        }
     
 }
 

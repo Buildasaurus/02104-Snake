@@ -56,7 +56,7 @@ public class MenuView extends StandardBackground
         VBox vbox = new VBox(0.05);
         vbox.getChildren().addAll(playButton,continueButton,loadButton);
         vbox.setStyle("-fx-alignment: center");
-        vbox.setTranslateY(Settings.windowWidth*0.05);
+        //vbox.setTranslateY(Settings.windowWidth*0.05);
         getChildren().add(vbox);
 
 

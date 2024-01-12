@@ -9,21 +9,24 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.StackPane;
 
-public class SelectionButton extends Button {
+public class SelectionButton extends StackPane {
+
+    public Button button;
 
     private double scaler = 6.0;
 
     public  SelectionButton(String buttonName)
 
     {
-        super(buttonName);
+        super();
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
-        setBackground(buttonbackground);
-        setStyle("-fx-cursor: hand; -fx-font-size: 30");
+        button.setBackground(buttonbackground);
+        button.setStyle("-fx-cursor: hand; -fx-font-size: 30");
         setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
     }
 
@@ -32,7 +35,7 @@ public class SelectionButton extends Button {
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
-        setBackground(buttonbackground);
+        button.setBackground(buttonbackground);
     }
 
     public void pressed(){
@@ -40,6 +43,6 @@ public class SelectionButton extends Button {
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
-        setBackground(buttonbackground);
+        button.setBackground(buttonbackground);
     }
 }
