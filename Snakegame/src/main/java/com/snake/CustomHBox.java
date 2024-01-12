@@ -1,8 +1,11 @@
 package com.snake;
 
+import com.snake.Model.Resources;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class CustomHBox extends HBox{
@@ -17,6 +20,8 @@ public class CustomHBox extends HBox{
         this.boxlabel = boxlabel;
 
         Text text = new Text(boxlabel);
+        Font font = Resources.getFontByName("crimes", 40);
+        text.setFont(font);
         getChildren().add(text);
 
         setAlignment(Pos.CENTER);
