@@ -25,7 +25,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        Resources.playSoundByName("BackgroundMusic",0.03, true);
+        Resources.playSoundByName("BackgroundMusic",0.05, true);
         controller = new MenuController();
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
