@@ -85,6 +85,8 @@ public class LevelGenerator
         removeSuicideCells(map);
 
         fillBoardWithMap(board, map);
+        System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9) + "seconds for rest");
+        startTime = System.nanoTime();
     }
 
 
@@ -132,7 +134,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(-2108484041);
+        Random rand = new Random(seed);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -349,8 +351,6 @@ public class LevelGenerator
         }
         long startGraf = System.nanoTime();
         connectRegions(allRooms, map);
-        System.out.println((System.nanoTime() - startGraf) / Math.pow(10, 9) + "seconds");
-
         // now figure out how to connect the regions in the best way, where each region is connected
         // to the one closest to itself. This might still result it some larger regions, that again
         // should be connected.
