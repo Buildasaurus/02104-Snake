@@ -2,12 +2,17 @@ package com.snake.Views;
 
 import java.util.ArrayList;
 import com.snake.Settings;
+import com.snake.Model.Resources;
 import com.snake.Model.Tile;
 import com.snake.Model.Vector;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -24,6 +29,7 @@ public class GameView extends GridPane
     int width;
     int extraVisionDepth;
     Node[][] nodes;
+    
 
     /**
      * Initialises the board with a height and width.
@@ -35,6 +41,7 @@ public class GameView extends GridPane
      */
     public GameView(int width, int height, Tile[][] board)
     {
+
         this.extraVisionDepth = Settings.getGameSettings().getExtraVisionDepth();
         this.height = height;
         this.width = width;
@@ -69,9 +76,9 @@ public class GameView extends GridPane
         }
 
         BackgroundFill bgFillDark =
-                new BackgroundFill(new Color(0, 0.6, 0.1, 1), null, getInsets());
+                new BackgroundFill(new Color(0.25, 0.2, 0.2, 1), null, getInsets());
         BackgroundFill bgFillLight =
-                new BackgroundFill(new Color(0, 0.5, 0.1, 1), null, getInsets());
+                new BackgroundFill(new Color(0.4, 0.4, 0.4, 1), null, getInsets());
         Background bgDark = new Background(bgFillDark);
         Background bgLight = new Background(bgFillLight);
         boolean isLastDark = false;

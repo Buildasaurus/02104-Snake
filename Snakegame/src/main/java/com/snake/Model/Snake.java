@@ -78,7 +78,6 @@ public class Snake
         else if (tileAtHead instanceof Wall)
         {
             killSnake();
-
         }
     }
 

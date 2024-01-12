@@ -10,6 +10,7 @@ import com.snake.Templates.OurButton;
 import com.snake.Templates.SelectionButton;
 import com.snake.Templates.StandardBackground;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StandardBackground
@@ -89,7 +90,6 @@ public class NewGameView extends StandardBackground
 
         startGame.setTranslateY(230);
         getChildren().add(startGame);
-
 
         // vbox adjust
         vbox.setTranslateY(-200);
