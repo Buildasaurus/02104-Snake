@@ -19,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
+// Made by Marinus Juhl
+
 public class GUIController implements IController
 {
     private GameController gameController;

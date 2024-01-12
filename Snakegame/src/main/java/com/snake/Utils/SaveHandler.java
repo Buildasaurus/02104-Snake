@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import com.snake.Model.Save;
 
+// Made by Marinus Juhl
+
 public class SaveHandler
 {
     private static Save[] saves = new Save[4];

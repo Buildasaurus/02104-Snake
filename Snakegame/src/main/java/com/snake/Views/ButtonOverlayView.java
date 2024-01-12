@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+// Made by Marinus Juhl
+
 public abstract class ButtonOverlayView extends StackPane
 {
     protected OurButton[] buttons;

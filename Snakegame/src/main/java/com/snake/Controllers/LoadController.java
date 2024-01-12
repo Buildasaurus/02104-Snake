@@ -11,6 +11,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 
+// Made by Marinus Juhl
+
 public class LoadController implements IController {
     LoadView view;
 
