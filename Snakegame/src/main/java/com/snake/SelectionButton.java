@@ -11,37 +11,56 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.text.Font;
 
-public class SelectionButton extends Button {
+public class SelectionButton extends Button
+{
 
     private double scaler = 6.0;
 
-    public  SelectionButton(String buttonName)
-
-    {
+    public SelectionButton(String buttonName) {
         super(buttonName);
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
-        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(1,1, true, true, false, false));
+        BackgroundSize buttonbackgroundsize = new BackgroundSize(
+            BackgroundSize.AUTO, BackgroundSize.AUTO,
+            false, false, false, false
+        );
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(
+            buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT,
+            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+            buttonbackgroundsize
+        );
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand");
-        Font font = Resources.getFontByName("crimes", 30);
+        Font font = Resources.getFontByName("crimes", 30); // Set your desired font size here
         setFont(font);
-        setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+
+        // Set a fixed size for the button
+        double width = Settings.windowWidth/scaler;
+        double height = Settings.windowHeight/scaler;
+        setMinSize(width, height);
+        setMaxSize(width, height);
+        setPrefSize(width, height);
     }
 
-    public void changeback(){
+
+
+    public void changeback()
+    {
         Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybt", scaler);
-        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(1, 1, true, true, false, false));
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile,
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
     }
 
-    public void pressed(){
-        Image buttonbackgroundimgfile = Resources.getImageByNamesetWidth("smallplaybtpressed", scaler);
-        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(1, 1, true, true, false, false));
+    public void pressed()
+    {
+        Image buttonbackgroundimgfile =
+                Resources.getImageByNamesetWidth("smallplaybtpressed", scaler);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile,
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
     }
