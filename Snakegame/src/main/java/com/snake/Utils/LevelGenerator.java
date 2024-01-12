@@ -115,7 +115,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(-439862863);
+        Random rand = new Random(seed);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
