@@ -10,6 +10,7 @@ import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StandardBackground
@@ -89,7 +90,6 @@ public class NewGameView extends StandardBackground
 
         startGame.setTranslateY(230);
         getChildren().add(startGame);
-
 
         // vbox adjust
         vbox.setTranslateY(-200);
