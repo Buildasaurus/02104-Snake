@@ -1,7 +1,7 @@
 package com.snake.Model;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import com.snake.Utils.LevelGenerator;
 
 public class Region
@@ -40,7 +40,7 @@ public class Region
                         int modY = LevelGenerator.mod(tile.y + dy, height);
                         if (map[modY][modX])
                         {
-                            edgeTiles.add(tile); //some tiles are added multiple times.
+                            edgeTiles.add(tile); // some tiles are added multiple times.
                         }
                     }
                 }
@@ -50,10 +50,11 @@ public class Region
 
     public void setRegionID(int id)
     {
-        if(id < regionID || regionID == -1)
+        if (id < regionID || regionID == -1)
         {
             regionID = id;
-            for (Region region : connectedRegions) {
+            for (Region region : connectedRegions)
+            {
                 region.setRegionID(id);
             }
         }
@@ -76,5 +77,43 @@ public class Region
         roomA.setRegionID(regionID);
         roomB.connectedRegions.add(roomA);
         roomB.setRegionID(regionID);
+    }
+
+    public void SaveData(Region other, DistanceData data)
+    {
+        storedConnections.put(other, data);
+    }
+
+    HashMap<Region, DistanceData> storedConnections = new HashMap<Region, DistanceData>();
+    public DistanceData distanceToOtherRegion(Region roomB)
+    {
+        if(storedConnections.containsKey(roomB))
+        {
+            return storedConnections.get(roomB);
+        }
+        Vector bestTileA = new Vector();
+        Vector bestTileB = new Vector();
+        double bestDistance = 99999999;
+        Region roomA = this;
+        for (int tileIndexA = 0; tileIndexA < roomA.edgeTiles.size(); tileIndexA++)
+        {
+            for (int tileIndexB = 0; tileIndexB < roomB.edgeTiles.size(); tileIndexB++)
+            {
+                Vector tileA = roomA.edgeTiles.get(tileIndexA);
+                Vector tileB = roomB.edgeTiles.get(tileIndexB);
+                double distanceBetweenRooms = tileA.distance(tileB);
+                if(distanceBetweenRooms < bestDistance)
+                {
+                    bestTileA = tileA;
+                    bestTileB = tileB;
+                    bestDistance = distanceBetweenRooms;
+                }
+
+            }
+        }
+        DistanceData data = new DistanceData(bestDistance, bestTileA, bestTileB);
+        roomB.SaveData(roomA, data);
+        storedConnections.put(roomB, data);
+        return data;
     }
 }

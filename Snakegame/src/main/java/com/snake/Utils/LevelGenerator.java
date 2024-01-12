@@ -5,19 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import com.snake.Settings;
+import com.snake.Model.DistanceData;
 import com.snake.Model.DoubleVector;
 import com.snake.Model.Region;
 import com.snake.Model.Tile;
 import com.snake.Model.Vector;
 import com.snake.Model.Wall;
 
-//Made by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 public class LevelGenerator
 {
     static int width;
     static int height;
     public static int wallCount;
+    static long islandTime = 0;
 
     /**
      * Generates walls around the level. Will always have a clear 8x8 square in the middle Assumes
@@ -27,6 +29,7 @@ public class LevelGenerator
      */
     public static void generateLevel(Tile[][] board)
     {
+        long startTime = System.nanoTime();
         wallCount = 0;
         // Early return if board is too small
         if (board.length < 1 || (board.length < 8 && board[0].length < 8))
@@ -36,19 +39,31 @@ public class LevelGenerator
         height = board.length;
         width = board[0].length;
         double fill = Settings.getGameSettings().getLevelFill();
+
         boolean[][] map = generateMap(fill);
         for (int i = 0; i < 3; i++)
         {
             map = simplifyNoise(map);
         }
+        System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9)
+                + "seconds for create and simplify");
+        startTime = System.nanoTime();
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
         System.out.println("regionCount before" + regions.size());
         map = connectIslands(map);
+        System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9)
+                + "seconds for connecting islands");
+        System.out.println((islandTime) / Math.pow(10, 9)
+                + "seconds for calculating disatnces between islands");
+        startTime = System.nanoTime();
         for (int i = 0; i < 6; i++)
         {
             map = simplifyNoise(map);
         }
 
+        System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9)
+                + "seconds for simplifying again");
+        startTime = System.nanoTime();
         // Make safe square in middle of board
         // illegal squares, that are to be ignored
         int yMargin = 8;
@@ -117,7 +132,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(seed);
+        Random rand = new Random(-2108484041);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
@@ -325,20 +340,16 @@ public class LevelGenerator
     {
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
 
-        // foreach region, create a Room class.
-        /*
-         * for (int firstIndex = 0; firstIndex < regions.size(); firstIndex++) { for (int
-         * secondIndex = 0; secondIndex < regions.size(); secondIndex++) { if (firstIndex ==
-         * secondIndex) continue; distances[firstIndex][secondIndex] =
-         * shortestDistanceBetweenRegions( regions.get(firstIndex), regions.get(secondIndex)); } }
-         */
+
         ArrayList<Region> allRooms = new ArrayList<Region>();
         for (ArrayList<Vector> region : regions)
         {
             Region reg = new Region(region, map);
             allRooms.add(reg);
         }
+        long startGraf = System.nanoTime();
         connectRegions(allRooms, map);
+        System.out.println((System.nanoTime() - startGraf) / Math.pow(10, 9) + "seconds");
 
         // now figure out how to connect the regions in the best way, where each region is connected
         // to the one closest to itself. This might still result it some larger regions, that again
@@ -369,26 +380,18 @@ public class LevelGenerator
                 {
                     continue;
                 }
-
-                for (int tileIndexA = 0; tileIndexA < roomA.edgeTiles.size(); tileIndexA++)
+                long startTime = System.nanoTime();
+                DistanceData data = roomA.distanceToOtherRegion(roomB);
+                if (data.distance < bestDistance || !possibleConnectionFound)
                 {
-                    for (int tileIndexB = 0; tileIndexB < roomB.edgeTiles.size(); tileIndexB++)
-                    {
-                        Vector tileA = roomA.edgeTiles.get(tileIndexA);
-                        Vector tileB = roomB.edgeTiles.get(tileIndexB);
-                        double distanceBetweenRooms = tileA.distance(tileB);
-
-                        if (distanceBetweenRooms < bestDistance || !possibleConnectionFound)
-                        {
-                            bestDistance = distanceBetweenRooms;
-                            possibleConnectionFound = true;
-                            bestTileA = tileA;
-                            bestTileB = tileB;
-                            bestRoomA = roomA;
-                            bestRoomB = roomB;
-                        }
-                    }
+                    bestDistance = data.distance;
+                    possibleConnectionFound = true;
+                    bestTileA = data.tileA;
+                    bestTileB = data.tileB;
+                    bestRoomA = roomA;
+                    bestRoomB = roomB;
                 }
+                islandTime += System.nanoTime() - startTime;
             }
         }
         // At this point, every region will be connected to the closeset region to it.
@@ -403,10 +406,10 @@ public class LevelGenerator
         }
     }
 
+
     private static void CreatePassage(Region roomA, Region roomB, Vector tileA, Vector tileB,
             boolean[][] map)
     {
-        System.out.println(tileA + " connects to " + tileB);
         for (int row = 0; row < height; row++)
         {
             for (int column = 0; column < width; column++)
@@ -415,7 +418,6 @@ public class LevelGenerator
                 if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA),
                         new DoubleVector(point)) < 2)
                 {
-                    System.out.println("creating passage at " + point);
                     map[row][column] = false;
                 }
             }
