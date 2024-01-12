@@ -40,9 +40,9 @@ public class OurButton extends StackPane
      public OurButton(String buttonName, double scaler){
         super();
         this.scaler = scaler;
-       this.button = new Button(buttonName);
-       this.getChildren().add(this.button);
-       setBackground();
+        this.button = new Button(buttonName);
+        this.getChildren().add(this.button);
+        setBackground();
 
 
     }
