@@ -61,7 +61,9 @@ public class App extends Application
 
     public void stop()
     {
-        gameTimer.cancel();
+        if (gameTimer != null) {
+            gameTimer.cancel();
+        }
         System.out.println(controller);
         System.out.println("closing app");
     }
