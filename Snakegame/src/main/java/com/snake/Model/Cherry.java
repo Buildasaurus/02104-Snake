@@ -15,7 +15,6 @@ public class Cherry extends Fruit
 
     public void playSound()
     {
-        //TODO fox this.
         Resources.playSoundByName("EatAppleSound");
     }
 }

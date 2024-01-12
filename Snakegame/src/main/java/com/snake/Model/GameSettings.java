@@ -3,6 +3,8 @@ package com.snake.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+//Everyone has been arond this.
+
 public class GameSettings
 {
     private transient List<Runnable> listeners = new ArrayList<>();
