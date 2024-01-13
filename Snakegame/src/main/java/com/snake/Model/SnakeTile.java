@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import com.snake.Utils.Resources;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 
 //Made by Jonathan Sommerlund
@@ -31,13 +33,17 @@ public class SnakeTile extends Tile
         }
         String imageName = tileType.toString().toLowerCase() + "_" + directionName;
         ImageView sprite = new ImageView(Resources.getImageByName(imageName));
+        ColorAdjust colorAdjust = new ColorAdjust();
+
         if (assignedPlayer == 1)
         {
-            sprite.setBlendMode(BlendMode.DIFFERENCE);
+            colorAdjust.setHue(-0.3);
+            sprite.setEffect(colorAdjust);
         }
         if (assignedPlayer == 2)
         {
-            sprite.setBlendMode(BlendMode.GREEN);
+            colorAdjust.setHue(-0.2);
+            sprite.setEffect(colorAdjust);
         }
         return sprite;
     }

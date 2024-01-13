@@ -24,7 +24,7 @@ public class GameView extends GridPane
     int width;
     int extraVisionDepth;
     Node[][] nodes;
-    
+
 
     /**
      * Initialises the board with a height and width.
@@ -71,9 +71,9 @@ public class GameView extends GridPane
         }
 
         BackgroundFill bgFillDark =
-                new BackgroundFill(new Color(0.25, 0.2, 0.2, 1), null, getInsets());
+                new BackgroundFill(new Color(0.6, 0.7, 0.6, 1), null, getInsets());
         BackgroundFill bgFillLight =
-                new BackgroundFill(new Color(0.4, 0.4, 0.4, 1), null, getInsets());
+                new BackgroundFill(new Color(0.5, 0.6, 0.5, 1), null, getInsets());
         Background bgDark = new Background(bgFillDark);
         Background bgLight = new Background(bgFillLight);
         boolean isLastDark = false;
