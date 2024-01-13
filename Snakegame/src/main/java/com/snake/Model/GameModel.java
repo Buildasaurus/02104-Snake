@@ -8,7 +8,7 @@ import com.snake.Settings;
 import com.snake.Utils.LevelGenerator;
 import org.reflections.Reflections;
 
-//Primarily Jonathan Sommerlund - but selected methods by Marinus - the GameState constructor
+//Primarily Jonathan Sommerlund - but initial version by Kajsa and Lucia and GameState constructor by Marinus.
 
 public class GameModel
 {
