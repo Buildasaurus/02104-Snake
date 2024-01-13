@@ -203,7 +203,7 @@ public class Snake
     public boolean willGrow(Tile[][] board)
     {
         Vector nextHeadPosition = getNextHeadPosition();
-        return board[nextHeadPosition.y][nextHeadPosition.x] instanceof Fruit && !isColliding;
+        return board[nextHeadPosition.y][nextHeadPosition.x] instanceof Apple && !isColliding;
     }
 
     public Fruit Fruiteaten()
