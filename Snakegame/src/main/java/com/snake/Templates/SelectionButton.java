@@ -14,7 +14,7 @@ import javafx.scene.text.Font;
 public class SelectionButton extends Button
 {
 
-    private double scaler = 8.0;
+    private double scaler = 7.0;
 
     /**
      * A button with implemented standard design for easy use.
