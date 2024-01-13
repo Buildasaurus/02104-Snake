@@ -31,6 +31,7 @@ public class GUIView extends StackPane {
     private Label frameRateCounter;
     private Label[] currentScores;
     private Label[] currentSpeeds;
+    Font font = Resources.getFontByName("crimes", 15);
 
     public GUIView(Parent gameView, int playerCount, double[] speedArray) {
         this.gameView = (GameView) gameView;
@@ -62,14 +63,14 @@ public class GUIView extends StackPane {
         leftBox.setPrefWidth(widthOfVBOX);
         leftBox.setAlignment(Pos.CENTER);
 
-        frameRateCounter.setFont(new Font(15.0));
+        frameRateCounter.setFont(font);
         topBox.getChildren().add(frameRateCounter);
 
         for (int i = 0; i < playerCount; i++) {
             Label currentScore = new Label();
-            currentScore.setText("Player " + (i + 1) + "'s score: 0");
+            currentScore.setText("Player " + (i + 1) + "score: 0");
             currentScores[i] = currentScore;
-            currentScore.setFont(new Font(15.0));
+            currentScore.setFont(font);
             topBox.getChildren().add(currentScore);
         }
         CheckBox toggleExtraVision = new CheckBox();
@@ -84,7 +85,7 @@ public class GUIView extends StackPane {
             Label currentSpeed = new Label();
             currentSpeed.setText("Player " + (i + 1) + "'s \n speed: " + speedArray[i]);
             currentSpeeds[i] = currentSpeed;
-            currentSpeed.setFont(new Font(15.0));
+            currentSpeed.setFont(font);
             leftBox.getChildren().add(currentSpeed);
         }
 
@@ -96,14 +97,17 @@ public class GUIView extends StackPane {
 
     public void updateFrameRate(double frameRate) {
         frameRateCounter.setText(String.format("fps: %.1f", frameRate));
+        frameRateCounter.setFont(font);
     }
 
     public void updateCurrentScore(int score, int player) {
-        currentScores[player].setText("Player " + (player + 1) + "'s score: " + score);
+        currentScores[player].setText("Player " + (player + 1) + "score: " + score);
+        frameRateCounter.setFont(font);
     }
 
     public void updateCurrentSpeed(double speed, int player) {
         currentSpeeds[player].setText("Player " + (player + 1) + "'s \n speed: " + speed);
+        frameRateCounter.setFont(font);
     }
 
     public void setPauseView(GUIController controller) {

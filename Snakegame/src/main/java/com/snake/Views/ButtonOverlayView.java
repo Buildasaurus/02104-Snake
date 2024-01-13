@@ -28,10 +28,5 @@ public abstract class ButtonOverlayView extends StackPane
         VBox buttonGroup = new VBox(20.0, buttons);
         buttonGroup.setAlignment(Pos.CENTER);
         getChildren().add(buttonGroup);
-
-        for (OurButton button : buttons)
-        {
-            button.button.setFont(new Font(20));
-        }
     }
 }
