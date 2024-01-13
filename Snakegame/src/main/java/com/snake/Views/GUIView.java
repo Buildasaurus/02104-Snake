@@ -9,7 +9,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -94,14 +93,6 @@ public class GUIView extends StackPane {
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
-    }
-
-    public void shiftFocus(KeyEvent key) {
-        if (pauseView != null) {
-            pauseView.shiftFocus(key);
-        } else if (gameOverView != null) {
-            gameOverView.shiftFocus(key);
-        }
     }
 
     public void updateFrameRate(double frameRate) {

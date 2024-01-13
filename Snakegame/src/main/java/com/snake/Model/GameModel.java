@@ -8,7 +8,7 @@ import com.snake.Settings;
 import com.snake.Utils.LevelGenerator;
 import org.reflections.Reflections;
 
-//Primarily Jonathan Sommerlund - but selected methods by Marinus - the GameState constructor
+//Primarily Jonathan Sommerlund - but initial version by Kajsa and Lucia and GameState constructor by Marinus.
 
 public class GameModel
 {
@@ -41,9 +41,9 @@ public class GameModel
         for (int i = 0; i < Settings.getGameSettings().getPlayerCount(); i++)
         {
             players[i] = new Snake(board, startSpawnPoint.add(0, i * 2),
-                    startSpawnPoint.add(-1, i * 2), new Vector(1, 0), i);
+                    startSpawnPoint.add(1, i * 2), new Vector(-1, 0), i);
             changedTiles.add(startSpawnPoint.add(0, i * 2));
-            changedTiles.add(startSpawnPoint.add(-1, i * 2));
+            changedTiles.add(startSpawnPoint.add(1, i * 2));
         }
 
 

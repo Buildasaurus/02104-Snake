@@ -11,6 +11,7 @@ import com.snake.Templates.SelectionButton;
 import com.snake.Templates.StandardBackground;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NewGameView extends StandardBackground
@@ -35,7 +36,8 @@ public class NewGameView extends StandardBackground
         for (int i : playerCounts)
         {
             SelectionButton button = new SelectionButton(Integer.toString(i));
-            if (Settings.getGameSettings().getPlayerCount() == i){
+            if (Settings.getGameSettings().getPlayerCount() == i)
+            {
                 button.pressed();
                 playerselection.defaultButton = button;
             }
@@ -50,7 +52,8 @@ public class NewGameView extends StandardBackground
         for (GameMode mode : GameMode.values())
         {
             SelectionButton button = new SelectionButton(mode.toString());
-            if (Settings.getGameSettings().getGameMode() == mode){
+            if (Settings.getGameSettings().getGameMode() == mode)
+            {
                 button.pressed();
                 gamemode.defaultButton = button;
             }
@@ -65,7 +68,8 @@ public class NewGameView extends StandardBackground
         for (Level level : Level.values())
         {
             SelectionButton button = new SelectionButton(level.toString());
-            if (Settings.getGameSettings().getLevel() == level){
+            if (Settings.getGameSettings().getLevel() == level)
+            {
                 button.pressed();
                 maptype.defaultButton = button;
             }
@@ -75,27 +79,20 @@ public class NewGameView extends StandardBackground
 
         VBox vbox = new VBox(10);
 
-        setMargin(vbox, new Insets(500, -300, 200, 100));
-
         vbox.getChildren().addAll(playerselection, gamemode, maptype);
-
-        getChildren().add(vbox);
-
-
-
 
         // Start game
         OurButton startGame = new OurButton("Start game");
         startGame.button.setOnAction(controller::handlePlayButtonPressed);
 
-        startGame.setTranslateY(230);
+
+        // setAlignment for good scaling
+        setAlignment(startGame, Pos.BOTTOM_CENTER);
+        vbox.setTranslateY(Settings.windowHeight/5);
+
+
+        getChildren().add(vbox);
         getChildren().add(startGame);
-
-        // vbox adjust
-        vbox.setTranslateY(-200);
-        vbox.setTranslateX(-200);
-
-        setPadding(new Insets(0,120,0,120));
 
 
     }

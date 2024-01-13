@@ -45,15 +45,7 @@ public class MenuView extends StandardBackground
         loadButton.button.setOnAction(controller::handleLoadButtonPressed);
         quitButton.button.setOnAction(controller::handleExitButtonPressed);
 
-        /*//TODO fix this in another way, ideally make button and background scale the same
-        //playButton.setTranslateY(Settings.windowHeight*0.1);
-        getChildren().add(playButton);
 
-        continueButton.setTranslateY(Settings.windowHeight*0.2);
-        getChildren().add(continueButton);
-
-        loadButton.setTranslateY(Settings.windowHeight*0.4);
-        getChildren().add(loadButton);*/
         VBox vbox = new VBox(0.05);
         vbox.getChildren().addAll(playButton,continueButton,loadButton);
         vbox.setStyle("-fx-alignment: center");
