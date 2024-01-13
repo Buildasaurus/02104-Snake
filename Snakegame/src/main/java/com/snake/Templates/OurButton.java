@@ -29,11 +29,6 @@ public class OurButton extends StackPane
 
     private double y = Settings.windowHeight/scaler;
 
-    /*public OurButton(){
-        super();
-        setBackground();
-    }*/
-
     public OurButton(String buttonName)
     {
        this(buttonName, 6.5);
