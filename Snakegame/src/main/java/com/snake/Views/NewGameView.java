@@ -6,7 +6,7 @@ import com.snake.Controllers.NewGameController;
 import com.snake.Model.GameSettings.GameMode;
 import com.snake.Model.GameSettings.Level;
 import com.snake.Templates.CustomHBox;
-import com.snake.Templates.OurButton;
+import com.snake.Templates.StyledButton;
 import com.snake.Templates.SelectionButton;
 import com.snake.Templates.StandardBackground;
 import javafx.geometry.Insets;
@@ -82,7 +82,7 @@ public class NewGameView extends StandardBackground
         vbox.getChildren().addAll(playerselection, gamemode, maptype);
 
         // Start game
-        OurButton startGame = new OurButton("Start game");
+        StyledButton startGame = new StyledButton("Start game");
         startGame.button.setOnAction(controller::handlePlayButtonPressed);
 
 

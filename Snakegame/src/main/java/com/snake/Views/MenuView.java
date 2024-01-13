@@ -2,7 +2,7 @@ package com.snake.Views;
 
 import com.snake.Settings;
 import com.snake.Controllers.MenuController;
-import com.snake.Templates.OurButton;
+import com.snake.Templates.StyledButton;
 import com.snake.Templates.StandardBackground;
 import com.snake.Utils.Resources;
 import javafx.geometry.Pos;
@@ -35,10 +35,10 @@ public class MenuView extends StandardBackground
         title.setTranslateY(Settings.windowHeight*0.1);
 
         //buttons
-        OurButton playButton = new OurButton("play");
-        OurButton continueButton = new OurButton("continue");
-        OurButton loadButton = new OurButton("load");
-        OurButton quitButton = new OurButton("quit", 10.5);
+        StyledButton playButton = new StyledButton("play");
+        StyledButton continueButton = new StyledButton("continue");
+        StyledButton loadButton = new StyledButton("load");
+        StyledButton quitButton = new StyledButton("quit", 10.5);
 
         playButton.button.setOnAction(controller::handlePlayButtonPressed);
         continueButton.button.setOnAction(controller::handleContinueButtonPressed);

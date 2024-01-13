@@ -1,6 +1,6 @@
 package com.snake.Views;
 
-import com.snake.Templates.OurButton;
+import com.snake.Templates.StyledButton;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 
 public abstract class ButtonOverlayView extends StackPane
 {
-    protected OurButton[] buttons;
+    protected StyledButton[] buttons;
     protected int focusElementIndex;
 
     public void setBackground(Color overlayColor)

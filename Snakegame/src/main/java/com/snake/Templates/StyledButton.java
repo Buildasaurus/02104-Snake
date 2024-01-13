@@ -18,7 +18,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class OurButton extends StackPane
+public class StyledButton extends StackPane
 
 {
     public final Button button;
@@ -29,12 +29,12 @@ public class OurButton extends StackPane
 
     private double y = Settings.windowHeight/scaler;
 
-    public OurButton(String buttonName)
+    public StyledButton(String buttonName)
     {
        this(buttonName, 6.5);
     }
 
-     public OurButton(String buttonName, double scaler){
+     public StyledButton(String buttonName, double scaler){
         super();
         this.scaler = scaler;
         this.button = new Button(buttonName);
@@ -46,7 +46,7 @@ public class OurButton extends StackPane
 
         this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
 
-        URL url = OurButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
+        URL url = StyledButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
         Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
         BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
         new BackgroundSize(1, 1, true, true, false, false));

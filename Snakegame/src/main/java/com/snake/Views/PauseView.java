@@ -1,7 +1,7 @@
 package com.snake.Views;
 
 import com.snake.Controllers.GUIController;
-import com.snake.Templates.OurButton;
+import com.snake.Templates.StyledButton;
 
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 
 public class PauseView extends ButtonOverlayView {
     public PauseView(GUIController controller) {
-        buttons = new OurButton[3];
+        buttons = new StyledButton[3];
         focusElementIndex = 0;
 
         initialize(controller);
@@ -20,14 +20,14 @@ public class PauseView extends ButtonOverlayView {
     public void initialize(GUIController controller) {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
-        OurButton resumeButton = new OurButton("Resume");
+        StyledButton resumeButton = new StyledButton("Resume");
         buttons[0] = resumeButton;
 
 
-        OurButton saveButton = new OurButton("Save Menu");
+        StyledButton saveButton = new StyledButton("Save Menu");
         buttons[1] = saveButton;
 
-        OurButton backButton = new OurButton("Back to\nMain Menu");
+        StyledButton backButton = new StyledButton("Back to\nMain Menu");
         //backButton.setStyle("-fx-text-align: center");
         buttons[2] = backButton;
 
