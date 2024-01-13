@@ -314,7 +314,7 @@ public class GUIController implements IController
 
     public void handleSaving(int index)
     {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM HH:mm");
         LocalDateTime now = LocalDateTime.now();
         String name = dtf.format(now);
 
