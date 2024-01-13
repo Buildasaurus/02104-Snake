@@ -36,7 +36,7 @@ public class SaveView extends ButtonOverlayView {
         }
         updateButtonNames(saveNames);
 
-        OurButton backButton = new OurButton("Back to Pause Menu");
+        OurButton backButton = new OurButton("Back to\nPause Menu");
         buttons[3] = backButton;
         backButton.button.setOnAction(controller::handlePauseButtonPressed);
 
