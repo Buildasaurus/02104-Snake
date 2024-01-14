@@ -21,6 +21,15 @@ import javafx.scene.input.KeyEvent;
 
 // Made by Marinus Juhl
 
+/**
+ * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game
+ * logic via {@link GameController}. Main controller of the main view
+ * {@link com.snake.Views.GUIView GUIView}. Handles {@link #handleKeyPressed(KeyEvent)
+ * keypresses} of the view. Handles button actions of the {@link com.snake.Views.GUIView
+ * GUIView} subviews: {@link com.snake.Views.PauseView PauseView},
+ * {@link com.snake.Views.GameOverView GameOverView}, and
+ * {@link com.snake.Views.SaveView SaveView}, as well as switching to those views.
+ */
 public class GUIController implements IController
 {
     private GameController gameController;
@@ -44,14 +53,7 @@ public class GUIController implements IController
     int margin = 175;
 
 
-    /**
-     * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game
-     * logic via {@link GameController}. Main controller of the main view
-     * {@link com.snake.Views.GUIView GUIView}. Handles {@link #handleKeyPressed(KeyEvent)
-     * keypresses} of the view. Handles button actions of the {@link com.snake.Views.GUIView
-     * GUIView} subviews: {@link com.snake.Views.PauseView PauseView} and
-     * {@link com.snake.Views.GameOverView GameOverView}, as well as switching to those views.
-     */
+    
     public GUIController()
     {
 
@@ -170,9 +172,11 @@ public class GUIController implements IController
     }
 
     /**
-     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}. WASD and arrow keys used to
-     * navigate in game or in menus. Escape pauses game or returns to main menu if paused or in game
-     * over. Backspace forces game over, only used for debugging purposes.
+     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}.
+     * WASD, arrow keys, and YGHJ are sent to the {@link com.snake.Controllers.GameController#handleKeyPressed(KeyEvent) handleKeyPressed} method in
+     * {@link com.snake.Controllers.GameController gamecontroller}.
+     * Escape pauses game or returns to main menu if paused or in gameover. 
+     * Backspace forces gameover, only used for debugging purposes.
      *
      * @param key a {@link javafx.scene.input.KeyEvent KeyEvent}, uses the
      *        {@link javafx.scene.input.KeyEvent#getCode() code} of the KeyEvent.
@@ -255,7 +259,7 @@ public class GUIController implements IController
 
     /**
      * Calls the {@link com.snake.Views.GUIView#setGameOverView() setGameOverView} function in
-     * GUIView.
+     * {@link com.snake.Views.GUIView GUIView}.
      */
     public void setGameOverView()
     {
@@ -281,8 +285,6 @@ public class GUIController implements IController
      */
     public void handleLoadGameButtonPressed(ActionEvent action)
     {
-        // WARNING: loadview and loadcontroller are still in progress, only basic framework is
-        // present with no functionality
         gameTimer.cancel();
         LoadController newController = new LoadController();
         App.setRoot(newController);
@@ -300,6 +302,12 @@ public class GUIController implements IController
         view.toggleGameOverButtonVisibility();
     }
 
+    /**
+     * Checks if the file index is empty or not. 
+     * If empty calls {@link com.snake.Views.GUIView#showAlert() showAlert},
+     * else calls {@link #handleSaving(int) handleSaving} and passes along the index.
+     * @param index
+     */
     public void handleSaveButtonPressed(int index)
     {
         if (SaveHandler.isSavePresent(index))
@@ -312,6 +320,13 @@ public class GUIController implements IController
         }
     }
 
+    /**
+     * Creates Save object and calls {@link com.snake.Utils.SaveHandler#writeSave(Save, int) writeSave}.
+     * Gets savename from current date.
+     * Gets the gamesettings from {@link com.snake.Settings#getGameSettings() getGameSettings}.
+     * Gets the gamestate from {@link com.snake.Controllers.GameController#getGameState() getGameState}.
+     * @param index
+     */
     public void handleSaving(int index)
     {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM\n  HH mm");
@@ -330,6 +345,11 @@ public class GUIController implements IController
         }
     }
 
+    /**
+     * Calls the {@link com.snake.Views.GUIView#setSaveView(GUIController, String[]) setSaveView} method in
+     * {@link com.snake.Views.GUIView GUIView}.
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handleSaveMenuButtonPressed(ActionEvent action)
     {
         isSaving = true;
@@ -337,6 +357,11 @@ public class GUIController implements IController
         view.setSaveView(this, SaveHandler.getSaveNames());
     }
 
+    /**
+     * Calls the {@link com.snake.Views.GUIView#removeSaveView(GUIController) removeSaveView} method in
+     * {@link com.snake.Views.GUIView GUIView}.
+     * @param action generic button parameter, unused and null safe.
+     */
     public void handlePauseButtonPressed(ActionEvent action)
     {
         isPaused = true;

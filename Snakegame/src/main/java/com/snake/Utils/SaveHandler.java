@@ -11,10 +11,22 @@ import com.snake.Model.Save;
 
 // Made by Marinus Juhl
 
+/**
+ * Static utility used for saving to and loading from the savefile system. 
+ * Accessible methods include: {@link #getSaveNames() getSaveNames}, 
+ * {@link #isSavePresent() isSavePresent},
+ * {@link #readSave() readSave},
+ * {@link #writeSave() writeSave}
+ */
 public class SaveHandler
 {
     private static Save[] saves = new Save[4];
 
+    /**
+     * Returns the savenames of the savefiles if present. If there is no name for a save the string will be null. 
+     * Index is offset 1 from the actual save indices: 1, 2, 3.
+     * @return 3 long String[]
+     */
     public static String[] getSaveNames()
     {
         String[] saveNames = new String[3];
@@ -42,6 +54,11 @@ public class SaveHandler
         return saveNames;
     }
 
+    /**
+     * 
+     * @param index
+     * @return true if there is data saved in the index, otherwise false.
+     */
     public static boolean isSavePresent(int index) {
         boolean res = false;
 
@@ -57,6 +74,11 @@ public class SaveHandler
         return res;
     }
 
+    /**
+     * Simple read function. If there is no Save object it will return null and print that the save was empty.
+     * @param index
+     * @return the Save object from the specified index.
+     */
     public static Save readSave(int index)
     {
         Save save = null;
@@ -81,6 +103,11 @@ public class SaveHandler
         return save;
     }
 
+    /**
+     * A simple write function. Prints the index written to.
+     * @param save the Save object being written to the file.
+     * @param index 
+     */
     public static void writeSave(Save save, int index)
     {
         try
@@ -107,6 +134,10 @@ public class SaveHandler
         }
     }
 
+    /**
+     * Private function used to synchronise the saves in the local variable with the ones stored in the files.
+     * @throws Exception
+     */
     private static void readSavesToLocal() throws Exception
     {
         Gson gson = new Gson();
@@ -120,6 +151,10 @@ public class SaveHandler
         }
     }
 
+    /**
+     * Function used at startup to check if all expected savefiles exist, and if they don't creates them.
+     * @throws IOException
+     */
     public static void createDummySaves() throws IOException {
         String path;
         for (int i = 0; i < 4; i++) {
