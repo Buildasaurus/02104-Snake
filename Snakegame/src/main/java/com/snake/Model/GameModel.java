@@ -179,12 +179,12 @@ public class GameModel
                 SnakeTile snakeTile = ((SnakeTile) tile);
                 if (!(snakeTile.tileType == TileType.Snaketail)
                         || (players[snakeTile.assignedPlayer].isColliding
-                                || players[snakeTile.assignedPlayer].willGrow(board))
+                                || players[snakeTile.assignedPlayer].willGrow())
                         || !playersToUpdate.contains(snakeTile.assignedPlayer))
                 {
                     System.out.println(
                             snakeTile.tileType + " " + players[snakeTile.assignedPlayer].isColliding
-                                    + "  " + players[snakeTile.assignedPlayer].willGrow(board));
+                                    + "  " + players[snakeTile.assignedPlayer].willGrow());
                     willClear[i] = false;
                 }
             }

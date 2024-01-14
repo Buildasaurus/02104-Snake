@@ -95,6 +95,9 @@ public class Snake
         return direction;
     }
 
+    /**
+     * Kills the snake, and does relevant logic in this regard.
+     */
     private void killSnake()
     {
         System.out.printf("Snake %d just died.", playerNumber);
@@ -104,7 +107,7 @@ public class Snake
     }
 
     /**
-     * updates the position of the snake on the board
+     * updates the position of the snake on the board, if the snake is alive
      */
     public void updateSnakePosition()
     {
@@ -164,6 +167,10 @@ public class Snake
         return snakeIsAlive;
     }
 
+    /**
+     * Will update the snake on the board stored, such that the head moves, but the tail stays, and
+     * also add 1 to the snakeLength field stored
+     */
     public void grow()
     {
         Vector nextHeadPosition = getNextHeadPosition();
@@ -197,15 +204,17 @@ public class Snake
      * Returns if the snake thinks it will grow next frame. Takes into consideration, whether it
      * might collide, in which case it won't grow.
      *
-     * @param board
-     * @return
+     * @return A boolean that is true if the snake grows
      */
-    public boolean willGrow(Tile[][] board)
+    public boolean willGrow()
     {
         Vector nextHeadPosition = getNextHeadPosition();
         return board[nextHeadPosition.y][nextHeadPosition.x] instanceof Apple && !isColliding;
     }
 
+    /**
+     * @return If the snake has eaten a fruit the last frame this will be returned. Else null
+     */
     public Fruit Fruiteaten()
     {
         return fruit;
