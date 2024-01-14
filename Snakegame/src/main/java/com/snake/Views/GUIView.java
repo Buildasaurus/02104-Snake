@@ -69,7 +69,7 @@ public class GUIView extends StackPane {
 
         for (int i = 0; i < playerCount; i++) {
             Label currentScore = new Label();
-            currentScore.setText("Player " + (i + 1) + "score: 0");
+            currentScore.setText("Player " + (i + 1) + " score: 0");
             currentScores[i] = currentScore;
             currentScore.setFont(font);
             topBox.getChildren().add(currentScore);
@@ -89,7 +89,7 @@ public class GUIView extends StackPane {
 
         for (int i = 0; i < playerCount; i++) {
             Label currentSpeed = new Label();
-            currentSpeed.setText("Player " + (i + 1) + "'s \n speed: " + speedArray[i]);
+            currentSpeed.setText("Player " + (i + 1) + "'s \nspeed: " + speedArray[i]);
             currentSpeeds[i] = currentSpeed;
             currentSpeed.setFont(font);
             leftBox.getChildren().add(currentSpeed);

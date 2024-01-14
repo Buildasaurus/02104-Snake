@@ -206,7 +206,7 @@ public class GameModel
                         {
                             if (Settings.getGameSettings().getSpeed() < player.getSpeed())
                             {
-                                player.setSpeed(player.getSpeed() - 1);
+                                player.setSpeed(player.getSpeed() - 2);
                             }
                         }
                     }
