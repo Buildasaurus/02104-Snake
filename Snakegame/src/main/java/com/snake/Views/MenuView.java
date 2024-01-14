@@ -28,7 +28,7 @@ public class MenuView extends StandardBackground
         //titl
         Text title = new Text("Snake!");
         title.setFill(Color.BLACK);
-        Font crimes = Resources.getFontByName("crimes", 70);
+        Font crimes = Resources.getFontByName("buzz", 70);
         title.setFont(crimes);
         setAlignment(title,Pos.TOP_CENTER);
         getChildren().add(title);

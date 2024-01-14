@@ -19,6 +19,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 // Made by Marinus Juhl
 
@@ -31,7 +32,7 @@ public class GUIView extends StackPane {
     private Label frameRateCounter;
     private Label[] currentScores;
     private Label[] currentSpeeds;
-    Font font = Resources.getFontByName("crimes", 15);
+    Font font = Resources.getFontByName("buzz", 15);
 
     public GUIView(Parent gameView, int playerCount, double[] speedArray) {
         this.gameView = (GameView) gameView;
@@ -73,6 +74,11 @@ public class GUIView extends StackPane {
             currentScore.setFont(font);
             topBox.getChildren().add(currentScore);
         }
+        //extra vision text
+        Text extraVisionText = new Text("Extra vision: ");
+        extraVisionText.setFont(font);
+        topBox.getChildren().add(extraVisionText);
+
         CheckBox toggleExtraVision = new CheckBox();
         toggleExtraVision.setSelected(Settings.getGameSettings().getExtraVision());
         toggleExtraVision.setOnAction((s) -> {
