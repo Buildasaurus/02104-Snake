@@ -2,7 +2,7 @@ package com.snake.Utils;
 
 import com.snake.Model.Vector;
 
-//Made by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 public class DistanceData
 {

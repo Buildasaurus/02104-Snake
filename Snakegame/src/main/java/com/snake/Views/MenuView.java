@@ -11,7 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-// Made by Kajsa Berlstedt & Lucia Little & Marinus Juhl 
+// Made by Kajsa Berlstedt & Lucia Little & Marinus Juhl
 
 public class MenuView extends StandardBackground
 {

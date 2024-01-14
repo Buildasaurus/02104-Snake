@@ -6,7 +6,7 @@ import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.Effect;
 import javafx.scene.image.ImageView;
 
-//Made by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 public class SnakeTile extends Tile
 {
