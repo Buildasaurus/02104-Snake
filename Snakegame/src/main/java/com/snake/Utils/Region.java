@@ -1,9 +1,15 @@
-package com.snake.Model;
+package com.snake.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.snake.Utils.LevelGenerator;
+import com.snake.Model.Vector;
 
+//Made by Jonathan Sommerlund
+
+/**
+ * A class to keep track of different regions. Idea came from from a video in Sebastian Lague's
+ * youtube series on procedural generation. Most code is my own though
+ */
 public class Region
 {
     public ArrayList<Vector> coords;
@@ -85,9 +91,10 @@ public class Region
     }
 
     HashMap<Region, DistanceData> storedConnections = new HashMap<Region, DistanceData>();
+
     public DistanceData distanceToOtherRegion(Region roomB)
     {
-        if(storedConnections.containsKey(roomB))
+        if (storedConnections.containsKey(roomB))
         {
             return storedConnections.get(roomB);
         }
@@ -102,7 +109,7 @@ public class Region
                 Vector tileA = roomA.edgeTiles.get(tileIndexA);
                 Vector tileB = roomB.edgeTiles.get(tileIndexB);
                 double distanceBetweenRooms = tileA.distance(tileB);
-                if(distanceBetweenRooms < bestDistance)
+                if (distanceBetweenRooms < bestDistance)
                 {
                     bestTileA = tileA;
                     bestTileB = tileB;

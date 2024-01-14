@@ -1,4 +1,6 @@
-package com.snake.Model;
+package com.snake.Utils;
+
+import com.snake.Model.Vector;
 
 public class DistanceData
 {
