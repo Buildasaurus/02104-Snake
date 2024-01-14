@@ -40,13 +40,26 @@ public class LevelGenerator
         width = board[0].length;
         double fill = Settings.getGameSettings().getLevelFill();
 
+        // First step - random map
         boolean[][] map = generateMap(fill);
+
+        // Second step - Simplify noise
         for (int i = 0; i < 3; i++)
         {
             map = simplifyNoise(map);
         }
+
         System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9)
                 + "seconds for create and simplify");
+
+        // Third step - Safe Square
+        int yMargin = 8;
+        int xMargin = 14;
+        Vector illegalXVector = new Vector((width - xMargin) / 2, (width + xMargin) / 2);
+        Vector illegalYVector = new Vector((height - yMargin) / 2, (height + yMargin) / 2);
+        map = createSafeSquare(map, illegalXVector, illegalYVector);
+
+        // Fourth step - Connect islands
         startTime = System.nanoTime();
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
         System.out.println("regionCount before" + regions.size());
@@ -56,32 +69,15 @@ public class LevelGenerator
         System.out.println((islandTime) / Math.pow(10, 9)
                 + "seconds for calculating disatnces between islands");
         startTime = System.nanoTime();
+
+        // Fifth step - Simplify again
+
         for (int i = 0; i < 6; i++)
         {
             map = simplifyNoise(map);
         }
 
-        System.out.println((System.nanoTime() - startTime) / Math.pow(10, 9)
-                + "seconds for simplifying again");
-        startTime = System.nanoTime();
-        // Make safe square in middle of board
-        // illegal squares, that are to be ignored
-        int yMargin = 8;
-        int xMargin = 14;
-        Vector illegalXVector = new Vector((width - xMargin) / 2, (width + xMargin) / 2);
-        Vector illegalYVector = new Vector((height - yMargin) / 2, (height + yMargin) / 2);
-        map = createSafeSquare(map, illegalXVector, illegalYVector);
-
-        regions = getRegions(map);
-        System.out.println("regionCount after" + regions.size());
-
-        if (regions.size() > 1)
-        // in the incredible case that the safesquare was inside a hugeblock of wall, and thus you
-        // don't have acces to the rest of the level
-        {
-            map = connectIslands(map);
-        }
-        map = simplifyNoise(map);
+        // Sixth step - remove suicide cells
         removeSuicideCells(map);
 
         fillBoardWithMap(board, map);
@@ -134,7 +130,7 @@ public class LevelGenerator
         Random randseedGenerator = new Random();
         int seed = randseedGenerator.nextInt();
         System.out.println("seed used is " + seed);
-        Random rand = new Random(seed);
+        Random rand = new Random(-585262782);
         for (int rowCount = 0; rowCount < height; rowCount++)
         {
             for (int columnCount = 0; columnCount < width; columnCount++)
