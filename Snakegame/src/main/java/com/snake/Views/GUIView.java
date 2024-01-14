@@ -39,6 +39,8 @@ public class GUIView extends StackPane
     {
         this.gameView = (GameView) gameView;
         frameRateCounter = new Label("fps: 0.0");
+        frameRateCounter.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
+
         currentScores = new Label[playerCount];
         currentSpeeds = new Label[playerCount];
         BackgroundImage backgroundImage =
@@ -99,12 +101,16 @@ public class GUIView extends StackPane
 
         }
 
-
         // extra vision text
+        HBox extraVisionInfo = new HBox(5);
+        extraVisionInfo.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
+        extraVisionInfo.setAlignment(Pos.CENTER);
+        extraVisionInfo.setMaxHeight(10); //estimated height of checkbox - it doesn't change as font size doens't change
+
         Text extraVisionText = new Text("Extra vision: ");
         extraVisionText.setFont(font);
 
-        topBox.getChildren().add(extraVisionText);
+        extraVisionInfo.getChildren().add(extraVisionText);
 
         CheckBox toggleExtraVision = new CheckBox();
         toggleExtraVision.setSelected(Settings.getGameSettings().getExtraVision());
@@ -112,7 +118,9 @@ public class GUIView extends StackPane
             Settings.getGameSettings().setExtraVision(toggleExtraVision.isSelected());
         });
         toggleExtraVision.setFocusTraversable(false);
-        topBox.getChildren().add(toggleExtraVision);
+        extraVisionInfo.getChildren().add(toggleExtraVision);
+
+        topBox.getChildren().add(extraVisionInfo);
 
         // Transparent background
 
