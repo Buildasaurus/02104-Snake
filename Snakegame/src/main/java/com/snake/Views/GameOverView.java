@@ -6,6 +6,8 @@ import com.snake.Templates.StyledButton;
 import com.snake.Utils.Highscore;
 
 import javafx.application.Platform;
+import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -39,8 +41,8 @@ public class GameOverView extends ButtonOverlayView
         for (int i = 0; i < playerCount; i++)
         {
             controller.getGameController().getCurrentScore(i);
-            Text score = new Text(
-                    "Player " + (i + 1) + " score: " + controller.getGameController().getCurrentScore(i));
+            Text score = new Text("Player " + (i + 1) + " score: "
+                    + controller.getGameController().getCurrentScore(i));
             score.setFill(Color.BLACK);
             score.setFont(Font.font("Arial", FontWeight.BOLD, 20));
             score.setTextAlignment(TextAlignment.CENTER);
@@ -61,6 +63,11 @@ public class GameOverView extends ButtonOverlayView
         winner.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         winner.setTextAlignment(TextAlignment.CENTER);
         scorebox.getChildren().add(winner);
+
+        scorebox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
+        scorebox.setMaxWidth(40); // Hardcoded because font size is hardcoded
+        scorebox.setMaxHeight(60); // Hardcoded because font size is hardcoded
+        StackPane.setAlignment(scorebox, Pos.TOP_LEFT);
 
 
         getChildren().add(scorebox);
