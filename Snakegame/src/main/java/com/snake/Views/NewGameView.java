@@ -21,7 +21,6 @@ import javafx.scene.layout.VBox;
  * Extends StandardBackground to incorporate a consistent background style. 
  * The UI includes player selection, game mode, and map type customization. 
  * Organized in a CustomHBox, user choices trigger corresponding actions through NewGameController.
- * The UI is made using JavaFX components.
  */
 
 public class NewGameView extends StandardBackground
