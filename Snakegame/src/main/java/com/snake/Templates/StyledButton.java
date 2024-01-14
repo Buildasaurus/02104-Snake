@@ -20,6 +20,8 @@ import javafx.scene.text.Font;
 
 public class StyledButton extends StackPane
 
+// Made by Kajsa Berlstedt & Lucia Little
+
 {
     public final Button button;
 
@@ -54,9 +56,8 @@ public class StyledButton extends StackPane
         Font crimes = Resources.getFontByName("Adventure", 20);
         button.setFont(crimes);
         this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
-//transperant till knappen
-//set size på button ikke our button
-//benjamins hjælp
+
+        
         this.paddingProperty().bind(Bindings.createObjectBinding(() -> new Insets(
             this.button.getHeight() / 100 * 20,
             this.button.getWidth() / 100 * 10,

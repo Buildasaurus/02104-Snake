@@ -8,6 +8,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.StackPane;
 
+// Made by Kajsa Berlstedt & Lucia Little
+
 public class StandardBackground extends StackPane{
     public StandardBackground(){
         BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByName("baggrund"), BackgroundRepeat.NO_REPEAT,

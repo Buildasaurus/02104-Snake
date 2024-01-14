@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import com.snake.Utils.Resources;
 
+// Made by Kajsa Berlstedt
+
 public class Cherry extends Fruit
 {
     public Cherry()
