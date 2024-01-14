@@ -2,6 +2,8 @@ package com.snake.Model;
 
 import javafx.scene.image.ImageView;
 
+// Made by everyone
+
 public abstract class Tile
 {
     protected TileType tileType;
@@ -9,6 +11,7 @@ public abstract class Tile
 
     /**
      * Represents a tile, expects the TileType as input
+     *
      * @param type The tileType
      */
     public Tile(TileType type)
@@ -21,7 +24,8 @@ public abstract class Tile
      */
     public abstract ImageView getImage();
 
-    public Vector getPosition() {
+    public Vector getPosition()
+    {
         return position;
     }
 

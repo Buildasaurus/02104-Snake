@@ -3,7 +3,7 @@ package com.snake.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-//Everyone has been arond this.
+// Everyone has been arond this.
 
 public class GameSettings
 {
@@ -187,17 +187,18 @@ public class GameSettings
      */
     public int getExtendedRowCount()
     {
-        return rowCount + extraVisionDepth*2;
+        return rowCount + extraVisionDepth * 2;
     }
 
 
     /**
      * Calculates the actual columncount, after extravision depth has been added.
+     *
      * @return
      */
     public int getExtendedColumnCount()
     {
-        return columnCount + extraVisionDepth*2;
+        return columnCount + extraVisionDepth * 2;
 
     }
 }

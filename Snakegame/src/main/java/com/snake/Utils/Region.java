@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import com.snake.Model.Vector;
 
-//Made by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 /**
  * A class to keep track of different regions. Idea came from from a video in Sebastian Lague's

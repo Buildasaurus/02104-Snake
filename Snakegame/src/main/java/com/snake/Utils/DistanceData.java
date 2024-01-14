@@ -2,6 +2,8 @@ package com.snake.Utils;
 
 import com.snake.Model.Vector;
 
+//Made by Jonathan Sommerlund
+
 public class DistanceData
 {
     public double distance;

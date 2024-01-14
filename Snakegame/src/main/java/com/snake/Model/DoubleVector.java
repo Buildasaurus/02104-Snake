@@ -1,5 +1,5 @@
 package com.snake.Model;
-//MAde by Jonathan Sommerlund
+// Made by Jonathan Sommerlund
 
 public class DoubleVector
 {

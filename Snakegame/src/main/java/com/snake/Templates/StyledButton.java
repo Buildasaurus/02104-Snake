@@ -29,10 +29,11 @@ public class StyledButton extends StackPane
 
     public StyledButton(String buttonName)
     {
-       this(buttonName, 6.5);
+        this(buttonName, 6.5);
     }
 
-     public StyledButton(String buttonName, double scaler){
+    public StyledButton(String buttonName, double scaler)
+    {
         super();
         this.scaler = scaler;
         this.button = new Button(buttonName);
@@ -40,30 +41,33 @@ public class StyledButton extends StackPane
         setBackground();
     }
 
-    private void setBackground(){
+    private void setBackground()
+    {
 
-        this.button.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
+        this.button.setBackground(
+                new Background(new BackgroundFill(new Color(0, 0, 0, 0), null, null)));
 
         URL url = StyledButton.class.getResource("/com/snake/Graphics/smallplaybt.png");
-        Image buttonbackgroundimgfile = new Image(url.toString(), Settings.windowWidth/scaler, 0, true, false);
-        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-        new BackgroundSize(1, 1, true, true, false, false));
+        Image buttonbackgroundimgfile =
+                new Image(url.toString(), Settings.windowWidth / scaler, 0, true, false);
+        BackgroundImage buttonbackgroundimg = new BackgroundImage(buttonbackgroundimgfile,
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(1, 1, true, true, false, false));
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         this.button.setStyle("-fx-cursor: hand");
-        //set up font
+        // set up font
         Font crimes = Resources.getFontByName("Adventure", 20);
         button.setFont(crimes);
-        this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
+        this.button.setPrefSize(Settings.windowWidth / scaler, Settings.windowHeight / scaler);
 
-        
-        this.paddingProperty().bind(Bindings.createObjectBinding(() -> new Insets(
-            this.button.getHeight() / 100 * 20,
-            this.button.getWidth() / 100 * 10,
-            this.button.getHeight() / 100 * 35,
-            this.button.getWidth() / 100 * 14),
-            this.button.widthProperty(), this.button.heightProperty()));
+
+        this.paddingProperty().bind(Bindings.createObjectBinding(
+                () -> new Insets(this.button.getHeight() / 100 * 20,
+                        this.button.getWidth() / 100 * 10, this.button.getHeight() / 100 * 35,
+                        this.button.getWidth() / 100 * 14),
+                this.button.widthProperty(), this.button.heightProperty()));
 
     }
 

@@ -12,6 +12,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.input.KeyEvent;
 
+// Made by Kajsa Berlstedt & Lucia Little
+
 
 public class NewGameController implements IController
 {
@@ -60,8 +62,10 @@ public class NewGameController implements IController
         return gameSettings.getPlayerCount();
     }
 
-    public void handleKeyPressed(KeyEvent key) {
-        switch (key.getCode()) {
+    public void handleKeyPressed(KeyEvent key)
+    {
+        switch (key.getCode())
+        {
             case ESCAPE:
                 MenuController newController = new MenuController();
                 App.setRoot(newController);
@@ -84,19 +88,23 @@ public class NewGameController implements IController
         GUIController newController = new GUIController();
         App.setRoot(newController);
     }
-    public void handlePlayerCounts(ActionEvent action){
+
+    public void handlePlayerCounts(ActionEvent action)
+    {
         SelectionButton actionOrigin = (SelectionButton) action.getSource();
         gameSettings.setPlayerCount(Integer.valueOf(actionOrigin.getText()));
         view.playerselection.buttonPressed(actionOrigin);
     }
 
-    public void handlegameMode(ActionEvent action){
+    public void handlegameMode(ActionEvent action)
+    {
         SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setGameMode(GameMode.valueOf(actionorigin.getText()));
         view.gamemode.buttonPressed(actionorigin);
     }
 
-    public void handlelevel(ActionEvent action){
+    public void handlelevel(ActionEvent action)
+    {
         SelectionButton actionorigin = (SelectionButton) action.getSource();
         gameSettings.setLevel(Level.valueOf(actionorigin.getText()));
         view.maptype.buttonPressed(actionorigin);

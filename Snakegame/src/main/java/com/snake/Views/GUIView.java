@@ -80,7 +80,7 @@ public class GUIView extends StackPane
         {
             VBox playerInfo = new VBox(2);
             playerInfo.setAlignment(Pos.CENTER);
-            playerInfo.setMaxWidth(widthOfVBOX/1.2);
+            playerInfo.setMaxWidth(widthOfVBOX / 1.2);
             playerInfo.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
 
             Label player = new Label("Player " + (i + 1));
@@ -105,7 +105,8 @@ public class GUIView extends StackPane
         HBox extraVisionInfo = new HBox(5);
         extraVisionInfo.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
         extraVisionInfo.setAlignment(Pos.CENTER);
-        extraVisionInfo.setMaxHeight(10); //estimated height of checkbox - it doesn't change as font size doens't change
+        extraVisionInfo.setMaxHeight(10); // estimated height of checkbox - it doesn't change as
+                                          // font size doens't change
 
         Text extraVisionText = new Text("Extra vision: ");
         extraVisionText.setFont(font);

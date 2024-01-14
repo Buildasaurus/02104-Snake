@@ -1,6 +1,6 @@
 package com.snake.Model;
 
-//Made by Jonathan Sommerlund (Taken from own chess project)
+// Made by Jonathan Sommerlund (Taken from own chess project)
 
 public class Vector
 {

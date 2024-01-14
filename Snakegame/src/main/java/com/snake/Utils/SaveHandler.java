@@ -12,19 +12,18 @@ import com.snake.Model.Save;
 // Made by Marinus Juhl
 
 /**
- * Static utility used for saving to and loading from the savefile system. 
- * Accessible methods include: {@link #getSaveNames() getSaveNames}, 
- * {@link #isSavePresent() isSavePresent},
- * {@link #readSave() readSave},
- * {@link #writeSave() writeSave}
+ * Static utility used for saving to and loading from the savefile system. Accessible methods
+ * include: {@link #getSaveNames() getSaveNames}, {@link #isSavePresent() isSavePresent},
+ * {@link #readSave() readSave}, {@link #writeSave() writeSave}
  */
 public class SaveHandler
 {
     private static Save[] saves = new Save[4];
 
     /**
-     * Returns the savenames of the savefiles if present. If there is no name for a save the string will be null. 
-     * Index is offset 1 from the actual save indices: 1, 2, 3.
+     * Returns the savenames of the savefiles if present. If there is no name for a save the string
+     * will be null. Index is offset 1 from the actual save indices: 1, 2, 3.
+     *
      * @return 3 long String[]
      */
     public static String[] getSaveNames()
@@ -55,27 +54,34 @@ public class SaveHandler
     }
 
     /**
-     * 
+     *
      * @param index
      * @return true if there is data saved in the index, otherwise false.
      */
-    public static boolean isSavePresent(int index) {
+    public static boolean isSavePresent(int index)
+    {
         boolean res = false;
 
-        try {
+        try
+        {
             readSavesToLocal();
 
-            if (saves[index] != null) {
+            if (saves[index] != null)
+            {
                 return true;
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             System.out.println(e);
         }
         return res;
     }
 
     /**
-     * Simple read function. If there is no Save object it will return null and print that the save was empty.
+     * Simple read function. If there is no Save object it will return null and print that the save
+     * was empty.
+     *
      * @param index
      * @return the Save object from the specified index.
      */
@@ -105,8 +111,9 @@ public class SaveHandler
 
     /**
      * A simple write function. Prints the index written to.
+     *
      * @param save the Save object being written to the file.
-     * @param index 
+     * @param index
      */
     public static void writeSave(Save save, int index)
     {
@@ -135,7 +142,9 @@ public class SaveHandler
     }
 
     /**
-     * Private function used to synchronise the saves in the local variable with the ones stored in the files.
+     * Private function used to synchronise the saves in the local variable with the ones stored in
+     * the files.
+     *
      * @throws Exception
      */
     private static void readSavesToLocal() throws Exception
@@ -152,15 +161,20 @@ public class SaveHandler
     }
 
     /**
-     * Function used at startup to check if all expected savefiles exist, and if they don't creates them.
+     * Function used at startup to check if all expected savefiles exist, and if they don't creates
+     * them.
+     *
      * @throws IOException
      */
-    public static void createDummySaves() throws IOException {
+    public static void createDummySaves() throws IOException
+    {
         String path;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++)
+        {
             path = "Save" + i + ".json";
             File myObj = new File(path);
-            if (!myObj.exists() && !myObj.isDirectory()) {
+            if (!myObj.exists() && !myObj.isDirectory())
+            {
                 myObj.createNewFile();
                 System.out.println("created file: " + path);
             }

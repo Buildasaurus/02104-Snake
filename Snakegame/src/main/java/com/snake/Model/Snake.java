@@ -240,7 +240,9 @@ public class Snake
      */
     public void setSpeed(double speed)
     {
-        this.speed = speed < Settings.getGameSettings().getSpeed() ?  Settings.getGameSettings().getSpeed() : speed;
+        this.speed = speed < Settings.getGameSettings().getSpeed()
+                ? Settings.getGameSettings().getSpeed()
+                : speed;
     }
 
     public Vector getHeadPosition()

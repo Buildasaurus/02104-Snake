@@ -7,13 +7,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class CustomHBox extends HBox{
+// Made by Kajsa Berlstedt & Lucia Little
+
+public class CustomHBox extends HBox
+{
     public SelectionButton previousButtonPressed;
     public SelectionButton defaultButton;
 
     String boxlabel;
 
-    public CustomHBox(String boxlabel){
+    public CustomHBox(String boxlabel)
+    {
 
         super(15);
         this.boxlabel = boxlabel;
@@ -28,11 +32,14 @@ public class CustomHBox extends HBox{
 
     }
 
-    public void buttonPressed(SelectionButton action){
-        if (previousButtonPressed == null && action != defaultButton){
+    public void buttonPressed(SelectionButton action)
+    {
+        if (previousButtonPressed == null && action != defaultButton)
+        {
             defaultButton.changeback();
         }
-        if (previousButtonPressed != null && action != previousButtonPressed) {
+        if (previousButtonPressed != null && action != previousButtonPressed)
+        {
             previousButtonPressed.changeback();
         }
         action.pressed();

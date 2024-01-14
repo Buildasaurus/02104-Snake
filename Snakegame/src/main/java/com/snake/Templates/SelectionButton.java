@@ -11,6 +11,8 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.text.Font;
 
+// Made by Kajsa Berlstedt & Lucia Little
+
 public class SelectionButton extends Button
 {
 

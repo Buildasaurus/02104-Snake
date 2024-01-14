@@ -23,11 +23,10 @@ import javafx.scene.input.KeyEvent;
 
 /**
  * Keeps track of an {@link javafx.animation.AnimationTimer AnimationTimer} used to compute game
- * logic via {@link GameController}. Main controller of the main view
- * {@link com.snake.Views.GUIView GUIView}. Handles {@link #handleKeyPressed(KeyEvent)
- * keypresses} of the view. Handles button actions of the {@link com.snake.Views.GUIView
- * GUIView} subviews: {@link com.snake.Views.PauseView PauseView},
- * {@link com.snake.Views.GameOverView GameOverView}, and
+ * logic via {@link GameController}. Main controller of the main view {@link com.snake.Views.GUIView
+ * GUIView}. Handles {@link #handleKeyPressed(KeyEvent) keypresses} of the view. Handles button
+ * actions of the {@link com.snake.Views.GUIView GUIView} subviews: {@link com.snake.Views.PauseView
+ * PauseView}, {@link com.snake.Views.GameOverView GameOverView}, and
  * {@link com.snake.Views.SaveView SaveView}, as well as switching to those views.
  */
 public class GUIController implements IController
@@ -53,18 +52,22 @@ public class GUIController implements IController
     int margin = 175;
 
 
-    
+
     public GUIController()
     {
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        double potentialBoxHeight = ((double)height) / (Settings.getGameSettings().getExtendedRowCount());
-        double potentialBoxWidth = ((double)width) / (Settings.getGameSettings().getExtendedColumnCount());
+        double potentialBoxHeight =
+                ((double) height) / (Settings.getGameSettings().getExtendedRowCount());
+        double potentialBoxWidth =
+                ((double) width) / (Settings.getGameSettings().getExtendedColumnCount());
         double boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedRowCount());
-        int gameWidth = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedColumnCount());
-        System.out.println(gameHeight + " "  + gameWidth);
+        int gameHeight =
+                (int) Math.round(boxDimension * Settings.getGameSettings().getExtendedRowCount());
+        int gameWidth = (int) Math
+                .round(boxDimension * Settings.getGameSettings().getExtendedColumnCount());
+        System.out.println(gameHeight + " " + gameWidth);
         this.gameController = new GameController(gameWidth, gameHeight);
 
         initialize();
@@ -80,12 +83,16 @@ public class GUIController implements IController
 
         int height = Settings.windowHeight - margin;
         int width = Settings.windowWidth - margin;
-        double potentialBoxHeight = ((double)height) / (Settings.getGameSettings().getExtendedRowCount());
-        double potentialBoxWidth = ((double)width) / (Settings.getGameSettings().getExtendedColumnCount());
+        double potentialBoxHeight =
+                ((double) height) / (Settings.getGameSettings().getExtendedRowCount());
+        double potentialBoxWidth =
+                ((double) width) / (Settings.getGameSettings().getExtendedColumnCount());
         double boxDimension = Math.min(potentialBoxHeight, potentialBoxWidth);
-        int gameHeight = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedRowCount());
-        int gameWidth = (int)Math.round(boxDimension * Settings.getGameSettings().getExtendedColumnCount());
-        System.out.println(gameHeight + " "  + gameWidth);
+        int gameHeight =
+                (int) Math.round(boxDimension * Settings.getGameSettings().getExtendedRowCount());
+        int gameWidth = (int) Math
+                .round(boxDimension * Settings.getGameSettings().getExtendedColumnCount());
+        System.out.println(gameHeight + " " + gameWidth);
         this.gameController = new GameController(gameWidth, gameHeight, gameState);
 
         initialize();
@@ -110,8 +117,10 @@ public class GUIController implements IController
         playerProgress = new int[playerCount];
         updateList = new ArrayList<Integer>();
 
-        TimerTask timeLoop = new TimerTask() {
-            public void run() {
+        TimerTask timeLoop = new TimerTask()
+        {
+            public void run()
+            {
                 // DON'T TRUST THE FRAMERATE!!!
                 Platform.runLater(() -> {
                     long oldFrameTime = frameTimes[frameTimeIndex];
@@ -172,11 +181,11 @@ public class GUIController implements IController
     }
 
     /**
-     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}.
-     * WASD, arrow keys, and YGHJ are sent to the {@link com.snake.Controllers.GameController#handleKeyPressed(KeyEvent) handleKeyPressed} method in
-     * {@link com.snake.Controllers.GameController gamecontroller}.
-     * Escape pauses game or returns to main menu if paused or in gameover. 
-     * Backspace forces gameover, only used for debugging purposes.
+     * Handles keypresses in {@link com.snake.Views.GUIView GUIView}. WASD, arrow keys, and YGHJ are
+     * sent to the {@link com.snake.Controllers.GameController#handleKeyPressed(KeyEvent)
+     * handleKeyPressed} method in {@link com.snake.Controllers.GameController gamecontroller}.
+     * Escape pauses game or returns to main menu if paused or in gameover. Backspace forces
+     * gameover, only used for debugging purposes.
      *
      * @param key a {@link javafx.scene.input.KeyEvent KeyEvent}, uses the
      *        {@link javafx.scene.input.KeyEvent#getCode() code} of the KeyEvent.
@@ -303,9 +312,10 @@ public class GUIController implements IController
     }
 
     /**
-     * Checks if the file index is empty or not. 
-     * If empty calls {@link com.snake.Views.GUIView#showAlert() showAlert},
-     * else calls {@link #handleSaving(int) handleSaving} and passes along the index.
+     * Checks if the file index is empty or not. If empty calls
+     * {@link com.snake.Views.GUIView#showAlert() showAlert}, else calls {@link #handleSaving(int)
+     * handleSaving} and passes along the index.
+     *
      * @param index
      */
     public void handleSaveButtonPressed(int index)
@@ -321,10 +331,11 @@ public class GUIController implements IController
     }
 
     /**
-     * Creates Save object and calls {@link com.snake.Utils.SaveHandler#writeSave(Save, int) writeSave}.
-     * Gets savename from current date.
-     * Gets the gamesettings from {@link com.snake.Settings#getGameSettings() getGameSettings}.
-     * Gets the gamestate from {@link com.snake.Controllers.GameController#getGameState() getGameState}.
+     * Creates Save object and calls {@link com.snake.Utils.SaveHandler#writeSave(Save, int)
+     * writeSave}. Gets savename from current date. Gets the gamesettings from
+     * {@link com.snake.Settings#getGameSettings() getGameSettings}. Gets the gamestate from
+     * {@link com.snake.Controllers.GameController#getGameState() getGameState}.
+     *
      * @param index
      */
     public void handleSaving(int index)
@@ -346,8 +357,9 @@ public class GUIController implements IController
     }
 
     /**
-     * Calls the {@link com.snake.Views.GUIView#setSaveView(GUIController, String[]) setSaveView} method in
-     * {@link com.snake.Views.GUIView GUIView}.
+     * Calls the {@link com.snake.Views.GUIView#setSaveView(GUIController, String[]) setSaveView}
+     * method in {@link com.snake.Views.GUIView GUIView}.
+     *
      * @param action generic button parameter, unused and null safe.
      */
     public void handleSaveMenuButtonPressed(ActionEvent action)
@@ -358,8 +370,9 @@ public class GUIController implements IController
     }
 
     /**
-     * Calls the {@link com.snake.Views.GUIView#removeSaveView(GUIController) removeSaveView} method in
-     * {@link com.snake.Views.GUIView GUIView}.
+     * Calls the {@link com.snake.Views.GUIView#removeSaveView(GUIController) removeSaveView} method
+     * in {@link com.snake.Views.GUIView GUIView}.
+     *
      * @param action generic button parameter, unused and null safe.
      */
     public void handlePauseButtonPressed(ActionEvent action)

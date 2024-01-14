@@ -10,6 +10,8 @@ import com.snake.Settings;
 
 import javafx.scene.image.Image;
 
+// A little by everyone
+
 public class Resources
 {
     private static HashMap<String, Image> map = new HashMap<String, Image>();

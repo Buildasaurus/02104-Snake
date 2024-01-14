@@ -10,10 +10,14 @@ import javafx.scene.layout.StackPane;
 
 // Made by Kajsa Berlstedt & Lucia Little
 
-public class StandardBackground extends StackPane{
-    public StandardBackground(){
-        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByName("baggrund"), BackgroundRepeat.NO_REPEAT,
-        BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+public class StandardBackground extends StackPane
+{
+    public StandardBackground()
+    {
+        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByName("baggrund"),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true,
+                        false));
         Background background = new Background(backgroundImage);
         setBackground(background);
     }
