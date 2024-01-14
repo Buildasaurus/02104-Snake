@@ -14,7 +14,7 @@ import com.snake.Utils.Resources;
 import com.snake.Utils.SaveHandler;
 
 /**
- * JavaFX App
+ * Snake game - Made by Jonathan Sommerlund, Marinus Juhl, Kajsa Berlstedt & Lucia Little
  */
 public class App extends Application
 {
@@ -25,7 +25,7 @@ public class App extends Application
     @Override
     public void start(Stage stage) throws IOException
     {
-        Resources.playSoundByName("BackgroundMusic",0.05, true);
+        Resources.playSoundByName("BackgroundMusic", 0.05, true);
         controller = new MenuController();
         scene = new Scene(controller.getView(), Settings.windowWidth, Settings.windowHeight);
         stage.setScene(scene);
@@ -61,14 +61,16 @@ public class App extends Application
 
     public void stop()
     {
-        if (gameTimer != null) {
+        if (gameTimer != null)
+        {
             gameTimer.cancel();
         }
         System.out.println(controller);
         System.out.println("closing app");
     }
 
-    public static void setTimer(Timer timer) {
+    public static void setTimer(Timer timer)
+    {
         gameTimer = timer;
     }
 }

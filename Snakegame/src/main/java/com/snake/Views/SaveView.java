@@ -13,12 +13,14 @@ import javafx.scene.paint.Color;
 
 // Made by Marinus Juhl
 
-public class SaveView extends ButtonOverlayView {
+public class SaveView extends ButtonOverlayView
+{
     Alert confirmationAlert;
     int saveIndex;
     GUIController controller;
 
-    public SaveView(GUIController controller, String[] saveNames) {
+    public SaveView(GUIController controller, String[] saveNames)
+    {
         buttons = new StyledButton[4];
         focusElementIndex = 0;
         this.controller = controller;
@@ -26,10 +28,12 @@ public class SaveView extends ButtonOverlayView {
         initialize(saveNames);
     }
 
-    public void initialize(String[] saveNames) {
+    public void initialize(String[] saveNames)
+    {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++)
+        {
             StyledButton saveButton = new StyledButton("");
             buttons[i] = saveButton;
             saveButton.button.setOnAction(this::handleSaveButtonPressed);
@@ -40,15 +44,18 @@ public class SaveView extends ButtonOverlayView {
         buttons[3] = backButton;
         backButton.button.setOnAction(controller::handlePauseButtonPressed);
 
-        confirmationAlert = new Alert(AlertType.CONFIRMATION, "You are going to overwrite a save, continue?");
+        confirmationAlert =
+                new Alert(AlertType.CONFIRMATION, "You are going to overwrite a save, continue?");
 
         setBasicFormatting();
 
         Platform.runLater(() -> this.requestFocus());
     }
 
-    public void updateButtonNames(String[] newNames) {
-        for (int i = 0; i < 3; i++) {
+    public void updateButtonNames(String[] newNames)
+    {
+        for (int i = 0; i < 3; i++)
+        {
             String buttonName = "" + (i + 1) + " ";
             buttonName += newNames[i] != null ? newNames[i] : "Empty Save";
 
@@ -56,16 +63,19 @@ public class SaveView extends ButtonOverlayView {
         }
     }
 
-    public void handleSaveButtonPressed(ActionEvent action) {
+    public void handleSaveButtonPressed(ActionEvent action)
+    {
         Button actionOrigin = (Button) action.getSource();
         String saveName = actionOrigin.getText();
         saveIndex = Integer.parseInt(saveName.substring(0, 1));
         controller.handleSaveButtonPressed(saveIndex);
     }
 
-    public void showAlert() {
+    public void showAlert()
+    {
         Optional<ButtonType> result = confirmationAlert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK)
+        {
             controller.handleSaving(saveIndex);
         }
     }

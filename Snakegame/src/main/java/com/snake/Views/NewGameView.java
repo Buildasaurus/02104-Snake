@@ -17,9 +17,8 @@ import javafx.scene.layout.VBox;
 // Made by Kajsa Berlstedt & Lucia Little
 
 /**
- * Represents the graphical user interface.
- * Extends StandardBackground to incorporate a consistent background style. 
- * The UI includes player selection, game mode, and map type customization. 
+ * Represents the graphical user interface. Extends StandardBackground to incorporate a consistent
+ * background style. The UI includes player selection, game mode, and map type customization.
  * Organized in a CustomHBox, user choices trigger corresponding actions through NewGameController.
  * The UI is made using JavaFX components.
  */
@@ -98,7 +97,7 @@ public class NewGameView extends StandardBackground
 
         // setAlignment for good scaling
         setAlignment(startGame, Pos.BOTTOM_CENTER);
-        vbox.setTranslateY(Settings.windowHeight/5);
+        vbox.setTranslateY(Settings.windowHeight / 5);
 
 
         getChildren().add(vbox);

@@ -2,6 +2,8 @@ package com.snake;
 
 import com.snake.Model.GameSettings;
 
+// Made by everyone
+
 public class Settings
 {
     public static int windowHeight = (int) Math.round(1417 / 2);

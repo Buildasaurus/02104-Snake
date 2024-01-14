@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+// Made by Kajsa Berlstedt & Lucia Little & Marinus Juhl
+
 public class MenuView extends StandardBackground
 {
     MenuController controller;
@@ -25,16 +27,16 @@ public class MenuView extends StandardBackground
     private void initialize()
     {
 
-        //titl
+        // titl
         Text title = new Text("Snake!");
         title.setFill(Color.BLACK);
         Font crimes = Resources.getFontByName("Adventure", 70);
         title.setFont(crimes);
-        setAlignment(title,Pos.TOP_CENTER);
+        setAlignment(title, Pos.TOP_CENTER);
         getChildren().add(title);
-        title.setTranslateY(Settings.windowHeight*0.1);
+        title.setTranslateY(Settings.windowHeight * 0.1);
 
-        //buttons
+        // buttons
         StyledButton playButton = new StyledButton("play");
         StyledButton continueButton = new StyledButton("continue");
         StyledButton loadButton = new StyledButton("load");
@@ -47,13 +49,13 @@ public class MenuView extends StandardBackground
 
 
         VBox vbox = new VBox(0.05);
-        vbox.getChildren().addAll(playButton,continueButton,loadButton);
+        vbox.getChildren().addAll(playButton, continueButton, loadButton);
         vbox.setStyle("-fx-alignment: center");
-        vbox.setTranslateY(Settings.windowWidth*0.05);
+        vbox.setTranslateY(Settings.windowWidth * 0.05);
         getChildren().add(vbox);
 
-        quitButton.setTranslateX(Settings.windowWidth*0.4 - (quitButton.getPrefWidth()*0.6));
-        quitButton.setTranslateY(Settings.windowHeight*0.4 - (quitButton.getPrefHeight()*0.4));
+        quitButton.setTranslateX(Settings.windowWidth * 0.4 - (quitButton.getPrefWidth() * 0.6));
+        quitButton.setTranslateY(Settings.windowHeight * 0.4 - (quitButton.getPrefHeight() * 0.4));
         getChildren().add(quitButton);
     }
 

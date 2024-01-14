@@ -9,15 +9,18 @@ import javafx.scene.paint.Color;
 
 // Made by Marinus Juhl
 
-public class PauseView extends ButtonOverlayView {
-    public PauseView(GUIController controller) {
+public class PauseView extends ButtonOverlayView
+{
+    public PauseView(GUIController controller)
+    {
         buttons = new StyledButton[3];
         focusElementIndex = 0;
 
         initialize(controller);
     }
 
-    public void initialize(GUIController controller) {
+    public void initialize(GUIController controller)
+    {
         setBackground(new Color(0.0, 0.0, 0.0, 0.3));
 
         StyledButton resumeButton = new StyledButton("Resume");
@@ -28,7 +31,7 @@ public class PauseView extends ButtonOverlayView {
         buttons[1] = saveButton;
 
         StyledButton backButton = new StyledButton("Back to\nMain Menu");
-        //backButton.setStyle("-fx-text-align: center");
+        // backButton.setStyle("-fx-text-align: center");
         buttons[2] = backButton;
 
 
