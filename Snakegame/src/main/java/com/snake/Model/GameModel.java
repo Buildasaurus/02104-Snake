@@ -51,6 +51,7 @@ public class GameModel
 
         LevelGenerator.generateLevel(board);
         int fruitCount = 0;
+        System.out.println("--- Following Errors are inconsequential ---");
         // Nice StackOverflow code to dynamiccaly get all classes that extends fruit, and spawn them
         // https://stackoverflow.com/questions/205573/at-runtime-find-all-classes-in-a-java-application-that-extend-a-base-class
         Reflections reflections = new Reflections("com.snake");
