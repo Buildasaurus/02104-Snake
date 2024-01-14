@@ -19,7 +19,7 @@ public class CustomHBox extends HBox{
         this.boxlabel = boxlabel;
 
         Text text = new Text(boxlabel);
-        Font font = Resources.getFontByName("buzz", 40);
+        Font font = Resources.getFontByName("Adventure", 40);
         text.setFont(font);
         getChildren().add(text);
 

@@ -33,7 +33,7 @@ public class SelectionButton extends Button
         Background buttonbackground = new Background(buttonbackgroundimg);
         setBackground(buttonbackground);
         setStyle("-fx-cursor: hand");
-        Font font = Resources.getFontByName("buzz", 20);
+        Font font = Resources.getFontByName("Adventure", 20);
         setFont(font);
 
         // fixed size for the button

@@ -51,7 +51,7 @@ public class StyledButton extends StackPane
         this.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         this.button.setStyle("-fx-cursor: hand");
         //set up font
-        Font crimes = Resources.getFontByName("buzz", 20);
+        Font crimes = Resources.getFontByName("Adventure", 20);
         button.setFont(crimes);
         this.button.setPrefSize(Settings.windowWidth/scaler, Settings.windowHeight/scaler);
 //transperant till knappen

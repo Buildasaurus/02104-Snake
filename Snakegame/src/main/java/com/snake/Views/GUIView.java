@@ -32,7 +32,7 @@ public class GUIView extends StackPane {
     private Label frameRateCounter;
     private Label[] currentScores;
     private Label[] currentSpeeds;
-    Font font = Resources.getFontByName("buzz", 15);
+    Font font = Resources.getFontByName("Adventure", 15);
 
     public GUIView(Parent gameView, int playerCount, double[] speedArray) {
         this.gameView = (GameView) gameView;

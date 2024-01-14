@@ -46,7 +46,7 @@ public class Resources
 
     public static Font getFontByName(String name, int size)
     {
-        URL url = Resources.class.getResource("/com/snake/Fonts/" + name + ".ttf");
+        URL url = Resources.class.getResource("/com/snake/Fonts/" + name + ".otf");
         Font font = Font.loadFont(url.toString(), size);
         return font;
     }
