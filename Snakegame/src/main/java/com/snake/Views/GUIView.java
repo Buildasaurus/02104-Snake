@@ -67,7 +67,7 @@ public class GUIView extends StackPane
 
         VBox leftBox = new VBox();
         double widthOfVBOX = (Settings.windowWidth - gameView.width) * 0.5;
-        leftBox.setSpacing(10.0);
+        leftBox.setSpacing(15.0);
         leftBox.setPrefWidth(widthOfVBOX);
         leftBox.setAlignment(Pos.CENTER);
 
@@ -76,22 +76,26 @@ public class GUIView extends StackPane
 
         for (int i = 0; i < playerCount; i++)
         {
+            VBox playerInfo = new VBox(2);
+            playerInfo.setAlignment(Pos.CENTER);
+            playerInfo.setMaxWidth(widthOfVBOX/1.2);
+            playerInfo.setStyle("-fx-background-color: rgba(255, 255, 255, 0.2);");
+
             Label player = new Label("Player " + (i + 1));
             player.setFont(font);
-            leftBox.getChildren().add(player);
+            playerInfo.getChildren().add(player);
 
             Label currentScore = new Label("Score " + (i + 1));
             currentScores[i] = currentScore;
             currentScore.setFont(font);
-            leftBox.getChildren().add(currentScore);
+            playerInfo.getChildren().add(currentScore);
 
             Label currentSpeed = new Label("speed: " + speedArray[i]);
             currentSpeeds[i] = currentSpeed;
             currentSpeed.setFont(font);
-            leftBox.getChildren().add(currentSpeed);
+            playerInfo.getChildren().add(currentSpeed);
 
-            Label empty = new Label("");
-            leftBox.getChildren().add(empty);
+            leftBox.getChildren().add(playerInfo);
 
         }
 
@@ -99,6 +103,7 @@ public class GUIView extends StackPane
         // extra vision text
         Text extraVisionText = new Text("Extra vision: ");
         extraVisionText.setFont(font);
+
         topBox.getChildren().add(extraVisionText);
 
         CheckBox toggleExtraVision = new CheckBox();
@@ -108,6 +113,10 @@ public class GUIView extends StackPane
         });
         toggleExtraVision.setFocusTraversable(false);
         topBox.getChildren().add(toggleExtraVision);
+
+        // Transparent background
+
+
 
         gameGroup.setLeft(leftBox);
         gameGroup.setTop(topBox);
