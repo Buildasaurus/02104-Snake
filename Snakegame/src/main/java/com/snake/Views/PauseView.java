@@ -31,7 +31,6 @@ public class PauseView extends ButtonOverlayView
         buttons[1] = saveButton;
 
         StyledButton backButton = new StyledButton("Back to\nMain Menu");
-        // backButton.setStyle("-fx-text-align: center");
         buttons[2] = backButton;
 
 
