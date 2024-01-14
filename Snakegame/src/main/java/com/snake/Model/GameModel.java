@@ -182,9 +182,6 @@ public class GameModel
                                 || players[snakeTile.assignedPlayer].willGrow())
                         || !playersToUpdate.contains(snakeTile.assignedPlayer))
                 {
-                    System.out.println(
-                            snakeTile.tileType + " " + players[snakeTile.assignedPlayer].isColliding
-                                    + "  " + players[snakeTile.assignedPlayer].willGrow());
                     willClear[i] = false;
                 }
             }
@@ -204,10 +201,7 @@ public class GameModel
                     {
                         for (Snake player : players)
                         {
-                            if (Settings.getGameSettings().getSpeed() < player.getSpeed())
-                            {
-                                player.setSpeed(player.getSpeed() - 2);
-                            }
+                            player.setSpeed(player.getSpeed() - 2);
                         }
                     }
                 }

@@ -23,7 +23,8 @@ import javafx.scene.text.Text;
 
 // Made by Marinus Juhl
 
-public class GUIView extends StackPane {
+public class GUIView extends StackPane
+{
     private GameView gameView;
     private PauseView pauseView;
     private GameOverView gameOverView;
@@ -34,19 +35,25 @@ public class GUIView extends StackPane {
     private Label[] currentSpeeds;
     Font font = Resources.getFontByName("Adventure", 15);
 
-    public GUIView(Parent gameView, int playerCount, double[] speedArray) {
+    public GUIView(Parent gameView, int playerCount, double[] speedArray)
+    {
         this.gameView = (GameView) gameView;
         frameRateCounter = new Label("fps: 0.0");
         currentScores = new Label[playerCount];
         currentSpeeds = new Label[playerCount];
-        BackgroundImage backgroundImage = new BackgroundImage(Resources.getImageByNamesetWidth("baggrund", 3), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false));
+        BackgroundImage backgroundImage =
+                new BackgroundImage(Resources.getImageByNamesetWidth("baggrund", 3),
+                        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT,
+                        BackgroundPosition.CENTER, new BackgroundSize(BackgroundSize.AUTO,
+                                BackgroundSize.AUTO, false, false, true, false));
         Background background = new Background(backgroundImage);
         this.setBackground(background);
 
         initialize(playerCount, speedArray);
     }
 
-    public void initialize(int playerCount, double[] speedArray) {
+    public void initialize(int playerCount, double[] speedArray)
+    {
         BorderPane gameGroup = new BorderPane();
         gameGroup.setCenter(this.gameView);
         gameGroup.setPadding(new Insets(5, 5, 5, 5));
@@ -60,21 +67,36 @@ public class GUIView extends StackPane {
 
         VBox leftBox = new VBox();
         double widthOfVBOX = (Settings.windowWidth - gameView.width) * 0.5;
-        leftBox.setSpacing(50.0);
+        leftBox.setSpacing(10.0);
         leftBox.setPrefWidth(widthOfVBOX);
         leftBox.setAlignment(Pos.CENTER);
 
         frameRateCounter.setFont(font);
         topBox.getChildren().add(frameRateCounter);
 
-        for (int i = 0; i < playerCount; i++) {
-            Label currentScore = new Label();
-            currentScore.setText("Player " + (i + 1) + " score: 0");
+        for (int i = 0; i < playerCount; i++)
+        {
+            Label player = new Label("Player " + (i + 1));
+            player.setFont(font);
+            leftBox.getChildren().add(player);
+
+            Label currentScore = new Label("Score " + (i + 1));
             currentScores[i] = currentScore;
             currentScore.setFont(font);
-            topBox.getChildren().add(currentScore);
+            leftBox.getChildren().add(currentScore);
+
+            Label currentSpeed = new Label("speed: " + speedArray[i]);
+            currentSpeeds[i] = currentSpeed;
+            currentSpeed.setFont(font);
+            leftBox.getChildren().add(currentSpeed);
+
+            Label empty = new Label("");
+            leftBox.getChildren().add(empty);
+
         }
-        //extra vision text
+
+
+        // extra vision text
         Text extraVisionText = new Text("Extra vision: ");
         extraVisionText.setFont(font);
         topBox.getChildren().add(extraVisionText);
@@ -87,71 +109,74 @@ public class GUIView extends StackPane {
         toggleExtraVision.setFocusTraversable(false);
         topBox.getChildren().add(toggleExtraVision);
 
-        for (int i = 0; i < playerCount; i++) {
-            Label currentSpeed = new Label();
-            currentSpeed.setText("Player " + (i + 1) + "'s \nspeed: " + speedArray[i]);
-            currentSpeeds[i] = currentSpeed;
-            currentSpeed.setFont(font);
-            leftBox.getChildren().add(currentSpeed);
-        }
-
         gameGroup.setLeft(leftBox);
         gameGroup.setTop(topBox);
 
         getChildren().add(gameGroup);
     }
 
-    public void updateFrameRate(double frameRate) {
+    public void updateFrameRate(double frameRate)
+    {
         frameRateCounter.setText(String.format("fps: %.1f", frameRate));
         frameRateCounter.setFont(font);
     }
 
-    public void updateCurrentScore(int score, int player) {
-        currentScores[player].setText("Player " + (player + 1) + "score: " + score);
+    public void updateCurrentScore(int score, int player)
+    {
+        currentScores[player].setText("score: " + score);
         frameRateCounter.setFont(font);
     }
 
-    public void updateCurrentSpeed(double speed, int player) {
-        currentSpeeds[player].setText("Player " + (player + 1) + "'s \n speed: " + speed);
+    public void updateCurrentSpeed(double speed, int player)
+    {
+        currentSpeeds[player].setText("speed: " + speed);
         frameRateCounter.setFont(font);
     }
 
-    public void setPauseView(GUIController controller) {
+    public void setPauseView(GUIController controller)
+    {
         pauseView = new PauseView(controller);
         getChildren().add(this.pauseView);
     }
 
-    public void removePauseView() {
+    public void removePauseView()
+    {
         getChildren().remove(pauseView);
         pauseView = null;
     }
 
-    public void setGameOverView(GUIController controller) {
+    public void setGameOverView(GUIController controller)
+    {
         gameOverView = new GameOverView(controller);
         getChildren().add(this.gameOverView);
     }
 
-    public void toggleGameOverButtonVisibility() {
+    public void toggleGameOverButtonVisibility()
+    {
         gameOverView.toggleGameOverButtonVisibility();
     }
 
-    public void setSaveView(GUIController controller, String[] saveNames) {
+    public void setSaveView(GUIController controller, String[] saveNames)
+    {
         removePauseView();
         saveView = new SaveView(controller, saveNames);
         getChildren().add(this.saveView);
     }
 
-    public void removeSaveView(GUIController controller) {
+    public void removeSaveView(GUIController controller)
+    {
         getChildren().remove(saveView);
         saveView = null;
         setPauseView(controller);
     }
 
-    public void updateSaveNames(String[] saveNames) {
+    public void updateSaveNames(String[] saveNames)
+    {
         saveView.updateButtonNames(saveNames);
     }
 
-    public void showAlert() {
+    public void showAlert()
+    {
         saveView.showAlert();
     }
 }

@@ -158,9 +158,7 @@ public class GameView extends GridPane
         Tile tile = board[row][column];
 
         pane.getChildren().clear();
-        // Label text = new Label(
-        // getColumnIndex(pane) + " " + getRowIndex(pane) + " : " + column + " " + row);
-        // pane.getChildren().add(text);
+
         if (tile != null)
         {
             ImageView imageView = tile.getImage();

@@ -153,8 +153,15 @@ public class Snake
     {
         if (snakeIsAlive)
         {
-            return head.add(direction).modulo(Settings.getGameSettings().getColumnCount(),
-                    Settings.getGameSettings().getRowCount());
+            Vector nextPosition =
+                    head.add(direction).modulo(Settings.getGameSettings().getColumnCount(),
+                            Settings.getGameSettings().getRowCount());
+            if (board[nextPosition.y][nextPosition.x] instanceof Wall)
+            {
+                isColliding = true;
+            }
+            return nextPosition;
+
         }
         else
         {
@@ -225,9 +232,15 @@ public class Snake
         return speed;
     }
 
+    /**
+     * Will set the speed to the value given, if it is not lower than the minimum speed. Else it is
+     * set to the minimum
+     *
+     * @param speed The new speed
+     */
     public void setSpeed(double speed)
     {
-        this.speed = speed;
+        this.speed = speed < Settings.getGameSettings().getSpeed() ?  Settings.getGameSettings().getSpeed() : speed;
     }
 
     public Vector getHeadPosition()

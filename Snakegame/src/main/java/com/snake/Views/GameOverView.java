@@ -40,7 +40,7 @@ public class GameOverView extends ButtonOverlayView
         {
             controller.getGameController().getCurrentScore(i);
             Text score = new Text(
-                    "Player " + (i + 1) + ": " + controller.getGameController().getCurrentScore(i));
+                    "Player " + (i + 1) + " score: " + controller.getGameController().getCurrentScore(i));
             score.setFill(Color.BLACK);
             score.setFont(Font.font("Arial", FontWeight.BOLD, 20));
             score.setTextAlignment(TextAlignment.CENTER);
