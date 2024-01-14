@@ -86,6 +86,14 @@ public class LevelGenerator
     }
 
 
+    /**
+     * Generates a square in the given intervals, in which there will be no walls
+     *
+     * @param map The map to modify
+     * @param xInterval The x interval that must be clear of walls
+     * @param yInterval The y interval that must be clear of walls
+     * @return A modified map
+     */
     private static boolean[][] createSafeSquare(boolean[][] map, Vector xInterval, Vector yInterval)
     {
         for (int rowCount = 0; rowCount < height; rowCount++)
@@ -102,6 +110,12 @@ public class LevelGenerator
         return map;
     }
 
+    /**
+     * Fills the given board with walls where there is a true value on the map
+     *
+     * @param board The board to fill with walls
+     * @param map The map representing where the walls should be
+     */
     private static void fillBoardWithMap(Tile[][] board, boolean[][] map)
     {
 
@@ -144,6 +158,13 @@ public class LevelGenerator
         return randomMap;
     }
 
+    /**
+     * Finds all regions on the given map and returns them in a 2d Arraylist
+     *
+     * @param map The map to look for regions in
+     * @return A list of lists with where the regions are. Each entry is a region, in which the
+     *         coordinates of the squares are stored.
+     */
     public static ArrayList<ArrayList<Vector>> getRegions(boolean[][] map)
     {
         ArrayList<ArrayList<Vector>> regions = new ArrayList<ArrayList<Vector>>();
@@ -334,6 +355,12 @@ public class LevelGenerator
         return neighborMap;
     }
 
+    /**
+     * Finds and connects the regions on the map, returns a new map with only one region.
+     *
+     * @param map The map to connect regions on
+     * @return The same map, now modified
+     */
     private static boolean[][] connectIslands(boolean[][] map)
     {
         ArrayList<ArrayList<Vector>> regions = getRegions(map);
@@ -354,12 +381,19 @@ public class LevelGenerator
     }
 
 
-    private static void connectRegions(ArrayList<Region> allRooms, boolean[][] map)
+    /**
+     * Connects all the regions one by one, by finding the two nearest room in different regions,
+     * and connecting those. Then it keeps looping until all the regions given are connected
+     *
+     * @param allRegions The regions to connect
+     * @param map The map upon which the regions are. This will be modified
+     */
+    private static void connectRegions(ArrayList<Region> allRegions, boolean[][] map)
     {
         List<Region> roomListA = new ArrayList<Region>();
         List<Region> roomListB = new ArrayList<Region>();
-        roomListA = allRooms;
-        roomListB = allRooms;
+        roomListA = allRegions;
+        roomListB = allRegions;
         double bestDistance = 0;
         Vector bestTileA = new Vector();
         Vector bestTileB = new Vector();
@@ -397,11 +431,21 @@ public class LevelGenerator
         {
             CreatePassage(bestRoomA, bestRoomB, bestTileA, bestTileB, map);
             Region.ConnectRooms(bestRoomA, bestRoomB);
-            connectRegions(allRooms, map);
+            connectRegions(allRegions, map);
         }
     }
 
 
+    /**
+     * Creates a passage between two rooms, from the given tiles. The passage will be a line from
+     * which all squares within a distance of two, will become a clear square, if they were a wall
+     *
+     * @param roomA The first room
+     * @param roomB The second room
+     * @param tileA The start tile in the first room
+     * @param tileB The end tile in the second room
+     * @param map The map upon which the passage should be created
+     */
     private static void CreatePassage(Region roomA, Region roomB, Vector tileA, Vector tileB,
             boolean[][] map)
     {
@@ -410,7 +454,7 @@ public class LevelGenerator
             for (int column = 0; column < width; column++)
             {
                 Vector point = new Vector(column, row);
-                if (minimumDistance(new DoubleVector(tileB), new DoubleVector(tileA),
+                if (MinimumDistanceFromPointToLine(new DoubleVector(tileB), new DoubleVector(tileA),
                         new DoubleVector(point)) < 2)
                 {
                     map[row][column] = false;
@@ -419,7 +463,18 @@ public class LevelGenerator
         }
     }
 
-    public static double minimumDistance(DoubleVector v, DoubleVector w, DoubleVector p)
+    /**
+     * Calculates the minimum distance between a line from v to w, and a point, denoted p. This
+     * method was taking from Stack Overflow and converted to java
+     * https://stackoverflow.com/questions/849211/shortest-distance-between-a-point-and-a-line-segment
+     *
+     * @param v The start of the line
+     * @param w The end of the line
+     * @param p The point which you seek to find the distance to the line
+     * @return
+     */
+    public static double MinimumDistanceFromPointToLine(DoubleVector v, DoubleVector w,
+            DoubleVector p)
     {
         double l2 = v.distance(w);
         l2 *= l2;
@@ -491,11 +546,25 @@ public class LevelGenerator
         return nodesInRegion;
     }
 
+    /**
+     * Figures if a value is in a interval spanned by a Vector
+     *
+     * @param value The value
+     * @param interval The interval in which the value might be
+     * @return True if the value is in the interval, else false.
+     */
     private static boolean isInInterval(int value, Vector interval)
     {
         return value > interval.x && value < interval.y;
     }
 
+    /**
+     * A mathematically correct modulo, only returning positive values. The syntax is a%b.
+     *
+     * @param a
+     * @param b
+     * @return number corresponding to a%b in the interval [0;b-1]
+     */
     public static int mod(int a, int b)
     {
         int mod = a % b;
